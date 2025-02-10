@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('apps.users.urls')),
     path('api/news/', include('apps.news.urls')),  # подключение маршрутов для новостей
+    path('api/comments/', include('apps.comments.urls')),  # подключение маршрутов для комментариев
 ]
