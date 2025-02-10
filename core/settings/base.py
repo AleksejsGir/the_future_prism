@@ -21,9 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    # Наше приложение
     'apps.users',
-    # Другие приложения
+    'apps.news',  # наше новое приложение
 ]
 
 # Здесь мы указываем Django использовать кастомную модель пользователя.
