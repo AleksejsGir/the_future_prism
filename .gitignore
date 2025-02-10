@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+
+# Virtual environment
+venv/
+env/
+ENV/
+.env/
+*.env
+
+# Django-specific
+*.log
+local_settings.py
+db.sqlite3
+
+# PyCharm
+.idea/
+
+# macOS
+.DS_Store
