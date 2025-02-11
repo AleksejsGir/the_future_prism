@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto p-4">
+  <!-- Блок для выбора категории -->
+  <div class="mb-8">
+    <h2 class="header-title mb-4">Выберите категорию</h2>
+    <div class="flex flex-wrap gap-4">
+      {% for category in categories %}
+        <!-- Вся карточка обёрнута в ссылку -->
+        <a href="?category={{ category.id }}" class="block w-64 category-card">
+          <div class="p-4 rounded-xl bg-gray-800 shadow-md border border-gray-700">
+            <h3 class="text-lg font-bold category-title text-center">{{ category.name }}</h3>
+            {% if category.description %}
+              <p class="text-sm text-gray-400 text-center">{{ category.description }}</p>
+            {% endif %}
+          </div>
+        </a>
+      {% empty %}
+        <p class="text-center">Нет доступных категорий.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Заголовок списка новостей -->
+  <h1 class="header-title mb-4">Новости</h1>
+  <!-- Список новостей -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {% for news in news_list %}
+      <div class="bg-gray-800 p-4 rounded shadow">
+        <h2 class="text-xl font-semibold news-headline">{{ news.title }}</h2>
+        <p class="text-sm text-gray-400">Опубликовано: {{ news.published_date }}</p>
+        <p class="mt-2">{{ news.content|truncatewords:30 }}</p>
+        <a href="{% url 'news_detail' news.id %}" class="mt-2 inline-block neon-button">Читать далее</a>
+      </div>
+    {% empty %}
+      <p class="text-center">Нет новостей.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -18,11 +18,17 @@ Including another URLconf
 # core/urls.py
 from django.contrib import admin
 from django.urls import path, include
-from .views import home  # импортируем наше представление
+from .views import home, news_list, news_detail, user_login, profile
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),  # домашняя страница
+    path('', home, name='home'),
+    path('news/', news_list, name='news_list'),  # маршрут для списка новостей
+    path('news/<int:news_id>/', news_detail, name='news_detail'),
+    path('login/', user_login, name='login'),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+    path('profile/', profile, name='profile'),
     path('api/users/', include('apps.users.urls')),
     path('api/news/', include('apps.news.urls')),
     path('api/comments/', include('apps.comments.urls')),
