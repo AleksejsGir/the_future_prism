@@ -18,11 +18,13 @@ Including another URLconf
 # core/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from .views import home  # импортируем наше представление
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', home, name='home'),  # домашняя страница
     path('api/users/', include('apps.users.urls')),
-    path('api/news/', include('apps.news.urls')),  # подключение маршрутов для новостей
-    path('api/comments/', include('apps.comments.urls')),  # подключение маршрутов для комментариев
-    path('api/analytics/', include('apps.analytics.urls')),  # маршруты для аналитики
+    path('api/news/', include('apps.news.urls')),
+    path('api/comments/', include('apps.comments.urls')),
+    path('api/analytics/', include('apps.analytics.urls')),
 ]
