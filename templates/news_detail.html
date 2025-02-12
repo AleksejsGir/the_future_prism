@@ -4,17 +4,21 @@
   <h1 class="text-4xl md:text-3xl font-bold neon-text mb-2">{{ news.title }}</h1>
   <p class="text-sm text-gray-400">Опубликовано: {{ news.published_date }} | Автор: {{ news.author }}</p>
 
+  <!-- Фотография новости -->
   {% if news.image %}
-    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-64 object-cover rounded my-4">
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="news-image">
   {% endif %}
 
+  <!-- Текст новости -->
   <p class="mt-4 text-lg">{{ news.content }}</p>
 
+  <!-- Информация о просмотрах и комментариях -->
   <div class="mt-4 text-sm text-gray-400">
     <span>Просмотры: {{ news.view_count }}</span> |
     <span>Комментарии: {{ news.comments.count }}</span>
   </div>
 
+  <!-- Кнопка назад -->
   <a href="{% url 'news_list' %}" class="mt-4 inline-block neon-button">Назад к новостям</a>
 </div>
 {% endblock %}

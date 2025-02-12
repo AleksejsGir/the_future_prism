@@ -114,8 +114,20 @@ body {
 }
 
 .category-button:hover {
-  box-shadow: 0 0 20px rgba(79,214,255,0.9);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.9);
   transform: scale(1.05);
+}
+
+/* --- Заголовок "Выбор категории" --- */
+.category-title {
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* --- Фильтр категорий --- */
@@ -123,7 +135,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
+  margin-top: 10px;
 }
 
 /* --- Анимация появления карточек --- */
@@ -148,4 +161,14 @@ body {
 .news-card:hover {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
+}
+/* --- Фотографии в новостях --- */
+.news-image {
+  width: 100%;
+  max-width: 700px; /* Ограничиваем ширину в ПК-версии */
+  height: auto; /* Сохраняем пропорции */
+  object-fit: cover;
+  border-radius: 12px; /* Скругление углов */
+  margin: 20px auto; /* Центрирование */
+  display: block;
 }
