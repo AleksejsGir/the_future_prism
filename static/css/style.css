@@ -1,0 +1,151 @@
+/* --- Основные переменные --- */
+:root {
+  --primary-color: #4FD6FF;
+  --secondary-color: #FF78FF;
+  --accent-color: #8B00FF;
+  --background-color: #2B2B36;
+  --text-color: #F0F0F0;
+  --header-bg: rgba(43, 43, 54, 0.9);
+}
+
+/* --- Базовые стили --- */
+body {
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* --- Фиксированный Header --- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  padding: 15px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+.header.shrink {
+  padding: 8px 30px;
+}
+
+/* --- Логотип и название --- */
+.logo-img {
+  width: 80px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- Бургер-меню (фиксированное) --- */
+#burger-btn {
+  position: fixed;
+  right: 20px;
+  top: 15px;
+  z-index: 1002;
+}
+
+/* --- Мобильное меню поверх всего контента --- */
+#mobile-menu {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  transition: transform 0.3s ease-in-out;
+}
+
+#mobile-menu.hidden {
+  display: none;
+}
+
+/* --- Навигация --- */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-color);
+}
+
+/* --- Поле поиска --- */
+.search-input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid var(--primary-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.search-input:focus {
+  box-shadow: 0 0 15px rgba(79,214,255,0.9);
+  border-color: var(--secondary-color);
+}
+
+/* --- Кнопки --- */
+.category-button {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  color: var(--text-color);
+  padding: 10px 16px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.category-button:hover {
+  box-shadow: 0 0 20px rgba(79,214,255,0.9);
+  transform: scale(1.05);
+}
+
+/* --- Фильтр категорий --- */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* --- Анимация появления карточек --- */
+.news-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Hover-эффект для карточек --- */
+.news-card:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease-in-out;
+}
