@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mx-auto p-4">
-  <h1 class="text-3xl font-bold neon-text mb-4">Вход</h1>
+<div class="container mx-auto p-6 animate-slide-in">
+  <h1 class="text-4xl font-bold neon-text mb-6 animate-fade-in">Вход</h1>
   {% if error %}
     <p class="text-red-500 mb-4">{{ error }}</p>
   {% endif %}
-  <form method="post" class="max-w-md mx-auto">
-    {% csrf_token %}
-    <div class="mb-4">
-      <label class="block text-sm font-medium mb-1" for="id_username">Имя пользователя:</label>
-      <input type="text" name="username" id="id_username" class="input input-bordered w-full" required>
-    </div>
-    <div class="mb-4">
-      <label class="block text-sm font-medium mb-1" for="id_password">Пароль:</label>
-      <input type="password" name="password" id="id_password" class="input input-bordered w-full" required>
-    </div>
-    <button type="submit" class="w-full neon-button">Войти</button>
-  </form>
+  <div class="bg-gray-900 p-6 rounded-xl shadow-xl border border-gray-700 animate-slide-in max-w-md mx-auto">
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1" for="id_username">Имя пользователя:</label>
+        <input type="text" name="username" id="id_username" class="input input-bordered w-full bg-gray-800 text-white" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-sm font-medium mb-1" for="id_password">Пароль:</label>
+        <input type="password" name="password" id="id_password" class="input input-bordered w-full bg-gray-800 text-white" required>
+      </div>
+      <button type="submit" class="w-full neon-button hover:scale-105 transition-all">Войти</button>
+    </form>
+  </div>
 </div>
 {% endblock %}

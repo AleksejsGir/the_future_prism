@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mx-auto p-6 animate-fade-in">
+  <h1 class="text-4xl font-bold neon-text mb-6 animate-fade-in">Профиль пользователя</h1>
+  <div class="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 hover:border-blue-400 hover:shadow-2xl transition-all animate-slide-in">
+    <p class="text-lg"><strong>Имя пользователя:</strong> {{ user.username }}</p>
+    <p class="text-lg"><strong>Email:</strong> {{ user.email }}</p>
+    <p class="text-lg"><strong>Имя:</strong> {{ user.first_name }}</p>
+    <p class="text-lg"><strong>Фамилия:</strong> {{ user.last_name }}</p>
+    <p class="text-lg"><strong>О себе:</strong> {{ user.bio }}</p>
+  </div>
+  <a href="/" class="mt-6 inline-block neon-button hover:scale-105 transition-all px-6 py-3 text-lg font-bold text-white bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg hover:shadow-2xl">На главную</a>
+</div>
+{% endblock %}
