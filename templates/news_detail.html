@@ -10,7 +10,7 @@
   {% endif %}
 
   <!-- Текст новости -->
-  <p class="mt-4 text-lg">{{ news.content }}</p>
+  <p class="mt-4 text-lg">{{ news.content|safe }}</p>
 
   <!-- Информация о просмотрах и комментариях -->
   <div class="mt-4 text-sm text-gray-400">

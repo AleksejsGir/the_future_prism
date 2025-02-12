@@ -162,6 +162,7 @@ body {
   transform: scale(1.02);
   transition: transform 0.3s ease-in-out;
 }
+
 /* --- Фотографии в новостях --- */
 .news-image {
   width: 100%;
@@ -171,4 +172,11 @@ body {
   border-radius: 12px; /* Скругление углов */
   margin: 20px auto; /* Центрирование */
   display: block;
+}
+
+/* --- Гибкая сетка карточек новостей --- */
+.grid-cols-auto {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Минимальная ширина 300px */
+  gap: 20px;
 }

@@ -1,5 +1,5 @@
-# apps/news/models.py
 from django.db import models
+from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField(max_length=255, unique=True, help_text="Название категории")
@@ -10,11 +10,18 @@ class Category(models.Model):
 
 class News(models.Model):
     title = models.CharField(max_length=255, help_text="Заголовок новости")
+    slug = models.SlugField(unique=True, blank=True, null=True, help_text="URL слаг (автогенерация из заголовка)")
     content = models.TextField(help_text="Содержимое новости")
-    published_date = models.DateTimeField(auto_now_add=True, help_text="Дата публикации")
+    published_date = models.DateTimeField(default=timezone.now, help_text="Дата публикации")  # ✅ Теперь редактируемое поле
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='news', help_text="Категория новости")
     view_count = models.PositiveIntegerField(default=0, help_text="Количество просмотров")
     image = models.ImageField(upload_to='news_images/', null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            from django.utils.text import slugify
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title

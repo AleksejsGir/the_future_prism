@@ -15,15 +15,18 @@
     {% endfor %}
   </div>
 
-  <!-- Основной контент -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+  <!-- Основной контент (адаптивная сетка) -->
+  <div class="grid-cols-auto mt-6">
     {% for news in news_list %}
       <div class="news-card bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
         {% if news.image %}
           <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-48 object-cover rounded-lg mb-3">
         {% endif %}
         <h2 class="text-xl font-semibold">{{ news.title }}</h2>
-        <p class="mt-2 text-gray-300">{{ news.content|truncatewords:20 }}</p>
+
+        <!-- 🔥 Исправленный вывод текста без HTML-тегов -->
+        <p class="mt-2 text-gray-300">{{ news.content|striptags|truncatewords:20 }}</p>
+
         <a href="{% url 'news_detail' news.id %}" class="mt-3 inline-block neon-button">Читать далее</a>
       </div>
     {% empty %}

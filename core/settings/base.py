@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'tinymce',
     'apps.users',
     'apps.news',  # наше новое приложение
     'apps.comments',  # наше новое приложение для комментариев
