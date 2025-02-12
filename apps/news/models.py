@@ -14,6 +14,7 @@ class News(models.Model):
     published_date = models.DateTimeField(auto_now_add=True, help_text="Дата публикации")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='news', help_text="Категория новости")
     view_count = models.PositiveIntegerField(default=0, help_text="Количество просмотров")
+    image = models.ImageField(upload_to='news_images/', null=True, blank=True)
 
     def __str__(self):
         return self.title

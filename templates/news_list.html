@@ -1,47 +1,46 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<div class="container mx-auto p-6 animate-fade-in">
-  <!-- Заголовок выбора категории с неоновым эффектом -->
+<div class="container mx-auto p-4">
+  <!-- Блок выбора категории -->
   <div class="mb-8">
-    <h2 class="header-title text-3xl font-bold neon-text text-center md:text-left mb-4">
-      Выберите категорию
-    </h2>
-    <div class="flex flex-wrap justify-center md:justify-start gap-4">
+    <h2 class="header-title mb-4">Выберите категорию</h2>
+    <div class="flex flex-wrap gap-4">
       {% for category in categories %}
-        <a href="?category={{ category.id }}" class="block w-48 md:w-64 category-card hover:scale-105 transition-all">
-          <div class="p-4 rounded-xl bg-gray-800 shadow-md border border-gray-700 hover:shadow-xl hover:border-blue-400 transition-all text-center">
-            <h3 class="text-lg font-bold text-blue-300">{{ category.name }}</h3>
+        <a href="?category={{ category.id }}" class="block w-64 category-card">
+          <div class="p-4 rounded-xl bg-gray-800 shadow-md border border-gray-700">
+            <h3 class="text-lg font-bold category-title text-center">{{ category.name }}</h3>
             {% if category.description %}
-              <p class="text-sm text-gray-400">{{ category.description }}</p>
+              <p class="text-sm text-gray-400 text-center">{{ category.description }}</p>
             {% endif %}
           </div>
         </a>
       {% empty %}
-        <p class="text-center text-gray-400">Нет доступных категорий.</p>
+        <p class="text-center">Нет доступных категорий.</p>
       {% endfor %}
     </div>
   </div>
-
-  <!-- Заголовок "Новости" с улучшенным дизайном -->
-  <h1 class="header-title mt-12 mb-6 text-4xl font-bold neon-text text-center md:text-left">
-    Новости
-  </h1>
-
-  <!-- Сетка новостей -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+  <h1 class="header-title mb-4">Новости</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
     {% for news in news_list %}
-      <div class="bg-gray-800 p-6 rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all border border-gray-700 hover:border-blue-400 flex flex-col h-full">
-        <div class="flex-grow">
-          <h2 class="text-xl font-semibold news-headline">{{ news.title }}</h2>
-          <p class="text-sm text-gray-400">Опубликовано: {{ news.published_date }}</p>
-          <p class="mt-2 text-gray-300">{{ news.content|truncatewords:30 }}</p>
+      <div class="bg-gray-800 p-4 rounded shadow">
+        {% if news.image %}
+          <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-48 object-cover rounded mb-2">
+        {% else %}
+          <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder" class="w-full h-48 object-cover rounded mb-2">
+        {% endif %}
+        <p class="text-sm text-gray-400 mb-1">Категория: {{ news.category.name }}</p>
+        <h2 class="text-xl font-semibold news-headline">{{ news.title }}</h2>
+        <p class="mt-2">{{ news.content|truncatewords:30 }}</p>
+        <div class="mt-2 text-sm text-gray-400">
+          <span>Опубликовано: {{ news.published_date }}</span> |
+          <span>Просмотры: {{ news.view_count }}</span> |
+          <span>Комментарии: {{ news.comments.count }}</span>
         </div>
-        <a href="{% url 'news_detail' news.id %}" class="mt-4 inline-block px-6 py-3 text-lg font-bold text-white bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg hover:shadow-2xl transition-all rounded-lg w-full text-center">
-          Читать далее
-        </a>
+        <a href="{% url 'news_detail' news.id %}" class="mt-2 inline-block neon-button">Читать далее</a>
       </div>
     {% empty %}
-      <p class="text-center text-gray-400">Нет новостей.</p>
+      <p class="text-center">Нет новостей.</p>
     {% endfor %}
   </div>
 </div>
