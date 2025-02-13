@@ -13,23 +13,40 @@ body {
   font-family: 'Montserrat', 'Poppins', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Типографика --- */
+h1 {
+  font-size: 50px;
+}
+h2 {
+  font-size: 32px;
+}
+p, .search-input, .nav-menu {
+  font-size: 16px;
 }
 
 /* --- Фиксированный Header --- */
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--header-bg);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  padding: 15px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: transform 0.3s ease-in-out, padding 0.3s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    /*max-width: 1400px; /* Ограничение ширины */
+    width: 100%;
+    margin: 0 auto; /* Центрирование */
+    background-color: var(--header-bg);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
+
 
 .header.hidden {
   transform: translateY(-100%);
@@ -65,17 +82,27 @@ body {
 /* --- Мобильное меню поверх всего контента --- */
 #mobile-menu {
   position: fixed;
-  top: 60px;
+  top: 0;
   left: 0;
   width: 100%;
   background-color: var(--background-color);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.2);
   z-index: 1001;
-  transition: transform 0.3s ease-in-out;
+  padding: 20px;
+
+  transform: translateY(-100%); /* Меню спрятано сверху */
+  transition: transform 0.4s ease-in-out;
 }
 
-#mobile-menu.hidden {
-  display: none;
+#mobile-menu.active {
+  transform: translateY(0); /* Меню плавно появляется */
+}
+
+
+/* Класс для открытия мобильного меню */
+#mobile-menu.active {
+  transform: translateX(0);
 }
 
 /* --- Навигация --- */
@@ -88,6 +115,11 @@ body {
 
 .nav-menu a:hover {
   color: var(--primary-color);
+}
+
+/* Неоновая подсветка для активных пунктов навигации */
+.nav-menu a.active {
+  text-shadow: 0 0 8px var(--primary-color);
 }
 
 /* --- Поле поиска --- */
@@ -179,4 +211,83 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Минимальная ширина 300px */
   gap: 20px;
+}
+
+/* --- Секция Hero (Главная страница) --- */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  background: url('path/to/hero-bg.jpg') no-repeat center center/cover;/* Путь к изображению */
+  /*background: url("/static/images/hero-bg.jpg") no-repeat center center/cover;/* Путь к изображению */
+  /*min-height: 100vh;/* Высота равна высоте экрана */
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(43,43,54,0.5); /* затемнение для улучшения читаемости */
+  backdrop-filter: blur(5px);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 50px;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.hero-btn {
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  color: var(--text-color);
+  padding: 12px 24px;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  transform: scale(1.05);
+}
+
+/* --- Медиа-запросы для адаптивности --- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+  h2 {
+    font-size: 28px;
+  }
+  p, .search-input, .nav-menu a {
+    font-size: 14px;
+  }
+  .logo-img {
+    width: 60px;
+  }
+  .header {
+    padding: 10px 20px;
+  }
 }

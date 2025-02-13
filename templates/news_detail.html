@@ -10,7 +10,9 @@
   {% endif %}
 
   <!-- Текст новости -->
-  <p class="mt-4 text-lg">{{ news.content|safe }}</p>
+  <div class="mt-4 text-lg">
+    {{ news.content|safe }}
+  </div>
 
   <!-- Информация о просмотрах и комментариях -->
   <div class="mt-4 text-sm text-gray-400">
@@ -18,7 +20,42 @@
     <span>Комментарии: {{ news.comments.count }}</span>
   </div>
 
-  <!-- Кнопка назад -->
-  <a href="{% url 'news_list' %}" class="mt-4 inline-block neon-button">Назад к новостям</a>
+  <!-- Блок "Поделиться" в соцсетях -->
+  <div class="mt-6">
+    <h2 class="text-2xl font-bold mb-3">Поделиться</h2>
+    <div class="flex gap-4">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="category-button">Facebook</a>
+      <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ news.title }}" target="_blank" class="category-button">Twitter</a>
+      <a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ news.title }}" target="_blank" class="category-button">Telegram</a>
+    </div>
+  </div>
+
+  <!-- Блок "Похожие новости" -->
+  {% if similar_news %}
+  <div class="mt-10">
+    <h2 class="text-3xl font-bold category-title mb-4">Похожие новости</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for similar in similar_news %}
+      <div class="news-card bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+        {% if similar.image %}
+          <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-48 object-cover rounded-lg mb-3">
+        {% endif %}
+        <h3 class="text-xl font-semibold">{{ similar.title }}</h3>
+        <p class="mt-2 text-gray-300">{{ similar.content|truncatewords:20 }}</p>
+        <a href="{% url 'news_detail' similar.id %}" class="mt-3 inline-block neon-button">Читать далее</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Раздел "Комментарии" (будет реализован в будущем) -->
+  <div class="mt-10">
+    <h2 class="text-2xl font-bold mb-3">Комментарии</h2>
+    <p class="text-gray-400">Комментарии будут доступны в будущих обновлениях.</p>
+  </div>
+
+  <!-- Кнопка "Назад к новостям" -->
+  <a href="{% url 'news_list' %}" class="mt-6 inline-block neon-button">Назад к новостям</a>
 </div>
 {% endblock %}

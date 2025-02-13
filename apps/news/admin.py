@@ -4,6 +4,11 @@ from .models import Category, News
 from tinymce.widgets import TinyMCE
 from django.db import models
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+    search_fields = ('name',)
+
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'published_date', 'view_count', 'category', 'image_preview')

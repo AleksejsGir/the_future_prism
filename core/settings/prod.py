@@ -10,9 +10,9 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'future_prism'),
-        'USER': os.getenv('DATABASE_USER', 'future_prism_user'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'linda1990'),
+        'NAME': os.getenv('DATABASE_NAME',),
+        'USER': os.getenv('DATABASE_USER',),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.getenv('DATABASE_PORT', '5432'),
     }

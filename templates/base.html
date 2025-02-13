@@ -27,23 +27,31 @@
       <a href="/contact/">Контакты</a>
     </nav>
 
-    <!-- Поиск и кнопка входа -->
+    <!-- Поиск, кнопка входа и переключатель темы -->
     <div class="flex gap-4 items-center">
       <input type="text" class="search-input hidden md:block" placeholder="Поиск...">
       <a href="/login/" class="category-button hidden md:inline-block">Вход</a>
+      <!-- Кнопка переключения темы (функционал реализуем в будущем) -->
+      <button class="category-button hidden md:inline-block" id="theme-toggle">Тема</button>
     </div>
 
     <!-- Бургер-меню -->
     <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
   </header>
 
-  <!-- Мобильное меню (скрытое) -->
-  <div id="mobile-menu" class="hidden absolute top-16 left-0 w-full bg-gray-900 p-4 text-center z-50">
-    <a href="/" class="block py-2">Главная</a>
-    <a href="/news/" class="block py-2">Новости</a>
-    <a href="/about/" class="block py-2">О проекте</a>
-    <a href="/contact/" class="block py-2">Контакты</a>
-    <a href="/login/" class="block py-2 category-button">Вход</a>
+  <!-- Мобильное меню (скрытое с помощью transform, активируется классом "active") -->
+  <div id="mobile-menu">
+    <nav class="flex flex-col gap-4 text-center">
+      <a href="/">Главная</a>
+      <a href="/news/">Новости</a>
+      <a href="/about/">О проекте</a>
+      <a href="/contact/">Контакты</a>
+      <a href="/login/" class="category-button inline-block">Вход</a>
+      <!-- Поле поиска в мобильном меню -->
+      <input type="text" class="search-input mt-4" placeholder="Поиск...">
+      <!-- Кнопка закрытия мобильного меню -->
+      <button class="category-button mt-4" id="close-mobile-menu">Закрыть</button>
+    </nav>
   </div>
 
   <main class="mt-24 p-6">
@@ -81,14 +89,44 @@
   </main>
 
   <footer class="bg-gray-900 p-6 mt-10 text-center">
-    <p>&copy; 2025 The Future Prism. Все права защищены.</p>
-    <p class="text-sm">Свяжитесь с нами: contact@thefutureprism.com</p>
+    <div class="flex flex-col items-center gap-4">
+      <!-- Логотип -->
+      <div class="flex items-center gap-3">
+        <img src="{% static 'images/logo.PNG' %}" alt="The Future Prism" class="logo-img">
+        <span class="logo-text">THE FUTURE PRISM</span>
+      </div>
+      <!-- Навигационные ссылки -->
+      <div class="flex gap-4">
+        <a href="/privacy/">Политика</a>
+        <a href="/contact/">Контакты</a>
+        <a href="/about/">О проекте</a>
+      </div>
+      <!-- Социальные сети -->
+      <div class="flex gap-4">
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://telegram.org" target="_blank">Telegram</a>
+        <a href="https://discord.com" target="_blank">Discord</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+      </div>
+      <!-- Копирайт -->
+      <p class="mt-4 text-sm">&copy; 2025 The Future Prism. Все права защищены.</p>
+    </div>
   </footer>
 
-  <!-- JS для бургер-меню -->
+  <!-- JS для мобильного меню и header -->
   <script>
-    document.getElementById('burger-btn').addEventListener('click', function() {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
+    // Тогглинг мобильного меню с анимацией (переключение класса "active")
+    const burgerBtn = document.getElementById('burger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+    burgerBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('active');
+    });
+
+    closeMobileMenu.addEventListener('click', function() {
+      mobileMenu.classList.remove('active');
     });
 
     // Скрытие/появление header при прокрутке
