@@ -1,32 +1,33 @@
 {% extends "base.html" %}
+
 {% block content %}
-<div class="article-container">
+<div class="article-container mx-auto p-4 md:p-8 max-w-4xl">
   <!-- Заголовок и мета-информация -->
-  <h1 class="article-title">{{ news.title }}</h1>
-  <div class="article-meta">
+  <h1 class="article-title text-3xl font-bold mb-4 text-center">{{ news.title }}</h1>
+  <div class="article-meta text-center mb-6">
     Опубликовано: {{ news.published_date }} | Автор: {{ news.author }}
   </div>
 
   <!-- Фотография новости -->
   {% if news.image %}
-    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="article-image">
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="article-image w-full h-64 object-cover rounded-lg mb-6">
   {% endif %}
 
   <!-- Текст новости -->
-  <div class="article-content">
+  <div class="article-content text-lg leading-relaxed mb-6">
     {{ news.content|safe }}
   </div>
 
   <!-- Статистика -->
-  <div class="article-stats">
+  <div class="article-stats flex justify-center gap-4 mb-6">
     <span>👁 {{ news.view_count }}</span>
     <span>💬 {{ news.comments.count }}</span>
   </div>
 
   <!-- Поделиться -->
-  <div class="share-block">
-    <h2>Поделиться</h2>
-    <div class="share-buttons">
+  <div class="share-block text-center mb-6">
+    <h2 class="text-xl font-semibold mb-4">Поделиться</h2>
+    <div class="share-buttons flex flex-wrap justify-center gap-4">
       <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
          target="_blank" class="category-button">Facebook</a>
       <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ news.title }}"
@@ -39,16 +40,16 @@
   <!-- Похожие новости -->
   {% if similar_news %}
   <div class="similar-news">
-    <h2>Похожие новости</h2>
-    <div class="grid-cols-auto">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Похожие новости</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for similar in similar_news %}
-      <div class="news-card">
+      <div class="news-card bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
         {% if similar.image %}
-          <img src="{{ similar.image.url }}" alt="{{ similar.title }}">
+          <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
         {% endif %}
-        <h3>{{ similar.title }}</h3>
-        <p>{{ similar.content|truncatewords:20 }}</p>
-        <a href="{% url 'news_detail' similar.id %}" class="category-button">Читать далее</a>
+        <h3 class="text-xl font-semibold">{{ similar.title }}</h3>
+        <p class="mt-2 text-gray-300">{{ similar.content|truncatewords:20 }}</p>
+        <a href="{% url 'news_detail' similar.id %}" class="category-button mt-3">Читать далее</a>
       </div>
       {% endfor %}
     </div>
@@ -56,7 +57,7 @@
   {% endif %}
 
   <!-- Навигация -->
-  <div class="article-nav">
+  <div class="article-nav text-center mt-6">
     <a href="{% url 'news_list' %}" class="category-button">← Назад к новостям</a>
   </div>
 </div>
