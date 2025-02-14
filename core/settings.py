@@ -77,9 +77,9 @@
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': os.environ.get('DATABASE_NAME', 'future_prism'),
-#         'USER': os.environ.get('DATABASE_USER', 'postgres'),
-#         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'your_password'),
-#         'HOST': os.environ.get('DATABASE_HOST', 'db'),
+#         'USER': os.environ.get('DATABASE_USER', 'future_prism_user'),
+#         'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'linda1990'),
+#         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
 #         'PORT': os.environ.get('DATABASE_PORT', '5432'),
 #     }
 # }
