@@ -1,61 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container mx-auto p-4">
-  <h1 class="text-4xl md:text-3xl font-bold neon-text mb-2">{{ news.title }}</h1>
-  <p class="text-sm text-gray-400">Опубликовано: {{ news.published_date }} | Автор: {{ news.author }}</p>
+<div class="article-container">
+  <!-- Заголовок и мета-информация -->
+  <h1 class="article-title">{{ news.title }}</h1>
+  <div class="article-meta">
+    Опубликовано: {{ news.published_date }} | Автор: {{ news.author }}
+  </div>
 
   <!-- Фотография новости -->
   {% if news.image %}
-    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="news-image">
+    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="article-image">
   {% endif %}
 
   <!-- Текст новости -->
-  <div class="mt-4 text-lg">
+  <div class="article-content">
     {{ news.content|safe }}
   </div>
 
-  <!-- Информация о просмотрах и комментариях -->
-  <div class="mt-4 text-sm text-gray-400">
-    <span>Просмотры: {{ news.view_count }}</span> |
-    <span>Комментарии: {{ news.comments.count }}</span>
+  <!-- Статистика -->
+  <div class="article-stats">
+    <span>👁 {{ news.view_count }}</span>
+    <span>💬 {{ news.comments.count }}</span>
   </div>
 
-  <!-- Блок "Поделиться" в соцсетях -->
-  <div class="mt-6">
-    <h2 class="text-2xl font-bold mb-3">Поделиться</h2>
-    <div class="flex gap-4">
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank" class="category-button">Facebook</a>
-      <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ news.title }}" target="_blank" class="category-button">Twitter</a>
-      <a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ news.title }}" target="_blank" class="category-button">Telegram</a>
+  <!-- Поделиться -->
+  <div class="share-block">
+    <h2>Поделиться</h2>
+    <div class="share-buttons">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
+         target="_blank" class="category-button">Facebook</a>
+      <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ news.title }}"
+         target="_blank" class="category-button">Twitter</a>
+      <a href="https://t.me/share/url?url={{ request.build_absolute_uri }}&text={{ news.title }}"
+         target="_blank" class="category-button">Telegram</a>
     </div>
   </div>
 
-  <!-- Блок "Похожие новости" -->
+  <!-- Похожие новости -->
   {% if similar_news %}
-  <div class="mt-10">
-    <h2 class="text-3xl font-bold category-title mb-4">Похожие новости</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="similar-news">
+    <h2>Похожие новости</h2>
+    <div class="grid-cols-auto">
       {% for similar in similar_news %}
-      <div class="news-card bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+      <div class="news-card">
         {% if similar.image %}
-          <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-48 object-cover rounded-lg mb-3">
+          <img src="{{ similar.image.url }}" alt="{{ similar.title }}">
         {% endif %}
-        <h3 class="text-xl font-semibold">{{ similar.title }}</h3>
-        <p class="mt-2 text-gray-300">{{ similar.content|truncatewords:20 }}</p>
-        <a href="{% url 'news_detail' similar.id %}" class="mt-3 inline-block neon-button">Читать далее</a>
+        <h3>{{ similar.title }}</h3>
+        <p>{{ similar.content|truncatewords:20 }}</p>
+        <a href="{% url 'news_detail' similar.id %}" class="category-button">Читать далее</a>
       </div>
       {% endfor %}
     </div>
   </div>
   {% endif %}
 
-  <!-- Раздел "Комментарии" (будет реализован в будущем) -->
-  <div class="mt-10">
-    <h2 class="text-2xl font-bold mb-3">Комментарии</h2>
-    <p class="text-gray-400">Комментарии будут доступны в будущих обновлениях.</p>
+  <!-- Навигация -->
+  <div class="article-nav">
+    <a href="{% url 'news_list' %}" class="category-button">← Назад к новостям</a>
   </div>
-
-  <!-- Кнопка "Назад к новостям" -->
-  <a href="{% url 'news_list' %}" class="mt-6 inline-block neon-button">Назад к новостям</a>
 </div>
 {% endblock %}
