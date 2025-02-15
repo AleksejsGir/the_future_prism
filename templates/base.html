@@ -29,9 +29,18 @@
 
     <!-- Поиск, кнопка входа и переключатель темы -->
     <div class="flex gap-4 items-center">
-      <input type="text" class="search-input hidden md:block" placeholder="Поиск...">
+      <form action="{% url 'news_list' %}" method="get" class="flex items-center">
+        <input type="text"
+               name="search"
+               class="search-input hidden md:block"
+               placeholder="Поиск..."
+               value="{{ search_query|default:'' }}"
+        >
+        {% if request.GET.category %}
+          <input type="hidden" name="category" value="{{ request.GET.category }}">
+        {% endif %}
+      </form>
       <a href="/login/" class="category-button hidden md:inline-block">Вход</a>
-      <!-- Кнопка переключения темы (функционал реализуем в будущем) -->
       <button class="category-button hidden md:inline-block" id="theme-toggle">Тема</button>
     </div>
 
@@ -39,7 +48,7 @@
     <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
   </header>
 
-  <!-- Мобильное меню (скрытое с помощью transform, активируется классом "active") -->
+  <!-- Мобильное меню -->
   <div id="mobile-menu">
     <nav class="flex flex-col gap-4 text-center">
       <a href="/">Главная</a>
@@ -47,9 +56,20 @@
       <a href="/about/">О проекте</a>
       <a href="/contact/">Контакты</a>
       <a href="/login/" class="category-button inline-block">Вход</a>
-      <!-- Поле поиска в мобильном меню -->
-      <input type="text" class="search-input mt-4" placeholder="Поиск...">
-      <!-- Кнопка закрытия мобильного меню -->
+
+      <!-- Форма поиска в мобильном меню -->
+      <form action="{% url 'news_list' %}" method="get" class="mt-4">
+        <input type="text"
+               name="search"
+               class="search-input w-full"
+               placeholder="Поиск..."
+               value="{{ search_query|default:'' }}"
+        >
+        {% if request.GET.category %}
+          <input type="hidden" name="category" value="{{ request.GET.category }}">
+        {% endif %}
+      </form>
+
       <button class="category-button mt-4" id="close-mobile-menu">Закрыть</button>
     </nav>
   </div>
@@ -57,18 +77,31 @@
   <main class="mt-24 p-6">
     {% block content %}
     <div class="container mx-auto p-4">
+      <!-- Результаты поиска -->
+      {% if search_query %}
+        <div class="text-center mb-6">
+          <p class="text-gray-300">
+            {% if news_list.exists %}
+              Результаты поиска для "{{ search_query }}"
+            {% else %}
+              По запросу "{{ search_query }}" ничего не найдено
+            {% endif %}
+          </p>
+        </div>
+      {% endif %}
 
       <!-- Заголовок "Выбор категории" -->
-      <!-- Заголовок "Выбор категории" -->
-    <div class="category-title-wrapper">
+      <div class="category-title-wrapper">
         <h2 class="text-3xl font-bold text-center category-title">Выбор категории</h2>
-    </div>
-
+      </div>
 
       <!-- Фильтр категорий -->
       <div class="category-filter">
         {% for category in categories %}
-          <a href="?category={{ category.id }}" class="category-button">{{ category.name }}</a>
+          <a href="?category={{ category.id }}{% if search_query %}&search={{ search_query }}{% endif %}"
+             class="category-button">
+            {{ category.name }}
+          </a>
         {% endfor %}
       </div>
 
@@ -87,12 +120,12 @@
           <p class="text-center">Новостей пока нет.</p>
         {% endfor %}
       </div>
-
     </div>
     {% endblock %}
   </main>
 
   <footer class="bg-gray-900 p-6 mt-10 text-center">
+    <!-- Футер остается без изменений -->
     <div class="flex flex-col items-center gap-4">
       <!-- Логотип -->
       <div class="flex items-center gap-3">
@@ -120,10 +153,10 @@
 
   <!-- JS для мобильного меню и header -->
   <script>
-    // Тогглинг мобильного меню с анимацией (переключение класса "active")
-    const burgerBtn = document.getElementById('burger-btn'); // Кнопка бургер-меню
-    const mobileMenu = document.getElementById('mobile-menu'); // Мобильное меню
-    const closeMobileMenu = document.getElementById('close-mobile-menu'); // Кнопка закрытия мобильного меню
+    // Скрипты остаются без изменений
+    const burgerBtn = document.getElementById('burger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
 
     burgerBtn.addEventListener('click', function() {
       mobileMenu.classList.toggle('active');
@@ -133,7 +166,6 @@
       mobileMenu.classList.remove('active');
     });
 
-    // Скрытие/появление header при прокрутке
     let lastScrollTop = 0;
     const header = document.querySelector(".header");
 
