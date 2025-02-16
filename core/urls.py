@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import home, news_list, news_detail, user_login, profile
+from .views import home, news_list, news_detail, user_login, profile, register_view  # добавляем import register_view
 from django.contrib.auth.views import (
     LogoutView, PasswordResetView, PasswordResetDoneView,
     PasswordResetConfirmView, PasswordResetCompleteView
@@ -14,6 +14,7 @@ urlpatterns = [
     path('news/', news_list, name='news_list'),
     path('news/<int:news_id>/', news_detail, name='news_detail'),
     path('login/', user_login, name='login'),
+    path('register/', register_view, name='register'),  # добавляем маршрут для регистрации
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
     path('profile/', profile, name='profile'),
 
