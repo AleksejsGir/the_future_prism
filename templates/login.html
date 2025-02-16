@@ -2,12 +2,24 @@
 {% block content %}
 <div class="container mx-auto p-4">
   <h1 class="text-3xl font-bold neon-text mb-4">Вход</h1>
+
+  {% if error %}
+    <div class="mb-4 p-4 rounded-lg bg-red-500/20 text-center">
+      {{ error }}
+    </div>
+  {% endif %}
+
   <form method="post" class="max-w-md mx-auto bg-gray-800/80 backdrop-blur-md rounded-lg p-6">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Имя пользователя" class="input input-bordered w-full mb-4" required>
     <input type="password" name="password" placeholder="Пароль" class="input input-bordered w-full mb-4" required>
     <button type="submit" class="w-full neon-button">Войти</button>
-    <a href="{% url 'password_reset' %}" class="block text-center text-blue-400 mt-2">Забыли пароль?</a>
+    <div class="mt-4 text-center">
+      <a href="{% url 'password_reset' %}" class="text-blue-400 hover:text-blue-300">Забыли пароль?</a>
+      <p class="mt-2 text-sm">
+        Нет аккаунта? <a href="{% url 'register' %}" class="text-blue-400 hover:text-blue-300">Зарегистрироваться</a>
+      </p>
+    </div>
   </form>
 </div>
 {% endblock %}
