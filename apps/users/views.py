@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm, LoginForm
 from .serializers import UserRegistrationSerializer
+from .utils import save_avatar
 
 
 # Заметки для дальнейшей разработки:
@@ -16,6 +17,8 @@ from .serializers import UserRegistrationSerializer
 # 2. Используем декораторы для защиты маршрутов
 # 3. Добавляем информативные сообщения для пользователя
 # 4. Обрабатываем все возможные ошибки
+# 5. Добавлена обработка загрузки аватаров и других файлов
+
 
 # API Представления
 class UserRegistrationView(generics.CreateAPIView):
@@ -89,12 +92,31 @@ def register_view(request):
 def profile(request):
     """
     Отображение и редактирование профиля пользователя.
-    Требует аутентификации (декоратор login_required).
+    Обрабатывает как обычные данные формы, так и загрузку аватара.
     """
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            form.save()
+            # Проверяем, загружен ли новый аватар
+            avatar_file = request.FILES.get('avatar')
+            if avatar_file:
+                try:
+                    # Используем утилиту для обработки и сохранения аватара
+                    save_avatar(request.user, avatar_file)
+                    messages.success(request, 'Аватар успешно обновлен!')
+                except Exception as e:
+                    messages.error(request, f'Ошибка при загрузке аватара: {str(e)}')
+                    return render(request, 'registration/profile.html', {'form': form})
+
+            # Сохраняем остальные данные формы
+            user = form.save(commit=False)
+
+            # Проверяем изменение email
+            if user.email != request.user.email:
+                # В будущем здесь можно добавить подтверждение email
+                pass
+
+            user.save()
             messages.success(request, 'Профиль успешно обновлен!')
             return redirect('profile')
     else:
@@ -102,9 +124,9 @@ def profile(request):
 
     context = {
         'form': form,
-        # Добавляем дополнительный контекст для шаблона
         'title': 'Профиль пользователя',
-        'user_since': request.user.date_joined
+        'user_since': request.user.date_joined,
+        'avatar_url': request.user.get_avatar_url(),
     }
 
     return render(request, 'registration/profile.html', context)
@@ -117,8 +139,18 @@ def edit_profile(request):
     Позволяет разделить отображение и редактирование данных.
     """
     if request.method == 'POST':
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+            # Обработка аватара
+            avatar_file = request.FILES.get('avatar')
+            if avatar_file:
+                try:
+                    save_avatar(request.user, avatar_file)
+                    messages.success(request, 'Аватар успешно обновлен!')
+                except Exception as e:
+                    messages.error(request, f'Ошибка при загрузке аватара: {str(e)}')
+                    return render(request, 'registration/edit_profile.html', {'form': form})
+
             form.save()
             messages.success(request, 'Изменения сохранены!')
             return redirect('profile')
@@ -126,3 +158,22 @@ def edit_profile(request):
         form = CustomUserChangeForm(instance=request.user)
 
     return render(request, 'registration/edit_profile.html', {'form': form})
+
+
+@login_required
+def delete_avatar(request):
+    """
+    Представление для удаления текущего аватара пользователя.
+    Требует подтверждения через POST-запрос для безопасности.
+    """
+    if request.method == 'POST':
+        user = request.user
+        if user.avatar:
+            # Удаляем файл аватара
+            user.avatar.delete(save=False)
+            user.avatar = None
+            user.save()
+            messages.success(request, 'Аватар успешно удален')
+        else:
+            messages.info(request, 'У вас нет загруженного аватара')
+    return redirect('profile')
