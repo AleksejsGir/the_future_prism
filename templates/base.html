@@ -55,7 +55,7 @@
       <a href="/news/">Новости</a>
       <a href="/about/">О проекте</a>
       <a href="/contact/">Контакты</a>
-      <a href="/login/" class="category-button inline-block">Вход</a>
+      <a href="{% url 'login' %}" class="category-button hidden md:inline-block">Вход</a>
 
       <!-- Форма поиска в мобильном меню -->
       <form action="{% url 'news_list' %}" method="get" class="mt-4">

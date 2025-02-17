@@ -20,17 +20,27 @@ class UserRegistrationView(generics.CreateAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 # Web Views
+# apps/users/views.py
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
+
+        # Добавляем проверку на пустые поля
+        if not username or not password:
+            messages.error(request, 'Пожалуйста, заполните все поля')
+            return render(request, 'login.html')
+
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(request, f'Добро пожаловать, {user.username}!')
+            # Оставляем редирект на home, как в оригинальном коде
             return redirect('home')
         else:
-            error = "Неверные учетные данные"
-            return render(request, 'login.html', {'error': error})
+            # Используем messages вместо контекста с error
+            messages.error(request, 'Неверные учетные данные')
+            return render(request, 'login.html')
     return render(request, 'login.html')
 
 def register_view(request):
