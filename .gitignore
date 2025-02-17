@@ -38,3 +38,5 @@ db.sqlite3
 # macOS
 .DS_Store
 media/avatars/*
+sent_emails/*
+debug.log
