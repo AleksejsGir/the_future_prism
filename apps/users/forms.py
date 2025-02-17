@@ -75,19 +75,27 @@ class CustomUserChangeForm(UserChangeForm):
         })
     )
 
+    avatar = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(attrs={
+            'class': 'hidden',  # Скрываем стандартный элемент
+            'accept': 'image/*'  # Принимаем только изображения
+        }),
+        help_text='Рекомендуемый размер: 300x300 пикселей'
+    )
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'bio')
+        fields = ('first_name', 'last_name', 'email', 'bio', 'avatar')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Стилизация полей
         for field in self.fields:
-            if field != 'bio':
+            if field not in ['bio', 'avatar']:
                 self.fields[field].widget.attrs.update({
                     'class': 'input input-bordered w-full'
                 })
-
 
 class LoginForm(forms.Form):
     """
@@ -120,3 +128,4 @@ class LoginForm(forms.Form):
             raise ValidationError('Пожалуйста, заполните все поля')
 
         return cleaned_data
+

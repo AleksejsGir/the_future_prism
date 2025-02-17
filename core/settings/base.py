@@ -70,6 +70,35 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Дефолтное значение для первичного ключа
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# Настройка медиафайлов
+
+# Настройки медиафайлов
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Настройки для загрузки файлов
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
+
+# Максимальный размер загружаемого файла (5MB)
+MAX_UPLOAD_SIZE = 5 * 1024 * 1024
+
+# Разрешенные форматы изображений
+ALLOWED_IMAGE_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+]
+
+# Максимальные размеры изображения
+MAX_IMAGE_DIMENSIONS = {
+    'width': 1920,
+    'height': 1080,
+}
+
+# Размеры для аватара
+AVATAR_DIMENSIONS = {
+    'width': 300,
+    'height': 300,
+}
