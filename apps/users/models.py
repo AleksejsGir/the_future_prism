@@ -31,12 +31,12 @@ class CustomUser(AbstractUser):
         help_text=_('Получать уведомления на email')
     )
 
-    # Дополнительные поля для отслеживания активности
-    last_activity = models.DateTimeField(
-        verbose_name=_('Последняя активность'),
-        auto_now=True,
-        help_text=_('Время последней активности пользователя')
-    )
+    # # Дополнительные поля для отслеживания активности
+    # last_activity = models.DateTimeField(
+    #     verbose_name=_('Последняя активность'),
+    #     auto_now=True,
+    #     help_text=_('Время последней активности пользователя')
+    # )
 
     # Добавим поле для избранных статей позже, когда создадим модель News
     # favorites = models.ManyToManyField(
