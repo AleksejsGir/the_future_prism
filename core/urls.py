@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import home, news_list, news_detail
 from apps.users.views import (
-    user_login, register_view, profile, edit_profile, delete_avatar  # Добавлен delete_avatar
+    user_login, register_view, profile, edit_profile, delete_avatar
 )
 from django.contrib.auth.views import (
     LogoutView, PasswordResetView, PasswordResetDoneView,
@@ -26,34 +26,53 @@ urlpatterns = [
     # Аутентификация и управление профилем
     path('login/', user_login, name='login'),
     path('register/', register_view, name='register'),
-    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
+
+    # Обновленная настройка выхода из системы
+    path('logout/',
+         LogoutView.as_view(
+             template_name='registration/logged_out.html',  # Шаблон для страницы выхода
+             next_page='home',  # Перенаправление после выхода
+             http_method_names=['post', 'get'],  # Разрешаем оба метода
+             extra_context={'title': 'Выход из системы'}  # Дополнительный контекст
+         ),
+         name='logout'
+         ),
 
     # Управление профилем пользователя
     path('profile/', profile, name='profile'),
     path('profile/edit/', edit_profile, name='edit_profile'),
-    path('profile/avatar/delete/', delete_avatar, name='delete_avatar'),  # Новый маршрут для удаления аватара
+    path('profile/avatar/delete/', delete_avatar, name='delete_avatar'),
 
-    # Маршруты для сброса пароля
+    # Маршруты для сброса пароля с улучшенными настройками
     path('password-reset/',
          PasswordResetView.as_view(
              template_name='registration/password_reset.html',
-             success_url='/password-reset/done/'  # Добавлен явный URL перенаправления
+             success_url='/password-reset/done/',
+             email_template_name='registration/password_reset_email.html',
+             subject_template_name='registration/password_reset_subject.txt',
+             extra_context={'title': 'Сброс пароля'}
          ),
          name='password_reset'),
+
     path('password-reset/done/',
          PasswordResetDoneView.as_view(
-             template_name='registration/password_reset_done.html'
+             template_name='registration/password_reset_done.html',
+             extra_context={'title': 'Письмо отправлено'}
          ),
          name='password_reset_done'),
+
     path('password-reset-confirm/<uidb64>/<token>/',
          PasswordResetConfirmView.as_view(
              template_name='registration/password_reset_confirm.html',
-             success_url='/password-reset-complete/'  # Добавлен явный URL перенаправления
+             success_url='/password-reset-complete/',
+             extra_context={'title': 'Установка нового пароля'}
          ),
          name='password_reset_confirm'),
+
     path('password-reset-complete/',
          PasswordResetCompleteView.as_view(
-             template_name='registration/password_reset_complete.html'
+             template_name='registration/password_reset_complete.html',
+             extra_context={'title': 'Пароль изменен'}
          ),
          name='password_reset_complete'),
 
@@ -69,11 +88,12 @@ urlpatterns = [
     ])),
 ]
 
-# Добавление обработки медиафайлов в режиме разработки
+# Настройка обработки медиафайлов в режиме разработки
 if settings.DEBUG:
+    # Добавляем обработку медиафайлов
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-    # Добавляем Django Debug Toolbar в режиме разработки
+    # Добавляем Django Debug Toolbar если он установлен
     try:
         import debug_toolbar
 
