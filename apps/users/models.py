@@ -1,15 +1,12 @@
-# apps/users/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 
 class CustomUser(AbstractUser):
     """
     Расширенная модель пользователя.
     Наследуется от AbstractUser для сохранения базового функционала Django.
     """
-    # Основные поля профиля
     bio = models.TextField(
         verbose_name=_('О себе'),
         blank=True,
@@ -30,21 +27,6 @@ class CustomUser(AbstractUser):
         default=True,
         help_text=_('Получать уведомления на email')
     )
-
-    # # Дополнительные поля для отслеживания активности
-    # last_activity = models.DateTimeField(
-    #     verbose_name=_('Последняя активность'),
-    #     auto_now=True,
-    #     help_text=_('Время последней активности пользователя')
-    # )
-
-    # Добавим поле для избранных статей позже, когда создадим модель News
-    # favorites = models.ManyToManyField(
-    #     'news.News',
-    #     verbose_name=_('Избранные статьи'),
-    #     related_name='favorited_by',
-    #     blank=True
-    # )
 
     class Meta:
         verbose_name = _('Пользователь')
