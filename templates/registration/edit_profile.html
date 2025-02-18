@@ -1,6 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Редактирование профиля | The Future Prism{% endblock %}
+
+{% block extra_head %}
+    {# Добавляем стили и скрипты для работы с аватаром #}
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <script src="{% static 'js/avatar-preview.js' %}" defer></script>
+{% endblock %}
 
 {% block content %}
 <div class="container mx-auto p-4">
@@ -21,26 +28,61 @@
         <form method="post" enctype="multipart/form-data" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6">
             {% csrf_token %}
 
+            {# Специальная обработка поля аватара #}
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-400 mb-2">
+                    Аватар профиля
+                </label>
+                {# Текущий аватар #}
+                {% if user.avatar %}
+                    <div class="mb-4">
+                        <img src="{{ user.avatar.url }}" alt="Текущий аватар"
+                             class="avatar-preview-image">
+                        <p class="text-sm text-gray-400 mt-2">Текущий аватар</p>
+                    </div>
+                {% endif %}
+                {# Поле загрузки нового аватара #}
+                {{ form.avatar }}
+                {% if form.avatar.help_text %}
+                    <p class="mt-1 text-sm text-gray-400">{{ form.avatar.help_text }}</p>
+                {% endif %}
+                {% if form.avatar.errors %}
+                    {% for error in form.avatar.errors %}
+                        <p class="mt-1 text-sm text-red-400">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Остальные поля формы #}
             {% for field in form %}
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-400 mb-2">
-                        {{ field.label }}
-                    </label>
-                    {{ field }}
-                    {% if field.help_text %}
-                        <p class="mt-1 text-sm text-gray-400">{{ field.help_text }}</p>
-                    {% endif %}
-                    {% if field.errors %}
-                        {% for error in field.errors %}
-                            <p class="mt-1 text-sm text-red-400">{{ error }}</p>
-                        {% endfor %}
-                    {% endif %}
-                </div>
+                {% if field.name != 'avatar' %}
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="mt-1 text-sm text-gray-400">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p class="mt-1 text-sm text-red-400">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
             {% endfor %}
 
+            {# Кнопки действий #}
             <div class="flex gap-4 mt-6">
                 <button type="submit" class="neon-button">Сохранить изменения</button>
                 <a href="{% url 'profile' %}" class="neon-button bg-gray-700">Отмена</a>
+                {% if user.avatar %}
+                    <form action="{% url 'delete_avatar' %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="neon-button bg-red-700">Удалить аватар</button>
+                    </form>
+                {% endif %}
             </div>
         </form>
     </div>

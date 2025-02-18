@@ -5,21 +5,27 @@
   <meta charset="UTF-8">
   <title>{% block title %}The Future Prism{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {# Основные стили #}
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+  {# Фавиконка #}
   <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+  {# Дополнительные стили и скрипты из дочерних шаблонов #}
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
-
-  <!-- Фиксированный хедер -->
+  {# Фиксированный хедер #}
   <header class="header">
     <a href="/" class="flex items-center gap-3">
       <img src="{% static 'images/logo.PNG' %}" alt="The Future Prism" class="logo-img">
       <span class="logo-text">THE FUTURE PRISM</span>
     </a>
 
-    <!-- Десктопное меню -->
+    {# Десктопное меню #}
     <nav class="nav-menu hidden md:flex">
       <a href="/">Главная</a>
       <a href="/news/">Новости</a>
@@ -27,7 +33,7 @@
       <a href="/contact/">Контакты</a>
     </nav>
 
-    <!-- Поиск, кнопка входа и переключатель темы -->
+    {# Поиск, кнопка входа и переключатель темы #}
     <div class="flex gap-4 items-center">
       <form action="{% url 'news_list' %}" method="get" class="flex items-center">
         <input type="text"
@@ -40,24 +46,48 @@
           <input type="hidden" name="category" value="{{ request.GET.category }}">
         {% endif %}
       </form>
-      <a href="/login/" class="category-button hidden md:inline-block">Вход</a>
+
+      {# Управление аутентификацией #}
+      {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="category-button hidden md:inline-block">
+          {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-8 h-8 rounded-full inline-block mr-2">
+          {% endif %}
+          {{ user.username }}
+        </a>
+        <a href="{% url 'logout' %}" class="category-button hidden md:inline-block">Выход</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="category-button hidden md:inline-block">Вход</a>
+      {% endif %}
+
       <button class="category-button hidden md:inline-block" id="theme-toggle">Тема</button>
     </div>
 
-    <!-- Бургер-меню -->
+    {# Бургер-меню #}
     <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
   </header>
 
-  <!-- Мобильное меню -->
+  {# Мобильное меню #}
   <div id="mobile-menu">
     <nav class="flex flex-col gap-4 text-center">
       <a href="/">Главная</a>
       <a href="/news/">Новости</a>
       <a href="/about/">О проекте</a>
       <a href="/contact/">Контакты</a>
-      <a href="{% url 'login' %}" class="category-button hidden md:inline-block">Вход</a>
 
-      <!-- Форма поиска в мобильном меню -->
+      {% if user.is_authenticated %}
+        <a href="{% url 'profile' %}" class="category-button">
+          {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-8 h-8 rounded-full inline-block mr-2">
+          {% endif %}
+          {{ user.username }}
+        </a>
+        <a href="{% url 'logout' %}" class="category-button">Выход</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="category-button">Вход</a>
+      {% endif %}
+
+      {# Форма поиска в мобильном меню #}
       <form action="{% url 'news_list' %}" method="get" class="mt-4">
         <input type="text"
                name="search"
@@ -77,7 +107,7 @@
   <main class="mt-24 p-6">
     {% block content %}
     <div class="container mx-auto p-4">
-      <!-- Результаты поиска -->
+      {# Результаты поиска #}
       {% if search_query %}
         <div class="text-center mb-6">
           <p class="text-gray-300">
@@ -90,12 +120,12 @@
         </div>
       {% endif %}
 
-      <!-- Заголовок "Выбор категории" -->
+      {# Заголовок "Выбор категории" #}
       <div class="category-title-wrapper">
         <h2 class="text-3xl font-bold text-center category-title">Выбор категории</h2>
       </div>
 
-      <!-- Фильтр категорий -->
+      {# Фильтр категорий #}
       <div class="category-filter">
         {% for category in categories %}
           <a href="?category={{ category.id }}{% if search_query %}&search={{ search_query }}{% endif %}"
@@ -105,7 +135,7 @@
         {% endfor %}
       </div>
 
-      <!-- Основной контент -->
+      {# Основной контент #}
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {% for news in news_list %}
           <div class="news-card bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
@@ -125,20 +155,21 @@
   </main>
 
   <footer class="bg-gray-900 p-6 mt-10 text-center">
-    <!-- Футер остается без изменений -->
     <div class="flex flex-col items-center gap-4">
-      <!-- Логотип -->
+      {# Логотип #}
       <div class="flex items-center gap-3">
         <img src="{% static 'images/logo.PNG' %}" alt="The Future Prism" class="logo-img">
         <span class="logo-text">THE FUTURE PRISM</span>
       </div>
-      <!-- Навигационные ссылки -->
+
+      {# Навигационные ссылки #}
       <div class="flex gap-4">
         <a href="/privacy/">Политика</a>
         <a href="/contact/">Контакты</a>
         <a href="/about/">О проекте</a>
       </div>
-      <!-- Социальные сети -->
+
+      {# Социальные сети #}
       <div class="flex gap-4">
         <a href="https://facebook.com" target="_blank">Facebook</a>
         <a href="https://twitter.com" target="_blank">Twitter</a>
@@ -146,14 +177,14 @@
         <a href="https://discord.com" target="_blank">Discord</a>
         <a href="https://instagram.com" target="_blank">Instagram</a>
       </div>
-      <!-- Копирайт -->
+
+      {# Копирайт #}
       <p class="mt-4 text-sm">&copy; 2025 The Future Prism. Все права защищены.</p>
     </div>
   </footer>
 
-  <!-- JS для мобильного меню и header -->
+  {# JS для мобильного меню и header #}
   <script>
-    // Скрипты остаются без изменений
     const burgerBtn = document.getElementById('burger-btn');
     const mobileMenu = document.getElementById('mobile-menu');
     const closeMobileMenu = document.getElementById('close-mobile-menu');
@@ -176,6 +207,5 @@
       lastScrollTop = scrollTop;
     });
   </script>
-
 </body>
 </html>
