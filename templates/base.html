@@ -47,7 +47,7 @@
         {% endif %}
       </form>
 
-      {# Управление аутентификацией #}
+      {# Управление аутентификацией - скрываем кнопку выхода на мобильных устройствах #}
       {% if user.is_authenticated %}
         <a href="{% url 'profile' %}" class="category-button hidden md:inline-block">
           {% if user.avatar %}
@@ -55,7 +55,8 @@
           {% endif %}
           {{ user.username }}
         </a>
-        <form method="post" action="{% url 'logout' %}" class="inline">
+        {# Кнопка выхода только в десктопной версии #}
+        <form method="post" action="{% url 'logout' %}" class="inline hidden md:block">
           {% csrf_token %}
           <button type="submit" class="category-button logout-btn">Выход</button>
         </form>
@@ -66,34 +67,46 @@
       <button class="category-button hidden md:inline-block" id="theme-toggle">Тема</button>
     </div>
 
-    {# Бургер-меню #}
+    {# Бургер-меню - всегда видимо на мобильных устройствах #}
     <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
   </header>
 
-  {# Мобильное меню #}
+  {# Мобильное меню - улучшенная структура #}
   <div id="mobile-menu" class="mobile-menu">
-    <nav class="flex flex-col gap-6 text-center text-white">
-      <a href="/">Главная</a>
-      <a href="/news/">Новости</a>
-      <a href="/about/">О проекте</a>
-      <a href="/contact/">Контакты</a>
-
+    <nav class="flex flex-col gap-6">
+      {# Профиль пользователя в мобильном меню #}
       {% if user.is_authenticated %}
-        <a href="{% url 'profile' %}" class="category-button">
+        <div class="user-profile text-center mb-6">
           {% if user.avatar %}
-            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-12 h-12 rounded-full mx-auto">
+            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-primary-color">
           {% endif %}
-          {{ user.username }}
-        </a>
-        <form method="post" action="{% url 'logout' %}" class="inline">
-          {% csrf_token %}
-          <button type="submit" class="category-button logout-btn">Выход</button>
-        </form>
-      {% else %}
-        <a href="{% url 'login' %}" class="category-button">Вход</a>
+          <div class="username text-lg mb-2">{{ user.username }}</div>
+          <a href="{% url 'profile' %}" class="text-primary-color hover:text-secondary-color transition-colors">
+            Перейти в профиль
+          </a>
+        </div>
       {% endif %}
 
-      <button class="category-button mt-4" id="close-mobile-menu">Закрыть</button>
+      {# Основные пункты меню #}
+      <a href="/" class="menu-link">Главная</a>
+      <a href="/news/" class="menu-link">Новости</a>
+      <a href="/about/" class="menu-link">О проекте</a>
+      <a href="/contact/" class="menu-link">Контакты</a>
+
+      {# Блок авторизации в мобильном меню #}
+      <div class="mt-6">
+        {% if user.is_authenticated %}
+          <form method="post" action="{% url 'logout' %}" class="w-full">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn w-full">Выход</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="category-button w-full block text-center">Вход</a>
+        {% endif %}
+      </div>
+
+      {# Кнопка закрытия меню #}
+      <button class="category-button mt-6" id="close-mobile-menu">Закрыть</button>
     </nav>
   </div>
 
@@ -105,24 +118,39 @@
     <p class="mt-4 text-sm">&copy; 2025 The Future Prism. Все права защищены.</p>
   </footer>
 
-  {# JS для мобильного меню #}
+  {# JS для мобильного меню - улучшенный скрипт #}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
         const burgerBtn = document.getElementById("burger-btn");
         const mobileMenu = document.getElementById("mobile-menu");
         const closeMenuBtn = document.getElementById("close-mobile-menu");
+        const body = document.body;
 
         function toggleMobileMenu() {
             mobileMenu.classList.toggle("open");
+            // Блокируем прокрутку страницы когда меню открыто
+            if (mobileMenu.classList.contains("open")) {
+                body.style.overflow = "hidden";
+            } else {
+                body.style.overflow = "";
+            }
         }
 
         burgerBtn.addEventListener("click", toggleMobileMenu);
         closeMenuBtn.addEventListener("click", toggleMobileMenu);
 
+        // Закрываем меню при клике вне его области
         document.addEventListener("click", function (event) {
-            if (!mobileMenu.contains(event.target) && !burgerBtn.contains(event.target)) {
-                mobileMenu.classList.remove("open");
+            if (mobileMenu.classList.contains("open") &&
+                !mobileMenu.contains(event.target) &&
+                !burgerBtn.contains(event.target)) {
+                toggleMobileMenu();
             }
+        });
+
+        // Предотвращаем закрытие меню при клике внутри него
+        mobileMenu.addEventListener("click", function(event) {
+            event.stopPropagation();
         });
     });
   </script>
