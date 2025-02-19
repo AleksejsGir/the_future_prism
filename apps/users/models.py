@@ -1,11 +1,13 @@
+# apps/users/models.py
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 class CustomUser(AbstractUser):
     """
     Расширенная модель пользователя.
-    Наследуется от AbstractUser для сохранения базового функционала Django.
+    Социальные сети и уведомления о новостях удалены по требованию заказчика.
     """
     bio = models.TextField(
         verbose_name=_('О себе'),
@@ -50,3 +52,9 @@ class CustomUser(AbstractUser):
         Если аватар не загружен, возвращает None.
         """
         return self.avatar.url if self.avatar else None
+
+# <!-- AI-TODO:
+# 1. Удалено поле news_notifications
+# 2. Проверить, нет ли зависимости в миграциях и формах
+# 3. Обновить базу данных после удаления поля
+# -->
