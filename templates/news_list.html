@@ -24,16 +24,14 @@
     </div>
 
     <!-- Фильтр категорий -->
-    <div class="category-filter flex flex-wrap justify-center gap-4">
+    <div class="category-filter flex flex-wrap justify-center gap-2 md:gap-4 animate-fade-in-up delay-300">
       <a href="{% url 'news_list' %}{% if search_query %}?search={{ search_query }}{% endif %}"
-         class="category-button px-4 py-2 {% if not request.GET.category %}bg-opacity-80{% endif %}"
-         style="--button-index: 0">
+         class="category-button rounded-[12px] md:rounded-[12px]">
         Все категории
       </a>
       {% for category in categories %}
         <a href="?{% if search_query %}search={{ search_query }}&{% endif %}category={{ category.id }}"
-           class="category-button px-4 py-2 {% if request.GET.category == category.id|stringformat:'s' %}bg-opacity-80{% endif %}"
-           style="--button-index: {{ forloop.counter }}">
+           class="category-button text-sm md:text-base {% if request.GET.category == category.id|stringformat:'s' %}bg-opacity-80{% endif %}">
           {{ category.name }}
         </a>
       {% empty %}
@@ -105,4 +103,17 @@
   {% endif %}
 
 </div>
+
+<script>
+// Добавляем задержку для анимации категорий
+document.addEventListener('DOMContentLoaded', function() {
+  const categoryFilter = document.querySelector('.category-filter');
+  if(categoryFilter) {
+    setTimeout(() => {
+      categoryFilter.style.opacity = '1';
+      categoryFilter.style.transform = 'translateY(0)';
+    }, 500);
+  }
+});
+</script>
 {% endblock %}

@@ -16,8 +16,16 @@
 
   {# Дополнительные стили и скрипты из дочерних шаблонов #}
   {% block extra_head %}{% endblock %}
+
+  <!-- Добавляем ссылку на новый скрипт -->
+  <script src="{% static 'js/home.js' %}" defer></script>
 </head>
 <body>
+  <!-- Добавляем контейнер для частиц -->
+  <div class="particles-container fixed inset-0 z-0 pointer-events-none">
+    <!-- Частицы будут сгенерированы скриптом -->
+  </div>
+
   {# Фиксированный хедер #}
   <header class="header">
     <a href="/" class="flex items-center gap-3">
@@ -27,19 +35,19 @@
 
     {# Десктопное меню #}
     <nav class="nav-menu hidden md:flex gap-6 items-center">
-      <a href="/" class="hover:text-blue-400 relative group">
+      <a href="/" class="hover:text-blue-400 relative group text-sm md:text-base">
         Главная
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/news/" class="hover:text-blue-400 relative group">
+      <a href="/news/" class="hover:text-blue-400 relative group text-sm md:text-base">
         Новости
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/about/" class="hover:text-blue-400 relative group">
+      <a href="/about/" class="hover:text-blue-400 relative group text-sm md:text-base">
         О проекте
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/contact/" class="hover:text-blue-400 relative group">
+      <a href="/contact/" class="hover:text-blue-400 relative group text-sm md:text-base">
         Контакты
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
@@ -59,28 +67,28 @@
         {% endif %}
       </form>
 
-      {# Управление аутентификацией - скрываем кнопку выхода на мобильных устройствах #}
-      {% if user.is_authenticated %}
-        <a href="{% url 'profile' %}" class="category-button hidden md:inline-block">
-          {% if user.avatar %}
-            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-8 h-8 rounded-full inline-block mr-2">
-          {% endif %}
-          {{ user.username }}
-        </a>
-        {# Кнопка выхода только в десктопной версии #}
-        <form method="post" action="{% url 'logout' %}" class="inline hidden md:block">
-          {% csrf_token %}
-          <button type="submit" class="category-button logout-btn">Выход</button>
-        </form>
-      {% else %}
-        <a href="{% url 'login' %}" class="category-button hidden md:inline-block">Вход</a>
-      {% endif %}
+      {# Скрываем кнопки управления на мобильных #}
+      <div class="hidden md:flex gap-4 items-center">
+        {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}" class="category-button">
+            {% if user.avatar %}
+              <img src="{{ user.avatar.url }}" alt="Аватар" class="w-8 h-8 rounded-full inline-block mr-2">
+            {% endif %}
+            {{ user.username }}
+          </a>
+          <form method="post" action="{% url 'logout' %}" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="category-button logout-btn">Выход</button>
+          </form>
+        {% else %}
+          <a href="{% url 'login' %}" class="category-button">Вход</a>
+        {% endif %}
+        <button class="category-button" id="theme-toggle">Тема</button>
+      </div>
 
-      <button class="category-button hidden md:inline-block" id="theme-toggle">Тема</button>
+      {# Бургер-меню - всегда видимо на мобильных устройствах #}
+      <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
     </div>
-
-    {# Бургер-меню - всегда видимо на мобильных устройствах #}
-    <button class="md:hidden text-white text-3xl" id="burger-btn">&#9776;</button>
   </header>
 
   {# Мобильное меню - улучшенная структура #}
@@ -130,40 +138,41 @@
     <p class="mt-4 text-sm">&copy; 2025 The Future Prism. Все права защищены.</p>
   </footer>
 
-  {# JS для мобильного меню - улучшенный скрипт #}
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const burgerBtn = document.getElementById("burger-btn");
-        const mobileMenu = document.getElementById("mobile-menu");
-        const closeMenuBtn = document.getElementById("close-mobile-menu");
-        const body = document.body;
+    // Переносим общие скрипты в base.html
+    document.addEventListener('DOMContentLoaded', function() {
+      // Общая логика для всех страниц
+      const burgerBtn = document.getElementById('burger-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMenuBtn = document.getElementById('close-mobile-menu');
+      const body = document.body;
 
-        function toggleMobileMenu() {
-            mobileMenu.classList.toggle("open");
-            // Блокируем прокрутку страницы когда меню открыто
-            if (mobileMenu.classList.contains("open")) {
-                body.style.overflow = "hidden";
-            } else {
-                body.style.overflow = "";
-            }
+      function toggleMobileMenu() {
+        mobileMenu.classList.toggle("open");
+        // Блокируем прокрутку страницы когда меню открыто
+        if (mobileMenu.classList.contains("open")) {
+          body.style.overflow = "hidden";
+        } else {
+          body.style.overflow = "";
         }
+      }
 
-        burgerBtn.addEventListener("click", toggleMobileMenu);
-        closeMenuBtn.addEventListener("click", toggleMobileMenu);
+      burgerBtn.addEventListener("click", toggleMobileMenu);
+      closeMenuBtn.addEventListener("click", toggleMobileMenu);
 
-        // Закрываем меню при клике вне его области
-        document.addEventListener("click", function (event) {
-            if (mobileMenu.classList.contains("open") &&
-                !mobileMenu.contains(event.target) &&
-                !burgerBtn.contains(event.target)) {
-                toggleMobileMenu();
-            }
-        });
+      // Закрываем меню при клике вне его области
+      document.addEventListener("click", function (event) {
+        if (mobileMenu.classList.contains("open") &&
+          !mobileMenu.contains(event.target) &&
+          !burgerBtn.contains(event.target)) {
+          toggleMobileMenu();
+        }
+      });
 
-        // Предотвращаем закрытие меню при клике внутри него
-        mobileMenu.addEventListener("click", function(event) {
-            event.stopPropagation();
-        });
+      // Предотвращаем закрытие меню при клике внутри него
+      mobileMenu.addEventListener("click", function(event) {
+        event.stopPropagation();
+      });
     });
   </script>
 </body>

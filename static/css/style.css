@@ -92,7 +92,8 @@ p, .search-input, .nav-menu {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: -webkit-fill-available; /* Для iOS */
   background-color: rgba(0, 0, 0, 0.9);
   display: none;
   flex-direction: column;
@@ -102,6 +103,8 @@ p, .search-input, .nav-menu {
   opacity: 0;
   transform: translateY(-100%);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* Открываем меню */
@@ -170,40 +173,45 @@ p, .search-input, .nav-menu {
   padding: 20px;
   position: relative;
   z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
 }
 
 /* --- Кнопки категорий --- */
 .category-button {
-  background: linear-gradient(135deg,
-    rgba(79, 214, 255, 0.7),
-    rgba(255, 120, 255, 0.7),
-    rgba(139, 0, 255, 0.7)
+  @apply px-4 py-2 md:px-6 md:py-3; /* Адаптивные размеры */
+  border-radius: 12px;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  background: linear-gradient(45deg, 
+    rgba(79, 214, 255, 0.8), 
+    rgba(255, 120, 255, 0.8), 
+    rgba(139, 0, 255, 0.8)
   );
   color: var(--text-color);
-  padding: 12px 24px;
-  border-radius: 20px;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(5px); /* Добавлен вендорный префикс для Safari */
-  backdrop-filter: blur(5px);
-  font-size: 14px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  text-align: center;
-  min-width: 120px;
-  animation: buttonFadeIn 0.5s ease-out forwards;
-  animation-delay: calc(var(--button-index) * 0.1s);
+  letter-spacing: 0.5px;
 }
 
 .category-button:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 5px 15px rgba(79, 214, 255, 0.3);
-  background: linear-gradient(135deg,
-    rgba(79, 214, 255, 0.9),
-    rgba(255, 120, 255, 0.9),
-    rgba(139, 0, 255, 0.9)
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(79,214,255,0.5);
+  opacity: 0.9;
+}
+
+/* Для активной категории */
+.category-button.bg-opacity-80 {
+  background: linear-gradient(45deg, 
+    rgba(79, 214, 255, 1), 
+    rgba(255, 120, 255, 1), 
+    rgba(139, 0, 255, 1)
   );
+  box-shadow: 0 0 20px rgba(79,214,255,0.7);
 }
 
 /* --- Заголовок "Выбор категории" --- */
@@ -340,6 +348,12 @@ p, .search-input, .nav-menu {
 
 /* --- Секция Hero --- */
 .hero-section {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(43, 43, 54, 0.9),
+    rgba(0, 0, 0, 0.9)
+  );
+  text-shadow: 0 0 10px rgba(79, 214, 255, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -649,17 +663,12 @@ textarea:focus {
 }
 
 .neon-text {
-  text-shadow: 0 0 8px rgba(79, 214, 255, 0.8);
-  animation: neonPulse 1.5s ease-in-out infinite alternate;
+  animation: neonPulse 2s ease-in-out infinite alternate;
 }
 
 @keyframes neonPulse {
-  from {
-    text-shadow: 0 0 5px rgba(79, 214, 255, 0.5);
-  }
-  to {
-    text-shadow: 0 0 15px rgba(79, 214, 255, 1);
-  }
+  0% { text-shadow: 0 0 5px rgba(79,214,255,0.3); }
+  100% { text-shadow: 0 0 20px rgba(79,214,255,0.8); }
 }
 
 /* Добавим плавные переходы для всех интерактивных элементов */
@@ -685,5 +694,159 @@ form {
     input, textarea {
       @apply w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
     }
+  }
+}
+
+.cta-buttons .neon-button {
+  min-width: 200px;
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 0.2s; }
+.delay-200 { animation-delay: 0.4s; }
+
+/* Частицы фона */
+.particle {
+  position: absolute;
+  background: rgba(79, 214, 255, 0.3);
+  border-radius: 50%;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Генерация частиц
+  const container = document.querySelector('.particles-container');
+  for(let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 4 + 2}px;
+      height: ${Math.random() * 4 + 2}px;
+      animation-duration: ${Math.random() * 10 + 10}s;
+    `;
+    container.appendChild(particle);
+  }
+});
+
+/* Добавляем стили для частиц */
+.particles-container {
+  z-index: -1;
+}
+
+.particle {
+  /* Существующие стили из предыдущего ответа */
+  filter: blur(1px);
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+@media (min-width: 768px) {
+  .category-button {
+    font-size: 1rem; /* 16px */
+  }
+}
+
+/* Универсальные стили кнопок */
+.neon-button, 
+.category-button,
+.logout-btn,
+.menu-link,
+#theme-toggle,
+#burger-btn {
+  @apply text-sm md:text-base;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem; /* 20px */
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-radius: 12px;
+  font-weight: 500; /* Добавляем одинаковую толщину шрифта */
+}
+
+/* Для мобильных устройств */
+@media (max-width: 640px) {
+  .neon-button, 
+  .category-button {
+    font-size: 0.875rem; /* 14px - явно указываем размер */
+    padding: 10px 18px;
+    border-radius: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .neon-button,  /* Добавляем neon-button в медиа-запрос */
+  .category-button,
+  .logout-btn {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+    padding: 12px 24px; /* Добавляем одинаковые отступы */
+  }
+}
+
+/* Специфичные стили для кнопок в новостях */
+.news-card .neon-button {
+  border-radius: 12px;
+}
+
+/* Специфичные стили для кнопок меню */
+.nav-menu a {
+  @apply text-sm md:text-base;
+  font-weight: 500;
+}
+
+/* Мобильное меню */
+.mobile-menu .menu-link {
+  @apply text-base py-3 px-6;
+}
+
+/* Кнопка закрытия мобильного меню */
+#close-mobile-menu {
+  @apply text-sm md:text-base w-full;
+}
+
+/* Пункты меню */
+.menu-link {
+  font-size: 1.25rem;
+  padding: 12px 24px;
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .menu-link {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  
+  #close-mobile-menu {
+    font-size: 0.875rem;
+    padding: 8px 16px;
+  }
+}
+
+/* Для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .mobile-menu {
+    height: -webkit-fill-available;
   }
 }

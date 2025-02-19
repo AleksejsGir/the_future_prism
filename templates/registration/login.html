@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full">
+    <div class="w-full max-w-md">
         {# Заголовок страницы #}
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold neon-text">Вход в систему</h1>
-            <p class="mt-2 text-gray-400">
+        <div class="text-center mb-8 px-2">
+            <h1 class="text-2xl md:text-3xl font-bold neon-text">Вход в систему</h1>
+            <p class="mt-2 text-sm md:text-base text-gray-400">
                 Войдите в свой аккаунт для доступа к полному функционалу
             </p>
         </div>
@@ -23,7 +23,7 @@
         {% endif %}
 
         {# Форма входа #}
-        <form method="post" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-8 shadow-xl space-y-6 md:p-6 sm:p-4">
+        <form method="post" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 space-y-4">
             {% csrf_token %}
 
             {# Поле имени пользователя #}
@@ -82,9 +82,9 @@
             </div>
 
             {# Кнопка входа #}
-            <button type="submit" class="w-full neon-button flex justify-center py-3">
+            <button type="submit" class="w-full neon-button flex justify-center py-2 md:py-3 text-sm md:text-base">
                 <span class="mr-2">Войти</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
             </button>
