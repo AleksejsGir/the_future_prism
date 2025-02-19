@@ -180,13 +180,13 @@ p, .search-input, .nav-menu {
 
 /* --- Кнопки категорий --- */
 .category-button {
-  @apply px-4 py-2 md:px-6 md:py-3; /* Адаптивные размеры */
+  padding: 0.5rem 1rem;
   border-radius: 12px;
   font-size: 0.875rem; /* 14px */
   line-height: 1.25rem; /* 20px */
-  background: linear-gradient(45deg, 
-    rgba(79, 214, 255, 0.8), 
-    rgba(255, 120, 255, 0.8), 
+  background: linear-gradient(45deg,
+    rgba(79, 214, 255, 0.8),
+    rgba(255, 120, 255, 0.8),
     rgba(139, 0, 255, 0.8)
   );
   color: var(--text-color);
@@ -206,9 +206,9 @@ p, .search-input, .nav-menu {
 
 /* Для активной категории */
 .category-button.bg-opacity-80 {
-  background: linear-gradient(45deg, 
-    rgba(79, 214, 255, 1), 
-    rgba(255, 120, 255, 1), 
+  background: linear-gradient(45deg,
+    rgba(79, 214, 255, 1),
+    rgba(255, 120, 255, 1),
     rgba(139, 0, 255, 1)
   );
   box-shadow: 0 0 20px rgba(79,214,255,0.7);
@@ -277,7 +277,6 @@ p, .search-input, .nav-menu {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /*backdrop-filter: blur(0,01px); /* Размытие фона */
   z-index: 1;
   border-radius: 12px;
 }
@@ -328,6 +327,9 @@ p, .search-input, .nav-menu {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s ease-in-out forwards;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06),
+              0 0 20px rgba(79, 214, 255, 0.1);
 }
 
 .news-card:hover {
@@ -372,7 +374,7 @@ p, .search-input, .nav-menu {
   width: 100%;
   height: 100%;
   background: rgba(43,43,54,0.5);
-  -webkit-backdrop-filter: blur(5px); /* Добавляем вендорный префикс для Safari */
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   z-index: 1;
   transition: background 0.3s ease;
@@ -484,7 +486,162 @@ p, .search-input, .nav-menu {
   text-align: center;
 }
 
-/* --- Медиа-запросы --- */
+/* Неоновая кнопка - объединенные стили */
+.neon-button {
+  background: linear-gradient(45deg,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  color: var(--text-color);
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.neon-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(79,214,255,0.5);
+  opacity: 0.9;
+}
+
+/* Для кнопок с дополнительными действиями */
+.neon-button.delete {
+  background: linear-gradient(45deg,
+    #ff4747,
+    #ff1a1a,
+    #cc0000
+  );
+}
+
+/* Стили для полей ввода */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(79, 214, 255, 0.3);
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(79, 214, 255, 0.1);
+}
+
+/* Пульсирующий неоновый текст */
+.neon-text {
+  animation: neonPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { text-shadow: 0 0 5px rgba(79,214,255,0.3); }
+  100% { text-shadow: 0 0 20px rgba(79,214,255,0.8); }
+}
+
+/* Универсальные стили для интерактивных элементов */
+a, button, input, .category-button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Стили для статистических карточек */
+.stat-card {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06),
+              0 0 20px rgba(79, 214, 255, 0.1);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Анимация появления элементов */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.delay-100 { animation-delay: 0.2s; }
+.delay-200 { animation-delay: 0.4s; }
+
+/* Стили для частиц фона */
+.particles-container {
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  background: rgba(79, 214, 255, 0.3);
+  border-radius: 50%;
+  animation: float 20s infinite linear;
+  filter: blur(1px);
+  opacity: 0.7;
+  mix-blend-mode: screen;
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-100vh) rotate(360deg); }
+}
+
+/* Меню-ссылки */
+.menu-link {
+  font-size: 1.25rem;
+  padding: 12px 24px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .mobile-menu {
+    height: -webkit-fill-available;
+  }
+}
+
+/* --- Медиа-запросы (объединены и оптимизированы) --- */
+
+/* Малые экраны (планшеты) */
+@media (min-width: 768px) {
+  .category-button,
+  .neon-button,
+  .logout-btn {
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+    padding: 12px 24px;
+  }
+
+  .nav-menu a {
+    font-size: 1rem;
+  }
+}
+
+/* Мобильные устройства */
 @media (max-width: 768px) {
   .category-filter {
     gap: 10px;
@@ -529,6 +686,33 @@ p, .search-input, .nav-menu {
   }
 }
 
+/* Маленькие мобильные устройства */
+@media (max-width: 640px) {
+  .neon-button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    padding: 0.5rem 0.75rem;
+    font-size: 14px;
+  }
+
+  .avatar-preview-container {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .avatar-preview-image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Очень маленькие экраны */
 @media (max-width: 480px) {
   .category-filter {
     flex-direction: column;
@@ -564,90 +748,17 @@ p, .search-input, .nav-menu {
   .share-buttons {
     flex-direction: column;
   }
-}
 
-.neon-button {
-  background: linear-gradient(45deg, 
-    var(--primary-color), 
-    var(--secondary-color), 
-    var(--accent-color)
-  );
-  color: var(--text-color);
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.neon-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(79,214,255,0.5);
-  opacity: 0.9;
-}
-
-/* Для кнопок с дополнительными действиями */
-.neon-button.delete {
-  background: linear-gradient(45deg, 
-    #ff4747, 
-    #ff1a1a, 
-    #cc0000
-  );
-}
-
-/* Стили для полей ввода */
-input[type="text"],
-input[type="password"],
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(79, 214, 255, 0.3);
-    border-radius: 0.5rem;
-    color: var(--text-color);
-    transition: all 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(79, 214, 255, 0.1);
-}
-
-/* Добавим медиа-запросы для мобильных устройств */
-@media (max-width: 640px) {
-  .neon-button {
-    padding: 10px 18px;
-    font-size: 14px;
+  .menu-link {
+    font-size: 1rem;
+    padding: 10px 20px;
   }
 
-  input[type="text"],
-  input[type="password"],
-  input[type="email"],
-  textarea {
-    padding: 0.5rem 0.75rem;
-    font-size: 14px;
+  #close-mobile-menu {
+    font-size: 0.875rem;
+    padding: 8px 16px;
   }
 
-  .avatar-preview-container {
-    width: 100%;
-    padding: 0.5rem;
-  }
-
-  .avatar-preview-image {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-@media (max-width: 480px) {
   .container.mx-auto.p-4 {
     padding: 1rem;
   }
@@ -659,194 +770,5 @@ textarea:focus {
   .flex.gap-4.mt-6 {
     flex-direction: column;
     gap: 1rem;
-  }
-}
-
-.neon-text {
-  animation: neonPulse 2s ease-in-out infinite alternate;
-}
-
-@keyframes neonPulse {
-  0% { text-shadow: 0 0 5px rgba(79,214,255,0.3); }
-  100% { text-shadow: 0 0 20px rgba(79,214,255,0.8); }
-}
-
-/* Добавим плавные переходы для всех интерактивных элементов */
-a, button, input, .category-button {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Улучшенные тени для карточек */
-.news-card, .stat-card {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
-              0 2px 4px -1px rgba(0, 0, 0, 0.06),
-              0 0 20px rgba(79, 214, 255, 0.1);
-}
-
-/* Единый стиль для всех форм */
-form {
-  @apply space-y-4;
-  .form-field {
-    @apply mb-4;
-    label {
-      @apply block text-sm font-medium text-gray-300 mb-2;
-    }
-    input, textarea {
-      @apply w-full bg-gray-700/50 border border-gray-600 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500;
-    }
-  }
-}
-
-.cta-buttons .neon-button {
-  min-width: 200px;
-}
-
-/* Анимации */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-.delay-100 { animation-delay: 0.2s; }
-.delay-200 { animation-delay: 0.4s; }
-
-/* Частицы фона */
-.particle {
-  position: absolute;
-  background: rgba(79, 214, 255, 0.3);
-  border-radius: 50%;
-  animation: float 20s infinite linear;
-}
-
-@keyframes float {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-100vh) rotate(360deg); }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Генерация частиц
-  const container = document.querySelector('.particles-container');
-  for(let i = 0; i < 30; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.cssText = `
-      left: ${Math.random() * 100}%;
-      width: ${Math.random() * 4 + 2}px;
-      height: ${Math.random() * 4 + 2}px;
-      animation-duration: ${Math.random() * 10 + 10}s;
-    `;
-    container.appendChild(particle);
-  }
-});
-
-/* Добавляем стили для частиц */
-.particles-container {
-  z-index: -1;
-}
-
-.particle {
-  /* Существующие стили из предыдущего ответа */
-  filter: blur(1px);
-  opacity: 0.7;
-  mix-blend-mode: screen;
-}
-
-@media (min-width: 768px) {
-  .category-button {
-    font-size: 1rem; /* 16px */
-  }
-}
-
-/* Универсальные стили кнопок */
-.neon-button, 
-.category-button,
-.logout-btn,
-.menu-link,
-#theme-toggle,
-#burger-btn {
-  @apply text-sm md:text-base;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.25rem; /* 20px */
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  border-radius: 12px;
-  font-weight: 500; /* Добавляем одинаковую толщину шрифта */
-}
-
-/* Для мобильных устройств */
-@media (max-width: 640px) {
-  .neon-button, 
-  .category-button {
-    font-size: 0.875rem; /* 14px - явно указываем размер */
-    padding: 10px 18px;
-    border-radius: 8px;
-  }
-}
-
-@media (min-width: 768px) {
-  .neon-button,  /* Добавляем neon-button в медиа-запрос */
-  .category-button,
-  .logout-btn {
-    font-size: 1rem; /* 16px */
-    line-height: 1.5rem; /* 24px */
-    padding: 12px 24px; /* Добавляем одинаковые отступы */
-  }
-}
-
-/* Специфичные стили для кнопок в новостях */
-.news-card .neon-button {
-  border-radius: 12px;
-}
-
-/* Специфичные стили для кнопок меню */
-.nav-menu a {
-  @apply text-sm md:text-base;
-  font-weight: 500;
-}
-
-/* Мобильное меню */
-.mobile-menu .menu-link {
-  @apply text-base py-3 px-6;
-}
-
-/* Кнопка закрытия мобильного меню */
-#close-mobile-menu {
-  @apply text-sm md:text-base w-full;
-}
-
-/* Пункты меню */
-.menu-link {
-  font-size: 1.25rem;
-  padding: 12px 24px;
-  width: 100%;
-  text-align: center;
-}
-
-@media (max-width: 480px) {
-  .menu-link {
-    font-size: 1rem;
-    padding: 10px 20px;
-  }
-  
-  #close-mobile-menu {
-    font-size: 0.875rem;
-    padding: 8px 16px;
-  }
-}
-
-/* Для iOS Safari */
-@supports (-webkit-touch-callout: none) {
-  .mobile-menu {
-    height: -webkit-fill-available;
   }
 }
