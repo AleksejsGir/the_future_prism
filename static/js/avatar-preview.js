@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Добавляем кастомную кнопку для загрузки
         const customUploadButton = document.createElement('button');
         customUploadButton.type = 'button';
-        customUploadButton.className = 'custom-file-upload';
+        customUploadButton.className = 'neon-button';
         customUploadButton.textContent = 'Выбрать фото';
         avatarInput.parentElement.insertBefore(customUploadButton, avatarInput);
 

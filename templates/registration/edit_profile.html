@@ -76,11 +76,11 @@
             {# Кнопки действий #}
             <div class="flex gap-4 mt-6">
                 <button type="submit" class="neon-button">Сохранить изменения</button>
-                <a href="{% url 'profile' %}" class="neon-button bg-gray-700">Отмена</a>
+                <a href="{% url 'profile' %}" class="neon-button">Отмена</a>
                 {% if user.avatar %}
                     <form action="{% url 'delete_avatar' %}" method="post" class="inline">
                         {% csrf_token %}
-                        <button type="submit" class="neon-button bg-red-700">Удалить аватар</button>
+                        <button type="submit" class="neon-button delete">Удалить аватар</button>
                     </form>
                 {% endif %}
             </div>
