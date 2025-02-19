@@ -24,32 +24,26 @@
     {% endif %}
     
     {# Форма регистрации #}
-    <form method="post" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-8 shadow-xl space-y-6 max-w-md mx-auto">
+    <form method="post" class="bg-gray-800/80 backdrop-blur-md rounded-xl p-8 shadow-2xl space-y-6 max-w-md mx-auto transition-all duration-300 hover:shadow-3xl">
         {% csrf_token %}
 
         {# Поля формы с обработкой ошибок как в login.html #}
-        {% for field in form %}
-            <div>
-                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
-                    {{ field.label }}
-                </label>
-                <div class="relative">
-                    {{ field }}
-                    {% if field.errors %}
-                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                    {% endif %}
-                </div>
-                {% if field.errors %}
-                    {% for error in field.errors %}
-                        <p class="mt-2 text-sm text-red-400">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
-            </div>
-        {% endfor %}
+        <div class="form-field">
+            <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+            {{ form.username }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.password1.id_for_label }}">Пароль</label>
+            {{ form.password1 }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.password2.id_for_label }}">Повторите пароль</label>
+            {{ form.password2 }}
+        </div>
 
         {# Кнопка регистрации #}
         <button type="submit" class="w-full neon-button flex justify-center py-3">

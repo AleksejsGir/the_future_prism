@@ -26,11 +26,23 @@
     </a>
 
     {# Десктопное меню #}
-    <nav class="nav-menu hidden md:flex">
-      <a href="/">Главная</a>
-      <a href="/news/">Новости</a>
-      <a href="/about/">О проекте</a>
-      <a href="/contact/">Контакты</a>
+    <nav class="nav-menu hidden md:flex gap-6 items-center">
+      <a href="/" class="hover:text-blue-400 relative group">
+        Главная
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+      </a>
+      <a href="/news/" class="hover:text-blue-400 relative group">
+        Новости
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+      </a>
+      <a href="/about/" class="hover:text-blue-400 relative group">
+        О проекте
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+      </a>
+      <a href="/contact/" class="hover:text-blue-400 relative group">
+        Контакты
+        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
+      </a>
     </nav>
 
     {# Поиск, кнопка входа и переключатель темы #}
