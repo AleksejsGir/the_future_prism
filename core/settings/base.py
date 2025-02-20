@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from .jazzmin_settings import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
 
 # Определяем базовую директорию проекта:
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -14,6 +15,7 @@ ALLOWED_HOSTS = []
 
 # Устанавливаем список приложений Django
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
