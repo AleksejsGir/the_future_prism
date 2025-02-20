@@ -5,7 +5,7 @@
   <!-- Заголовок и мета-информация -->
   <h1 class="article-title text-3xl font-bold mb-4 text-center">{{ news.title }}</h1>
   <div class="article-meta text-center mb-6">
-    Опубликовано: {{ news.published_date }} | Автор: {{ news.author }}
+    Опубликовано: {{ news.published_date }} | Категория: {{ news.category.name }}
   </div>
 
   <!-- Фотография новости -->
@@ -48,8 +48,10 @@
           <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
         {% endif %}
         <h3 class="text-xl font-semibold">{{ similar.title }}</h3>
-        <p class="mt-2 text-gray-300">{{ similar.content|truncatewords:20 }}</p>
-        <a href="{% url 'news_detail' similar.id %}" class="category-button mt-3">Читать далее</a>
+        <div class="mt-2 text-gray-300 similar-preview">
+          {{ similar.content|striptags|truncatewords:20 }}
+        </div>
+        <a href="{% url 'news_detail' similar.id %}" class="category-button mt-3 inline-block">Читать далее</a>
       </div>
       {% endfor %}
     </div>
@@ -61,4 +63,21 @@
     <a href="{% url 'news_list' %}" class="category-button">← Назад к новостям</a>
   </div>
 </div>
+
+<script>
+// Исправляем отображение HTML-символов в похожих новостях
+document.addEventListener('DOMContentLoaded', function() {
+  const previews = document.querySelectorAll('.similar-preview');
+  previews.forEach(preview => {
+    // Заменяем HTML-сущности на обычный текст
+    preview.innerHTML = preview.innerHTML
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&nbsp;/g, ' ');
+  });
+});
+</script>
 {% endblock %}

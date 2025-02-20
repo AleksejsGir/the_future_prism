@@ -2,6 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils.html import strip_tags
 from apps.news.models import News, Category
 
 
@@ -63,6 +64,10 @@ def news_detail(request, news_id):
     similar_news = News.objects.filter(category=news_item.category) \
                        .exclude(id=news_id) \
                        .order_by('-published_date')[:3]
+
+    # Подготавливаем контент для предпросмотра в похожих новостях
+    for news in similar_news:
+        news.preview_content = strip_tags(news.content)
 
     return render(request, 'news_detail.html', {
         'news': news_item,

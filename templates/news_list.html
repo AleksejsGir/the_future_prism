@@ -54,9 +54,7 @@
         <h2 class="text-xl font-semibold">{{ news.title }}</h2>
 
         <div class="mt-2 text-gray-300 news-preview">
-          {% autoescape off %}
-            {{ news.content|striptags|truncatewords:20 }}
-          {% endautoescape %}
+          {{ news.content|striptags|truncatewords:20 }}
         </div>
 
         <div class="mt-4 flex justify-between items-center">
@@ -116,6 +114,19 @@ document.addEventListener('DOMContentLoaded', function() {
       categoryFilter.style.transform = 'translateY(0)';
     }, 500);
   }
+
+  // Исправляем отображение HTML-символов
+  const previews = document.querySelectorAll('.news-preview');
+  previews.forEach(preview => {
+    // Заменяем HTML-сущности на обычный текст
+    preview.innerHTML = preview.innerHTML
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .replace(/&quot;/g, '"')
+      .replace(/&#39;/g, "'")
+      .replace(/&nbsp;/g, ' ');
+  });
 });
 </script>
 {% endblock %}
