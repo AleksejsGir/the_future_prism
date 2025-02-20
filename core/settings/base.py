@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'tinymce',
     'apps.users',
     'apps.news',  # наше новое приложение
@@ -104,3 +105,41 @@ AVATAR_DIMENSIONS = {
     'width': 300,
     'height': 300,
 }
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
+
+# Настройки TinyMCE - добавить в конец файла
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'silver',
+    'width': '100%',
+    'height': 500,
+    'menubar': 'file edit view insert format tools table help',
+    'plugins': 'advlist autolink lists link image charmap print preview hr anchor '
+               'searchreplace visualblocks visualchars code fullscreen insertdatetime media '
+               'nonbreaking save table contextmenu directionality emoticons template paste '
+               'textcolor wordcount spellchecker',
+    'toolbar': 'undo redo | formatselect | bold italic backcolor | '
+               'alignleft aligncenter alignright alignjustify | '
+               'bullist numlist outdent indent | link image media | removeformat | help',
+    'language': 'ru',
+    'directionality': 'ltr',
+    'branding': False,
+    'statusbar': True,
+    'resize': 'both',
+    'elementpath': False,
+    'convert_urls': False,
+    'valid_elements': '*[*]',
+    'extended_valid_elements': 'img[class=responsive|src|border=0|alt|title|width|height|align]',
+    'content_css': [
+        '/static/css/style.css',
+    ],
+}
+
+# Используем локальную версию TinyMCE вместо CDN
+TINYMCE_JS_URL = '/static/tinymce/tinymce.min.js'
+TINYMCE_COMPRESSOR = False
