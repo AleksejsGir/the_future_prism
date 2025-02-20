@@ -13,9 +13,9 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          POSTGRES_DB: future_prism
-          POSTGRES_USER: future_prism_user
-          POSTGRES_PASSWORD: linda1990
+          POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
+          POSTGRES_USER: ${{ secrets.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
         ports:
           - 5432:5432
         options: >-
@@ -36,22 +36,21 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install python-dotenv
           pip install -r requirements.txt
 
+      - name: Set up environment variables
+        run: |
+          echo "DEBUG=False" >> .env
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env
+          echo "DATABASE_NAME=${{ secrets.DATABASE_NAME }}" >> .env
+          echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
+          echo "DATABASE_HOST=localhost" >> .env
+          echo "DATABASE_PORT=5432" >> .env
+
       - name: Run migrations
-        env:
-          DATABASE_NAME: future_prism
-          DATABASE_USER: future_prism_user
-          DATABASE_PASSWORD: linda1990
-          DATABASE_HOST: localhost
-          DATABASE_PORT: 5432
         run: python manage.py migrate
 
       - name: Run tests
-        env:
-          DATABASE_NAME: future_prism
-          DATABASE_USER: future_prism_user
-          DATABASE_PASSWORD: linda1990
-          DATABASE_HOST: localhost
-          DATABASE_PORT: 5432
         run: python manage.py test
