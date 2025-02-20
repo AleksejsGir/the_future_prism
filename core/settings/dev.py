@@ -2,10 +2,10 @@ import os
 from .base import *
 
 # Включаем режим отладки
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() == 'true'
 
-# Разрешаем доступ только с локального компьютера
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+# Разрешаем доступ с локальных адресов
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 # Настройка базы данных PostgreSQL для разработки
 DATABASES = {
@@ -13,16 +13,18 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DATABASE_NAME', 'future_prism'),
         'USER': os.getenv('DATABASE_USER', 'future_prism_user'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'linda1990'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD','linda1990'),
         'HOST': os.getenv('DATABASE_HOST', 'localhost'),
         'PORT': os.getenv('DATABASE_PORT', '5432'),
     }
 }
 
 # Настройки электронной почты для разработки
-# Сохраняем письма в файлы вместо реальной отправки
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
+EMAIL_BACKEND = os.getenv(
+    'EMAIL_BACKEND',
+    'django.core.mail.backends.filebased.EmailBackend'
+)
+EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', str(BASE_DIR / 'sent_emails'))
 
 # Настройки для Django Debug Toolbar
 if DEBUG:
@@ -55,13 +57,16 @@ if DEBUG:
 # Настройки кэширования для разработки
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': os.getenv(
+            'CACHE_BACKEND',
+            'django.core.cache.backends.dummy.DummyCache'
+        ),
     }
 }
 
 # Настройки для работы с медиафайлами
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', str(BASE_DIR / 'media'))
+MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 
 # Настройки для загрузки файлов
 FILE_UPLOAD_HANDLERS = [
@@ -70,10 +75,16 @@ FILE_UPLOAD_HANDLERS = [
 ]
 
 # Ограничения для загружаемых файлов
-MAX_UPLOAD_SIZE = 5 * 1024 * 1024  # 5 MB
+MAX_UPLOAD_SIZE = int(os.getenv('MAX_UPLOAD_SIZE', 5 * 1024 * 1024))  # 5 MB
 ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif']
-MAX_IMAGE_DIMENSIONS = {'width': 1920, 'height': 1080}
-AVATAR_DIMENSIONS = {'width': 300, 'height': 300}
+MAX_IMAGE_DIMENSIONS = {
+    'width': int(os.getenv('MAX_IMAGE_WIDTH', 1920)),
+    'height': int(os.getenv('MAX_IMAGE_HEIGHT', 1080))
+}
+AVATAR_DIMENSIONS = {
+    'width': int(os.getenv('AVATAR_WIDTH', 300)),
+    'height': int(os.getenv('AVATAR_HEIGHT', 300))
+}
 
 # Настройки логирования для отладки
 LOGGING = {
@@ -85,17 +96,17 @@ LOGGING = {
         },
         'file': {
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'debug.log',
+            'filename': os.getenv('LOG_FILE', str(BASE_DIR / 'debug.log')),
         },
     },
     'loggers': {
         'django': {
             'handlers': ['console', 'file'],
-            'level': 'INFO',
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
         },
         'apps': {  # Логирование наших приложений
             'handlers': ['console', 'file'],
-            'level': 'DEBUG',
+            'level': os.getenv('APP_LOG_LEVEL', 'DEBUG'),
         },
     },
 }
