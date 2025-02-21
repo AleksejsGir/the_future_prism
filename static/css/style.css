@@ -777,7 +777,7 @@ a, button, input, .category-button {
     padding: 1rem;
   }
 
-  form.bg-gray-800\\/80 {
+  form.bg-gray-800\/80 {
     padding: 1.5rem;
   }
 
@@ -815,7 +815,12 @@ a, button, input, .category-button {
     flex-direction: column;
   }
   
-  .neon-button {
-    padding: 10px 18px;
+  .neon-button, .category-button {
+    transition: var(--button-hover-effect) !important;
+  }
+
+  .neon-button:hover, .category-button:hover {
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 15px rgba(79,214,255,0.5) !important;
   }
 }
