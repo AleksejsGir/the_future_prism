@@ -1,0 +1,63 @@
+/* Фиксированный Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  background-color: var(--header-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.header-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 15px 40px;
+}
+
+.header.hidden {
+  transform: translateY(-100%);
+}
+
+.header.shrink {
+  padding: 8px 30px;
+}
+
+/* Логотип */
+.logo-img {
+  width: 95px;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: bold;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Навигация */
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.nav-menu a {
+  transition: color 0.4s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-color);
+}

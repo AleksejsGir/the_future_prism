@@ -1,0 +1,31 @@
+/* Поля ввода */
+.form-control,
+input[type="text"].form-control,
+input[type="search"].form-control {
+  background-color: var(--admin-dark-bg) !important;
+  color: white !important;
+  border-color: var(--admin-border-color) !important;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.2rem rgba(79, 214, 255, 0.25) !important;
+}
+
+/* Select2 стили */
+.select2-container--default .select2-selection--single {
+  background-color: var(--admin-dark-bg) !important;
+  color: white !important;
+  border: 1px solid var(--admin-border-color) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: white !important;
+  padding-left: 12px !important;
+  line-height: 2.2 !important;
+}
+
+/* Placeholders */
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}

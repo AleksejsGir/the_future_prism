@@ -1,0 +1,34 @@
+/* Стили для аватара и предпросмотра */
+.avatar-preview-container {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(79, 214, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.avatar-preview-container.hidden {
+    display: none;
+}
+
+.avatar-preview-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(79, 214, 255, 0.3);
+}
+
+.avatar-remove-button {
+    background: rgba(255, 78, 78, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

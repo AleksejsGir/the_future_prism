@@ -1,15 +1,27 @@
 /* static/css/admin-custom.css */
+/* Импорты */
+@import 'themes/admin/variables.css';
+@import 'themes/admin/components/buttons.css';
+@import 'themes/admin/components/forms.css';
+@import 'themes/admin/components/tables.css';
 
-/* Основные переменные цветов из style.css */
-:root {
-  --primary-color: #4FD6FF;
-  --secondary-color: #FF78FF;
-  --accent-color: #8B00FF;
-  --background-color: #2B2B36;
-  --text-color: rgba(244, 237, 237, 0.8);
-  --header-bg: rgb(42, 48, 60);
+/* Базовые стили */
+body {
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
+/* Карточки */
+.card {
+  background-color: var(--admin-card-bg) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  border: 1px solid var(--admin-border-color) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+/* Остальные стили остаются без изменений */
 /* Градиентные стили */
 .gradient-bg {
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));

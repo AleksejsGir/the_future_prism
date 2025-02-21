@@ -1,0 +1,33 @@
+/* static/css/variables.css */
+:root {
+  /* Цвета */
+  --primary-color: #4FD6FF;
+  --secondary-color: #FF78FF;
+  --accent-color: #8B00FF;
+  --background-color: #2B2B36;
+  --text-color: rgba(244, 237, 237, 0.8);
+  --header-bg: rgb(42, 48, 60);
+
+  /* Градиенты */
+  --primary-gradient: linear-gradient(45deg,
+    var(--primary-color),
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  --primary-gradient-transparent: linear-gradient(45deg,
+    rgba(79, 214, 255, 0.8),
+    rgba(255, 120, 255, 0.8),
+    rgba(139, 0, 255, 0.8)
+  );
+
+  /* Эффекты */
+  --button-hover-effect: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Размеры */
+  --max-width: 1400px;
+
+  /* Точки перелома */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-small-mobile: 480px;
+}

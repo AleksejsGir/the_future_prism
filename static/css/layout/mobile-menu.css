@@ -1,0 +1,50 @@
+/* Мобильное меню */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: -webkit-fill-available;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Бургер-меню */
+#burger-btn {
+  position: fixed;
+  right: 20px;
+  top: 15px;
+  z-index: 1002;
+}
+
+/* Открываем меню */
+.mobile-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Меню-ссылки */
+.menu-link {
+  font-size: 1.25rem;
+  padding: 12px 24px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Для iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .mobile-menu {
+    height: -webkit-fill-available;
+  }
+}

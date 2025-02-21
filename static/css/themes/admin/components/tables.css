@@ -1,0 +1,25 @@
+/* Таблицы */
+.table-hover tbody tr:hover {
+  background-color: var(--admin-hover-bg) !important;
+}
+
+.table th {
+  border-bottom: 2px solid var(--admin-border-color) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Сортировка */
+th.sortable a {
+  color: var(--primary-color) !important;
+  font-weight: bold !important;
+}
+
+/* Пагинация */
+.pagination .page-item.active .page-link {
+  background: var(--admin-primary-gradient) !important;
+  border-color: transparent !important;
+}

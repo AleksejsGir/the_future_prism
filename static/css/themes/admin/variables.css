@@ -1,0 +1,27 @@
+/* Переменные для админки */
+:root {
+  /* Основные цвета */
+  --primary-color: #4FD6FF;
+  --secondary-color: #FF78FF;
+  --accent-color: #8B00FF;
+  --background-color: #2B2B36;
+  --text-color: rgba(244, 237, 237, 0.8);
+  --header-bg: rgb(42, 48, 60);
+
+  /* Специфичные для админки */
+  --admin-dark-bg: #1a1a24;
+  --admin-border-color: rgba(79, 214, 255, 0.3);
+  --admin-hover-bg: rgba(79, 214, 255, 0.05);
+  --admin-select-bg: #202029;
+  --admin-card-bg: rgba(43, 43, 54, 0.7);
+
+  /* Градиенты */
+  --admin-primary-gradient: linear-gradient(135deg,
+    rgba(79, 214, 255, 0.7),
+    rgba(139, 0, 255, 0.7)
+  );
+  --admin-danger-gradient: linear-gradient(135deg,
+    rgba(255, 78, 78, 0.8),
+    rgba(255, 0, 0, 0.8)
+  );
+}
