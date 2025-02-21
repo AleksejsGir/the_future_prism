@@ -1,0 +1,6 @@
+[
+{
+  "model": "news.category",
+  "pk": 1,
+  "fields": {
+    "name": 
