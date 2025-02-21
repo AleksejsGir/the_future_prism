@@ -425,3 +425,14 @@ th.sortable a {
 #changelist-filter li.selected a {
   color: var(--primary-color) !important;
 }
+
+@media (max-width: var(--breakpoint-tablet)) {
+  .brand-image { 
+    width: 25px !important;
+    height: 25px !important; 
+  }
+  
+  .navbar-search {
+    display: none !important;
+  }
+}

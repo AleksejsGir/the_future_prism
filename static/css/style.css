@@ -7,6 +7,20 @@
   --text-color: rgba(244, 237, 237, 0.8);
   --header-bg: rgb(42, 48, 60);
   --max-width: 1400px;
+  --primary-gradient: linear-gradient(45deg, 
+    var(--primary-color), 
+    var(--secondary-color), 
+    var(--accent-color)
+  );
+  --primary-gradient-transparent: linear-gradient(45deg, 
+    rgba(79, 214, 255, 0.8),
+    rgba(255, 120, 255, 0.8),
+    rgba(139, 0, 255, 0.8)
+  );
+  --button-hover-effect: transform 0.3s ease, box-shadow 0.3s ease;
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-small-mobile: 480px;
 }
 
 /* --- Базовые стили --- */
@@ -184,7 +198,7 @@ p, .search-input, .nav-menu {
   border-radius: 12px;
   font-size: 0.875rem; /* 14px */
   line-height: 1.25rem; /* 20px */
-  background: linear-gradient(45deg,
+  background: linear-gradient(45deg, 
     rgba(79, 214, 255, 0.8),
     rgba(255, 120, 255, 0.8),
     rgba(139, 0, 255, 0.8)
@@ -488,10 +502,10 @@ p, .search-input, .nav-menu {
 
 /* Неоновая кнопка - объединенные стили */
 .neon-button {
-  background: linear-gradient(45deg,
-    var(--primary-color),
-    var(--secondary-color),
-    var(--accent-color)
+  background: linear-gradient(45deg, 
+    rgba(79, 214, 255, 0.8),
+    rgba(255, 120, 255, 0.8),
+    rgba(139, 0, 255, 0.8)
   );
   color: var(--text-color);
   padding: 12px 24px;
@@ -770,5 +784,38 @@ a, button, input, .category-button {
   .flex.gap-4.mt-6 {
     flex-direction: column;
     gap: 1rem;
+  }
+}
+
+/* Создать миксин для кнопок */
+@mixin neon-button {
+  background: var(--primary-gradient);
+  padding: 12px 24px;
+  border-radius: 8px;
+  transition: var(--button-hover-effect);
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(79,214,255,0.5);
+  }
+}
+
+@media (max-width: var(--breakpoint-tablet)) {
+  /* Общие стили для планшетов */
+  .category-button, .neon-button {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+  
+  /* Специфичные стили переносим в соответствующие блоки */
+}
+
+@media (max-width: var(--breakpoint-mobile)) {
+  /* Только мобильные */
+  .category-filter {
+    flex-direction: column;
+  }
+  
+  .neon-button {
+    padding: 10px 18px;
   }
 }
