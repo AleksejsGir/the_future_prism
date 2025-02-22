@@ -34,6 +34,12 @@
   letter-spacing: 0.5px;
 }
 
+/* Ховер-эффект для категории */
+.category-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.7);
+  opacity: 0.9; /* немного затемняем или делаем прозрачнее, как вам нужно */
+}
 /* Кнопка выхода */
 .logout-btn {
   background: linear-gradient(135deg, rgba(255, 78, 78, 0.9), rgba(255, 0, 0, 0.9));
