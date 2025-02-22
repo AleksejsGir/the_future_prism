@@ -1,0 +1,66 @@
+/* Импорты компонентов */
+@import 'variables.css';
+@import 'components/buttons.css';
+@import 'components/forms.css';
+@import 'components/tables.css';
+@import 'components/selects.css';
+
+/* Базовые стили админки */
+body {
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+/* Карточки */
+.card {
+  background-color: var(--admin-card-bg) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  border: 1px solid var(--admin-border-color) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 20px rgba(79, 214, 255, 0.1) !important;
+}
+
+/* Заголовки */
+.content-header h1,
+.card-title,
+.card-header {
+  background: var(--admin-primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+/* Логотип на странице входа */
+.login-logo img {
+  width: 80px !important;  /* Уменьшаем с 100px до 80px */
+  height: auto !important;
+  max-height: 80px !important;  /* Уменьшаем максимальную высоту */
+  object-fit: contain;
+}
+/* Логотип */
+.brand-image.img-circle {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+  padding: 0;
+  background-color: transparent;
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.3);
+  border: 2px solid var(--primary-color);
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+  .brand-image { 
+    width: 25px !important;
+    height: 25px !important; 
+  }
+  
+  .navbar-search {
+    display: none !important;
+  }
+}

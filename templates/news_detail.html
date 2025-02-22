@@ -1,3 +1,4 @@
+<!-- templates/news_detail.html -->
 {% extends "base.html" %}
 
 {% block content %}
@@ -43,7 +44,8 @@
     <h2 class="text-2xl font-semibold mb-4 text-center">Похожие новости</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for similar in similar_news %}
-      <div class="news-card bg-gray-800 p-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+      <!-- Убрал bg-gray-800 p-4 rounded-lg -->
+      <div class="news-card transition-all duration-300">
         {% if similar.image %}
           <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
         {% endif %}

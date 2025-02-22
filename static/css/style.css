@@ -42,11 +42,11 @@
   background-blend-mode: darken;
 
 
-  /* Скругление углов, отступы, тени — на ваше усмотрение */
-  border-radius: 12px;
-  padding: 40px 20px;
-  margin-bottom: 2rem;
-  box-shadow: 0 0 20px rgba(79, 214, 255, 0.2);
+  /* Скругление углов, отступы, тени  */
+  border-radius: 12px; /* Скругление углов */
+  padding: 40px 20px; /* Внутренние отступы */
+  margin-bottom: 2rem; /* Отступ снизу */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.2); /* Тень */
 
   /* Анимация появления (если нужна) */
   animation: fadeInUp 1s ease-in-out;

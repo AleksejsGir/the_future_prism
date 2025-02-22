@@ -1,6 +1,6 @@
 /* Переменные для админки */
 :root {
-  /* Основные цвета */
+  /* Основные цвета (наследуем из общих переменных) */
   --primary-color: #4FD6FF;
   --secondary-color: #FF78FF;
   --accent-color: #8B00FF;
@@ -15,7 +15,7 @@
   --admin-select-bg: #202029;
   --admin-card-bg: rgba(43, 43, 54, 0.7);
 
-  /* Градиенты */
+  /* Градиенты админки */
   --admin-primary-gradient: linear-gradient(135deg,
     rgba(79, 214, 255, 0.7),
     rgba(139, 0, 255, 0.7)

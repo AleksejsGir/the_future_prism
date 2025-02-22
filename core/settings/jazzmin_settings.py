@@ -44,7 +44,7 @@ JAZZMIN_SETTINGS = {
     # Тема интерфейса
     "theme": "darkly",
     # Пользовательские CSS
-    "custom_css": "css/admin-custom.css",
+    "custom_css": "css/themes/admin/admin.css",
     # Пользовательский JS
     "custom_js": None,
     # Скрыть модели пользователей

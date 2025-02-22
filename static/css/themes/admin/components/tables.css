@@ -1,4 +1,4 @@
-/* Таблицы */
+/* Таблицы админки */
 .table-hover tbody tr:hover {
   background-color: var(--admin-hover-bg) !important;
 }
@@ -6,6 +6,7 @@
 .table th {
   border-bottom: 2px solid var(--admin-border-color) !important;
   background-color: rgba(0, 0, 0, 0.2) !important;
+  color: var(--text-color) !important;
 }
 
 .table-striped tbody tr:nth-of-type(odd) {
@@ -18,8 +19,7 @@ th.sortable a {
   font-weight: bold !important;
 }
 
-/* Пагинация */
-.pagination .page-item.active .page-link {
-  background: var(--admin-primary-gradient) !important;
-  border-color: transparent !important;
+/* Подсветка выбранной строки */
+.table .selected td {
+  background-color: var(--admin-hover-bg) !important;
 }

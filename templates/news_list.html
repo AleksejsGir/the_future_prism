@@ -1,3 +1,4 @@
+<!-- templates/news_list.html -->
 {% extends "base.html" %}
 
 {% block content %}
@@ -43,7 +44,8 @@
   <!-- Основной контент (адаптивная сетка) -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     {% for news in news_list %}
-      <div class="news-card bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+      <!-- УБРАНО bg-gray-800 p-5 rounded-lg, чтобы фон и скругление шли из cards.css -->
+      <div class="news-card transition-all duration-300"
            style="--card-index: {{ forloop.counter0 }}">
         {% if news.image %}
           <img src="{{ news.image.url }}"
@@ -105,28 +107,30 @@
 </div>
 
 <script>
-// Добавляем задержку для анимации категорий
-document.addEventListener('DOMContentLoaded', function() {
-  const categoryFilter = document.querySelector('.category-filter');
-  if(categoryFilter) {
-    setTimeout(() => {
-      categoryFilter.style.opacity = '1';
-      categoryFilter.style.transform = 'translateY(0)';
-    }, 500);
-  }
+  // Добавляем задержку для анимации категорий
+  document.addEventListener('DOMContentLoaded', function() {
+    const categoryFilter = document.querySelector('.category-filter');
+    if (categoryFilter) {
+      setTimeout(() => {
+        categoryFilter.style.opacity = '1';
+        categoryFilter.style.transform = 'translateY(0)';
+      }, 500);
+    }
 
-  // Исправляем отображение HTML-символов
-  const previews = document.querySelectorAll('.news-preview');
-  previews.forEach(preview => {
-    // Заменяем HTML-сущности на обычный текст
-    preview.innerHTML = preview.innerHTML
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
-      .replace(/&amp;/g, '&')
-      .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, "'")
-      .replace(/&nbsp;/g, ' ');
+    // Исправляем отображение HTML-символов
+    const previews = document.querySelectorAll('.news-preview');
+    previews.forEach(preview => {
+      // Заменяем HTML-сущности на обычный текст
+      preview.innerHTML = preview.innerHTML
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&nbsp;/g, ' ');
+    });
   });
-});
 </script>
+
+
 {% endblock %}

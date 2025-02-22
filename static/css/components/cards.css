@@ -1,28 +1,29 @@
+/* static/css/components/cards.css */
+
 /* Карточки новостей */
 .news-card {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-in-out forwards;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06),
-              0 0 20px rgba(79, 214, 255, 0.1);
+  position: relative;
+  border-radius: 12px;
+  padding: 40px 20px; /* как в category-section */
+  margin-bottom: 2rem; /* если надо, как в category-section */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.2);
+  animation: fadeInUp 1s ease-in-out;
 }
-
 .news-card:hover {
-  transform: scale(1.02);
-  transition: transform 0.3s ease-in-out;
+  /* Можно усилить тень */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.5)!important;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Статистические карточки */
+
+/* Статистические карточки (примерно без изменений) */
 .stat-card {
   background: rgba(0, 0, 0, 0.2);
   padding: 1.5rem;
   border-radius: 0.5rem;
   text-align: center;
   transition: transform 0.3s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-              0 2px 4px -1px rgba(0, 0, 0, 0.06),
-              0 0 20px rgba(79, 214, 255, 0.1);
+  box-shadow: 0 0 20px rgb(42, 48, 60);
 }
 
 .stat-card:hover {
