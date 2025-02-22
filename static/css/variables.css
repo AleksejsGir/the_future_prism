@@ -16,8 +16,8 @@
   );
   --primary-gradient-transparent: linear-gradient(45deg,
     rgba(79, 214, 255, 0.8),
-    rgba(255, 120, 255, 0.8),
-    rgba(139, 0, 255, 0.8)
+  rgb(253, 119, 253),
+  rgb(138, 0, 253)
   );
 
   /* Эффекты */

@@ -1,59 +1,57 @@
 # core/views.py
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.html import strip_tags
+from django_filters.views import FilterView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from apps.news.models import News, Category
-
+from apps.news.filters import NewsFilter  # Подключаем фильтр
 
 def home(request):
-    return news_list(request)
+    """
+    Главная страница. Перенаправляет на список новостей.
+    """
+    return redirect('news_list')  # Исправленный редирект
 
+class NewsListView(FilterView):
+    """
+    Представление списка новостей с фильтрацией через django-filter.
+    """
+    model = News
+    template_name = 'news_list.html'
+    filterset_class = NewsFilter
 
-def news_list(request):
-    # Получаем параметры запроса
-    search_query = request.GET.get('search', '')
-    category_id = request.GET.get('category')
-    page = request.GET.get('page', 1)
+    def get_queryset(self):
+        """
+        Фильтруем и сортируем новости по дате публикации (новые сверху).
+        """
+        queryset = super().get_queryset().order_by('-published_date')
+        return queryset
 
-    # Получаем все новости, сортируем по дате
-    news_queryset = News.objects.all().order_by('-published_date')
+    def get_context_data(self, **kwargs):
+        """
+        Добавляем категории и пагинацию в контекст шаблона.
+        """
+        context = super().get_context_data(**kwargs)
+        categories = Category.objects.all().order_by('name')
+        context['categories'] = categories
 
-    # Применяем фильтр поиска
-    if search_query:
-        news_queryset = news_queryset.filter(
-            Q(title__icontains=search_query) |
-            Q(content__icontains=search_query)
-        )
+        # Пагинация
+        page = self.request.GET.get('page', 1)
+        paginator = Paginator(context['object_list'], 9)  # 9 новостей на страницу
 
-    # Применяем фильтр по категории
-    if category_id:
-        news_queryset = news_queryset.filter(category__id=category_id)
+        try:
+            context['news_list'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['news_list'] = paginator.page(1)
+        except EmptyPage:
+            context['news_list'] = paginator.page(paginator.num_pages)
 
-    # Пагинация
-    paginator = Paginator(news_queryset, 9)  # По 9 новостей на страницу
-    try:
-        news_list = paginator.page(page)
-    except PageNotAnInteger:
-        news_list = paginator.page(1)
-    except EmptyPage:
-        news_list = paginator.page(paginator.num_pages)
-
-    # Получаем все категории
-    categories = Category.objects.all().order_by('name')
-
-    # Контекст для шаблона
-    context = {
-        'news_list': news_list,
-        'categories': categories,
-        'search_query': search_query,
-    }
-
-    return render(request, 'news_list.html', context)
-
+        return context
 
 def news_detail(request, news_id):
-    # Получаем новость по ID или возвращаем 404
+    """
+    Отображает детальную страницу новости.
+    """
     news_item = get_object_or_404(News, id=news_id)
 
     # Увеличиваем счетчик просмотров

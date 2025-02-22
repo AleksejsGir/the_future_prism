@@ -1,8 +1,7 @@
 # core/urls.py
-
 from django.contrib import admin
 from django.urls import path, include
-from .views import home, news_list, news_detail
+from .views import home, NewsListView, news_detail
 from apps.users.views import (
     user_login, register_view, profile, edit_profile, delete_avatar
 )
@@ -20,7 +19,7 @@ urlpatterns = [
 
     # Главная страница и новости
     path('', home, name='home'),
-    path('news/', news_list, name='news_list'),
+    path('news/', NewsListView.as_view(), name='news_list'),
     path('news/<int:news_id>/', news_detail, name='news_detail'),
 
     # Аутентификация и управление профилем
