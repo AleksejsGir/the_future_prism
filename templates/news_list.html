@@ -44,7 +44,7 @@
   <!-- Основной контент (адаптивная сетка) -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     {% for news in news_list %}
-      <!-- Вместо <div class="news-card ..."> используем <a> обёртку -->
+      <!-- Вместо <div class="news-card ..."> использую <a> обёртку -->
       <a href="{% url 'news_detail' news.id %}"
          class="news-card transition-all duration-300 block"
          style="--card-index: {{ forloop.counter0 }};">
