@@ -44,33 +44,31 @@
   <!-- Основной контент (адаптивная сетка) -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
     {% for news in news_list %}
-      <!-- УБРАНО bg-gray-800 p-5 rounded-lg, чтобы фон и скругление шли из cards.css -->
-      <div class="news-card transition-all duration-300"
-           style="--card-index: {{ forloop.counter0 }}">
+      <!-- Вместо <div class="news-card ..."> используем <a> обёртку -->
+      <a href="{% url 'news_detail' news.id %}"
+         class="news-card transition-all duration-300 block"
+         style="--card-index: {{ forloop.counter0 }};">
         {% if news.image %}
           <img src="{{ news.image.url }}"
                alt="{{ news.title }}"
                class="w-full h-48 object-cover rounded-lg mb-3">
         {% endif %}
 
-        <h2 class="text-xl font-semibold">{{ news.title }}</h2>
+        <h2 class="text-xl font-semibold">
+          {{ news.title }}
+        </h2>
 
         <div class="mt-2 text-gray-300 news-preview">
           {{ news.content|striptags|truncatewords:20 }}
         </div>
 
-        <div class="mt-4 flex justify-between items-center">
-          <a href="{% url 'news_detail' news.id %}"
-             class="inline-block neon-button px-4 py-2">
-            Читать далее
-          </a>
-          {% if news.category %}
-            <span class="text-sm text-gray-400">
-              {{ news.category.name }}
-            </span>
-          {% endif %}
-        </div>
-      </div>
+        <!-- Если нужно отображать категорию внизу карточки, можно оставить: -->
+        {% if news.category %}
+          <span class="text-sm text-gray-400 block mt-4">
+            {{ news.category.name }}
+          </span>
+        {% endif %}
+      </a>
     {% empty %}
       <div class="col-span-full text-center">
         {% if search_query %}
@@ -87,23 +85,22 @@
 
   <!-- Пагинация (если потребуется в будущем) -->
   {% if news_list.has_other_pages %}
-  <div class="mt-8 flex justify-center gap-2">
-    {% if news_list.has_previous %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.previous_page_number }}"
-         class="neon-button px-4 py-2">
-        Предыдущая
-      </a>
-    {% endif %}
+    <div class="mt-8 flex justify-center gap-2">
+      {% if news_list.has_previous %}
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.previous_page_number }}"
+           class="neon-button px-4 py-2">
+          Предыдущая
+        </a>
+      {% endif %}
 
-    {% if news_list.has_next %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.next_page_number }}"
-         class="neon-button px-4 py-2">
-        Следующая
-      </a>
-    {% endif %}
-  </div>
+      {% if news_list.has_next %}
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.next_page_number }}"
+           class="neon-button px-4 py-2">
+          Следующая
+        </a>
+      {% endif %}
+    </div>
   {% endif %}
-
 </div>
 
 <script>
@@ -120,7 +117,6 @@
     // Исправляем отображение HTML-символов
     const previews = document.querySelectorAll('.news-preview');
     previews.forEach(preview => {
-      // Заменяем HTML-сущности на обычный текст
       preview.innerHTML = preview.innerHTML
         .replace(/&lt;/g, '<')
         .replace(/&gt;/g, '>')
@@ -131,6 +127,4 @@
     });
   });
 </script>
-
-
 {% endblock %}

@@ -44,8 +44,9 @@
     <h2 class="text-2xl font-semibold mb-4 text-center">Похожие новости</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {% for similar in similar_news %}
-      <!-- Убрал bg-gray-800 p-4 rounded-lg -->
-      <div class="news-card transition-all duration-300">
+      <!-- Вместо <div class="news-card ..."> + кнопка, делаем ссылку-обёртку -->
+      <a href="{% url 'news_detail' similar.id %}"
+         class="news-card transition-all duration-300 block">
         {% if similar.image %}
           <img src="{{ similar.image.url }}" alt="{{ similar.title }}" class="w-full h-32 object-cover rounded-lg mb-3">
         {% endif %}
@@ -53,8 +54,7 @@
         <div class="mt-2 text-gray-300 similar-preview">
           {{ similar.content|striptags|truncatewords:20 }}
         </div>
-        <a href="{% url 'news_detail' similar.id %}" class="category-button mt-3 inline-block">Читать далее</a>
-      </div>
+      </a>
       {% endfor %}
     </div>
   </div>
@@ -71,7 +71,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   const previews = document.querySelectorAll('.similar-preview');
   previews.forEach(preview => {
-    // Заменяем HTML-сущности на обычный текст
     preview.innerHTML = preview.innerHTML
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')

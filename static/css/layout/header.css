@@ -9,10 +9,10 @@
   background-color: var(--header-bg);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  z-index: 1000;
-  display: flex;
+  z-index: 1000; /* Помещаем поверх всех элементов */
+  display: flex; /
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Распределяем элементы по краям */
   transition: transform 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .logo-text {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
@@ -48,10 +48,12 @@
 
 /* Навигация */
 .nav-menu {
-  display: flex;
-  gap: 2rem;
-  font-size: 16px;
-  text-transform: uppercase;
+  display: flex; /* Делаем элементы горизонтальными */
+  gap: 2rem; /* Добавляем отступы между элементами */
+  font-size: 12px; /* Уменьшаем размер шрифта */
+  text-transform: uppercase; /* Преобразуем в верхний регистр */
+  justify-content: center; /* Добавляем центрирование */
+  flex: 1 1 auto; /* Разрешаем растягивание */
 }
 
 .nav-menu a {
