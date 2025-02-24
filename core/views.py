@@ -4,13 +4,15 @@ from django.utils.html import strip_tags
 from django_filters.views import FilterView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from apps.news.models import News, Category
-from apps.news.filters import NewsFilter  # Подключаем фильтр
+from apps.news.filters import NewsFilter
+
 
 def home(request):
     """
     Главная страница. Перенаправляет на список новостей.
     """
-    return redirect('news_list')  # Исправленный редирект
+    return redirect('news_list')
+
 
 class NewsListView(FilterView):
     """
@@ -25,6 +27,13 @@ class NewsListView(FilterView):
         Фильтруем и сортируем новости по дате публикации (новые сверху).
         """
         queryset = super().get_queryset().order_by('-published_date')
+
+        # Добавляем поиск
+        search_query = self.request.GET.get('search')
+        if search_query:
+            queryset = queryset.filter(
+                title__icontains=search_query) | queryset.filter(content__icontains=search_query
+                                                                 )
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -34,6 +43,9 @@ class NewsListView(FilterView):
         context = super().get_context_data(**kwargs)
         categories = Category.objects.all().order_by('name')
         context['categories'] = categories
+
+        # Добавляем поисковый запрос в контекст
+        context['search_query'] = self.request.GET.get('search', '')
 
         # Пагинация
         page = self.request.GET.get('page', 1)
@@ -47,6 +59,7 @@ class NewsListView(FilterView):
             context['news_list'] = paginator.page(paginator.num_pages)
 
         return context
+
 
 def news_detail(request, news_id):
     """
