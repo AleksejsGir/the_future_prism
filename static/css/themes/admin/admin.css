@@ -64,3 +64,14 @@ body {
     display: none !important;
   }
 }
+
+/* Стили для смещения TinyMCE */
+.custom-tinymce-body .tox-tinymce {
+    margin-left: -40px !important;
+    width: calc(100% + 80px) !important;
+}
+
+.custom-tinymce-body .tox-editor-container {
+    margin-left: -40px !important;
+    width: calc(100% + 80px) !important;
+}

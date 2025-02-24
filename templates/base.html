@@ -15,7 +15,9 @@
   <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
   {# Дополнительные стили и скрипты из дочерних шаблонов #}
-  {% block extra_head %}{% endblock %}
+  {% block extra_head %}
+  <script src="{% static 'js/search.js' %}" defer></script>
+  {% endblock %}
 
   <!-- Добавляем ссылку на новый скрипт -->
   <script src="{% static 'js/home.js' %}" defer></script>
@@ -53,19 +55,25 @@
       </a>
     </nav>
 
-    {# Поиск, кнопка входа и переключатель темы #}
-    <div class="flex gap-4 items-center">
-      <form action="{% url 'news_list' %}" method="get" class="flex items-center">
-        <input type="text"
-               name="search"
-               class="search-input hidden md:block"
-               placeholder="Поиск..."
-               value="{{ search_query|default:'' }}"
-        >
-        {% if request.GET.category %}
-          <input type="hidden" name="category" value="{{ request.GET.category }}">
-        {% endif %}
-      </form>
+{# Поиск, кнопка входа и переключатель темы #}
+<div class="flex gap-4 items-center">
+  <form action="{% url 'news_list' %}" method="get" class="flex items-center relative" id="searchForm">
+    <input type="text"
+           name="search"
+           id="searchInput"
+           class="search-input hidden md:block"
+           placeholder="Поиск..."
+           value="{{ search_query|default:'' }}"
+    >
+    <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </button>
+    {% if request.GET.category %}
+      <input type="hidden" name="category" value="{{ request.GET.category }}">
+    {% endif %}
+  </form>
 
       {# Скрываем кнопки управления на мобильных #}
       <div class="hidden md:flex gap-4 items-center">
@@ -91,44 +99,62 @@
     </div>
   </header>
 
-  {# Мобильное меню - улучшенная структура #}
-  <div id="mobile-menu" class="mobile-menu">
-    <nav class="flex flex-col gap-6">
-      {# Профиль пользователя в мобильном меню #}
-      {% if user.is_authenticated %}
-        <div class="user-profile text-center mb-6">
-          {% if user.avatar %}
-            <img src="{{ user.avatar.url }}" alt="Аватар" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-primary-color">
-          {% endif %}
-          <div class="username text-lg mb-2">{{ user.username }}</div>
-          <a href="{% url 'profile' %}" class="text-primary-color hover:text-secondary-color transition-colors">
-            Перейти в профиль
-          </a>
-        </div>
-      {% endif %}
-
-      {# Основные пункты меню #}
-      <a href="/" class="menu-link">Главная</a>
-      <a href="/news/" class="menu-link">Новости</a>
-      <a href="/about/" class="menu-link">О проекте</a>
-      <a href="/contact/" class="menu-link">Контакты</a>
-
-      {# Блок авторизации в мобильном меню #}
-      <div class="mt-6">
-        {% if user.is_authenticated %}
-          <form method="post" action="{% url 'logout' %}" class="w-full">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn w-full">Выход</button>
-          </form>
-        {% else %}
-          <a href="{% url 'login' %}" class="category-button w-full block text-center">Вход</a>
+{# Мобильное меню - улучшенная структура #}
+<div id="mobile-menu" class="mobile-menu">
+  <nav class="flex flex-col gap-6">
+    {# Профиль пользователя в мобильном меню #}
+    {% if user.is_authenticated %}
+      <div class="user-profile text-center mb-6">
+        {% if user.avatar %}
+          <img src="{{ user.avatar.url }}" alt="Аватар" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-primary-color">
         {% endif %}
+        <div class="username text-lg mb-2">{{ user.username }}</div>
+        <a href="{% url 'profile' %}" class="text-primary-color hover:text-secondary-color transition-colors">
+          Перейти в профиль
+        </a>
       </div>
+    {% endif %}
 
-      {# Кнопка закрытия меню #}
-      <button class="category-button mt-6" id="close-mobile-menu">Закрыть</button>
-    </nav>
-  </div>
+    {# Добавляем форму поиска в мобильное меню #}
+    <form action="{% url 'news_list' %}" method="get" class="px-4 mb-4" id="mobileSearchForm">
+      <div class="relative">
+        <input type="text"
+       name="search"
+       id="mobileSearchInput"
+       class="search-input w-full py-2 px-4 rounded-lg bg-gray-800 text-white"
+       placeholder="Поиск..."
+       value="{{ search_query|default:'' }}"
+>
+        <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+    </form>
+
+    {# Основные пункты меню #}
+    <a href="/" class="menu-link">Главная</a>
+    <a href="/news/" class="menu-link">Новости</a>
+    <a href="/about/" class="menu-link">О проекте</a>
+    <a href="/contact/" class="menu-link">Контакты</a>
+
+    {# Блок авторизации в мобильном меню #}
+    <div class="mt-6">
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'logout' %}" class="w-full">
+          {% csrf_token %}
+          <button type="submit" class="logout-btn w-full">Выход</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}" class="category-button w-full block text-center">Вход</a>
+      {% endif %}
+    </div>
+
+    {# Кнопка закрытия меню #}
+    <button class="category-button mt-6" id="close-mobile-menu">Закрыть</button>
+  </nav>
+</div>
 
   <main class="mt-24 p-6">
     {% block content %}{% endblock %}

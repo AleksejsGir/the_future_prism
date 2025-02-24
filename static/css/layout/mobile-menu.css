@@ -1,3 +1,4 @@
+/* static/css/layout/mobile-menu.css */
 /* Мобильное меню */
 .mobile-menu {
   position: fixed;
@@ -40,6 +41,30 @@
   padding: 12px 24px;
   width: 100%;
   text-align: center;
+}
+
+/* Стили для поисковой формы в мобильном меню */
+.mobile-menu .search-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 40px 10px 15px;
+  color: var(--text-color);
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu .search-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px rgba(79,214,255,0.3);
+  outline: none;
+}
+
+.mobile-menu form {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 /* Для iOS Safari */

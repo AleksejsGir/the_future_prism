@@ -35,7 +35,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class NewsAdmin(admin.ModelAdmin):
     """Административный интерфейс для модели News."""
     list_display = ('id', 'title', 'published_date', 'view_count', 'category', 'image_preview', 'status_tag')
-    # Исправляем фильтры - убираем EmptyFieldListFilter для view_count
     list_filter = ('published_date', 'category')
     search_fields = ('title', 'content')
     readonly_fields = ('image_preview', 'view_count')
@@ -77,13 +76,14 @@ class NewsAdmin(admin.ModelAdmin):
                             '| bullist numlist outdent indent | link image media | forecolor backcolor emoticons '
                             '| fullscreen preview code',
                 'style_formats': [
-                    {'title': 'Параграф', 'block': 'p'},
-                    {'title': 'Заголовок 2', 'block': 'h2'},
-                    {'title': 'Заголовок 3', 'block': 'h3'},
-                    {'title': 'Заголовок 4', 'block': 'h4'},
-                    {'title': 'Цитата', 'block': 'blockquote'},
-                    {'title': 'Выделенный блок', 'block': 'div', 'classes': 'highlighted-block'},
+                    {'title': 'Параграф (маленький)', 'block': 'p', 'classes': 'text-sm'},
+                    {'title': 'Параграф (обычный)', 'block': 'p', 'classes': 'text-base'},
+                    {'title': 'Параграф (большой)', 'block': 'p', 'classes': 'text-lg'},
+                    {'title': 'Заголовок 2 (маленький)', 'block': 'h2', 'classes': 'text-xl'},
+                    {'title': 'Заголовок 2 (средний)', 'block': 'h2', 'classes': 'text-2xl'},
+                    {'title': 'Заголовок 2 (большой)', 'block': 'h2', 'classes': 'text-3xl'},
                 ],
+                'body_class': 'custom-tinymce-body',  # НОВАЯ СТРОКА
                 'content_css': '/static/css/style.css',
                 'language': 'ru',
                 'language_url': '/static/tinymce/langs/ru.js',

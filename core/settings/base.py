@@ -115,7 +115,38 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': int(os.getenv('API_PAGE_SIZE', 10)),
 }
 
-# # Настройки TinyMCE
+# Настройки TinyMCE
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': 'silver',
+    'width': '100%',
+    'height': 500,
+    'menubar': 'file edit view insert format tools table help',
+    'plugins': 'advlist autolink lists link image charmap print preview hr anchor '
+               'searchreplace visualblocks visualchars code fullscreen insertdatetime media '
+               'nonbreaking save table contextmenu directionality emoticons template paste '
+               'textcolor wordcount spellchecker',
+    'toolbar': 'undo redo | formatselect | bold italic backcolor | '
+               'alignleft aligncenter alignright alignjustify | '
+               'bullist numlist outdent indent | link image media | removeformat | help',
+    'language': 'ru',
+    'directionality': 'ltr',
+    'branding': False,
+    'statusbar': True,
+    'resize': 'both',
+    'elementpath': False,
+    'convert_urls': False,
+    'valid_elements': '*[*]',
+    'extended_valid_elements': 'img[class=responsive|src|border=0|alt|title|width|height|align]',
+    'content_css': [
+        '/static/css/style.css',
+        'https://cdn.tailwindcss.com/2.2.19/tailwind.min.css'
+    ],
+}
+
+#Используем локальную версию TinyMCE вместо CDN
+TINYMCE_JS_URL = '/static/tinymce/tinymce.min.js'
+TINYMCE_COMPRESSOR = False
+
 # TINYMCE_DEFAULT_CONFIG = {
 #     'theme': 'silver',
 #     'width': '100%',
@@ -140,41 +171,11 @@ REST_FRAMEWORK = {
 #     'content_css': [
 #         '/static/css/style.css',
 #     ],
+#     'referrer_policy': 'origin-when-cross-origin',  # Добавляем эту строку
 # }
-
-# Используем локальную версию TinyMCE вместо CDN
-# TINYMCE_JS_URL = '/static/tinymce/tinymce.min.js'
+#
+# TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/d6moiyjc3vglpg949gs0vxyc5wbwqvwqo7v7lfgtlkj3l0lt/tinymce/7/tinymce.min.js'
 # TINYMCE_COMPRESSOR = False
 
-TINYMCE_DEFAULT_CONFIG = {
-    'theme': 'silver',
-    'width': '100%',
-    'height': 500,
-    'menubar': 'file edit view insert format tools table help',
-    'plugins': 'advlist autolink lists link image charmap print preview hr anchor '
-               'searchreplace visualblocks visualchars code fullscreen insertdatetime media '
-               'nonbreaking save table contextmenu directionality emoticons template paste '
-               'textcolor wordcount spellchecker',
-    'toolbar': 'undo redo | formatselect | bold italic backcolor | '
-               'alignleft aligncenter alignright alignjustify | '
-               'bullist numlist outdent indent | link image media | removeformat | help',
-    'language': 'ru',
-    'directionality': 'ltr',
-    'branding': False,
-    'statusbar': True,
-    'resize': 'both',
-    'elementpath': False,
-    'convert_urls': False,
-    'valid_elements': '*[*]',
-    'extended_valid_elements': 'img[class=responsive|src|border=0|alt|title|width|height|align]',
-    'content_css': [
-        '/static/css/style.css',
-    ],
-    'referrer_policy': 'origin-when-cross-origin',  # Добавляем эту строку
-}
-
-TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/d6moiyjc3vglpg949gs0vxyc5wbwqvwqo7v7lfgtlkj3l0lt/tinymce/7/tinymce.min.js'
-TINYMCE_COMPRESSOR = False
-
 # Указываем политику Referrer, чтобы TinyMCE мог определить домен
-SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+# SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
