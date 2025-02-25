@@ -1,9 +1,7 @@
-/* Импорты компонентов */
-@import 'variables.css';
-@import 'components/buttons.css';
-@import 'components/forms.css';
-@import 'components/tables.css';
-@import 'components/selects.css';
+/* Основные стили для админ-панели The Future Prism */
+
+/* Импорт переменных */
+@import '../../variables.css';
 
 /* Базовые стили админки */
 body {
@@ -12,13 +10,26 @@ body {
   color: var(--text-color);
 }
 
-/* Карточки */
+/* Заголовки */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+/* Карточки и контейнеры */
+.card,
+.card-body,
+.content-wrapper,
+.main-sidebar {
+  background-color: var(--admin-card-bg, #2A303C) !important;
+  border-color: var(--admin-border-color, #444) !important;
+}
+
 .card {
-  background-color: var(--admin-card-bg) !important;
-  backdrop-filter: blur(5px) !important;
-  -webkit-backdrop-filter: blur(5px) !important;
-  border: 1px solid var(--admin-border-color) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
 }
 
 .card:hover {
@@ -26,23 +37,124 @@ body {
   box-shadow: 0 10px 20px rgba(79, 214, 255, 0.1) !important;
 }
 
-/* Заголовки */
+/* Заголовки разделов */
 .content-header h1,
 .card-title,
 .card-header {
-  background: var(--admin-primary-gradient);
+  background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
 }
-/* Логотип на странице входа */
-.login-logo img {
-  width: 80px !important;  /* Уменьшаем с 100px до 80px */
+
+/* Кнопки админки */
+.btn-primary,
+.btn-success {
+  background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF)) !important;
+  border-color: transparent !important;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 5px 15px rgba(79, 214, 255, 0.3) !important;
+  opacity: 0.9;
+}
+
+.btn-danger {
+  background: linear-gradient(45deg, #ff5252, #ff0000) !important;
+  border-color: transparent !important;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+  opacity: 0.9;
+}
+
+/* Таблицы админки */
+.table-hover tbody tr:hover {
+  background-color: rgba(79, 214, 255, 0.1) !important;
+}
+
+.table th {
+  border-bottom: 2px solid var(--admin-border-color, #444) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  color: var(--text-color, #fff) !important;
+  font-weight: bold !important;
+  padding: 12px 8px !important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Сортировка в таблицах */
+th.sortable a {
+  color: var(--primary-color, #4FD6FF) !important;
+  font-weight: bold !important;
+}
+
+/* Подсветка выбранной строки */
+.table .selected td {
+  background-color: rgba(79, 214, 255, 0.15) !important;
+}
+
+/* Поля ввода админки */
+.form-control,
+input[type="text"].form-control,
+input[type="search"].form-control {
+  background-color: var(--admin-dark-bg, #2B2B36) !important;
+  color: var(--text-color, #fff) !important;
+  border: 1px solid var(--admin-border-color, #444) !important;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px !important;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color, #4FD6FF) !important;
+  box-shadow: 0 0 0 0.2rem rgba(79, 214, 255, 0.25) !important;
+}
+
+/* Placeholders */
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Select и другие элементы форм */
+select.form-control,
+.select2-container--default .select2-selection--single {
+  background-color: var(--admin-dark-bg, #2B2B36) !important;
+  color: var(--text-color, #fff) !important;
+  border: 1px solid var(--admin-border-color, #444) !important;
+  padding: 0.5rem 0.75rem !important;
   height: auto !important;
-  max-height: 80px !important;  /* Уменьшаем максимальную высоту */
-  object-fit: contain;
+  min-height: 38px !important;
 }
-/* Логотип */
+
+/* Настройки выпадающих списков */
+.select2-container--default .select2-results__option,
+.select2-container--default .select2-search--dropdown .select2-search__field,
+.select2-dropdown {
+  background-color: var(--admin-dark-bg, #2B2B36) !important;
+  color: var(--text-color, #fff) !important;
+  border-color: var(--admin-border-color, #444) !important;
+}
+
+/* Выделение в выпадающих списках */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF)) !important;
+  color: white !important;
+}
+
+/* Логотип и брендинг */
 .brand-image.img-circle {
   width: 40px !important;
   height: 40px !important;
@@ -50,28 +162,158 @@ body {
   padding: 0;
   background-color: transparent;
   box-shadow: 0 0 15px rgba(79, 214, 255, 0.3);
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--primary-color, #4FD6FF);
 }
 
-/* Медиа-запросы */
+.brand-text {
+  font-weight: bold !important;
+  font-size: 1.2rem !important;
+  background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Боковая панель */
+.sidebar {
+  background-color: var(--admin-dark-bg, #2B2B36) !important;
+  padding: 0.5rem 0;
+}
+
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active {
+  background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF)) !important;
+}
+
+.nav-treeview > .nav-item > .nav-link.active,
+.nav-treeview > .nav-item > .nav-link.active:hover {
+  background-color: rgba(79, 214, 255, 0.2) !important;
+  color: var(--primary-color, #4FD6FF) !important;
+}
+
+/* Действия с объектами */
+.actions {
+  background: rgba(0, 0, 0, 0.2) !important;
+  padding: 10px !important;
+  border-radius: 6px !important;
+  margin: 10px 0 !important;
+}
+
+/* Навигация по страницам */
+.pagination .page-link {
+  background-color: var(--admin-dark-bg, #2B2B36) !important;
+  color: var(--text-color, #fff) !important;
+  border-color: var(--admin-border-color, #444) !important;
+}
+
+.pagination .active .page-link {
+  background-color: var(--primary-color, #4FD6FF) !important;
+  color: #000 !important;
+  border-color: var(--primary-color, #4FD6FF) !important;
+}
+
+/* Стили для страницы входа */
+.login-logo img {
+  width: 80px !important;
+  height: auto !important;
+  max-height: 80px !important;
+  object-fit: contain;
+  margin-bottom: 10px !important;
+}
+
+.login-card-body {
+  background-color: var(--admin-card-bg, #2A303C) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+.login-box-msg {
+  color: var(--text-color, #fff) !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Сообщения и уведомления */
+.alert {
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 12px 15px !important;
+}
+
+.alert-success {
+  background-color: rgba(40, 167, 69, 0.2) !important;
+  color: #28a745 !important;
+}
+
+.alert-info {
+  background-color: rgba(23, 162, 184, 0.2) !important;
+  color: #17a2b8 !important;
+}
+
+.alert-warning {
+  background-color: rgba(255, 193, 7, 0.2) !important;
+  color: #ffc107 !important;
+}
+
+.alert-danger {
+  background-color: rgba(220, 53, 69, 0.2) !important;
+  color: #dc3545 !important;
+}
+
+/* Вкладки */
+.nav-tabs .nav-link {
+  border: none !important;
+  color: var(--text-color, #fff) !important;
+  border-bottom: 2px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 1.25rem !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+  color: var(--primary-color, #4FD6FF) !important;
+  background-color: transparent !important;
+  border-bottom: 2px solid var(--primary-color, #4FD6FF) !important;
+}
+
+/* Интеграция с TinyMCE */
+.mce-fullscreen {
+  z-index: 9999 !important;
+}
+
+/* Медиа-запросы для адаптивности */
 @media (max-width: 768px) {
-  .brand-image { 
+  .brand-image {
     width: 25px !important;
-    height: 25px !important; 
+    height: 25px !important;
   }
-  
+
+  .content-header h1,
+  .card-title,
+  .card-header {
+    font-size: 1.5rem !important;
+  }
+
   .navbar-search {
     display: none !important;
   }
+
+  .btn {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+  }
 }
 
-/* Стили для смещения TinyMCE */
-.custom-tinymce-body .tox-tinymce {
-    margin-left: -40px !important;
-    width: calc(100% + 80px) !important;
+/* Важные правила для TinyMCE */
+/* Эти стили можно оставить здесь или переместить в tinymce-custom.css */
+.field-content {
+  overflow: visible !important;
 }
 
-.custom-tinymce-body .tox-editor-container {
-    margin-left: -40px !important;
-    width: calc(100% + 80px) !important;
+/* Обеспечиваем видимость расширенного редактора */
+fieldset.module.aligned {
+  overflow: visible !important;
+}
+
+/* Позиционирование полей с TinyMCE редактором */
+.field-content .tox-tinymce {
+  margin-top: 10px !important;
 }

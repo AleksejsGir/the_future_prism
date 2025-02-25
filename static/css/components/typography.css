@@ -1,0 +1,82 @@
+/* Классы размеров текста для использования в редакторе и на сайте */
+
+/* Базовые размеры текста */
+.text-xs {
+    font-size: 0.75rem !important; /* 12px */
+    line-height: 1rem !important;  /* 16px */
+}
+
+.text-sm {
+    font-size: 0.875rem !important; /* 14px */
+    line-height: 1.25rem !important; /* 20px */
+}
+
+.text-base {
+    font-size: 1rem !important; /* 16px */
+    line-height: 1.5rem !important; /* 24px */
+}
+
+.text-lg {
+    font-size: 1.125rem !important; /* 18px */
+    line-height: 1.75rem !important; /* 28px */
+}
+
+.text-xl {
+    font-size: 1.25rem !important; /* 20px */
+    line-height: 1.75rem !important; /* 28px */
+}
+
+.text-2xl {
+    font-size: 1.5rem !important; /* 24px */
+    line-height: 2rem !important; /* 32px */
+}
+
+.text-3xl {
+    font-size: 1.875rem !important; /* 30px */
+    line-height: 2.25rem !important; /* 36px */
+}
+
+.text-4xl {
+    font-size: 2.25rem !important; /* 36px */
+    line-height: 2.5rem !important; /* 40px */
+}
+
+/* Цвета текста */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+/* Дополнительные стили для заголовков */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.25rem !important;
+    line-height: 2.5rem !important;
+}
+
+h2 {
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+}
+
+h3 {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+}
+
+/* Стили для параграфов в статьях */
+.article-content p {
+    margin-bottom: 1.25em;
+}

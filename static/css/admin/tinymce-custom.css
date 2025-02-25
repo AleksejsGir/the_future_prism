@@ -1,0 +1,92 @@
+/* Стили для настройки внешнего вида TinyMCE в админке */
+
+/* Регулировка положения редактора */
+.tox-tinymce {
+    margin-left: -200px !important; /* Сдвигаем редактор влево */
+    width: 90% !important; /* Ограничиваем ширину */
+    max-width: 1200px !important; /* Максимальная ширина */
+}
+
+/* Настройка для контейнера поля в Django-админке */
+.field-content {
+    overflow: visible !important; /* Позволяем содержимому выходить за пределы контейнера */
+}
+
+/* Изменение внешнего вида формы в целом */
+form .form-row,
+.django-admin-form .fieldBox,
+.django-admin-form .form-row {
+    overflow: visible !important;
+}
+
+/* Стилизация текстового поля редактора */
+.custom-tinymce-body {
+    padding: 20px !important;
+    font-family: 'Montserrat', 'Poppins', sans-serif !important;
+    background-color: #2B2B36 !important;
+    color: rgba(244, 237, 237, 0.8) !important;
+}
+
+/* Настройка фона редактора */
+iframe.tox-edit-area__iframe {
+    background-color: #2B2B36 !important;
+}
+
+/* Настройка предварительного просмотра стилей в редакторе */
+.tox .tox-collection__item-label {
+    font-family: 'Montserrat', 'Poppins', sans-serif !important;
+}
+
+/* Стилизуем превью стилей в выпадающем меню форматирования */
+.tox-collection__item .text-sm {
+    font-size: 0.875rem !important;
+}
+
+.tox-collection__item .text-base {
+    font-size: 1rem !important;
+}
+
+.tox-collection__item .text-lg {
+    font-size: 1.125rem !important;
+}
+
+.tox-collection__item .text-xl {
+    font-size: 1.25rem !important;
+}
+
+.tox-collection__item .text-2xl {
+    font-size: 1.5rem !important;
+}
+
+.tox-collection__item .text-3xl {
+    font-size: 1.875rem !important;
+}
+
+/* Стилизация кнопок и панелей инструментов */
+.tox .tox-toolbar,
+.tox .tox-toolbar__primary,
+.tox .tox-toolbar__overflow {
+    background-color: #2A303C !important;
+}
+
+.tox .tox-tbtn {
+    color: #f4f4f4 !important;
+}
+
+/* Стилизация интерфейса в целом */
+.tox.tox-tinymce {
+    border-color: #444 !important;
+}
+
+.tox .tox-statusbar {
+    background-color: #2A303C !important;
+    border-top: 1px solid #444 !important;
+}
+
+/* Улучшаем информационные блоки */
+fieldset.module .description {
+    padding: 5px 12px;
+    margin: 5px 0 10px 0;
+    background-color: #2A303C;
+    border-left: 5px solid #4FD6FF;
+}

@@ -42,7 +42,7 @@ class NewsAdmin(admin.ModelAdmin):
     ordering = ['-published_date']
     date_hierarchy = 'published_date'
     save_on_top = True
-    list_per_page = 20
+    list_per_page = 15
     actions = ['reset_views']
 
     fieldsets = (
@@ -51,7 +51,7 @@ class NewsAdmin(admin.ModelAdmin):
         }),
         ('Содержимое', {
             'fields': ('content',),
-            'description': 'Используйте визуальный редактор для форматирования контента'
+            'description': 'Используйте визуальный редактор для форматирования контента. Выбирайте стили оформления с помощью кнопки "Форматирование" в панели инструментов.'
         }),
         ('Изображение', {
             'fields': ('image', 'image_preview'),
@@ -67,7 +67,7 @@ class NewsAdmin(admin.ModelAdmin):
     # Настройка TinyMCE для полноценного редактирования
     formfield_overrides = {
         models.TextField: {'widget': TinyMCE(
-            attrs={'cols': 80, 'rows': 30},
+            attrs={'cols': 80, 'rows': 30, 'class': 'custom-tinymce-field', 'style': 'width:90%; max-width:1200px;'},
             mce_attrs={
                 'plugins': 'advlist autolink lists link image charmap print preview hr anchor searchreplace '
                            'visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table '
@@ -82,16 +82,34 @@ class NewsAdmin(admin.ModelAdmin):
                     {'title': 'Заголовок 2 (маленький)', 'block': 'h2', 'classes': 'text-xl'},
                     {'title': 'Заголовок 2 (средний)', 'block': 'h2', 'classes': 'text-2xl'},
                     {'title': 'Заголовок 2 (большой)', 'block': 'h2', 'classes': 'text-3xl'},
+                    {'title': 'Цвет: Основной', 'inline': 'span', 'classes': 'text-primary'},
+                    {'title': 'Цвет: Дополнительный', 'inline': 'span', 'classes': 'text-secondary'},
+                    {'title': 'Цвет: Акцент', 'inline': 'span', 'classes': 'text-accent'},
                 ],
-                'body_class': 'custom-tinymce-body',  # НОВАЯ СТРОКА
-                'content_css': '/static/css/style.css',
+                'body_class': 'custom-tinymce-body',
+                'content_css': [
+                    '/static/css/style.css',
+                    '/static/css/admin/tinymce-custom.css'
+                ],
                 'language': 'ru',
                 'language_url': '/static/tinymce/langs/ru.js',
                 'height': 500,
+                'width': '90%',
+                'resize': True,
                 'menubar': 'file edit view insert format tools table help',
                 'contextmenu': 'link image inserttable | cell row column deletetable',
                 'image_advtab': True,
                 'paste_data_images': True,
+                'relative_urls': False,
+                'remove_script_host': False,
+                'convert_urls': False,
+                'browser_spellcheck': True,
+                'setup': """function(editor) {
+                    editor.on('init', function(e) {
+                        // Дополнительные настройки после инициализации
+                        editor.getBody().style.marginLeft = '0px';
+                    });
+                }"""
             }
         )}
     }
