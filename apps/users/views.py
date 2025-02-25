@@ -1,12 +1,13 @@
 # apps/users/views.py
 
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.forms import PasswordChangeForm
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .models import CustomUser
@@ -211,3 +212,31 @@ def delete_avatar(request):
         messages.info(request, 'У вас нет загруженного аватара')
 
     return redirect('profile')
+
+
+@login_required
+def change_password(request):
+    """
+    Изменение пароля пользователя.
+
+    Процесс:
+    1. Проверка текущего пароля
+    2. Создание и проверка нового пароля
+    3. Сохранение нового пароля
+    4. Обновление сессии пользователя
+    """
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Обновляем сессию, чтобы пользователь не выходил из системы
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Ваш пароль успешно изменен!')
+            return redirect('profile')
+        else:
+            for error in form.non_field_errors():
+                messages.error(request, error)
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, 'registration/password_change.html', {'form': form})

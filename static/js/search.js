@@ -1,7 +1,7 @@
 // static/js/search.js
 document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput'); // Получаем поле ввода
+    const searchForm = document.getElementById('searchForm'); // Получаем форму
 
     if (searchInput && searchForm) {
         // Отправка формы только по Enter

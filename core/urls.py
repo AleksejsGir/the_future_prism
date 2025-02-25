@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import home, NewsListView, news_detail
 from apps.users.views import (
-    user_login, register_view, profile, edit_profile, delete_avatar
+    user_login, register_view, profile, edit_profile, delete_avatar, change_password
 )
 from django.contrib.auth.views import (
     LogoutView, PasswordResetView, PasswordResetDoneView,
@@ -41,6 +41,8 @@ urlpatterns = [
     path('profile/', profile, name='profile'),
     path('profile/edit/', edit_profile, name='edit_profile'),
     path('profile/avatar/delete/', delete_avatar, name='delete_avatar'),
+    # Маршрут для смены пароля
+    path('profile/password/', change_password, name='password_change'),
 
     # Маршруты для сброса пароля с улучшенными настройками
     path('password-reset/',
@@ -80,7 +82,12 @@ urlpatterns = [
 
     # API endpoints с версионированием
     path('api/v1/', include([
-        path('users/', include('apps.users.urls')),
+        path('users/', include([
+            # API маршрут для смены пароля
+            path('profile/password/', change_password, name='api_password_change'),
+            # Включаем остальные URL из приложения users
+            path('', include('apps.users.urls')),
+        ])),
         path('news/', include('apps.news.urls')),
         path('comments/', include('apps.comments.urls')),
         path('analytics/', include('apps.analytics.urls')),
