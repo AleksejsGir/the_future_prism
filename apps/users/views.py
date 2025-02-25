@@ -144,32 +144,38 @@ def edit_profile(request):
     3. Сохранение изменений
     """
     if request.method == 'POST':
+        # Создаем форму без файлов, чтобы избежать двойной обработки аватара
         form = CustomUserChangeForm(
             request.POST,
-            request.FILES,
             instance=request.user
         )
         if form.is_valid():
+            # Сначала сохраняем данные профиля без аватара
+            user = form.save(commit=False)
+
             # Обработка аватара
             avatar_file = request.FILES.get('avatar')
             if avatar_file:
                 try:
-                    save_avatar(request.user, avatar_file)
-                    messages.success(request, 'Аватар успешно обновлен!')
+                    save_avatar(user, avatar_file)
+                    messages.success(request, 'Профиль и аватар успешно обновлены!')
                 except Exception as e:
                     messages.error(
                         request,
                         f'Ошибка при загрузке аватара: {str(e)}'
                     )
+                    # Сохраняем остальные изменения, даже если аватар не загрузился
+                    user.save()
                     return render(
                         request,
                         'registration/edit_profile.html',
                         {'form': form}
                     )
+            else:
+                # Если аватар не загружен, просто сохраняем профиль
+                user.save()
+                messages.success(request, 'Профиль успешно обновлен!')
 
-            # Сохранение остальных данных
-            form.save()
-            messages.success(request, 'Изменения сохранены!')
             return redirect('profile')
     else:
         form = CustomUserChangeForm(instance=request.user)

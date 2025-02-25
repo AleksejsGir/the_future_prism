@@ -1,3 +1,4 @@
+# apps/users/utils.py
 from django.core.exceptions import ValidationError
 from django.conf import settings
 from PIL import Image
@@ -86,6 +87,11 @@ def save_avatar(user, file):
     # Формируем путь для сохранения
     filename = f'avatar_{user.id}{os.path.splitext(file.name)[1]}'
     filepath = os.path.join('avatars', filename)
+
+    # Проверяем, существует ли директория для сохранения аватаров
+    avatar_dir = os.path.join(settings.MEDIA_ROOT, 'avatars')
+    if not os.path.exists(avatar_dir):
+        os.makedirs(avatar_dir)
 
     # Удаляем старый аватар, если он существует
     if user.avatar:

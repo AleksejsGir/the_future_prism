@@ -1,3 +1,5 @@
+/* static/css/components/avatar.css */
+
 /* Стили для аватара и предпросмотра */
 .avatar-preview-container {
     margin-top: 1rem;
@@ -8,6 +10,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    transition: all 0.3s ease-in-out;
 }
 
 .avatar-preview-container.hidden {
@@ -21,6 +24,13 @@
     object-fit: cover;
     border: 3px solid var(--primary-color);
     box-shadow: 0 0 15px rgba(79, 214, 255, 0.3);
+    transition: transform 0.3s ease;
+}
+
+/* Добавляем небольшую анимацию при наведении на изображение */
+.avatar-preview-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(79, 214, 255, 0.5);
 }
 
 .avatar-remove-button {
@@ -31,4 +41,136 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+.avatar-remove-button:hover {
+    background: rgba(255, 78, 78, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(255, 78, 78, 0.3);
+}
+
+/* Стили для сообщений */
+.message-box {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    animation: fade-in 0.3s ease-in-out;
+    transition: opacity 0.5s ease;
+}
+
+.message-box.error {
+    background-color: rgba(220, 38, 38, 0.2);
+    color: #f87171;
+    border-left: 3px solid #ef4444;
+}
+
+.message-box.success {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #86efac;
+    border-left: 3px solid #22c55e;
+}
+
+.message-box.fade-out {
+    opacity: 0;
+}
+
+/* Анимации */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Скрываем стандартный input file */
+input[type="file"] {
+    display: none;
+}
+
+/* Стили для кнопок действий в профиле */
+.flex.gap-4.mt-6 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+button.neon-button,
+a.neon-button,
+.neon-button.delete {
+    background: linear-gradient(135deg,
+        rgba(79, 214, 255, 0.7),
+        rgba(255, 120, 255, 0.7)
+    );
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.neon-button.delete {
+    background: linear-gradient(135deg,
+        rgba(255, 78, 78, 0.7),
+        rgba(255, 59, 59, 0.7)
+    );
+}
+
+button.neon-button:hover,
+a.neon-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(79, 214, 255, 0.3);
+    background: linear-gradient(135deg,
+        rgba(79, 214, 255, 0.9),
+        rgba(255, 120, 255, 0.9)
+    );
+}
+
+.neon-button.delete:hover {
+    background: linear-gradient(135deg,
+        rgba(255, 78, 78, 0.9),
+        rgba(255, 59, 59, 0.9)
+    );
+    box-shadow: 0 5px 15px rgba(255, 78, 78, 0.3);
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 640px) {
+    .avatar-preview-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Улучшенное отображение кнопок на мобильных устройствах */
+    .flex.gap-4.mt-6 {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem !important;
+    }
+
+    button.neon-button,
+    a.neon-button,
+    .neon-button.delete,
+    form.inline {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    form.inline button {
+        width: 100%;
+    }
+}
+
+/* Дополнительные стили для очень маленьких экранов */
+@media (max-width: 360px) {
+    button.neon-button,
+    a.neon-button,
+    .neon-button.delete {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
 }
