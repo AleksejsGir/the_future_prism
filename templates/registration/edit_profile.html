@@ -73,10 +73,17 @@
                 {% endif %}
             {% endfor %}
 
+            {# Кнопка смены пароля #}
+            <div class="mt-6 mb-4">
+                <a href="{% url 'password_change' %}" class="neon-button bg-gray-700 inline-block">
+                    Изменить пароль
+                </a>
+            </div>
+
             {# Кнопки действий #}
             <div class="flex gap-4 mt-6">
                 <button type="submit" class="neon-button">Сохранить изменения</button>
-                <a href="{% url 'profile' %}" class="neon-button">Отмена</a>
+                <a href="{% url 'profile' %}" class="neon-button bg-gray-700">Отмена</a>
                 {% if user.avatar %}
                     <form action="{% url 'delete_avatar' %}" method="post" class="inline">
                         {% csrf_token %}
@@ -88,3 +95,10 @@
     </div>
 </div>
 {% endblock %}
+
+{# Технические заметки #}
+<!-- AI-TODO:
+1. Проверить совместимость стилей с существующим дизайном
+2. Убедиться, что кнопка смены пароля корректно работает
+3. Протестировать адаптивность на разных устройствах
+-->

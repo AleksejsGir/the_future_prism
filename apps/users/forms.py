@@ -66,6 +66,15 @@ class CustomUserChangeForm(UserChangeForm):
         model = User
         fields = ('first_name', 'last_name', 'email', 'bio', 'avatar')
 
+    def __init__(self, *args, **kwargs):
+        """
+        Удаляем стандартное поле пароля и его подсказки.
+        """
+        super().__init__(*args, **kwargs)
+        # Удаляем поле пароля
+        if 'password' in self.fields:
+            del self.fields['password']
+
     def clean_avatar(self):
         """
         Проверка загружаемого аватара.
@@ -125,7 +134,7 @@ class LoginForm(forms.Form):
         return cleaned_data
 
 # <!-- AI-TODO:
-# 1. Восстановлен LoginForm для входа в систему
-# 2. Проверить, корректно ли он используется в views.py
-# 3. Убедиться, что в шаблоне login.html форма подключена
+# 1. Удалено стандартное поле пароля в форме изменения профиля
+# 2. Сохранена существующая логика форм
+# 3. Проверить корректность работы форм после изменений
 # -->
