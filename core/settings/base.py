@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'tinymce',
+    'core',
     'apps.users',
     'apps.news',  # наше новое приложение
     'apps.comments',  # наше новое приложение для комментариев

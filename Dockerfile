@@ -1,6 +1,4 @@
-# Dockerfile для проекта "The Future Prism"
-
-# Используем официальный образ Python (3.11-slim)
+# Dockerfile
 FROM python:3.11-slim
 
 # Отключаем запись байткода и буферизацию вывода
@@ -23,11 +21,13 @@ RUN pip install --upgrade pip && pip install -r /app/requirements.txt
 # Копируем весь проект в контейнер
 COPY . /app
 
-# (Опционально) Собираем статические файлы
-# RUN python manage.py collectstatic --noinput
+# Создаем необходимые директории
+RUN mkdir -p /app/media /app/staticfiles /app/sent_emails
+
+
 
 # Открываем порт 8000 для доступа к приложению
 EXPOSE 8000
 
-# Команда для запуска приложения с помощью Gunicorn
+# Команда для запуска приложения (переопределяется в docker-compose)
 CMD ["gunicorn", "core.wsgi:application", "--bind", "0.0.0.0:8000"]
