@@ -5,15 +5,27 @@ from .models import Category, News
 from tinymce.widgets import TinyMCE
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TranslationAdmin
 
 admin.site.site_header = "The Future Prism Admin"
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    """Административный интерфейс для модели Category."""
+class CategoryAdmin(TranslationAdmin):
+    """Административный интерфейс для модели Category с поддержкой переводов."""
     list_display = ('id', 'name', 'description', 'news_count')
     search_fields = ('name', 'description')
+
+    # Настройка табов для разных языков
+    class Media:
+        js = (
+            'modeltranslation/js/force_jquery.js',
+            'https://code.jquery.com/jquery-3.6.0.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
 
     def get_queryset(self, request):
         """Оптимизируем запрос с аннотацией для подсчета новостей."""
@@ -32,8 +44,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 @admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
-    """Административный интерфейс для модели News."""
+class NewsAdmin(TranslationAdmin):
+    """Административный интерфейс для модели News с поддержкой переводов."""
     list_display = ('id', 'title', 'published_date', 'view_count', 'category', 'image_preview', 'status_tag')
     list_filter = ('published_date', 'category')
     search_fields = ('title', 'content')
@@ -45,12 +57,23 @@ class NewsAdmin(admin.ModelAdmin):
     list_per_page = 15
     actions = ['reset_views']
 
+    # Настройка табов для разных языков
+    class Media:
+        js = (
+            'modeltranslation/js/force_jquery.js',
+            'https://code.jquery.com/jquery-3.6.0.min.js',
+            'modeltranslation/js/tabbed_translation_fields.js',
+        )
+        css = {
+            'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
+        }
+
     fieldsets = (
         ('Основная информация', {
             'fields': ('title', 'slug', 'category', 'published_date')
         }),
         ('Содержимое', {
-            'fields': ('content',),
+            'fields': ('content', 'short_description'),
             'description': 'Используйте визуальный редактор для форматирования контента. Выбирайте стили оформления с помощью кнопки "Форматирование" в панели инструментов.'
         }),
         ('Изображение', {

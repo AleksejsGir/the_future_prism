@@ -1,0 +1,417 @@
+# English translation for The Future Prism.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-04 14:17+0000\n"
+"PO-Revision-Date: 2025-03-03 HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps\news\admin.py:42
+msgid "Количество новостей"
+msgstr "Number of news"
+
+#: .\apps\users\models.py:13
+msgid "О себе"
+msgstr "About me"
+
+#: .\apps\users\models.py:16
+msgid "Краткая информация о пользователе"
+msgstr "Brief information about the user"
+
+#: .\apps\users\models.py:20 .\templates\base.html:101
+#: .\templates\base.html:127
+msgid "Аватар"
+msgstr "Avatar"
+
+#: .\apps\users\models.py:24
+msgid "Изображение профиля пользователя"
+msgstr "User profile image"
+
+#: .\apps\users\models.py:28
+msgid "Уведомления на email"
+msgstr "Email notifications"
+
+#: .\apps\users\models.py:30
+msgid "Получать уведомления на email"
+msgstr "Receive email notifications"
+
+#: .\apps\users\models.py:34
+msgid "Пользователь"
+msgstr "User"
+
+#: .\apps\users\models.py:35
+msgid "Пользователи"
+msgstr "Users"
+
+#: .\templates\about.html:4 .\templates\about.html:9 .\templates\base.html:51
+#: .\templates\base.html:175
+msgid "О проекте"
+msgstr "About"
+
+#: .\templates\about.html:13
+msgid ""
+"\n"
+"        \"The Future Prism\" — это новостной портал, который освещает темы "
+"будущего, технологий и общества.\n"
+"        Цель проекта — предоставить пользователям актуальную и качественную "
+"информацию в удобном формате.\n"
+"        "
+msgstr ""
+
+#: .\templates\about.html:19
+msgid "Наша миссия"
+msgstr ""
+
+#: .\templates\about.html:21
+msgid ""
+"\n"
+"        Мы стремимся делать сложные темы доступными и понятными, "
+"предоставлять объективную информацию\n"
+"        и помогать нашим читателям ориентироваться в быстро меняющемся мире "
+"технологий.\n"
+"        "
+msgstr ""
+
+#: .\templates\about.html:27
+msgid "Команда"
+msgstr ""
+
+#: .\templates\about.html:29
+msgid ""
+"\n"
+"        Наша команда состоит из опытных журналистов, технических экспертов и "
+"исследователей,\n"
+"        которые специализируются на различных областях технологий и "
+"инноваций.\n"
+"        "
+msgstr ""
+
+#: .\templates\about.html:35
+msgid "Присоединяйтесь к нам"
+msgstr ""
+
+#: .\templates\about.html:37
+msgid ""
+"\n"
+"        Мы всегда открыты для сотрудничества с авторами, экспертами и "
+"компаниями,\n"
+"        которые разделяют нашу страсть к инновациям и будущему. Если у вас "
+"есть идеи\n"
+"        или предложения, не стесняйтесь связаться с нами.\n"
+"        "
+msgstr ""
+
+#: .\templates\about.html:47
+msgid "Связаться с нами"
+msgstr ""
+
+#: .\templates\base.html:8 .\templates\base.html:36
+msgid "The Future Prism"
+msgstr "The Future Prism"
+
+#: .\templates\base.html:37
+msgid "THE FUTURE PRISM"
+msgstr "THE FUTURE PRISM"
+
+#: .\templates\base.html:43 .\templates\base.html:173
+msgid "Главная"
+msgstr "Home"
+
+#: .\templates\base.html:47 .\templates\base.html:174
+msgid "Новости"
+msgstr "News"
+
+#: .\templates\base.html:55 .\templates\base.html:176
+#: .\templates\contact.html:4 .\templates\contact.html:9
+msgid "Контакты"
+msgstr "Contacts"
+
+#: .\templates\base.html:67 .\templates\base.html:161
+msgid "Поиск..."
+msgstr "Search..."
+
+#: .\templates\base.html:107 .\templates\base.html:183
+msgid "Выход"
+msgstr "Logout"
+
+#: .\templates\base.html:110 .\templates\base.html:186
+msgid "Вход"
+msgstr "Login"
+
+#: .\templates\base.html:131
+msgid "Перейти в профиль"
+msgstr "Go to profile"
+
+#: .\templates\base.html:191
+msgid "Закрыть"
+msgstr "Close"
+
+#: .\templates\base.html:200
+#, fuzzy
+#| msgid "&copy; 2025 The Future Prism. Все права защищены."
+msgid "Все права защищены."
+msgstr "&copy; 2025 The Future Prism. All rights reserved."
+
+#: .\templates\contact.html:13
+msgid ""
+"\n"
+"        Если у вас есть вопросы, предложения или вы хотите сотрудничать с "
+"нами,\n"
+"        пожалуйста, используйте контактную информацию ниже.\n"
+"        "
+msgstr ""
+
+#: .\templates\contact.html:21
+msgid "Электронная почта"
+msgstr ""
+
+#: .\templates\contact.html:24
+msgid "Адрес"
+msgstr ""
+
+#: .\templates\contact.html:25
+msgid "ул. Технологическая, 42"
+msgstr ""
+
+#: .\templates\contact.html:25
+msgid "Москва, Россия"
+msgstr ""
+
+#: .\templates\contact.html:29
+#, fuzzy
+#| msgid "Избранные статьи"
+msgid "Социальные сети"
+msgstr "Favorite articles"
+
+#: .\templates\contact.html:40
+msgid "Обратная связь"
+msgstr ""
+
+#: .\templates\contact.html:42
+msgid ""
+"\n"
+"          Скоро здесь появится форма обратной связи. А пока вы можете "
+"написать нам\n"
+"          на электронную почту.\n"
+"          "
+msgstr ""
+
+#: .\templates\news_detail.html:10
+msgid "Опубликовано"
+msgstr ""
+
+#: .\templates\news_detail.html:10
+msgid "Категория"
+msgstr ""
+
+#: .\templates\news_detail.html:31
+msgid "Поделиться"
+msgstr ""
+
+#: .\templates\news_detail.html:45
+#, fuzzy
+#| msgid "Перейти к новости"
+msgid "Похожие новости"
+msgstr "Go to news"
+
+#: .\templates\news_detail.html:66
+#, fuzzy
+#| msgid "Перейти к новости"
+msgid "← Назад к новостям"
+msgstr "Go to news"
+
+#: .\templates\news_list.html:13
+#, python-format
+msgid "Результаты поиска для \"%(query)s\""
+msgstr ""
+
+#: .\templates\news_list.html:15
+#, python-format
+msgid "По запросу \"%(query)s\" ничего не найдено"
+msgstr ""
+
+#: .\templates\news_list.html:25
+msgid "ВЫБОР КАТЕГОРИИ"
+msgstr ""
+
+#: .\templates\news_list.html:32
+msgid "Все категории"
+msgstr ""
+
+#: .\templates\news_list.html:40
+msgid "Категории не найдены"
+msgstr ""
+
+#: .\templates\news_list.html:76
+msgid "По вашему запросу ничего не найдено"
+msgstr ""
+
+#: .\templates\news_list.html:78
+msgid "Сбросить поиск"
+msgstr ""
+
+#: .\templates\news_list.html:81
+msgid "Новостей пока нет"
+msgstr ""
+
+#: .\templates\news_list.html:93
+msgid "Предыдущая"
+msgstr ""
+
+#: .\templates\news_list.html:100
+msgid "Следующая"
+msgstr ""
+
+#~ msgid "Введите email"
+#~ msgstr "Enter email"
+
+#~ msgid "Введите действующий email адрес"
+#~ msgstr "Enter a valid email address"
+
+#~ msgid "Пользователь с таким email уже существует."
+#~ msgstr "A user with this email already exists."
+
+#~ msgid "Расскажите о себе"
+#~ msgstr "Tell us about yourself"
+
+#~ msgid "Кратко расскажите о себе (необязательно)"
+#~ msgstr "Briefly tell us about yourself (optional)"
+
+#~ msgid "Максимальный размер: 5MB"
+#~ msgstr "Maximum size: 5MB"
+
+#~ msgid "Русский"
+#~ msgstr "Russian"
+
+#~ msgid "Английский"
+#~ msgstr "English"
+
+#~ msgid "Выберите предпочитаемый язык интерфейса"
+#~ msgstr "Choose your preferred interface language"
+
+#~ msgid "Размер файла не должен превышать 5MB"
+#~ msgstr "File size should not exceed 5MB"
+
+#~ msgid "Имя пользователя"
+#~ msgstr "Username"
+
+#~ msgid "Пароль"
+#~ msgstr "Password"
+
+#~ msgid "Запомнить меня"
+#~ msgstr "Remember me"
+
+#~ msgid "Введите имя пользователя"
+#~ msgstr "Enter username"
+
+#~ msgid "Введите пароль"
+#~ msgstr "Enter password"
+
+#~ msgid "Предпочитаемый язык"
+#~ msgstr "Preferred language"
+
+#~ msgid "Выберите язык интерфейса"
+#~ msgstr "Choose interface language"
+
+#, fuzzy
+#~| msgid "Введите имя пользователя"
+#~ msgid "Неверное имя пользователя или пароль"
+#~ msgstr "Enter username"
+
+#, fuzzy, python-brace-format
+#~| msgid "Дата регистрации:"
+#~ msgid "Ошибка при регистрации: {0}"
+#~ msgstr "Registration date:"
+
+#, fuzzy
+#~| msgid "Имя пользователя"
+#~ msgid "Профиль пользователя"
+#~ msgstr "Username"
+
+#, fuzzy
+#~| msgid "Редактировать профиль"
+#~ msgid "Редактирование профиля"
+#~ msgstr "Edit profile"
+
+#, fuzzy
+#~| msgid "Перейти в профиль"
+#~ msgid "Аватар профиля"
+#~ msgstr "Go to profile"
+
+#~ msgid "Изменить пароль"
+#~ msgstr "Change password"
+
+#, fuzzy
+#~| msgid "Запомнить меня"
+#~ msgid "Сохранить изменения"
+#~ msgstr "Remember me"
+
+#, fuzzy
+#~| msgid "Изменить пароль"
+#~ msgid "Удалить аватар"
+#~ msgstr "Change password"
+
+#, fuzzy
+#~| msgid "Введите пароль"
+#~ msgid "Забыли пароль?"
+#~ msgstr "Enter password"
+
+#, fuzzy
+#~| msgid "Дата регистрации:"
+#~ msgid "Зарегистрироваться"
+#~ msgstr "Registration date:"
+
+#~ msgid "Профиль"
+#~ msgstr "Profile"
+
+#~ msgid "Личный кабинет"
+#~ msgstr "Personal account"
+
+#~ msgid "Email:"
+#~ msgstr "Email:"
+
+#~ msgid "Дата регистрации:"
+#~ msgstr "Registration date:"
+
+#~ msgid "О себе:"
+#~ msgstr "About me:"
+
+#~ msgid "Предпочитаемый язык:"
+#~ msgstr "Preferred language:"
+
+#~ msgid "Редактировать профиль"
+#~ msgstr "Edit profile"
+
+#~ msgid "Управление безопасностью"
+#~ msgstr "Security management"
+
+#~ msgid "Пароль:"
+#~ msgstr "Password:"
+
+#~ msgid "Установлен"
+#~ msgstr "Set"
+
+#~ msgid "Не установлен"
+#~ msgstr "Not set"
+
+#~ msgid "Для безопасности аккаунта регулярно меняйте пароль"
+#~ msgstr "Change your password regularly for account security"
+
+#~ msgid "Комментарии"
+#~ msgstr "Comments"
+
+#~ msgid "Последнее посещение"
+#~ msgstr "Last visit"
+
+#~ msgid "Последняя активность"
+#~ msgstr "Recent activity"
+
+#~ msgid "Пока нет активности"
+#~ msgstr "No activity yet"

@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from .jazzmin_settings import JAZZMIN_SETTINGS, JAZZMIN_UI_TWEAKS
 
+
 # Определяем базовую директорию проекта:
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -14,8 +15,27 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 # Получаем список разрешенных хостов из переменной окружения
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') if os.getenv('ALLOWED_HOSTS') else []
 
-# Устанавливаем список приложений Django
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+]
+DEFAULT_LANGUAGE = 'ru'
+LANGUAGE_CODE = 'ru'
+
+# Включаем поддержку переводов
+USE_I18N = True
+
+# Настройки modeltranslation
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'  # Язык по умолчанию для создания новых записей
+MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'ru'  # Язык, с которого копировать значения в пустые поля
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('ru', 'en')  # Порядок языков при поиске перевода
+MODELTRANSLATION_TRANSLATION_FILES = (  # Путь к файлам с настройками переводов моделей
+    'apps.news.translation',
+)
+
+# Обновляем INSTALLED_APPS: добавляем modeltranslation в начало списка
 INSTALLED_APPS = [
+    'modeltranslation',  # Новая строка
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,9 +48,14 @@ INSTALLED_APPS = [
     'tinymce',
     'core',
     'apps.users',
-    'apps.news',  # наше новое приложение
-    'apps.comments',  # наше новое приложение для комментариев
-    'apps.analytics',  # наше новое приложение для аналитики
+    'apps.news',
+    'apps.comments',
+    'apps.analytics',
+]
+
+# Добавляем пути для поиска переводов
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
 ]
 
 # Здесь Я указываю Django использует кастомную модель пользователя.
@@ -39,6 +64,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # Добавляем middleware локализации
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -51,7 +77,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Каталог для шаблонов
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -59,6 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n',  # Добавляем i18n процессор
             ],
         },
     },

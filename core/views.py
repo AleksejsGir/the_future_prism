@@ -84,3 +84,21 @@ def news_detail(request, news_id):
         'news': news_item,
         'similar_news': similar_news
     })
+
+
+def about_view(request):
+    """
+    Отображает страницу "О проекте".
+    """
+    return render(request, 'about.html', {
+        'title': 'О проекте'
+    })
+
+
+def contact_view(request):
+    """
+    Отображает страницу "Контакты".
+    """
+    return render(request, 'contact.html', {
+        'title': 'Контакты'
+    })

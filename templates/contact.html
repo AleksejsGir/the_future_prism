@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Контакты" %} | The Future Prism{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4 md:p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold neon-text text-center mb-8">{% trans "Контакты" %}</h1>
+
+    <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 mb-6">
+      <p class="mb-6">
+        {% blocktrans %}
+        Если у вас есть вопросы, предложения или вы хотите сотрудничать с нами,
+        пожалуйста, используйте контактную информацию ниже.
+        {% endblocktrans %}
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="text-xl font-semibold mb-4">{% trans "Электронная почта" %}</h2>
+          <p><a href="mailto:info@thefutureprism.com" class="text-blue-400 hover:text-blue-300">info@thefutureprism.com</a></p>
+
+          <h2 class="text-xl font-semibold mb-4 mt-6">{% trans "Адрес" %}</h2>
+          <p>{% trans "ул. Технологическая, 42" %}<br>{% trans "Москва, Россия" %}</p>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-semibold mb-4">{% trans "Социальные сети" %}</h2>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-blue-400 hover:text-blue-300">Facebook</a></li>
+            <li><a href="#" class="text-blue-400 hover:text-blue-300">Twitter</a></li>
+            <li><a href="#" class="text-blue-400 hover:text-blue-300">Telegram</a></li>
+            <li><a href="#" class="text-blue-400 hover:text-blue-300">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-8">
+        <h2 class="text-xl font-semibold mb-4">{% trans "Обратная связь" %}</h2>
+        <p class="mb-4">
+          {% blocktrans %}
+          Скоро здесь появится форма обратной связи. А пока вы можете написать нам
+          на электронную почту.
+          {% endblocktrans %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

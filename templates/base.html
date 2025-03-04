@@ -1,9 +1,11 @@
+<!-- templates/base.html -->
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
   <meta charset="UTF-8">
-  <title>{% block title %}The Future Prism{% endblock %}</title>
+  <title>{% block title %}{% trans "The Future Prism" %}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {# Основные стили #}
@@ -30,27 +32,27 @@
 
   {# Фиксированный хедер #}
   <header class="header">
-    <a href="/" class="flex items-center gap-3">
-      <img src="{% static 'images/logo.PNG' %}" alt="The Future Prism" class="logo-img">
-      <span class="logo-text">THE FUTURE PRISM</span>
+    <a href="{% url 'home' %}" class="flex items-center gap-3">
+      <img src="{% static 'images/logo.PNG' %}" alt="{% trans 'The Future Prism' %}" class="logo-img">
+      <span class="logo-text">{% trans "THE FUTURE PRISM" %}</span>
     </a>
 
     {# Десктопное меню #}
     <nav class="nav-menu hidden md:flex gap-6 items-center">
-      <a href="/" class="hover:text-blue-400 relative group text-sm md:text-base">
-        Главная
+      <a href="{% url 'home' %}" class="hover:text-blue-400 relative group text-sm md:text-base">
+        {% trans "Главная" %}
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/news/" class="hover:text-blue-400 relative group text-sm md:text-base">
-        Новости
+      <a href="{% url 'news_list' %}" class="hover:text-blue-400 relative group text-sm md:text-base">
+        {% trans "Новости" %}
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/about/" class="hover:text-blue-400 relative group text-sm md:text-base">
-        О проекте
+      <a href="{% url 'about' %}" class="hover:text-blue-400 relative group text-sm md:text-base">
+        {% trans "О проекте" %}
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
-      <a href="/contact/" class="hover:text-blue-400 relative group text-sm md:text-base">
-        Контакты
+      <a href="{% url 'contact' %}" class="hover:text-blue-400 relative group text-sm md:text-base">
+        {% trans "Контакты" %}
         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-400 transition-all group-hover:w-full"></span>
       </a>
     </nav>
@@ -62,7 +64,7 @@
            name="search"
            id="searchInput"
            class="search-input hidden md:block"
-           placeholder="Поиск..."
+           placeholder="{% trans 'Поиск...' %}"
            value="{{ search_query|default:'' }}"
     >
     <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2 hidden md:block">
@@ -75,21 +77,37 @@
     {% endif %}
   </form>
 
+  {# Переключатель языков для десктопов - форма #}
+  <div class="language-switcher hidden md:flex gap-2">
+    {% get_current_language as CURRENT_LANGUAGE %}
+    {% get_language_info_list for LANGUAGES as languages %}
+    {% for language in languages %}
+      <form action="{% url 'set_language' %}" method="post" class="inline">
+        {% csrf_token %}
+        <input type="hidden" name="language" value="{{ language.code }}">
+        <input type="hidden" name="next" value="{{ request.get_full_path }}">
+        <button type="submit" class="category-button px-2 py-1 text-sm {% if language.code == CURRENT_LANGUAGE %}bg-blue-600{% else %}bg-transparent border border-gray-600{% endif %} rounded">
+          {{ language.code|upper }}
+        </button>
+      </form>
+    {% endfor %}
+  </div>
+
       {# Скрываем кнопки управления на мобильных #}
       <div class="hidden md:flex gap-4 items-center">
         {% if user.is_authenticated %}
           <a href="{% url 'profile' %}" class="category-button">
             {% if user.avatar %}
-              <img src="{{ user.avatar.url }}" alt="Аватар" class="w-8 h-8 rounded-full inline-block mr-2">
+              <img src="{{ user.avatar.url }}" alt="{% trans 'Аватар' %}" class="w-8 h-8 rounded-full inline-block mr-2">
             {% endif %}
             {{ user.username }}
           </a>
           <form method="post" action="{% url 'logout' %}" class="inline">
             {% csrf_token %}
-            <button type="submit" class="category-button logout-btn">Выход</button>
+            <button type="submit" class="category-button logout-btn">{% trans "Выход" %}</button>
           </form>
         {% else %}
-          <a href="{% url 'login' %}" class="category-button">Вход</a>
+          <a href="{% url 'login' %}" class="category-button">{% trans "Вход" %}</a>
         {% endif %}
         {#<button class="category-button" id="theme-toggle">Тема</button>  #}
       </div>
@@ -106,14 +124,32 @@
     {% if user.is_authenticated %}
       <div class="user-profile text-center mb-6">
         {% if user.avatar %}
-          <img src="{{ user.avatar.url }}" alt="Аватар" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-primary-color">
+          <img src="{{ user.avatar.url }}" alt="{% trans 'Аватар' %}" class="w-16 h-16 rounded-full mx-auto mb-2 border-2 border-primary-color">
         {% endif %}
         <div class="username text-lg mb-2">{{ user.username }}</div>
         <a href="{% url 'profile' %}" class="text-primary-color hover:text-secondary-color transition-colors">
-          Перейти в профиль
+          {% trans "Перейти в профиль" %}
         </a>
       </div>
     {% endif %}
+
+    {# Переключатель языков в мобильном меню - кнопки #}
+    <div class="language-switcher text-center mb-4 px-4">
+      <div class="flex justify-center gap-4">
+        {% get_current_language as CURRENT_LANGUAGE %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+          <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="language" value="{{ language.code }}">
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <button type="submit" class="category-button w-20 py-2 rounded font-medium {% if language.code == CURRENT_LANGUAGE %}bg-blue-600{% else %}bg-gray-700 border border-gray-500{% endif %}">
+              {{ language.name_local }}
+            </button>
+          </form>
+        {% endfor %}
+      </div>
+    </div>
 
     {# Добавляем форму поиска в мобильное меню #}
     <form action="{% url 'news_list' %}" method="get" class="px-4 mb-4" id="mobileSearchForm">
@@ -122,7 +158,7 @@
        name="search"
        id="mobileSearchInput"
        class="search-input w-full py-2 px-4 rounded-lg bg-gray-800 text-white"
-       placeholder="Поиск..."
+       placeholder="{% trans 'Поиск...' %}"
        value="{{ search_query|default:'' }}"
 >
         <button type="submit" class="absolute right-3 top-1/2 transform -translate-y-1/2">
@@ -134,25 +170,25 @@
     </form>
 
     {# Основные пункты меню #}
-    <a href="/" class="menu-link">Главная</a>
-    <a href="/news/" class="menu-link">Новости</a>
-    <a href="/about/" class="menu-link">О проекте</a>
-    <a href="/contact/" class="menu-link">Контакты</a>
+    <a href="{% url 'home' %}" class="menu-link">{% trans "Главная" %}</a>
+    <a href="{% url 'news_list' %}" class="menu-link">{% trans "Новости" %}</a>
+    <a href="{% url 'about' %}" class="menu-link">{% trans "О проекте" %}</a>
+    <a href="{% url 'contact' %}" class="menu-link">{% trans "Контакты" %}</a>
 
     {# Блок авторизации в мобильном меню #}
     <div class="mt-6">
       {% if user.is_authenticated %}
         <form method="post" action="{% url 'logout' %}" class="w-full">
           {% csrf_token %}
-          <button type="submit" class="logout-btn w-full">Выход</button>
+          <button type="submit" class="logout-btn w-full">{% trans "Выход" %}</button>
         </form>
       {% else %}
-        <a href="{% url 'login' %}" class="category-button w-full block text-center">Вход</a>
+        <a href="{% url 'login' %}" class="category-button w-full block text-center">{% trans "Вход" %}</a>
       {% endif %}
     </div>
 
     {# Кнопка закрытия меню #}
-    <button class="category-button mt-6" id="close-mobile-menu">Закрыть</button>
+    <button class="category-button mt-6" id="close-mobile-menu">{% trans "Закрыть" %}</button>
   </nav>
 </div>
 
@@ -161,7 +197,7 @@
   </main>
 
   <footer class="bg-gray-900 p-6 mt-10 text-center">
-    <p class="mt-4 text-sm">&copy; 2025 The Future Prism. Все права защищены.</p>
+    <p class="mt-4 text-sm">&copy; 2025 The Future Prism. {% trans "Все права защищены." %}</p>
   </footer>
 
   <script>
