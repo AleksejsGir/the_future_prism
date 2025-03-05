@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 User = get_user_model()
 
@@ -16,10 +17,10 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         widget=forms.EmailInput(attrs={
             'class': 'input input-bordered w-full',
-            'placeholder': 'Введите email',
+            'placeholder': _('Введите email'),
             'autocomplete': 'email'
         }),
-        help_text='Введите действующий email адрес'
+        help_text=_('Введите действующий email адрес')
     )
 
     class Meta:
@@ -34,7 +35,7 @@ class CustomUserCreationForm(UserCreationForm):
         if email:
             email = email.lower()
             if User.objects.filter(email=email).exists():
-                raise ValidationError('Пользователь с таким email уже существует.')
+                raise ValidationError(_('Пользователь с таким email уже существует.'))
         return email
 
 
@@ -46,10 +47,10 @@ class CustomUserChangeForm(UserChangeForm):
         required=False,
         widget=forms.Textarea(attrs={
             'class': 'input input-bordered w-full h-32',
-            'placeholder': 'Расскажите о себе',
+            'placeholder': _('Расскажите о себе'),
             'rows': 4
         }),
-        help_text='Кратко расскажите о себе (необязательно)'
+        help_text=_('Кратко расскажите о себе (необязательно)')
     )
 
     avatar = forms.ImageField(
@@ -59,7 +60,7 @@ class CustomUserChangeForm(UserChangeForm):
             'accept': 'image/*',
             'data-max-size': '5242880'
         }),
-        help_text='Максимальный размер: 5MB'
+        help_text=_('Максимальный размер: 5MB')
     )
 
     class Meta:
@@ -81,7 +82,7 @@ class CustomUserChangeForm(UserChangeForm):
         """
         avatar = self.cleaned_data.get('avatar')
         if avatar and avatar.size > 5 * 1024 * 1024:
-            raise ValidationError('Размер файла не должен превышать 5MB')
+            raise ValidationError(_('Размер файла не должен превышать 5MB'))
         return avatar
 
 
@@ -92,20 +93,20 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'input input-bordered w-full',
-            'placeholder': 'Имя пользователя',
+            'placeholder': _('Имя пользователя'),
             'autocomplete': 'username',
             'autofocus': True
         }),
-        label="Имя пользователя"
+        label=_("Имя пользователя")
     )
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'input input-bordered w-full',
-            'placeholder': 'Пароль',
+            'placeholder': _('Пароль'),
             'autocomplete': 'current-password'
         }),
-        label="Пароль"
+        label=_("Пароль")
     )
 
     remember_me = forms.BooleanField(
@@ -114,7 +115,7 @@ class LoginForm(forms.Form):
         widget=forms.CheckboxInput(attrs={
             'class': 'checkbox'
         }),
-        label="Запомнить меня"
+        label=_("Запомнить меня")
     )
 
     def clean(self):
@@ -126,14 +127,14 @@ class LoginForm(forms.Form):
         password = cleaned_data.get('password')
 
         if not username:
-            raise ValidationError({'username': 'Введите имя пользователя'})
+            raise ValidationError({'username': _('Введите имя пользователя')})
 
         if not password:
-            raise ValidationError({'password': 'Введите пароль'})
+            raise ValidationError({'password': _('Введите пароль')})
 
         return cleaned_data
 
-# <!-- AI-TODO:
+# <!-- :
 # 1. Удалено стандартное поле пароля в форме изменения профиля
 # 2. Сохранена существующая логика форм
 # 3. Проверить корректность работы форм после изменений

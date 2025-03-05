@@ -37,8 +37,8 @@ class NewsViewSet(viewsets.ModelViewSet):
         Переопределяем метод retrieve для увеличения счетчика просмотров.
         Используем update_fields для оптимизации запроса к БД.
         """
-        instance = self.get_object()
-        instance.view_count += 1
-        instance.save(update_fields=['view_count'])
+        instance = self.get_object() # Получаем объект новости
+        instance.view_count += 1 # Увеличиваем счетчик просмотров
+        instance.save(update_fields=['view_count']) # Сохраняем изменения
         serializer = self.get_serializer(instance)
         return Response(serializer.data)

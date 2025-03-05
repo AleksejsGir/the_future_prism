@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.translation import gettext as _
 from rest_framework import generics, status
 from rest_framework.response import Response
 from .models import CustomUser
@@ -56,7 +57,7 @@ def user_login(request):
                     login(request, user)
                     messages.success(
                         request,
-                        f'Добро пожаловать, {user.username}!'
+                        _('Добро пожаловать, {0}!').format(user.username)
                     )
                     # Безопасная обработка параметра next
                     next_page = request.GET.get('next')
@@ -66,12 +67,12 @@ def user_login(request):
                 else:
                     messages.error(
                         request,
-                        'Ваш аккаунт деактивирован'
+                        _('Ваш аккаунт деактивирован')
                     )
             else:
                 messages.error(
                     request,
-                    'Неверное имя пользователя или пароль'
+                    _('Неверное имя пользователя или пароль')
                 )
     else:
         form = LoginForm()
@@ -79,7 +80,7 @@ def user_login(request):
     # Добавляем расширенный контекст для шаблона
     context = {
         'form': form,
-        'title': 'Вход в систему',
+        'title': _('Вход в систему'),
         'next': request.GET.get('next', ''),
     }
     return render(request, 'registration/login.html', context)
@@ -106,13 +107,13 @@ def register_view(request):
                 login(request, user)
                 messages.success(
                     request,
-                    'Регистрация успешна! Добро пожаловать!'
+                    _('Регистрация успешна! Добро пожаловать!')
                 )
                 return redirect('profile')
             except Exception as e:
                 messages.error(
                     request,
-                    f'Ошибка при регистрации: {str(e)}'
+                    _('Ошибка при регистрации: {0}').format(str(e))
                 )
     else:
         form = CustomUserCreationForm()
@@ -127,7 +128,7 @@ def profile(request):
     Защищено декоратором login_required.
     """
     context = {
-        'title': 'Профиль пользователя',
+        'title': _('Профиль пользователя'),
         'user_since': request.user.date_joined,
         'avatar_url': request.user.get_avatar_url(),
     }
@@ -159,11 +160,11 @@ def edit_profile(request):
             if avatar_file:
                 try:
                     save_avatar(user, avatar_file)
-                    messages.success(request, 'Профиль и аватар успешно обновлены!')
+                    messages.success(request, _('Профиль и аватар успешно обновлены!'))
                 except Exception as e:
                     messages.error(
                         request,
-                        f'Ошибка при загрузке аватара: {str(e)}'
+                        _('Ошибка при загрузке аватара: {0}').format(str(e))
                     )
                     # Сохраняем остальные изменения, даже если аватар не загрузился
                     user.save()
@@ -175,7 +176,7 @@ def edit_profile(request):
             else:
                 # Если аватар не загружен, просто сохраняем профиль
                 user.save()
-                messages.success(request, 'Профиль успешно обновлен!')
+                messages.success(request, _('Профиль успешно обновлен!'))
 
             return redirect('profile')
     else:
@@ -202,14 +203,14 @@ def delete_avatar(request):
             user.avatar.delete(save=False)
             user.avatar = None
             user.save()
-            messages.success(request, 'Аватар успешно удален')
+            messages.success(request, _('Аватар успешно удален'))
         except Exception as e:
             messages.error(
                 request,
-                f'Ошибка при удалении аватара: {str(e)}'
+                _('Ошибка при удалении аватара: {0}').format(str(e))
             )
     else:
-        messages.info(request, 'У вас нет загруженного аватара')
+        messages.info(request, _('У вас нет загруженного аватара'))
 
     return redirect('profile')
 
@@ -231,7 +232,7 @@ def change_password(request):
             user = form.save()
             # Обновляем сессию, чтобы пользователь не выходил из системы
             update_session_auth_hash(request, user)
-            messages.success(request, 'Ваш пароль успешно изменен!')
+            messages.success(request, _('Ваш пароль успешно изменен!'))
             return redirect('profile')
         else:
             for error in form.non_field_errors():

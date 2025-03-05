@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 09:36+0000\n"
-"PO-Revision-Date: 2025-03-03 HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2025-03-05 23:02+0000\n"
+"PO-Revision-Date: 2025-03-05 15:30+0000\n"
+"Last-Translator: ADMIN <admin@thefutureprism.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -13,142 +13,179 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\apps\news\admin.py:11
-#, fuzzy
-#| msgid "The Future Prism"
+#: .\apps\news\admin.py:12
 msgid "The Future Prism Admin"
-msgstr "The Future Prism"
+msgstr "The Future Prism Admin"
 
-#: .\apps\news\admin.py:47
+#: .\apps\news\admin.py:52
 msgid "Количество новостей"
 msgstr "Number of news"
 
-#: .\apps\news\admin.py:69 .\apps\news\admin.py:257
+#: .\apps\news\admin.py:74 .\apps\news\admin.py:283
 msgid "Статус переводов"
-msgstr ""
+msgstr "Translation status"
 
-#: .\apps\news\admin.py:88
-#, python-brace-format
-msgid "Основной язык скопирован во все переводы для {0} категорий"
-msgstr ""
-
-#: .\apps\news\admin.py:90 .\apps\news\admin.py:286
+#: .\apps\news\admin.py:96 .\apps\news\admin.py:316
 msgid "Копировать основной язык во все переводы"
-msgstr ""
+msgstr "Copy main language to all translations"
 
-#: .\apps\news\admin.py:124
+#: .\apps\news\admin.py:129
 msgid "Основная информация"
-msgstr ""
-
-#: .\apps\news\admin.py:126
-msgid "Поля \"title\" имеют переводимые версии для каждого языка"
-msgstr ""
-
-#: .\apps\news\admin.py:128
-msgid "Содержимое"
-msgstr ""
+msgstr "Basic information"
 
 #: .\apps\news\admin.py:131
+msgid "Поля \"title\" имеют переводимые версии для каждого языка"
+msgstr "\"Title\" fields have translatable versions for each language"
+
+#: .\apps\news\admin.py:133
+msgid "Содержимое"
+msgstr "Content"
+
+#: .\apps\news\admin.py:136
 msgid ""
 "Содержимое статьи доступно для перевода на все поддерживаемые языки. "
 "Используйте визуальный редактор для форматирования."
 msgstr ""
+"Article content is available for translation to all supported languages. Use "
+"the visual editor for formatting."
 
-#: .\apps\news\admin.py:133
+#: .\apps\news\admin.py:138
 msgid "Изображение"
-msgstr ""
-
-#: .\apps\news\admin.py:135
-msgid "Загрузите изображение для новости"
-msgstr ""
-
-#: .\apps\news\admin.py:137
-msgid "Статистика"
-msgstr ""
+msgstr "Image"
 
 #: .\apps\news\admin.py:140
-#, fuzzy
-#| msgid "Краткая информация о пользователе"
+msgid "Загрузите изображение для новости"
+msgstr "Upload an image for the news"
+
+#: .\apps\news\admin.py:142
+msgid "Статистика"
+msgstr "Statistics"
+
+#: .\apps\news\admin.py:145
 msgid "Информация о просмотрах новости"
-msgstr "Brief information about the user"
-
-#: .\apps\news\admin.py:163
-msgid "Параграф (маленький)"
-msgstr ""
-
-#: .\apps\news\admin.py:164
-msgid "Параграф (обычный)"
-msgstr ""
-
-#: .\apps\news\admin.py:165
-msgid "Параграф (большой)"
-msgstr ""
-
-#: .\apps\news\admin.py:166
-msgid "Заголовок 2 (маленький)"
-msgstr ""
-
-#: .\apps\news\admin.py:167
-msgid "Заголовок 2 (средний)"
-msgstr ""
+msgstr "Information about news views"
 
 #: .\apps\news\admin.py:168
-msgid "Заголовок 2 (большой)"
-msgstr ""
+msgid "Параграф (маленький)"
+msgstr "Paragraph (small)"
 
 #: .\apps\news\admin.py:169
-msgid "Цвет: Основной"
-msgstr ""
+msgid "Параграф (обычный)"
+msgstr "Paragraph (regular)"
 
 #: .\apps\news\admin.py:170
-msgid "Цвет: Дополнительный"
-msgstr ""
+msgid "Параграф (большой)"
+msgstr "Paragraph (large)"
 
 #: .\apps\news\admin.py:171
+msgid "Заголовок 2 (маленький)"
+msgstr "Heading 2 (small)"
+
+#: .\apps\news\admin.py:172
+msgid "Заголовок 2 (средний)"
+msgstr "Heading 2 (medium)"
+
+#: .\apps\news\admin.py:173
+msgid "Заголовок 2 (большой)"
+msgstr "Heading 2 (large)"
+
+#: .\apps\news\admin.py:174
+msgid "Цвет: Основной"
+msgstr "Color: Primary"
+
+#: .\apps\news\admin.py:175
+msgid "Цвет: Дополнительный"
+msgstr "Color: Secondary"
+
+#: .\apps\news\admin.py:176
 msgid "Цвет: Акцент"
-msgstr ""
+msgstr "Color: Accent"
 
-#: .\apps\news\admin.py:210
-#, fuzzy
-#| msgid "Запомнить меня"
+#: .\apps\news\admin.py:236
 msgid "Предпросмотр изображения"
-msgstr "Remember me"
+msgstr "Image preview"
 
-#: .\apps\news\admin.py:217
+#: .\apps\news\admin.py:243
 msgid "Популярная"
-msgstr ""
+msgstr "Popular"
 
-#: .\apps\news\admin.py:222
-#, fuzzy
-#| msgid "Главная"
+#: .\apps\news\admin.py:248
 msgid "Активная"
-msgstr "Home"
+msgstr "Active"
 
-#: .\apps\news\admin.py:227
+#: .\apps\news\admin.py:253
 msgid "Обычная"
-msgstr ""
+msgstr "Regular"
 
-#: .\apps\news\admin.py:232
+#: .\apps\news\admin.py:258
 msgid "Новая"
-msgstr ""
+msgstr "New"
 
-#: .\apps\news\admin.py:235
+#: .\apps\news\admin.py:261
 msgid "Статус"
-msgstr ""
+msgstr "Status"
 
-#: .\apps\news\admin.py:262
-#, python-brace-format
-msgid "Счетчик просмотров сброшен для {0} новостей."
-msgstr ""
-
-#: .\apps\news\admin.py:264
+#: .\apps\news\admin.py:292
 msgid "Сбросить счетчик просмотров"
+msgstr "Reset view counter"
+
+#: .\apps\users\forms.py:20
+#, fuzzy
+#| msgid "Уведомления на email"
+msgid "Введите email"
+msgstr "Email notifications"
+
+#: .\apps\users\forms.py:23
+msgid "Введите действующий email адрес"
 msgstr ""
 
-#: .\apps\news\admin.py:284
-#, python-brace-format
-msgid "Основной язык скопирован во все переводы для {0} новостей"
+#: .\apps\users\forms.py:38
+msgid "Пользователь с таким email уже существует."
 msgstr ""
+
+#: .\apps\users\forms.py:50
+msgid "Расскажите о себе"
+msgstr ""
+
+#: .\apps\users\forms.py:53
+msgid "Кратко расскажите о себе (необязательно)"
+msgstr ""
+
+#: .\apps\users\forms.py:63
+msgid "Максимальный размер: 5MB"
+msgstr ""
+
+#: .\apps\users\forms.py:85
+msgid "Размер файла не должен превышать 5MB"
+msgstr ""
+
+#: .\apps\users\forms.py:96 .\apps\users\forms.py:100
+#: .\templates\registration\register.html:33
+msgid "Имя пользователя"
+msgstr "Username"
+
+#: .\apps\users\forms.py:106 .\apps\users\forms.py:109
+#: .\templates\registration\register.html:41
+msgid "Пароль"
+msgstr "Password"
+
+#: .\apps\users\forms.py:118
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Запомнить меня"
+msgstr "Change password"
+
+#: .\apps\users\forms.py:130
+#, fuzzy
+#| msgid "Имя пользователя"
+msgid "Введите имя пользователя"
+msgstr "Username"
+
+#: .\apps\users\forms.py:133
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Введите пароль"
+msgstr "Confirm password"
 
 #: .\apps\users\models.py:13
 msgid "О себе"
@@ -182,6 +219,71 @@ msgstr "User"
 #: .\apps\users\models.py:35
 msgid "Пользователи"
 msgstr "Users"
+
+#: .\apps\users\views.py:60
+#, python-brace-format
+msgid "Добро пожаловать, {0}!"
+msgstr ""
+
+#: .\apps\users\views.py:70
+msgid "Ваш аккаунт деактивирован"
+msgstr ""
+
+#: .\apps\users\views.py:75
+#, fuzzy
+#| msgid "Изображение профиля пользователя"
+msgid "Неверное имя пользователя или пароль"
+msgstr "User profile image"
+
+#: .\apps\users\views.py:83
+msgid "Вход в систему"
+msgstr "Log in"
+
+#: .\apps\users\views.py:110
+msgid "Регистрация успешна! Добро пожаловать!"
+msgstr ""
+
+#: .\apps\users\views.py:116
+#, fuzzy, python-brace-format
+#| msgid "Дата регистрации:"
+msgid "Ошибка при регистрации: {0}"
+msgstr "Registration date:"
+
+#: .\apps\users\views.py:131
+#, fuzzy
+#| msgid "Имя пользователя"
+msgid "Профиль пользователя"
+msgstr "Username"
+
+#: .\apps\users\views.py:163
+msgid "Профиль и аватар успешно обновлены!"
+msgstr ""
+
+#: .\apps\users\views.py:167
+#, python-brace-format
+msgid "Ошибка при загрузке аватара: {0}"
+msgstr ""
+
+#: .\apps\users\views.py:179
+msgid "Профиль успешно обновлен!"
+msgstr ""
+
+#: .\apps\users\views.py:206
+msgid "Аватар успешно удален"
+msgstr ""
+
+#: .\apps\users\views.py:210
+#, python-brace-format
+msgid "Ошибка при удалении аватара: {0}"
+msgstr ""
+
+#: .\apps\users\views.py:213
+msgid "У вас нет загруженного аватара"
+msgstr ""
+
+#: .\apps\users\views.py:235
+msgid "Ваш пароль успешно изменен!"
+msgstr ""
 
 #: .\templates\about.html:4 .\templates\about.html:9 .\templates\base.html:51
 #: .\templates\base.html:175
@@ -246,12 +348,16 @@ msgid "Связаться с нами"
 msgstr ""
 
 #: .\templates\base.html:8 .\templates\base.html:36
+#: .\templates\registration\logged_out.html:4
+#: .\templates\registration\register.html:4
+#, fuzzy
+#| msgid "The Future Prism Admin"
 msgid "The Future Prism"
-msgstr "The Future Prism"
+msgstr "The Future Prism Admin"
 
 #: .\templates\base.html:37
 msgid "THE FUTURE PRISM"
-msgstr "THE FUTURE PRISM"
+msgstr ""
 
 #: .\templates\base.html:43 .\templates\base.html:173
 msgid "Главная"
@@ -271,6 +377,7 @@ msgid "Поиск..."
 msgstr "Search..."
 
 #: .\templates\base.html:107 .\templates\base.html:183
+#: .\templates\registration\logged_out.html:4
 msgid "Выход"
 msgstr "Logout"
 
@@ -287,10 +394,8 @@ msgid "Закрыть"
 msgstr "Close"
 
 #: .\templates\base.html:200
-#, fuzzy
-#| msgid "&copy; 2025 The Future Prism. Все права защищены."
 msgid "Все права защищены."
-msgstr "&copy; 2025 The Future Prism. All rights reserved."
+msgstr "All rights reserved."
 
 #: .\templates\contact.html:13
 msgid ""
@@ -310,11 +415,11 @@ msgid "Адрес"
 msgstr ""
 
 #: .\templates\contact.html:25
-msgid "ул. Технологическая, 42"
+msgid "Street 8"
 msgstr ""
 
 #: .\templates\contact.html:25
-msgid "Москва, Россия"
+msgid "London, United Kingdom"
 msgstr ""
 
 #: .\templates\contact.html:29
@@ -338,166 +443,116 @@ msgstr ""
 
 #: .\templates\news_detail.html:10
 msgid "Опубликовано"
-msgstr ""
+msgstr "Published"
 
 #: .\templates\news_detail.html:10
 msgid "Категория"
-msgstr ""
+msgstr "Category"
 
 #: .\templates\news_detail.html:31
 msgid "Поделиться"
-msgstr ""
+msgstr "Share"
 
 #: .\templates\news_detail.html:45
-#, fuzzy
-#| msgid "Перейти к новости"
 msgid "Похожие новости"
-msgstr "Go to news"
+msgstr "Related news"
 
 #: .\templates\news_detail.html:66
-#, fuzzy
-#| msgid "Перейти к новости"
 msgid "← Назад к новостям"
-msgstr "Go to news"
+msgstr "← Back to news"
 
 #: .\templates\news_list.html:13
 #, python-format
 msgid "Результаты поиска для \"%(query)s\""
-msgstr ""
+msgstr "Search results for \"%(query)s\""
 
 #: .\templates\news_list.html:15
 #, python-format
 msgid "По запросу \"%(query)s\" ничего не найдено"
-msgstr ""
+msgstr "No results found for \"%(query)s\""
 
 #: .\templates\news_list.html:25
-msgid "ВЫБОР КАТЕГОРИИ"
-msgstr ""
+msgid "Выбор категории"
+msgstr "Category Selection"
 
 #: .\templates\news_list.html:32
 msgid "Все категории"
-msgstr ""
+msgstr "All Categories"
 
 #: .\templates\news_list.html:40
 msgid "Категории не найдены"
-msgstr ""
+msgstr "Categories not found"
 
 #: .\templates\news_list.html:76
 msgid "По вашему запросу ничего не найдено"
-msgstr ""
+msgstr "No results found for your query"
 
 #: .\templates\news_list.html:78
 msgid "Сбросить поиск"
-msgstr ""
+msgstr "Reset search"
 
 #: .\templates\news_list.html:81
 msgid "Новостей пока нет"
-msgstr ""
+msgstr "No news yet"
 
 #: .\templates\news_list.html:93
 msgid "Предыдущая"
-msgstr ""
+msgstr "Previous"
 
 #: .\templates\news_list.html:100
 msgid "Следующая"
-msgstr ""
+msgstr "Next"
 
-#~ msgid "Введите email"
-#~ msgstr "Enter email"
+#: .\templates\registration\logged_out.html:9
+msgid "Выход из системы"
+msgstr "Logged out"
 
-#~ msgid "Введите действующий email адрес"
-#~ msgstr "Enter a valid email address"
+#: .\templates\registration\logged_out.html:10
+msgid "Вы успешно вышли из своей учетной записи"
+msgstr "You have successfully logged out"
 
-#~ msgid "Пользователь с таким email уже существует."
-#~ msgstr "A user with this email already exists."
+#: .\templates\registration\logged_out.html:14
+msgid "Войти снова"
+msgstr "Log in again"
 
-#~ msgid "Расскажите о себе"
-#~ msgstr "Tell us about yourself"
+#: .\templates\registration\logged_out.html:17
+msgid "Вернуться на главную"
+msgstr "Return to home page"
 
-#~ msgid "Кратко расскажите о себе (необязательно)"
-#~ msgstr "Briefly tell us about yourself (optional)"
+#: .\templates\registration\register.html:4
+#: .\templates\registration\register.html:10
+msgid "Регистрация"
+msgstr "Registration"
 
-#~ msgid "Максимальный размер: 5MB"
-#~ msgstr "Maximum size: 5MB"
+#: .\templates\registration\register.html:12
+msgid "Создайте аккаунт для доступа ко всем возможностям"
+msgstr "Create an account to access all features"
 
-#~ msgid "Русский"
-#~ msgstr "Russian"
+#: .\templates\registration\register.html:37
+msgid "Email"
+msgstr "Email"
 
-#~ msgid "Английский"
-#~ msgstr "English"
+#: .\templates\registration\register.html:45
+msgid "Повторите пароль"
+msgstr "Confirm password"
 
-#~ msgid "Выберите предпочитаемый язык интерфейса"
-#~ msgstr "Choose your preferred interface language"
+#: .\templates\registration\register.html:51
+msgid "Зарегистрироваться"
+msgstr "Register"
 
-#~ msgid "Размер файла не должен превышать 5MB"
-#~ msgstr "File size should not exceed 5MB"
+#: .\templates\registration\register.html:60
+msgid "Уже есть аккаунт?"
+msgstr "Already have an account?"
 
-#~ msgid "Имя пользователя"
-#~ msgstr "Username"
+#: .\templates\registration\register.html:62
+msgid "Войти"
+msgstr "Log in"
 
-#~ msgid "Пароль"
-#~ msgstr "Password"
+#~ msgid "Войдите в свой аккаунт для доступа к полному функционалу"
+#~ msgstr "Log in to your account to access full functionality"
 
-#~ msgid "Запомнить меня"
-#~ msgstr "Remember me"
-
-#~ msgid "Введите имя пользователя"
-#~ msgstr "Enter username"
-
-#~ msgid "Введите пароль"
-#~ msgstr "Enter password"
-
-#~ msgid "Предпочитаемый язык"
-#~ msgstr "Preferred language"
-
-#~ msgid "Выберите язык интерфейса"
-#~ msgstr "Choose interface language"
-
-#, fuzzy
-#~| msgid "Введите имя пользователя"
-#~ msgid "Неверное имя пользователя или пароль"
-#~ msgstr "Enter username"
-
-#, fuzzy, python-brace-format
-#~| msgid "Дата регистрации:"
-#~ msgid "Ошибка при регистрации: {0}"
-#~ msgstr "Registration date:"
-
-#, fuzzy
-#~| msgid "Имя пользователя"
-#~ msgid "Профиль пользователя"
-#~ msgstr "Username"
-
-#, fuzzy
-#~| msgid "Редактировать профиль"
-#~ msgid "Редактирование профиля"
-#~ msgstr "Edit profile"
-
-#, fuzzy
-#~| msgid "Перейти в профиль"
-#~ msgid "Аватар профиля"
-#~ msgstr "Go to profile"
-
-#~ msgid "Изменить пароль"
-#~ msgstr "Change password"
-
-#, fuzzy
-#~| msgid "Изменить пароль"
-#~ msgid "Удалить аватар"
-#~ msgstr "Change password"
-
-#, fuzzy
-#~| msgid "Введите пароль"
-#~ msgid "Забыли пароль?"
-#~ msgstr "Enter password"
-
-#, fuzzy
-#~| msgid "Дата регистрации:"
-#~ msgid "Зарегистрироваться"
-#~ msgstr "Registration date:"
-
-#~ msgid "Профиль"
-#~ msgstr "Profile"
+#~ msgid "Нет аккаунта?"
+#~ msgstr "Don't have an account?"
 
 #~ msgid "Личный кабинет"
 #~ msgstr "Personal account"
@@ -505,14 +560,17 @@ msgstr ""
 #~ msgid "Email:"
 #~ msgstr "Email:"
 
-#~ msgid "Дата регистрации:"
-#~ msgstr "Registration date:"
-
 #~ msgid "О себе:"
 #~ msgstr "About me:"
 
 #~ msgid "Предпочитаемый язык:"
 #~ msgstr "Preferred language:"
+
+#~ msgid "Русский"
+#~ msgstr "Russian"
+
+#~ msgid "Английский"
+#~ msgstr "English"
 
 #~ msgid "Редактировать профиль"
 #~ msgstr "Edit profile"
@@ -540,6 +598,9 @@ msgstr ""
 
 #~ msgid "Последняя активность"
 #~ msgstr "Recent activity"
+
+#~ msgid "Перейти к новости"
+#~ msgstr "Go to news"
 
 #~ msgid "Пока нет активности"
 #~ msgstr "No activity yet"

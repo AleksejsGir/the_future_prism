@@ -1,0 +1,376 @@
+# English translation for The Future Prism.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-03-05 14:30+0000\n"
+"PO-Revision-Date: 2025-03-05 15:30+0000\n"
+"Last-Translator: ADMIN <admin@thefutureprism.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\apps\news\admin.py:12
+msgid "The Future Prism Admin"
+msgstr "The Future Prism Admin"
+
+#: .\apps\news\admin.py:52
+msgid "Количество новостей"
+msgstr "Number of news"
+
+#: .\apps\news\admin.py:74 .\apps\news\admin.py:283
+msgid "Статус переводов"
+msgstr "Translation status"
+
+#: .\apps\news\admin.py:96 .\apps\news\admin.py:316
+msgid "Копировать основной язык во все переводы"
+msgstr "Copy main language to all translations"
+
+#: .\apps\news\admin.py:129
+msgid "Основная информация"
+msgstr "Basic information"
+
+#: .\apps\news\admin.py:131
+msgid "Поля \"title\" имеют переводимые версии для каждого языка"
+msgstr "\"Title\" fields have translatable versions for each language"
+
+#: .\apps\news\admin.py:133
+msgid "Содержимое"
+msgstr "Content"
+
+#: .\apps\news\admin.py:136
+msgid ""
+"Содержимое статьи доступно для перевода на все поддерживаемые языки. "
+"Используйте визуальный редактор для форматирования."
+msgstr ""
+"Article content is available for translation to all supported languages. "
+"Use the visual editor for formatting."
+
+#: .\apps\news\admin.py:138
+msgid "Изображение"
+msgstr "Image"
+
+#: .\apps\news\admin.py:140
+msgid "Загрузите изображение для новости"
+msgstr "Upload an image for the news"
+
+#: .\apps\news\admin.py:142
+msgid "Статистика"
+msgstr "Statistics"
+
+#: .\apps\news\admin.py:145
+msgid "Информация о просмотрах новости"
+msgstr "Information about news views"
+
+#: .\apps\news\admin.py:168
+msgid "Параграф (маленький)"
+msgstr "Paragraph (small)"
+
+#: .\apps\news\admin.py:169
+msgid "Параграф (обычный)"
+msgstr "Paragraph (regular)"
+
+#: .\apps\news\admin.py:170
+msgid "Параграф (большой)"
+msgstr "Paragraph (large)"
+
+#: .\apps\news\admin.py:171
+msgid "Заголовок 2 (маленький)"
+msgstr "Heading 2 (small)"
+
+#: .\apps\news\admin.py:172
+msgid "Заголовок 2 (средний)"
+msgstr "Heading 2 (medium)"
+
+#: .\apps\news\admin.py:173
+msgid "Заголовок 2 (большой)"
+msgstr "Heading 2 (large)"
+
+#: .\apps\news\admin.py:174
+msgid "Цвет: Основной"
+msgstr "Color: Primary"
+
+#: .\apps\news\admin.py:175
+msgid "Цвет: Дополнительный"
+msgstr "Color: Secondary"
+
+#: .\apps\news\admin.py:176
+msgid "Цвет: Акцент"
+msgstr "Color: Accent"
+
+#: .\apps\news\admin.py:236
+msgid "Предпросмотр изображения"
+msgstr "Image preview"
+
+#: .\apps\news\admin.py:243
+msgid "Популярная"
+msgstr "Popular"
+
+#: .\apps\news\admin.py:248
+msgid "Активная"
+msgstr "Active"
+
+#: .\apps\news\admin.py:253
+msgid "Обычная"
+msgstr "Regular"
+
+#: .\apps\news\admin.py:258
+msgid "Новая"
+msgstr "New"
+
+#: .\apps\news\admin.py:261
+msgid "Статус"
+msgstr "Status"
+
+#: .\apps\news\admin.py:292
+msgid "Сбросить счетчик просмотров"
+msgstr "Reset view counter"
+
+#: .\templates\news_detail.html:10
+msgid "Опубликовано"
+msgstr "Published"
+
+#: .\templates\news_detail.html:10
+msgid "Категория"
+msgstr "Category"
+
+#: .\templates\news_detail.html:31
+msgid "Поделиться"
+msgstr "Share"
+
+#: .\templates\news_detail.html:45
+msgid "Похожие новости"
+msgstr "Related news"
+
+#: .\templates\news_detail.html:66
+msgid "← Назад к новостям"
+msgstr "← Back to news"
+
+#: .\templates\news_list.html:13
+#, python-format
+msgid "Результаты поиска для \"%(query)s\""
+msgstr "Search results for \"%(query)s\""
+
+#: .\templates\news_list.html:15
+#, python-format
+msgid "По запросу \"%(query)s\" ничего не найдено"
+msgstr "No results found for \"%(query)s\""
+
+#: .\templates\news_list.html:25
+msgid "Выбор категории"
+msgstr "Category Selection"
+
+#: .\templates\news_list.html:32
+msgid "Все категории"
+msgstr "All Categories"
+
+#: .\templates\news_list.html:40
+msgid "Категории не найдены"
+msgstr "Categories not found"
+
+#: .\templates\news_list.html:76
+msgid "По вашему запросу ничего не найдено"
+msgstr "No results found for your query"
+
+#: .\templates\news_list.html:78
+msgid "Сбросить поиск"
+msgstr "Reset search"
+
+#: .\templates\news_list.html:81
+msgid "Новостей пока нет"
+msgstr "No news yet"
+
+#: .\templates\news_list.html:93
+msgid "Предыдущая"
+msgstr "Previous"
+
+#: .\templates\news_list.html:100
+msgid "Следующая"
+msgstr "Next"
+
+#: .\templates\registration\login.html:4
+#: .\templates\registration\login.html:11
+msgid "Вход в систему"
+msgstr "Log in"
+
+#: .\templates\registration\login.html:13
+msgid "Войдите в свой аккаунт для доступа к полному функционалу"
+msgstr "Log in to your account to access full functionality"
+
+#: .\templates\registration\login.html:87
+msgid "Войти"
+msgstr "Log in"
+
+#: .\templates\registration\login.html:96
+msgid "Нет аккаунта?"
+msgstr "Don't have an account?"
+
+#: .\templates\registration\login.html:98
+msgid "Зарегистрироваться"
+msgstr "Register"
+
+#: .\templates\registration\logged_out.html:3
+msgid "Выход"
+msgstr "Logout"
+
+#: .\templates\registration\logged_out.html:9
+msgid "Выход из системы"
+msgstr "Logged out"
+
+#: .\templates\registration\logged_out.html:10
+msgid "Вы успешно вышли из своей учетной записи"
+msgstr "You have successfully logged out"
+
+#: .\templates\registration\logged_out.html:14
+msgid "Войти снова"
+msgstr "Log in again"
+
+#: .\templates\registration\logged_out.html:17
+msgid "Вернуться на главную"
+msgstr "Return to home page"
+
+#: .\templates\registration\register.html:3
+#: .\templates\registration\register.html:12
+msgid "Регистрация"
+msgstr "Registration"
+
+#: .\templates\registration\register.html:14
+msgid "Создайте аккаунт для доступа ко всем возможностям"
+msgstr "Create an account to access all features"
+
+#: .\templates\registration\register.html:33
+msgid "Имя пользователя"
+msgstr "Username"
+
+#: .\templates\registration\register.html:37
+msgid "Email"
+msgstr "Email"
+
+#: .\templates\registration\register.html:41
+msgid "Пароль"
+msgstr "Password"
+
+#: .\templates\registration\register.html:45
+msgid "Повторите пароль"
+msgstr "Confirm password"
+
+#: .\templates\registration\register.html:52
+msgid "Зарегистрироваться"
+msgstr "Sign up"
+
+#: .\templates\registration\register.html:61
+msgid "Уже есть аккаунт?"
+msgstr "Already have an account?"
+
+#: .\templates\registration\register.html:63
+msgid "Войти"
+msgstr "Log in"
+
+# Сохраняем существующие переводы
+msgid "О себе"
+msgstr "About me"
+
+msgid "Краткая информация о пользователе"
+msgstr "Brief information about the user"
+
+msgid "Аватар"
+msgstr "Avatar"
+
+msgid "Изображение профиля пользователя"
+msgstr "User profile image"
+
+msgid "Уведомления на email"
+msgstr "Email notifications"
+
+msgid "Получать уведомления на email"
+msgstr "Receive email notifications"
+
+msgid "Пользователь"
+msgstr "User"
+
+msgid "Пользователи"
+msgstr "Users"
+
+msgid "О проекте"
+msgstr "About"
+
+msgid "Главная"
+msgstr "Home"
+
+msgid "Новости"
+msgstr "News"
+
+msgid "Контакты"
+msgstr "Contacts"
+
+msgid "Поиск..."
+msgstr "Search..."
+
+msgid "Перейти в профиль"
+msgstr "Go to profile"
+
+msgid "Закрыть"
+msgstr "Close"
+
+msgid "Все права защищены."
+msgstr "All rights reserved."
+
+msgid "Личный кабинет"
+msgstr "Personal account"
+
+msgid "Email:"
+msgstr "Email:"
+
+msgid "Дата регистрации:"
+msgstr "Registration date:"
+
+msgid "О себе:"
+msgstr "About me:"
+
+msgid "Предпочитаемый язык:"
+msgstr "Preferred language:"
+
+msgid "Русский"
+msgstr "Russian"
+
+msgid "Английский"
+msgstr "English"
+
+msgid "Редактировать профиль"
+msgstr "Edit profile"
+
+msgid "Управление безопасностью"
+msgstr "Security management"
+
+msgid "Установлен"
+msgstr "Set"
+
+msgid "Не установлен"
+msgstr "Not set"
+
+msgid "Для безопасности аккаунта регулярно меняйте пароль"
+msgstr "Change your password regularly for account security"
+
+msgid "Изменить пароль"
+msgstr "Change password"
+
+msgid "Комментарии"
+msgstr "Comments"
+
+msgid "Избранные статьи"
+msgstr "Favorite articles"
+
+msgid "Последнее посещение"
+msgstr "Last visit"
+
+msgid "Последняя активность"
+msgstr "Recent activity"
+
+msgid "Перейти к новости"
+msgstr "Go to news"
+
+msgid "Пока нет активности"
+msgstr "No activity yet"
