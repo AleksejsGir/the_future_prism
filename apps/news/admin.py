@@ -5,7 +5,7 @@ from django.db.models import Count
 from .models import Category, News
 from tinymce.widgets import TinyMCE
 from django.db import models
-from django.utils.translation import gettext_lazy as _  # Важно использовать этот импорт правильно
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TranslationAdmin
 from django.conf import settings
 
@@ -15,8 +15,9 @@ admin.site.site_header = _("The Future Prism Admin")
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
     """Административный интерфейс для модели Category с поддержкой переводов."""
-    list_display = ('id', 'name', 'description', 'news_count', 'translation_status')
+    list_display = ('id', 'name', 'icon_display', 'description', 'news_count', 'translation_status')
     search_fields = ('name', 'description')
+    fields = ['name', 'description', 'icon']  # Добавляем поле icon
 
     # Настройка для кастомных табов
     class Media:
@@ -29,6 +30,12 @@ class CategoryAdmin(TranslationAdmin):
                 'css/admin/custom-tabs.css',
             ),
         }
+
+    def icon_display(self, obj):
+        """Отображение иконки в списке категорий"""
+        return obj.icon if obj.icon else '-'
+    icon_display.short_description = 'Иконка'
+
 
     def get_queryset(self, request):
         """Оптимизируем запрос с аннотацией для подсчета новостей."""
@@ -87,6 +94,8 @@ class CategoryAdmin(TranslationAdmin):
         self.message_user(request, message)
 
     copy_main_language_to_all.short_description = _("Копировать основной язык во все переводы")
+
+
 
 
 @admin.register(News)

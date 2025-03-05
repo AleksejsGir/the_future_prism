@@ -3,7 +3,8 @@ from django.utils import timezone
 
 class Category(models.Model):
     """
-    Модель категории с поддержкой мультиязычности через django-modeltranslation.
+    Модель категории с поддержкой мультиязычности через django-modeltranslation
+    и добавлением Unicode-иконок.
     """
     name = models.CharField(
         max_length=255,
@@ -16,6 +17,14 @@ class Category(models.Model):
         null=True,
         help_text="Описание категории",
         verbose_name="Описание категории"
+    )
+    # Новое поле для Unicode-иконки
+    icon = models.CharField(
+        max_length=10,  # Достаточно для emoji
+        blank=True,
+        null=True,
+        help_text="Unicode-иконка для категории",
+        verbose_name="Иконка"
     )
 
     def __str__(self):
@@ -89,3 +98,8 @@ class News(models.Model):
     class Meta:
         verbose_name = "Новость"
         verbose_name_plural = "Новости"
+
+# <!-- AI-TODO -->
+# 1. Создать миграции после изменения модели
+# 2. Обновить административную панель для отображения нового поля
+# 3. Протестировать создание и редактирование категорий с иконками

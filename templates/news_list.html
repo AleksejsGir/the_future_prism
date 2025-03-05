@@ -28,13 +28,13 @@
     <!-- Фильтр категорий -->
     <div class="category-filter flex flex-wrap justify-center gap-2 md:gap-4 animate-fade-in-up delay-300">
       <a href="{% url 'news_list' %}{% if search_query %}?search={{ search_query }}{% endif %}"
-         class="category-button rounded-[12px] md:rounded-[12px] {% if not request.GET.category %}bg-opacity-80{% endif %}">
-        {% trans "Все категории" %}
+         class="category-button rounded-[12px] md:rounded-[12px] flex items-center gap-2 {% if not request.GET.category %}bg-opacity-80{% endif %}">
+        🌐 {% trans "Все категории" %}
       </a>
       {% for category in categories %}
         <a href="?{% if search_query %}search={{ search_query }}&{% endif %}category={{ category.id }}"
-           class="category-button text-sm md:text-base {% if request.GET.category == category.id|stringformat:'s' %}bg-opacity-80{% endif %}">
-          {{ category.name }}
+           class="category-button text-sm md:text-base flex items-center gap-2 {% if request.GET.category == category.id|stringformat:'s' %}bg-opacity-80{% endif %}">
+          {{ category.icon|default:'🏷️' }} {{ category.name }}
         </a>
       {% empty %}
         <p class="text-center text-gray-400">{% trans "Категории не найдены" %}</p>
@@ -66,7 +66,7 @@
         <!-- Если нужно отображать категорию внизу карточки, можно оставить: -->
         {% if news.category %}
           <span class="text-sm text-gray-400 block mt-4">
-            {{ news.category.name }}
+            {{ news.category.icon|default:'🏷️' }} {{ news.category.name }}
           </span>
         {% endif %}
       </a>
