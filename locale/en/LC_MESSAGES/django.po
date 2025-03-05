@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-04 14:17+0000\n"
+"POT-Creation-Date: 2025-03-05 09:36+0000\n"
 "PO-Revision-Date: 2025-03-03 HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English\n"
@@ -13,9 +13,142 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\apps\news\admin.py:42
+#: .\apps\news\admin.py:11
+#, fuzzy
+#| msgid "The Future Prism"
+msgid "The Future Prism Admin"
+msgstr "The Future Prism"
+
+#: .\apps\news\admin.py:47
 msgid "Количество новостей"
 msgstr "Number of news"
+
+#: .\apps\news\admin.py:69 .\apps\news\admin.py:257
+msgid "Статус переводов"
+msgstr ""
+
+#: .\apps\news\admin.py:88
+#, python-brace-format
+msgid "Основной язык скопирован во все переводы для {0} категорий"
+msgstr ""
+
+#: .\apps\news\admin.py:90 .\apps\news\admin.py:286
+msgid "Копировать основной язык во все переводы"
+msgstr ""
+
+#: .\apps\news\admin.py:124
+msgid "Основная информация"
+msgstr ""
+
+#: .\apps\news\admin.py:126
+msgid "Поля \"title\" имеют переводимые версии для каждого языка"
+msgstr ""
+
+#: .\apps\news\admin.py:128
+msgid "Содержимое"
+msgstr ""
+
+#: .\apps\news\admin.py:131
+msgid ""
+"Содержимое статьи доступно для перевода на все поддерживаемые языки. "
+"Используйте визуальный редактор для форматирования."
+msgstr ""
+
+#: .\apps\news\admin.py:133
+msgid "Изображение"
+msgstr ""
+
+#: .\apps\news\admin.py:135
+msgid "Загрузите изображение для новости"
+msgstr ""
+
+#: .\apps\news\admin.py:137
+msgid "Статистика"
+msgstr ""
+
+#: .\apps\news\admin.py:140
+#, fuzzy
+#| msgid "Краткая информация о пользователе"
+msgid "Информация о просмотрах новости"
+msgstr "Brief information about the user"
+
+#: .\apps\news\admin.py:163
+msgid "Параграф (маленький)"
+msgstr ""
+
+#: .\apps\news\admin.py:164
+msgid "Параграф (обычный)"
+msgstr ""
+
+#: .\apps\news\admin.py:165
+msgid "Параграф (большой)"
+msgstr ""
+
+#: .\apps\news\admin.py:166
+msgid "Заголовок 2 (маленький)"
+msgstr ""
+
+#: .\apps\news\admin.py:167
+msgid "Заголовок 2 (средний)"
+msgstr ""
+
+#: .\apps\news\admin.py:168
+msgid "Заголовок 2 (большой)"
+msgstr ""
+
+#: .\apps\news\admin.py:169
+msgid "Цвет: Основной"
+msgstr ""
+
+#: .\apps\news\admin.py:170
+msgid "Цвет: Дополнительный"
+msgstr ""
+
+#: .\apps\news\admin.py:171
+msgid "Цвет: Акцент"
+msgstr ""
+
+#: .\apps\news\admin.py:210
+#, fuzzy
+#| msgid "Запомнить меня"
+msgid "Предпросмотр изображения"
+msgstr "Remember me"
+
+#: .\apps\news\admin.py:217
+msgid "Популярная"
+msgstr ""
+
+#: .\apps\news\admin.py:222
+#, fuzzy
+#| msgid "Главная"
+msgid "Активная"
+msgstr "Home"
+
+#: .\apps\news\admin.py:227
+msgid "Обычная"
+msgstr ""
+
+#: .\apps\news\admin.py:232
+msgid "Новая"
+msgstr ""
+
+#: .\apps\news\admin.py:235
+msgid "Статус"
+msgstr ""
+
+#: .\apps\news\admin.py:262
+#, python-brace-format
+msgid "Счетчик просмотров сброшен для {0} новостей."
+msgstr ""
+
+#: .\apps\news\admin.py:264
+msgid "Сбросить счетчик просмотров"
+msgstr ""
+
+#: .\apps\news\admin.py:284
+#, python-brace-format
+msgid "Основной язык скопирован во все переводы для {0} новостей"
+msgstr ""
 
 #: .\apps\users\models.py:13
 msgid "О себе"
@@ -347,11 +480,6 @@ msgstr ""
 
 #~ msgid "Изменить пароль"
 #~ msgstr "Change password"
-
-#, fuzzy
-#~| msgid "Запомнить меня"
-#~ msgid "Сохранить изменения"
-#~ msgstr "Remember me"
 
 #, fuzzy
 #~| msgid "Изменить пароль"

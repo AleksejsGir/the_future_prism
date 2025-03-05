@@ -1,0 +1,83 @@
+/* static/css/admin/translation-tabs.css */
+
+/* Улучшение стилей для вкладок переводов */
+.ui-tabs {
+    padding: 0;
+    border: none !important;
+    margin-bottom: 20px !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+    background: var(--admin-dark-bg, #2B2B36) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--admin-border-color, #444) !important;
+    padding: 5px 5px 0 !important;
+}
+
+.ui-tabs .ui-tabs-nav li {
+    margin: 0 4px 0 0 !important;
+    border-radius: 6px 6px 0 0 !important;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    padding: 8px 16px !important;
+    font-weight: bold !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+/* Стиль неактивной вкладки */
+.ui-tabs .ui-tabs-nav li.ui-state-default {
+    background: rgba(128, 128, 128, 0.1) !important;
+    border: 1px solid var(--admin-border-color, #444) !important;
+}
+
+/* Активная вкладка */
+.ui-tabs .ui-tabs-nav li.ui-state-active {
+    background: linear-gradient(45deg, var(--primary-color, #4FD6FF), var(--secondary-color, #FF78FF)) !important;
+    border: 1px solid var(--primary-color, #4FD6FF) !important;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-state-active a {
+    color: white !important;
+}
+
+/* Ховер по вкладке */
+.ui-tabs .ui-tabs-nav li:not(.ui-state-active):hover {
+    background: rgba(79, 214, 255, 0.2) !important;
+}
+
+/* Контейнер содержимого вкладки */
+.ui-tabs .ui-tabs-panel {
+    padding: 16px !important;
+    background: rgba(0, 0, 0, 0.1) !important;
+    border: 1px solid var(--admin-border-color, #444) !important;
+    border-radius: 0 0 8px 8px !important;
+}
+
+/* Добавляем флаги стран к вкладкам */
+.ui-tabs .ui-tabs-nav li a[href="#id_name_ru-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href="#id_title_ru-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href="#id_content_ru-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href*="_ru-tab"]::before {
+    content: "🇷🇺 ";
+}
+
+.ui-tabs .ui-tabs-nav li a[href="#id_name_en-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href="#id_title_en-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href="#id_content_en-tab"]::before,
+.ui-tabs .ui-tabs-nav li a[href*="_en-tab"]::before {
+    content: "🇬🇧 ";
+}
+
+/* Индикатор заполненности перевода */
+.empty-translation {
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+.partial-translation {
+    background: rgba(255, 165, 0, 0.1) !important;
+}
+
+.complete-translation {
+    background: rgba(0, 255, 0, 0.1) !important;
+}
