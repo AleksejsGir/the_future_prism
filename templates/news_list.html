@@ -22,18 +22,18 @@
   <div class="category-section mb-8">
     <!-- Заголовок "Выбор категории" -->
     <div class="category-title-wrapper text-center mb-4">
-      <h2 class="category-title text-3xl font-bold">{% trans "ВЫБОР КАТЕГОРИИ" %}</h2>
+      <h2 class="category-title">{% trans "Выбор категории" %}</h2>
     </div>
 
     <!-- Фильтр категорий -->
-    <div class="category-filter flex flex-wrap justify-center gap-2 md:gap-4 animate-fade-in-up delay-300">
+    <div class="category-filter flex flex-wrap justify-center gap-3 md:gap-4">
       <a href="{% url 'news_list' %}{% if search_query %}?search={{ search_query }}{% endif %}"
-         class="category-button rounded-[12px] md:rounded-[12px] flex items-center gap-2 {% if not request.GET.category %}bg-opacity-80{% endif %}">
+         class="category-button {% if not request.GET.category %}active-category{% endif %}">
         🌐 {% trans "Все категории" %}
       </a>
       {% for category in categories %}
         <a href="?{% if search_query %}search={{ search_query }}&{% endif %}category={{ category.id }}"
-           class="category-button text-sm md:text-base flex items-center gap-2 {% if request.GET.category == category.id|stringformat:'s' %}bg-opacity-80{% endif %}">
+           class="category-button {% if request.GET.category == category.id|stringformat:'s' %}active-category{% endif %}">
           {{ category.icon|default:'🏷️' }} {{ category.name }}
         </a>
       {% empty %}
@@ -112,7 +112,7 @@
       setTimeout(() => {
         categoryFilter.style.opacity = '1';
         categoryFilter.style.transform = 'translateY(0)';
-      }, 500);
+      }, 300);
     }
 
     // Исправляем отображение HTML-символов

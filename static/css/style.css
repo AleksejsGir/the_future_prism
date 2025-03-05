@@ -30,6 +30,17 @@
   animation: neonPulse 2s ease-in-out infinite alternate;
 }
 
+/* Декоративная линия под заголовком категорий */
+.category-title:after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 80%;
+  margin: 0.7rem auto 1.5rem;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 120, 255, 0.5);
+}
 
 /* Стили для блока категории с фоновым изображением */
 .category-section {
@@ -38,20 +49,61 @@
   background: url("../images/category-bg8.jpg") no-repeat center center;
   background-size: cover;
 
-  /* Чтобы текст был читаем, возможно стоит добавить полупрозрачную подложку */
-  /* Пример (если нужно затемнение):*/
-  background-color: rgba(0, 0, 0, 0.5);
+  /* Затемнение фона для лучшего контраста */
+  background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: darken;
 
-
-  /* Скругление углов, отступы, тени  */
+  /* Скругление углов, отступы, тени */
   border-radius: 12px; /* Скругление углов */
   padding: 40px 20px; /* Внутренние отступы */
-  margin-bottom: 2rem; /* Отступ снизу */
-  box-shadow: 0 0 20px rgba(79, 214, 255, 0.2); /* Тень */
+  margin: 2rem 0 3rem 0; /* Увеличиваем отступы сверху и снизу */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.3); /* Тень */
+
+  /* Неоновая рамка */
+  border: 1px solid rgba(255, 120, 255, 0.3);
 
   /* Анимация появления (если нужна) */
   animation: fadeInUp 1s ease-in-out;
+}
+
+/* Стиль для категорий-кнопок */
+.category-button {
+  background-color: rgba(79, 214, 255, 0.1); /* Полупрозрачный фон */
+  border: 1px solid rgba(79, 214, 255, 0.3); /* Тонкая неоновая рамка */
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+/* Hover-эффект для кнопок категорий */
+.category-button:hover {
+  background-color: rgba(255, 120, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 120, 255, 0.3);
+  border-color: rgba(255, 120, 255, 0.5);
+  animation: buttonGlow 1.5s infinite alternate;
+}
+
+/* Активная кнопка категории */
+.category-filter a.active-category {
+  background-color: rgba(255, 120, 255, 0.3);
+  border-color: rgba(255, 120, 255, 0.8);
+  box-shadow: 0 0 15px rgba(255, 120, 255, 0.4);
+}
+
+/* Анимация появления блока категорий */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Базовые стили, которые не относятся к компонентам */
