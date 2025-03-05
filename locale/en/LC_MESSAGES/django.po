@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 23:02+0000\n"
+"POT-Creation-Date: 2025-03-05 23:17+0000\n"
 "PO-Revision-Date: 2025-03-05 15:30+0000\n"
 "Last-Translator: ADMIN <admin@thefutureprism.com>\n"
 "Language-Team: English\n"
@@ -196,7 +196,7 @@ msgid "Краткая информация о пользователе"
 msgstr "Brief information about the user"
 
 #: .\apps\users\models.py:20 .\templates\base.html:101
-#: .\templates\base.html:127
+#: .\templates\base.html:127 .\templates\registration\profile.html:28
 msgid "Аватар"
 msgstr "Avatar"
 
@@ -348,7 +348,10 @@ msgid "Связаться с нами"
 msgstr ""
 
 #: .\templates\base.html:8 .\templates\base.html:36
+#: .\templates\registration\edit_profile.html:5
 #: .\templates\registration\logged_out.html:4
+#: .\templates\registration\password_change.html:4
+#: .\templates\registration\profile.html:4
 #: .\templates\registration\register.html:4
 #, fuzzy
 #| msgid "The Future Prism Admin"
@@ -503,6 +506,47 @@ msgstr "Previous"
 msgid "Следующая"
 msgstr "Next"
 
+#: .\templates\registration\edit_profile.html:5
+#: .\templates\registration\edit_profile.html:18
+#, fuzzy
+#| msgid "Редактировать профиль"
+msgid "Редактирование профиля"
+msgstr "Edit profile"
+
+#: .\templates\registration\edit_profile.html:35
+#, fuzzy
+#| msgid "Перейти в профиль"
+msgid "Аватар профиля"
+msgstr "Go to profile"
+
+#: .\templates\registration\edit_profile.html:40
+#: .\templates\registration\edit_profile.html:42
+msgid "Текущий аватар"
+msgstr ""
+
+#: .\templates\registration\edit_profile.html:80
+#: .\templates\registration\password_change.html:80
+#: .\templates\registration\profile.html:62
+msgid "Изменить пароль"
+msgstr "Change password"
+
+#: .\templates\registration\edit_profile.html:86
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Сохранить изменения"
+msgstr "Change password"
+
+#: .\templates\registration\edit_profile.html:87
+#: .\templates\registration\password_change.html:81
+msgid "Отмена"
+msgstr ""
+
+#: .\templates\registration\edit_profile.html:91
+#, fuzzy
+#| msgid "Уже есть аккаунт?"
+msgid "Удалить аватар"
+msgstr "Already have an account?"
+
 #: .\templates\registration\logged_out.html:9
 msgid "Выход из системы"
 msgstr "Logged out"
@@ -518,6 +562,105 @@ msgstr "Log in again"
 #: .\templates\registration\logged_out.html:17
 msgid "Вернуться на главную"
 msgstr "Return to home page"
+
+#: .\templates\registration\password_change.html:4
+#: .\templates\registration\password_change.html:11
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Изменение пароля"
+msgstr "Change password"
+
+#: .\templates\registration\password_change.html:36
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Текущий пароль"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_change.html:50
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Новый пароль"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_change.html:60
+msgid "Пароль должен содержать минимум 8 символов и не быть слишком простым"
+msgstr ""
+
+#: .\templates\registration\password_change.html:67
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Подтверждение нового пароля"
+msgstr "Confirm password"
+
+#: .\templates\registration\profile.html:4
+#, fuzzy
+#| msgid "Перейти в профиль"
+msgid "Профиль"
+msgstr "Go to profile"
+
+#: .\templates\registration\profile.html:12
+msgid "Личный кабинет"
+msgstr "Personal account"
+
+#: .\templates\registration\profile.html:38
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\registration\profile.html:39
+msgid "Дата регистрации:"
+msgstr "Registration date:"
+
+#: .\templates\registration\profile.html:41
+msgid "О себе:"
+msgstr "About me:"
+
+#: .\templates\registration\profile.html:46
+msgid "Редактировать профиль"
+msgstr "Edit profile"
+
+#: .\templates\registration\profile.html:51
+msgid "Управление безопасностью"
+msgstr "Security management"
+
+#: .\templates\registration\profile.html:54
+msgid "Пароль:"
+msgstr "Password:"
+
+#: .\templates\registration\profile.html:56
+msgid "Установлен"
+msgstr "Set"
+
+#: .\templates\registration\profile.html:58
+msgid "Не установлен"
+msgstr "Not set"
+
+#: .\templates\registration\profile.html:60
+msgid "Для безопасности аккаунта регулярно меняйте пароль"
+msgstr "Change your password regularly for account security"
+
+#: .\templates\registration\profile.html:72
+msgid "Комментарии"
+msgstr "Comments"
+
+#: .\templates\registration\profile.html:76
+msgid "Избранные статьи"
+msgstr "Favorite articles"
+
+#: .\templates\registration\profile.html:80
+msgid "Последнее посещение"
+msgstr "Last visit"
+
+#: .\templates\registration\profile.html:87
+msgid "Последняя активность"
+msgstr "Recent activity"
+
+#: .\templates\registration\profile.html:94
+msgid "Перейти к новости"
+msgstr "Go to news"
+
+#: .\templates\registration\profile.html:98
+msgid "Пока нет активности"
+msgstr "No activity yet"
 
 #: .\templates\registration\register.html:4
 #: .\templates\registration\register.html:10
@@ -554,53 +697,6 @@ msgstr "Log in"
 #~ msgid "Нет аккаунта?"
 #~ msgstr "Don't have an account?"
 
-#~ msgid "Личный кабинет"
-#~ msgstr "Personal account"
-
-#~ msgid "Email:"
-#~ msgstr "Email:"
-
-#~ msgid "О себе:"
-#~ msgstr "About me:"
-
 #~ msgid "Предпочитаемый язык:"
 #~ msgstr "Preferred language:"
 
-#~ msgid "Русский"
-#~ msgstr "Russian"
-
-#~ msgid "Английский"
-#~ msgstr "English"
-
-#~ msgid "Редактировать профиль"
-#~ msgstr "Edit profile"
-
-#~ msgid "Управление безопасностью"
-#~ msgstr "Security management"
-
-#~ msgid "Пароль:"
-#~ msgstr "Password:"
-
-#~ msgid "Установлен"
-#~ msgstr "Set"
-
-#~ msgid "Не установлен"
-#~ msgstr "Not set"
-
-#~ msgid "Для безопасности аккаунта регулярно меняйте пароль"
-#~ msgstr "Change your password regularly for account security"
-
-#~ msgid "Комментарии"
-#~ msgstr "Comments"
-
-#~ msgid "Последнее посещение"
-#~ msgstr "Last visit"
-
-#~ msgid "Последняя активность"
-#~ msgstr "Recent activity"
-
-#~ msgid "Перейти к новости"
-#~ msgstr "Go to news"
-
-#~ msgid "Пока нет активности"
-#~ msgstr "No activity yet"

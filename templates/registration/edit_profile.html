@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Редактирование профиля | The Future Prism{% endblock %}
+{% block title %}{% trans "Редактирование профиля" %} | {% trans "The Future Prism" %}{% endblock %}
 
 {% block extra_head %}
     {# Добавляем стили и скрипты для работы с аватаром #}
@@ -14,7 +15,7 @@
     <div class="max-w-2xl mx-auto">
         {# Заголовок страницы #}
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold neon-text">Редактирование профиля</h1>
+            <h1 class="text-3xl font-bold neon-text">{% trans "Редактирование профиля" %}</h1>
             {% if messages %}
                 {% for message in messages %}
                     <div class="mt-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-500/20{% else %}bg-red-500/20{% endif %}">
@@ -31,14 +32,14 @@
             {# Специальная обработка поля аватара #}
             <div class="mb-6">
                 <label class="block text-sm font-medium text-gray-400 mb-2">
-                    Аватар профиля
+                    {% trans "Аватар профиля" %}
                 </label>
                 {# Текущий аватар #}
                 {% if user.avatar %}
                     <div class="mb-4">
-                        <img src="{{ user.avatar.url }}" alt="Текущий аватар"
+                        <img src="{{ user.avatar.url }}" alt="{% trans 'Текущий аватар' %}"
                              class="avatar-preview-image">
-                        <p class="text-sm text-gray-400 mt-2">Текущий аватар</p>
+                        <p class="text-sm text-gray-400 mt-2">{% trans "Текущий аватар" %}</p>
                     </div>
                 {% endif %}
                 {# Поле загрузки нового аватара #}
@@ -76,18 +77,18 @@
             {# Кнопка смены пароля #}
             <div class="mt-6 mb-4">
                 <a href="{% url 'password_change' %}" class="neon-button bg-gray-700 inline-block">
-                    Изменить пароль
+                    {% trans "Изменить пароль" %}
                 </a>
             </div>
 
             {# Кнопки действий #}
             <div class="flex gap-4 mt-6">
-                <button type="submit" class="neon-button">Сохранить изменения</button>
-                <a href="{% url 'profile' %}" class="neon-button bg-gray-700">Отмена</a>
+                <button type="submit" class="neon-button">{% trans "Сохранить изменения" %}</button>
+                <a href="{% url 'profile' %}" class="neon-button bg-gray-700">{% trans "Отмена" %}</a>
                 {% if user.avatar %}
                     <form action="{% url 'delete_avatar' %}" method="post" class="inline">
                         {% csrf_token %}
-                        <button type="submit" class="neon-button delete">Удалить аватар</button>
+                        <button type="submit" class="neon-button delete">{% trans "Удалить аватар" %}</button>
                     </form>
                 {% endif %}
             </div>
@@ -95,10 +96,3 @@
     </div>
 </div>
 {% endblock %}
-
-{# Технические заметки #}
-<!-- AI-TODO:
-1. Проверить совместимость стилей с существующим дизайном
-2. Убедиться, что кнопка смены пароля корректно работает
-3. Протестировать адаптивность на разных устройствах
--->

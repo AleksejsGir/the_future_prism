@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Профиль | The Future Prism{% endblock %}
+{% block title %}{% trans "Профиль" %} | {% trans "The Future Prism" %}{% endblock %}
 
 {% block content %}
 <div class="container mx-auto p-4">
@@ -8,7 +9,7 @@
     <div class="max-w-4xl mx-auto">
         {# Заголовок страницы с системными сообщениями #}
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold neon-text">Личный кабинет</h1>
+            <h1 class="text-3xl font-bold neon-text">{% trans "Личный кабинет" %}</h1>
             {% if messages %}
                 {% for message in messages %}
                     <div class="mt-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-500/20{% else %}bg-red-500/20{% endif %}">
@@ -24,7 +25,7 @@
                 {# Аватар пользователя #}
                 <div class="w-32 h-32 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
                     {% if user.avatar %}
-                        <img src="{{ user.avatar.url }}" alt="Аватар" class="w-full h-full object-cover">
+                        <img src="{{ user.avatar.url }}" alt="{% trans 'Аватар' %}" class="w-full h-full object-cover">
                     {% else %}
                         <span class="text-4xl">{{ user.username|make_list|first|upper }}</span>
                     {% endif %}
@@ -34,31 +35,31 @@
                 <div class="flex-1">
                     <h2 class="text-2xl font-semibold mb-4">{{ user.get_full_name|default:user.username }}</h2>
                     <div class="space-y-2">
-                        <p><span class="text-gray-400">Email:</span> {{ user.email }}</p>
-                        <p><span class="text-gray-400">Дата регистрации:</span> {{ user.date_joined|date:"d.m.Y" }}</p>
+                        <p><span class="text-gray-400">{% trans "Email:" %}</span> {{ user.email }}</p>
+                        <p><span class="text-gray-400">{% trans "Дата регистрации:" %}</span> {{ user.date_joined|date:"d.m.Y" }}</p>
                         {% if user.bio %}
-                            <p><span class="text-gray-400">О себе:</span> {{ user.bio }}</p>
+                            <p><span class="text-gray-400">{% trans "О себе:" %}</span> {{ user.bio }}</p>
                         {% endif %}
                     </div>
                     {# Кнопка редактирования профиля #}
                     <div class="mt-6">
-                        <a href="{% url 'edit_profile' %}" class="neon-button">Редактировать профиль</a>
+                        <a href="{% url 'edit_profile' %}" class="neon-button">{% trans "Редактировать профиль" %}</a>
                     </div>
 
                     {# Блок управления паролем #}
                     <div class="mt-6 space-y-2 p-4 border-t border-gray-700">
-                        <h3 class="text-xl font-semibold mb-4">Управление безопасностью</h3>
+                        <h3 class="text-xl font-semibold mb-4">{% trans "Управление безопасностью" %}</h3>
                         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                             <div>
-                                <span class="text-gray-400">Пароль:</span>
+                                <span class="text-gray-400">{% trans "Пароль:" %}</span>
                                 {% if user.has_usable_password %}
-                                    <span class="text-green-400 ml-2">Установлен</span>
+                                    <span class="text-green-400 ml-2">{% trans "Установлен" %}</span>
                                 {% else %}
-                                    <span class="text-red-400 ml-2">Не установлен</span>
+                                    <span class="text-red-400 ml-2">{% trans "Не установлен" %}</span>
                                 {% endif %}
-                                <p class="text-sm text-gray-500 mt-1">Для безопасности аккаунта регулярно меняйте пароль</p>
+                                <p class="text-sm text-gray-500 mt-1">{% trans "Для безопасности аккаунта регулярно меняйте пароль" %}</p>
                             </div>
-                            <a href="{% url 'password_change' %}" class="neon-button text-center">Изменить пароль</a>
+                            <a href="{% url 'password_change' %}" class="neon-button text-center">{% trans "Изменить пароль" %}</a>
                         </div>
                     </div>
                 </div>
@@ -68,33 +69,33 @@
         {# Статистика пользователя #}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">Комментарии</h3>
+                <h3 class="text-lg font-semibold mb-2">{% trans "Комментарии" %}</h3>
                 <p class="text-2xl neon-text">{{ user.comments.count }}</p>
             </div>
             <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">Избранные статьи</h3>
+                <h3 class="text-lg font-semibold mb-2">{% trans "Избранные статьи" %}</h3>
                 <p class="text-2xl neon-text">{{ user.favorites.count }}</p>
             </div>
             <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">Последнее посещение</h3>
+                <h3 class="text-lg font-semibold mb-2">{% trans "Последнее посещение" %}</h3>
                 <p class="text-2xl neon-text">{{ user.last_login|date:"d.m.Y" }}</p>
             </div>
         </div>
 
         {# Последняя активность #}
         <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6">
-            <h2 class="text-xl font-semibold mb-4">Последняя активность</h2>
+            <h2 class="text-xl font-semibold mb-4">{% trans "Последняя активность" %}</h2>
             <div class="space-y-4">
                 {% for comment in user.comments.all|slice:":5" %}
                     <div class="border-l-4 border-primary-500 pl-4">
                         <p class="text-sm text-gray-400">{{ comment.created_at|date:"d.m.Y H:i" }}</p>
                         <p class="mt-1">{{ comment.text|truncatechars:100 }}</p>
                         <a href="{% url 'news_detail' comment.news.id %}" class="text-blue-400 hover:text-blue-300 text-sm">
-                            Перейти к новости
+                            {% trans "Перейти к новости" %}
                         </a>
                     </div>
                 {% empty %}
-                    <p class="text-gray-400">Пока нет активности</p>
+                    <p class="text-gray-400">{% trans "Пока нет активности" %}</p>
                 {% endfor %}
             </div>
         </div>

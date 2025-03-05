@@ -1,15 +1,16 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Вход | The Future Prism{% endblock %}
+{% block title %}{% trans "Вход" %} | {% trans "The Future Prism" %}{% endblock %}
 
 {% block content %}
 <div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="w-full max-w-md">
         {# Заголовок страницы #}
         <div class="text-center mb-8 px-2">
-            <h1 class="text-2xl md:text-3xl font-bold neon-text">Вход в систему</h1>
+            <h1 class="text-2xl md:text-3xl font-bold neon-text">{% trans "Вход в систему" %}</h1>
             <p class="mt-2 text-sm md:text-base text-gray-400">
-                Войдите в свой аккаунт для доступа к полному функционалу
+                {% trans "Войдите в свой аккаунт для доступа к полному функционалу" %}
             </p>
         </div>
 
@@ -29,7 +30,7 @@
             {# Поле имени пользователя #}
             <div>
                 <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
-                    Имя пользователя
+                    {% trans "Имя пользователя" %}
                 </label>
                 <div class="relative">
                     {{ form.username }}
@@ -51,7 +52,7 @@
             {# Поле пароля #}
             <div>
                 <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
-                    Пароль
+                    {% trans "Пароль" %}
                 </label>
                 <div class="relative">
                     {{ form.password }}
@@ -74,16 +75,16 @@
             <div class="flex items-center justify-between">
                 <label class="flex items-center">
                     <input type="checkbox" name="remember_me" class="form-checkbox rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500">
-                    <span class="ml-2 text-sm text-gray-300">Запомнить меня</span>
+                    <span class="ml-2 text-sm text-gray-300">{% trans "Запомнить меня" %}</span>
                 </label>
                 <a href="{% url 'password_reset' %}" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">
-                    Забыли пароль?
+                    {% trans "Забыли пароль?" %}
                 </a>
             </div>
 
             {# Кнопка входа #}
             <button type="submit" class="w-full neon-button flex justify-center py-2 md:py-3 text-sm md:text-base">
-                <span class="mr-2">Войти</span>
+                <span class="mr-2">{% trans "Войти" %}</span>
                 <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
@@ -92,9 +93,9 @@
             {# Ссылка на регистрацию #}
             <div class="text-center mt-6">
                 <p class="text-sm text-gray-400">
-                    Нет аккаунта?
+                    {% trans "Нет аккаунта?" %}
                     <a href="{% url 'register' %}" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">
-                        Зарегистрироваться
+                        {% trans "Зарегистрироваться" %}
                     </a>
                 </p>
             </div>
