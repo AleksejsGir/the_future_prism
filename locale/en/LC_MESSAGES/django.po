@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 23:17+0000\n"
+"POT-Creation-Date: 2025-03-05 23:30+0000\n"
 "PO-Revision-Date: 2025-03-05 15:30+0000\n"
 "Last-Translator: ADMIN <admin@thefutureprism.com>\n"
 "Language-Team: English\n"
@@ -160,16 +160,18 @@ msgid "Размер файла не должен превышать 5MB"
 msgstr ""
 
 #: .\apps\users\forms.py:96 .\apps\users\forms.py:100
+#: .\templates\registration\login.html:33
 #: .\templates\registration\register.html:33
 msgid "Имя пользователя"
 msgstr "Username"
 
 #: .\apps\users\forms.py:106 .\apps\users\forms.py:109
+#: .\templates\registration\login.html:55
 #: .\templates\registration\register.html:41
 msgid "Пароль"
 msgstr "Password"
 
-#: .\apps\users\forms.py:118
+#: .\apps\users\forms.py:118 .\templates\registration\login.html:78
 #, fuzzy
 #| msgid "Изменить пароль"
 msgid "Запомнить меня"
@@ -235,7 +237,7 @@ msgstr ""
 msgid "Неверное имя пользователя или пароль"
 msgstr "User profile image"
 
-#: .\apps\users\views.py:83
+#: .\apps\users\views.py:83 .\templates\registration\login.html:11
 msgid "Вход в систему"
 msgstr "Log in"
 
@@ -350,7 +352,12 @@ msgstr ""
 #: .\templates\base.html:8 .\templates\base.html:36
 #: .\templates\registration\edit_profile.html:5
 #: .\templates\registration\logged_out.html:4
+#: .\templates\registration\login.html:4
 #: .\templates\registration\password_change.html:4
+#: .\templates\registration\password_reset.html:4
+#: .\templates\registration\password_reset_complete.html:4
+#: .\templates\registration\password_reset_confirm.html:4
+#: .\templates\registration\password_reset_done.html:4
 #: .\templates\registration\profile.html:4
 #: .\templates\registration\register.html:4
 #, fuzzy
@@ -385,6 +392,7 @@ msgid "Выход"
 msgstr "Logout"
 
 #: .\templates\base.html:110 .\templates\base.html:186
+#: .\templates\registration\login.html:4
 msgid "Вход"
 msgstr "Login"
 
@@ -563,6 +571,30 @@ msgstr "Log in again"
 msgid "Вернуться на главную"
 msgstr "Return to home page"
 
+#: .\templates\registration\login.html:13
+msgid "Войдите в свой аккаунт для доступа к полному функционалу"
+msgstr "Log in to your account to access full functionality"
+
+#: .\templates\registration\login.html:81
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Забыли пароль?"
+msgstr "Confirm password"
+
+#: .\templates\registration\login.html:87
+#: .\templates\registration\register.html:62
+msgid "Войти"
+msgstr "Log in"
+
+#: .\templates\registration\login.html:96
+msgid "Нет аккаунта?"
+msgstr "Don't have an account?"
+
+#: .\templates\registration\login.html:98
+#: .\templates\registration\register.html:51
+msgid "Зарегистрироваться"
+msgstr "Register"
+
 #: .\templates\registration\password_change.html:4
 #: .\templates\registration\password_change.html:11
 #, fuzzy
@@ -592,6 +624,86 @@ msgstr ""
 msgid "Подтверждение нового пароля"
 msgstr "Confirm password"
 
+#: .\templates\registration\password_reset.html:4
+#: .\templates\registration\password_reset.html:8
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Сброс пароля"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_reset.html:9
+msgid "Введите ваш email, и мы отправим вам инструкцию по сбросу пароля."
+msgstr ""
+
+#: .\templates\registration\password_reset.html:13
+#: .\templates\registration\profile.html:38
+msgid "Email:"
+msgstr "Email:"
+
+#: .\templates\registration\password_reset.html:16
+msgid "Отправить"
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:4
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Пароль изменен"
+msgstr "Change password"
+
+#: .\templates\registration\password_reset_complete.html:9
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Пароль успешно изменен!"
+msgstr "Change password"
+
+#: .\templates\registration\password_reset_complete.html:10
+msgid "Теперь вы можете войти в свой аккаунт с новым паролем."
+msgstr ""
+
+#: .\templates\registration\password_reset_complete.html:11
+#, fuzzy
+#| msgid "Перейти к новости"
+msgid "Перейти ко входу"
+msgstr "Go to news"
+
+#: .\templates\registration\password_reset_confirm.html:4
+#: .\templates\registration\password_reset_confirm.html:8
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Создание нового пароля"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_reset_confirm.html:12
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Новый пароль:"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_reset_confirm.html:16
+#, fuzzy
+#| msgid "Повторите пароль"
+msgid "Подтвердите пароль:"
+msgstr "Confirm password"
+
+#: .\templates\registration\password_reset_confirm.html:19
+#, fuzzy
+#| msgid "Изменить пароль"
+msgid "Сохранить пароль"
+msgstr "Change password"
+
+#: .\templates\registration\password_reset_done.html:4
+#: .\templates\registration\password_reset_done.html:9
+#, fuzzy
+#| msgid "Установлен"
+msgid "Письмо отправлено"
+msgstr "Set"
+
+#: .\templates\registration\password_reset_done.html:10
+msgid ""
+"Если ваш email найден в системе, вам отправлено письмо с инструкцией по "
+"сбросу пароля."
+msgstr ""
+
 #: .\templates\registration\profile.html:4
 #, fuzzy
 #| msgid "Перейти в профиль"
@@ -601,10 +713,6 @@ msgstr "Go to profile"
 #: .\templates\registration\profile.html:12
 msgid "Личный кабинет"
 msgstr "Personal account"
-
-#: .\templates\registration\profile.html:38
-msgid "Email:"
-msgstr "Email:"
 
 #: .\templates\registration\profile.html:39
 msgid "Дата регистрации:"
@@ -679,24 +787,9 @@ msgstr "Email"
 msgid "Повторите пароль"
 msgstr "Confirm password"
 
-#: .\templates\registration\register.html:51
-msgid "Зарегистрироваться"
-msgstr "Register"
-
 #: .\templates\registration\register.html:60
 msgid "Уже есть аккаунт?"
 msgstr "Already have an account?"
 
-#: .\templates\registration\register.html:62
-msgid "Войти"
-msgstr "Log in"
-
-#~ msgid "Войдите в свой аккаунт для доступа к полному функционалу"
-#~ msgstr "Log in to your account to access full functionality"
-
-#~ msgid "Нет аккаунта?"
-#~ msgstr "Don't have an account?"
-
 #~ msgid "Предпочитаемый язык:"
 #~ msgstr "Preferred language:"
-
