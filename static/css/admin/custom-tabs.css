@@ -1,0 +1,99 @@
+/* static/css/admin/custom-tabs.css */
+
+/* Стили для кастомных вкладок переключения языков */
+.custom-tab-nav,
+.global-language-tabs {
+    display: flex;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding: 5px 5px 0;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px 5px 0 0;
+}
+
+.custom-tab-button,
+.global-tab-button {
+    padding: 10px 20px;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.custom-tab-button.active,
+.global-tab-button.active {
+    background-color: #4FD6FF !important;
+    color: black !important;
+}
+
+/* Русская вкладка */
+.custom-tab-button[data-lang="ru"],
+.global-tab-button[data-lang="ru"] {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Английская вкладка */
+.custom-tab-button[data-lang="en"],
+.global-tab-button[data-lang="en"] {
+    background-color: rgba(0, 0, 255, 0.1);
+}
+
+/* Индикатор языка для меток */
+.lang-indicator {
+    margin-left: 5px;
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+/* Панель с информацией о переводах */
+.translation-info-panel {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: rgba(79, 214, 255, 0.1);
+    border-left: 5px solid #4FD6FF;
+    border-radius: 5px;
+}
+
+/* Выделение полей ввода разных языков */
+input[id$="_ru"], textarea[id$="_ru"],
+input[name$="_ru"], textarea[name$="_ru"] {
+    border-left: 3px solid #FF4646 !important;
+}
+
+input[id$="_en"], textarea[id$="_en"],
+input[name$="_en"], textarea[name$="_en"] {
+    border-left: 3px solid #4646FF !important;
+}
+
+/* Улучшенные стили для групп полей в админке */
+.form-row, .field-box {
+    margin-bottom: 15px !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.form-row:hover, .field-box:hover {
+    background-color: rgba(79, 214, 255, 0.05) !important;
+}
+
+/* Улучшенные стили для меток полей */
+.form-row label, .field-box label {
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+    display: block !important;
+}
+
+/* Индикатор языка в редакторе TinyMCE */
+.editor-language-indicator {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+    position: absolute;
+    top: 5px;
+    right: 80px;
+    z-index: 100;
+}

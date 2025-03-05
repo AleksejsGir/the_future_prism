@@ -1,10 +1,11 @@
+# apps/news/admin.py
 from django.contrib import admin
 from django.utils.html import format_html
 from django.db.models import Count
 from .models import Category, News
 from tinymce.widgets import TinyMCE
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _  # Важно использовать этот импорт правильно
 from modeltranslation.admin import TranslationAdmin
 from django.conf import settings
 
@@ -17,18 +18,15 @@ class CategoryAdmin(TranslationAdmin):
     list_display = ('id', 'name', 'description', 'news_count', 'translation_status')
     search_fields = ('name', 'description')
 
-    # Настройка табов для разных языков
+    # Настройка для кастомных табов
     class Media:
         js = (
-            'modeltranslation/js/force_jquery.js',
             'https://code.jquery.com/jquery-3.6.0.min.js',
-            'modeltranslation/js/tabbed_translation_fields.js',
-            'js/admin/translation-tabs.js',  # Наш новый файл скриптов
+            'js/admin/custom-tabs.js',
         )
         css = {
             'screen': (
-                'modeltranslation/css/tabbed_translation_fields.css',
-                'css/admin/translation-tabs.css',  # Наш новый файл стилей
+                'css/admin/custom-tabs.css',
             ),
         }
 
@@ -56,7 +54,7 @@ class CategoryAdmin(TranslationAdmin):
             name_field = f"name_{lang_code}"
             desc_field = f"description_{lang_code}"
 
-            # Проверяем наличие названия и описания
+            # Проверяем наличие названия
             has_name = bool(getattr(obj, name_field))
 
             if has_name:
@@ -84,8 +82,9 @@ class CategoryAdmin(TranslationAdmin):
                         setattr(obj, f"description_{lang_code}", main_lang_desc)
             obj.save()
 
-        self.message_user(request,
-                          _("Основной язык скопирован во все переводы для {0} категорий").format(queryset.count()))
+        # Исправляем ошибку здесь - не используем _() напрямую для форматирования
+        message = "Основной язык скопирован во все переводы для {} категорий".format(queryset.count())
+        self.message_user(request, message)
 
     copy_main_language_to_all.short_description = _("Копировать основной язык во все переводы")
 
@@ -94,7 +93,7 @@ class CategoryAdmin(TranslationAdmin):
 class NewsAdmin(TranslationAdmin):
     """Административный интерфейс для модели News с поддержкой переводов."""
     list_display = (
-    'id', 'title', 'published_date', 'view_count', 'category', 'image_preview', 'status_tag', 'translation_status')
+        'id', 'title', 'published_date', 'view_count', 'category', 'image_preview', 'status_tag', 'translation_status')
     list_filter = ('published_date', 'category')
     search_fields = ('title', 'content')
     readonly_fields = ('image_preview', 'view_count')
@@ -108,15 +107,12 @@ class NewsAdmin(TranslationAdmin):
     # Настройка табов для разных языков
     class Media:
         js = (
-            'modeltranslation/js/force_jquery.js',
             'https://code.jquery.com/jquery-3.6.0.min.js',
-            'modeltranslation/js/tabbed_translation_fields.js',
-            'js/admin/translation-tabs.js',  # Наш новый файл скриптов
+            'js/admin/custom-tabs.js',
         )
         css = {
             'screen': (
-                'modeltranslation/css/tabbed_translation_fields.css',
-                'css/admin/translation-tabs.css',  # Наш новый файл стилей
+                'css/admin/custom-tabs.css',
             ),
         }
 
@@ -147,18 +143,18 @@ class NewsAdmin(TranslationAdmin):
         user_language = getattr(request, 'LANGUAGE_CODE', settings.LANGUAGE_CODE)
         tinymce_language = 'ru' if user_language in ['ru', 'ru-ru'] else 'en'
 
-        # Настройка TinyMCE для полноценного редактирования
+        # Оптимизированные настройки TinyMCE
         self.formfield_overrides = {
             models.TextField: {'widget': TinyMCE(
-                attrs={'cols': 80, 'rows': 30, 'class': 'custom-tinymce-field',
-                       'style': 'width:90%; max-width:1200px;'},
+                attrs={'cols': 80, 'rows': 30, 'class': 'custom-tinymce-field'},
                 mce_attrs={
-                    'plugins': 'advlist autolink lists link image charmap print preview hr anchor searchreplace '
-                               'visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table '
-                               'contextmenu directionality emoticons template paste textcolor wordcount spellchecker',
-                    'toolbar1': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify '
-                                '| bullist numlist outdent indent | link image media | forecolor backcolor emoticons '
-                                '| fullscreen preview code',
+                    # Используем только стабильные плагины, убираем устаревшие
+                    'plugins': 'advlist autolink lists link image charmap preview hr anchor searchreplace '
+                               'visualblocks visualchars code fullscreen table directionality '
+                               'emoticons wordcount',
+                    'toolbar': 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify '
+                               '| bullist numlist outdent indent | link image | forecolor backcolor emoticons '
+                               '| fullscreen preview code',
                     'style_formats': [
                         {'title': _('Параграф (маленький)'), 'block': 'p', 'classes': 'text-sm'},
                         {'title': _('Параграф (обычный)'), 'block': 'p', 'classes': 'text-base'},
@@ -182,19 +178,40 @@ class NewsAdmin(TranslationAdmin):
                     'width': '90%',
                     'resize': True,
                     'menubar': 'file edit view insert format tools table help',
-                    'contextmenu': 'link image inserttable | cell row column deletetable',
-                    'image_advtab': True,
-                    'paste_data_images': True,
+                    'contextmenu': 'link image table',
+                    'browser_spellcheck': True,
                     'relative_urls': False,
                     'remove_script_host': False,
                     'convert_urls': False,
-                    'browser_spellcheck': True,
-                    'setup': """function(editor) {
-                        editor.on('init', function(e) {
+                    'branding': False,
+                    'promotion': False,
+                    # Добавляем визуальную индикацию языка редактирования
+                    'setup': f"""function(editor) {{
+                        editor.on('init', function(e) {{
+                            const lang = '{tinymce_language}';
+                            const editorContainer = editor.getContainer();
+
+                            // Добавляем индикатор языка в редактор
+                            if (editorContainer) {{
+                                const flagIndicator = document.createElement('div');
+                                flagIndicator.className = 'editor-language-indicator';
+                                flagIndicator.innerHTML = lang === 'ru' ? '🇷🇺 Русский' : '🇬🇧 English';
+                                flagIndicator.style.position = 'absolute';
+                                flagIndicator.style.top = '5px';
+                                flagIndicator.style.right = '80px';
+                                flagIndicator.style.padding = '3px 8px';
+                                flagIndicator.style.borderRadius = '3px';
+                                flagIndicator.style.fontSize = '12px';
+                                flagIndicator.style.fontWeight = 'bold';
+                                flagIndicator.style.backgroundColor = lang === 'ru' ? 'rgba(255,0,0,0.1)' : 'rgba(0,0,255,0.1)';
+
+                                editorContainer.querySelector('.tox-editor-header').appendChild(flagIndicator);
+                            }}
+
                             // Дополнительные настройки после инициализации
                             editor.getBody().style.marginLeft = '0px';
-                        });
-                    }"""
+                        }});
+                    }}"""
                 }
             )}
         }
@@ -259,7 +276,9 @@ class NewsAdmin(TranslationAdmin):
     def reset_views(self, request, queryset):
         """Метод для сброса счетчика просмотров."""
         updated = queryset.update(view_count=0)
-        self.message_user(request, _('Счетчик просмотров сброшен для {0} новостей.').format(updated))
+        # Исправляем ошибку здесь - используем просто строку вместо _().format()
+        message = "Счетчик просмотров сброшен для {} новостей.".format(updated)
+        self.message_user(request, message)
 
     reset_views.short_description = _('Сбросить счетчик просмотров')
 
@@ -281,6 +300,8 @@ class NewsAdmin(TranslationAdmin):
             obj.save()
             updated_count += 1
 
-        self.message_user(request, _("Основной язык скопирован во все переводы для {0} новостей").format(updated_count))
+        # Исправляем ошибку здесь - не используем _() для форматирования
+        message = "Основной язык скопирован во все переводы для {} новостей".format(updated_count)
+        self.message_user(request, message)
 
     copy_main_language_to_all.short_description = _("Копировать основной язык во все переводы")
