@@ -130,9 +130,8 @@ msgid "Сбросить счетчик просмотров"
 msgstr "Reset view counter"
 
 #: .\apps\users\forms.py:20
-#, fuzzy
-#| msgid "Уведомления на email"
-msgid "Введите email"
+
+msgid "Уведомления на email"
 msgstr "Email notifications"
 
 #: .\apps\users\forms.py:23
@@ -172,21 +171,17 @@ msgid "Пароль"
 msgstr "Password"
 
 #: .\apps\users\forms.py:118 .\templates\registration\login.html:78
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Запомнить меня"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\apps\users\forms.py:130
-#, fuzzy
-#| msgid "Имя пользователя"
-msgid "Введите имя пользователя"
+msgid "Имя пользователя"
 msgstr "Username"
 
 #: .\apps\users\forms.py:133
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Введите пароль"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\apps\users\models.py:13
@@ -225,16 +220,14 @@ msgstr "Users"
 #: .\apps\users\views.py:60
 #, python-brace-format
 msgid "Добро пожаловать, {0}!"
-msgstr ""
+msgstr "Welcome, {0}!"
 
 #: .\apps\users\views.py:70
 msgid "Ваш аккаунт деактивирован"
-msgstr ""
+msgstr "Your account is deactivated"
 
 #: .\apps\users\views.py:75
-#, fuzzy
-#| msgid "Изображение профиля пользователя"
-msgid "Неверное имя пользователя или пароль"
+msgid "Изображение профиля пользователя"
 msgstr "User profile image"
 
 #: .\apps\users\views.py:83 .\templates\registration\login.html:11
@@ -243,49 +236,46 @@ msgstr "Log in"
 
 #: .\apps\users\views.py:110
 msgid "Регистрация успешна! Добро пожаловать!"
-msgstr ""
+msgstr "Registration successful! Welcome!"
 
 #: .\apps\users\views.py:116
-#, fuzzy, python-brace-format
-#| msgid "Дата регистрации:"
-msgid "Ошибка при регистрации: {0}"
+msgid "Дата регистрации:"
 msgstr "Registration date:"
 
 #: .\apps\users\views.py:131
-#, fuzzy
-#| msgid "Имя пользователя"
-msgid "Профиль пользователя"
+
+msgid "Имя пользователя"
 msgstr "Username"
 
 #: .\apps\users\views.py:163
 msgid "Профиль и аватар успешно обновлены!"
-msgstr ""
+msgstr "Profile and avatar successfully updated!"
 
 #: .\apps\users\views.py:167
 #, python-brace-format
 msgid "Ошибка при загрузке аватара: {0}"
-msgstr ""
+msgstr "Error uploading avatar: {0}"
 
 #: .\apps\users\views.py:179
 msgid "Профиль успешно обновлен!"
-msgstr ""
+msgstr "Profile successfully updated!"
 
 #: .\apps\users\views.py:206
 msgid "Аватар успешно удален"
-msgstr ""
+msgstr "Avatar successfully deleted"
 
 #: .\apps\users\views.py:210
 #, python-brace-format
 msgid "Ошибка при удалении аватара: {0}"
-msgstr ""
+msgstr "Error deleting avatar: {0}"
 
 #: .\apps\users\views.py:213
 msgid "У вас нет загруженного аватара"
-msgstr ""
+msgstr "You don't have an uploaded avatar"
 
 #: .\apps\users\views.py:235
 msgid "Ваш пароль успешно изменен!"
-msgstr ""
+msgstr "Your password has been changed successfully!"
 
 #: .\templates\about.html:4 .\templates\about.html:9 .\templates\base.html:51
 #: .\templates\base.html:175
@@ -360,9 +350,8 @@ msgstr ""
 #: .\templates\registration\password_reset_done.html:4
 #: .\templates\registration\profile.html:4
 #: .\templates\registration\register.html:4
-#, fuzzy
-#| msgid "The Future Prism Admin"
-msgid "The Future Prism"
+
+msgid "The Future Prism Admin"
 msgstr "The Future Prism Admin"
 
 #: .\templates\base.html:37
@@ -434,9 +423,8 @@ msgid "London, United Kingdom"
 msgstr ""
 
 #: .\templates\contact.html:29
-#, fuzzy
-#| msgid "Избранные статьи"
-msgid "Социальные сети"
+
+msgid "Избранные статьи"
 msgstr "Favorite articles"
 
 #: .\templates\contact.html:40
@@ -516,21 +504,19 @@ msgstr "Next"
 
 #: .\templates\registration\edit_profile.html:5
 #: .\templates\registration\edit_profile.html:18
-#, fuzzy
-#| msgid "Редактировать профиль"
-msgid "Редактирование профиля"
+
+msgid "Редактировать профиль"
 msgstr "Edit profile"
 
 #: .\templates\registration\edit_profile.html:35
-#, fuzzy
-#| msgid "Перейти в профиль"
-msgid "Аватар профиля"
+
+msgid "Перейти в профиль"
 msgstr "Go to profile"
 
 #: .\templates\registration\edit_profile.html:40
 #: .\templates\registration\edit_profile.html:42
 msgid "Текущий аватар"
-msgstr ""
+msgstr "Current avatar"
 
 #: .\templates\registration\edit_profile.html:80
 #: .\templates\registration\password_change.html:80
@@ -539,20 +525,18 @@ msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\edit_profile.html:86
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Сохранить изменения"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\edit_profile.html:87
 #: .\templates\registration\password_change.html:81
 msgid "Отмена"
-msgstr ""
+msgstr "Cancel"
 
 #: .\templates\registration\edit_profile.html:91
-#, fuzzy
-#| msgid "Уже есть аккаунт?"
-msgid "Удалить аватар"
+
+msgid "Уже есть аккаунт?"
 msgstr "Already have an account?"
 
 #: .\templates\registration\logged_out.html:9
@@ -576,9 +560,8 @@ msgid "Войдите в свой аккаунт для доступа к пол
 msgstr "Log in to your account to access full functionality"
 
 #: .\templates\registration\login.html:81
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Забыли пароль?"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\login.html:87
@@ -597,43 +580,38 @@ msgstr "Register"
 
 #: .\templates\registration\password_change.html:4
 #: .\templates\registration\password_change.html:11
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Изменение пароля"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\password_change.html:36
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Текущий пароль"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_change.html:50
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Новый пароль"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_change.html:60
 msgid "Пароль должен содержать минимум 8 символов и не быть слишком простым"
-msgstr ""
+msgstr "Password must contain at least 8 characters and not be too simple"
 
 #: .\templates\registration\password_change.html:67
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Подтверждение нового пароля"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_reset.html:4
 #: .\templates\registration\password_reset.html:8
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Сброс пароля"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_reset.html:9
 msgid "Введите ваш email, и мы отправим вам инструкцию по сбросу пароля."
-msgstr ""
+msgstr "Enter your email and we will send you password reset instructions."
 
 #: .\templates\registration\password_reset.html:13
 #: .\templates\registration\profile.html:38
@@ -642,72 +620,62 @@ msgstr "Email:"
 
 #: .\templates\registration\password_reset.html:16
 msgid "Отправить"
-msgstr ""
+msgstr "Send"
 
 #: .\templates\registration\password_reset_complete.html:4
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Пароль изменен"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\password_reset_complete.html:9
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Пароль успешно изменен!"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\password_reset_complete.html:10
 msgid "Теперь вы можете войти в свой аккаунт с новым паролем."
-msgstr ""
+msgstr "Now you can log in to your account with your new password."
 
 #: .\templates\registration\password_reset_complete.html:11
-#, fuzzy
-#| msgid "Перейти к новости"
-msgid "Перейти ко входу"
+
+msgid "Перейти к новости"
 msgstr "Go to news"
 
 #: .\templates\registration\password_reset_confirm.html:4
 #: .\templates\registration\password_reset_confirm.html:8
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Создание нового пароля"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_reset_confirm.html:12
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Новый пароль:"
+
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_reset_confirm.html:16
-#, fuzzy
-#| msgid "Повторите пароль"
-msgid "Подтвердите пароль:"
+msgid "Повторите пароль"
 msgstr "Confirm password"
 
 #: .\templates\registration\password_reset_confirm.html:19
-#, fuzzy
-#| msgid "Изменить пароль"
-msgid "Сохранить пароль"
+
+msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\templates\registration\password_reset_done.html:4
 #: .\templates\registration\password_reset_done.html:9
-#, fuzzy
-#| msgid "Установлен"
-msgid "Письмо отправлено"
+
+msgid "Установлен"
 msgstr "Set"
 
 #: .\templates\registration\password_reset_done.html:10
 msgid ""
 "Если ваш email найден в системе, вам отправлено письмо с инструкцией по "
 "сбросу пароля."
-msgstr ""
+msgstr "If your email is found in our system, you will receive password reset instructions."
 
 #: .\templates\registration\profile.html:4
-#, fuzzy
-#| msgid "Перейти в профиль"
-msgid "Профиль"
+
+msgid "Перейти в профиль"
 msgstr "Go to profile"
 
 #: .\templates\registration\profile.html:12
