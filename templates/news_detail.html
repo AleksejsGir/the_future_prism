@@ -24,6 +24,16 @@
   <div class="article-stats flex justify-center gap-4 mb-6">
     <span>👁 {{ news.view_count }}</span>
     <span>💬 {{ news.comments.count }}</span>
+
+    {% if user.is_authenticated %}
+      <a href="{% url 'toggle_favorite' news.id %}" class="favorite-btn">
+        {% if news in user.favorites.all %}
+          <span>✓ {% trans "В избранном" %}</span>
+        {% else %}
+          <span>+ {% trans "В избранное" %}</span>
+        {% endif %}
+      </a>
+    {% endif %}
   </div>
 
   <!-- Поделиться -->

@@ -1,3 +1,4 @@
+<!-- templates/registration/profile.html -->
 {% extends "base.html" %}
 {% load i18n %}
 
@@ -75,6 +76,9 @@
             <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
                 <h3 class="text-lg font-semibold mb-2">{% trans "Избранные статьи" %}</h3>
                 <p class="text-2xl neon-text">{{ user.favorites.count }}</p>
+                <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300 text-sm">
+                    {% trans "Показать все" %}
+                </a>
             </div>
             <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
                 <h3 class="text-lg font-semibold mb-2">{% trans "Последнее посещение" %}</h3>
@@ -99,6 +103,38 @@
                 {% endfor %}
             </div>
         </div>
+
+        {% if user.favorites.exists %}
+        <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 mt-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">{% trans "Избранные новости" %}</h2>
+                <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300">
+                    {% trans "Показать все" %}
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {% for news in user.favorites.all|slice:":4" %}
+                    <a href="{% url 'news_detail' news.id %}" class="block p-4 bg-gray-900/50 rounded-lg hover:bg-gray-700/50 transition-all">
+                        <div class="flex items-start gap-3">
+                            {% if news.image %}
+                                <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-16 h-16 object-cover rounded">
+                            {% else %}
+                                <div class="w-16 h-16 bg-gray-800 rounded flex items-center justify-center">
+                                    <span class="text-2xl">📰</span>
+                                </div>
+                            {% endif %}
+
+                            <div>
+                                <h3 class="font-medium">{{ news.title|truncatechars:50 }}</h3>
+                                <p class="text-sm text-gray-400 mt-1">{{ news.published_date|date:"d.m.Y" }}</p>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

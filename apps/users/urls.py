@@ -1,5 +1,4 @@
 # apps/users/urls.py
-
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import (
@@ -10,6 +9,8 @@ from .views import (
     edit_profile,            # Редактирование профиля
     delete_avatar,           # Удаление аватара
     change_password,         # Изменение пароля
+    toggle_favorite,         # Добавление/удаление из избранного
+    favorite_news_list,      # Список избранных новостей
 )
 
 # Разделяем URL-паттерны на группы для лучшей организации
@@ -29,6 +30,10 @@ urlpatterns = [
     path('profile/edit/', edit_profile, name='edit_profile'),
     path('profile/avatar/delete/', delete_avatar, name='delete_avatar'),
     path('profile/password/', change_password, name='password_change'),
+
+    # маршруты для избранных новостей
+    path('favorites/', favorite_news_list, name='favorite_news_list'),
+    path('favorites/toggle/<int:news_id>/', toggle_favorite, name='toggle_favorite'),
 ]
 
 # Примечания по URL-паттернам:

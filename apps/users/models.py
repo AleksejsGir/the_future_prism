@@ -30,6 +30,15 @@ class CustomUser(AbstractUser):
         help_text=_('Получать уведомления на email')
     )
 
+    # Добавляем поле для избранных новостей
+    favorites = models.ManyToManyField(
+        'news.News',
+        related_name='favorited_by',
+        blank=True,
+        verbose_name=_('Избранные новости'),
+        help_text=_('Новости, добавленные пользователем в избранное')
+    )
+
     class Meta:
         verbose_name = _('Пользователь')
         verbose_name_plural = _('Пользователи')
