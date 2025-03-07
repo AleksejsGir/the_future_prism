@@ -1,6 +1,12 @@
 <!-- templates/news_detail.html -->
 {% extends "base.html" %}
 {% load i18n %}
+{% load static %}
+
+{% block extra_head %}
+  {{ block.super }}
+  <script src="{% static 'js/favorites.js' %}" defer></script>
+{% endblock %}
 
 {% block content %}
 <div class="article-container mx-auto p-4 md:p-8 max-w-4xl">
@@ -26,13 +32,16 @@
     <span>💬 {{ news.comments.count }}</span>
 
     {% if user.is_authenticated %}
-      <a href="{% url 'toggle_favorite' news.id %}" class="favorite-btn">
-        {% if news in user.favorites.all %}
-          <span>✓ {% trans "В избранном" %}</span>
-        {% else %}
-          <span>+ {% trans "В избранное" %}</span>
-        {% endif %}
-      </a>
+      <div class="favorite-toggle{% if news in user.favorites.all %} favorite-active{% endif %}" id="favorite-btn" data-news-id="{{ news.id }}">
+        <span class="favorite-icon">{% if news in user.favorites.all %}★{% else %}☆{% endif %}</span>
+        <span class="favorite-text">
+          {% if news in user.favorites.all %}
+            {% trans "В избранном" %}
+          {% else %}
+            {% trans "В избранное" %}
+          {% endif %}
+        </span>
+      </div>
     {% endif %}
   </div>
 
