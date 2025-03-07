@@ -1,15 +1,19 @@
 /* static/css/style.css */
 
-/* Импорты всех компонентов */
-@import 'variables.css';
-/* ВАЖНО добавить animations.css до cards.css */
-@import 'components/animations.css';
+/* Импорты базовых стилей */
+@import 'base/variables.css';
+@import 'base/animations.css';
+
+/* Импорты компонентов */
 @import 'components/buttons.css';
 @import 'components/avatar.css';
 @import 'components/forms.css';
 @import 'components/cards.css';
 @import 'components/typography.css';
 @import 'components/login.css';
+@import 'components/favorites.css';
+
+/* Импорты макетов */
 @import 'layout/header.css';
 @import 'layout/mobile-menu.css';
 @import 'layout/responsive.css';
@@ -77,6 +81,8 @@
   align-items: center;
   gap: 8px;
   font-weight: 500;
+  position: relative; /* Добавлено для позиционирования подчеркивания */
+  color: var(--text-color); /* Устанавливаем базовый цвет текста */
 }
 
 /* Hover-эффект для кнопок категорий */
@@ -86,7 +92,11 @@
   box-shadow: 0 4px 12px rgba(255, 120, 255, 0.3);
   border-color: rgba(255, 120, 255, 0.5);
   animation: buttonGlow 1.5s infinite alternate;
+  color: var(--primary-color); /* Меняем цвет текста при наведении на синий */
 }
+
+/* Убираем подчеркивание под заголовком категорий */
+/* Оба блока удалены - и объявление псевдоэлемента, и правило для hover */
 
 /* Активная кнопка категории */
 .category-filter a.active-category {

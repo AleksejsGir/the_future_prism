@@ -1,7 +1,7 @@
 /* Основные стили для админ-панели The Future Prism */
 
 /* Импорт переменных */
-@import '../../variables.css';
+@import '../../base/variables.css';
 
 /* Базовые стили админки */
 body {
