@@ -15,9 +15,6 @@ from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm, LoginForm
 from .serializers import UserRegistrationSerializer
 from .utils import save_avatar
-from django.http import JsonResponse
-from apps.news.models import News
-
 
 class UserRegistrationView(generics.CreateAPIView):
     """API для регистрации пользователей через REST."""
@@ -245,76 +242,3 @@ def change_password(request):
     return render(request, 'registration/password_change.html', {'form': form})
 
 
-@login_required
-def toggle_favorite(request, news_id):
-    """
-    Добавляет или удаляет новость из избранного.
-
-    Если новость уже в избранном - удаляет её.
-    Если новости нет в избранном - добавляет её.
-    Работает как с GET, так и с POST запросами для совместимости.
-    """
-    try:
-        news = News.objects.get(pk=news_id)
-        user = request.user
-
-        # Проверяем, есть ли новость в избранном
-        if news in user.favorites.all():
-            # Если есть - удаляем
-            user.favorites.remove(news)
-            is_favorite = False
-            message = _('Новость удалена из избранного')
-        else:
-            # Если нет - добавляем
-            user.favorites.add(news)
-            is_favorite = True
-            message = _('Новость добавлена в избранное')
-
-        # Если это AJAX-запрос, возвращаем JSON-ответ
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({
-                'success': True,
-                'is_favorite': is_favorite,
-                'message': message
-            })
-
-        # Иначе добавляем сообщение и делаем редирект
-        messages.success(request, message)
-        return redirect('news_detail', news.id)
-
-    except News.DoesNotExist:
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({
-                'success': False,
-                'message': _('Новость не найдена')
-            }, status=404)
-        messages.error(request, _('Новость не найдена'))
-        return redirect('news_list')
-    except Exception as e:
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({
-                'success': False,
-                'message': str(e)
-            }, status=500)
-        messages.error(request, str(e))
-        return redirect('news_list')
-
-
-@login_required
-def favorite_news_list(request):
-    """
-    Отображает список избранных новостей пользователя.
-
-    Требует аутентификации. Возвращает страницу со списком
-    всех новостей, добавленных пользователем в избранное.
-    """
-    user = request.user
-    # Получаем избранные новости пользователя
-    news_list = user.favorites.all().order_by('-published_date')
-
-    context = {
-        'news_list': news_list,
-        'title': _('Избранные новости'),
-    }
-
-    return render(request, 'news/favorites_list.html', context)
