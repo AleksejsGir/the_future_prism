@@ -16,17 +16,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const csrfToken = getCookie('csrftoken');
 
       console.log('Sending request for news ID:', newsId);
+      console.log('CSRF Token:', csrfToken ? 'Found' : 'Not found');
 
-      // Исправлен URL - правильный путь к API новостей
-      fetch(`/api/v1/news/favorites/toggle/${newsId}/`, {
+      // Используем обычный URL маршрут вместо API (исправление)
+      fetch(`/favorites/toggle/${newsId}/`, {
         method: 'POST',
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
           'X-CSRFToken': csrfToken,
+          'Content-Type': 'application/json'
         }
       })
       .then(response => {
         console.log('Response status:', response.status);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         return response.json();
       })
       .then(data => {
@@ -38,12 +43,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Adding to favorites');
             favoriteBtn.classList.add('favorite-active');
             favoriteBtn.querySelector('.favorite-icon').textContent = '★';
-            favoriteBtn.querySelector('.favorite-text').textContent = window.translations.in_favorites || 'В избранном';
+            favoriteBtn.querySelector('.favorite-text').textContent = window.translations?.in_favorites || 'В избранном';
           } else {
             console.log('Removing from favorites');
             favoriteBtn.classList.remove('favorite-active');
             favoriteBtn.querySelector('.favorite-icon').textContent = '☆';
-            favoriteBtn.querySelector('.favorite-text').textContent = window.translations.add_to_favorites || 'В избранное';
+            favoriteBtn.querySelector('.favorite-text').textContent = window.translations?.add_to_favorites || 'В избранное';
           }
 
           // Используем общую функцию для уведомлений
@@ -57,9 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
           console.error('Error in response:', data);
 
           if (typeof showNotification === 'function') {
-            showNotification(window.translations.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
+            showNotification(window.translations?.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
           } else {
-            showLocalNotification(window.translations.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
+            showLocalNotification(window.translations?.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
           }
         }
       })
@@ -67,9 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('AJAX error:', error);
 
         if (typeof showNotification === 'function') {
-            showNotification(window.translations.request_error || 'Произошла ошибка при обработке запроса', 'error');
+            showNotification(window.translations?.request_error || 'Произошла ошибка при обработке запроса', 'error');
         } else {
-            showLocalNotification(window.translations.request_error || 'Произошла ошибка при обработке запроса', 'error');
+            showLocalNotification(window.translations?.request_error || 'Произошла ошибка при обработке запроса', 'error');
         }
       });
     });
