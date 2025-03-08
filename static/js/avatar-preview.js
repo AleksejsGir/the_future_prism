@@ -1,66 +1,4 @@
 // static/js/avatar-preview.js
-
-// Функция для создания стилизованных сообщений об ошибках
-function showMessage(message, isError = false) {
-    // Создаем элемент сообщения
-    const messageElement = document.createElement('div');
-    messageElement.className = `message-box ${isError ? 'error' : 'success'}`;
-    messageElement.innerText = message;
-
-    // Добавляем стили
-    messageElement.style.padding = '10px';
-    messageElement.style.marginTop = '10px';
-    messageElement.style.borderRadius = '5px';
-    messageElement.style.backgroundColor = isError ? 'rgba(220, 38, 38, 0.2)' : 'rgba(34, 197, 94, 0.2)';
-    messageElement.style.color = isError ? '#f87171' : '#86efac';
-
-    // Удаляем предыдущие сообщения
-    const prevMessages = document.querySelectorAll('.message-box');
-    prevMessages.forEach(msg => msg.remove());
-
-    // Добавляем сообщение на страницу
-    const avatarInput = document.getElementById('id_avatar');
-    avatarInput.parentElement.appendChild(messageElement);
-
-    // Удаляем сообщение через 5 секунд
-    setTimeout(() => {
-        messageElement.classList.add('fade-out');
-        setTimeout(() => messageElement.remove(), 500);
-    }, 5000);
-}
-
-// Общая функция для создания элементов предпросмотра
-function createPreviewElements() {
-    const previewContainer = document.createElement('div');
-    previewContainer.className = 'avatar-preview-container hidden';
-
-    const previewImage = document.createElement('img');
-    previewImage.className = 'avatar-preview-image';
-
-    const removeButton = document.createElement('button');
-    removeButton.className = 'avatar-remove-button';
-    removeButton.textContent = 'Удалить';
-
-    previewContainer.append(previewImage, removeButton);
-    return {previewContainer, previewImage, removeButton};
-}
-
-// Валидация файла
-function validateFile(file) {
-    if (!file) return false;
-
-    if (!file.type.startsWith('image/')) {
-        showMessage('Пожалуйста, выберите изображение', true);
-        return false;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-        showMessage('Размер файла не должен превышать 5MB', true);
-        return false;
-    }
-    return true;
-}
-
-// Функция для предпросмотра аватара
 document.addEventListener('DOMContentLoaded', function() {
     const avatarInput = document.getElementById('id_avatar');
     if (!avatarInput) return;
@@ -68,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const {previewContainer, previewImage, removeButton} = createPreviewElements();
     avatarInput.parentElement.appendChild(previewContainer);
 
-    // Создаем кастомную кнопку
+    // Создаем кастомную кнопку с использованием переводов
     const customUploadButton = document.createElement('button');
     customUploadButton.type = 'button';
     customUploadButton.className = 'neon-button';
-    customUploadButton.textContent = 'Выбрать фото';
+    customUploadButton.textContent = window.translations.select_photo || 'Выбрать фото'; // Используем перевод
     avatarInput.parentElement.insertBefore(customUploadButton, avatarInput);
 
     // Обработчик изменения файла
@@ -88,12 +26,18 @@ document.addEventListener('DOMContentLoaded', function() {
         reader.onload = function(event) {
             previewImage.src = event.target.result;
             previewContainer.classList.remove('hidden');
-            showMessage('Аватар готов к загрузке. Нажмите "Сохранить изменения" для применения.');
+            // Используем общую функцию showNotification и переводы
+            if (typeof showNotification === 'function') {
+                showNotification(window.translations.avatar_ready || 'Аватар готов к загрузке', 'success', {
+                    parent: avatarInput.parentElement,
+                    fixed: false
+                });
+            }
         };
         reader.readAsDataURL(file);
     });
 
-    // Обработчик удаления
+    // Обработчик удаления с использованием переводов
     removeButton.addEventListener('click', function() {
         avatarInput.value = '';
         previewContainer.classList.add('hidden');
@@ -113,3 +57,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+// Общая функция для создания элементов предпросмотра
+function createPreviewElements() {
+    const previewContainer = document.createElement('div');
+    previewContainer.className = 'avatar-preview-container hidden';
+
+    const previewImage = document.createElement('img');
+    previewImage.className = 'avatar-preview-image';
+
+    const removeButton = document.createElement('button');
+    removeButton.className = 'avatar-remove-button';
+    removeButton.textContent = window.translations.delete || 'Удалить'; // Используем перевод
+
+    previewContainer.append(previewImage, removeButton);
+    return {previewContainer, previewImage, removeButton};
+}
+
+// Валидация файла с использованием переводов
+function validateFile(file) {
+    if (!file) return false;
+
+    if (!file.type.startsWith('image/')) {
+        // Используем общую функцию showNotification из utils.js если доступна
+        if (typeof showNotification === 'function') {
+            showNotification(window.translations.file_not_image || 'Пожалуйста, выберите изображение', 'error');
+        } else {
+            alert(window.translations.file_not_image || 'Пожалуйста, выберите изображение');
+        }
+        return false;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+        if (typeof showNotification === 'function') {
+            showNotification(window.translations.file_too_large || 'Размер файла не должен превышать 5MB', 'error');
+        } else {
+            alert(window.translations.file_too_large || 'Размер файла не должен превышать 5MB');
+        }
+        return false;
+    }
+
+    return true;
+}

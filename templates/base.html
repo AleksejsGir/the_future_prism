@@ -17,6 +17,34 @@
   {# Фавиконка #}
   <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
+  {# Глобальный объект с переводами для JavaScript #}
+  <script>
+    window.translations = {
+      // Общие переводы
+      select_photo: "{% trans 'Выбрать фото' %}",
+      delete: "{% trans 'Удалить' %}",
+      save: "{% trans 'Сохранить' %}",
+      cancel: "{% trans 'Отмена' %}",
+
+      // Переводы для избранного
+      added_to_favorites: "{% trans 'Новость добавлена в избранное' %}",
+      removed_from_favorites: "{% trans 'Новость удалена из избранного' %}",
+      in_favorites: "{% trans 'В избранном' %}",
+      add_to_favorites: "{% trans 'В избранное' %}",
+
+      // Сообщения об ошибках
+      error_occurred: "{% trans 'Произошла ошибка. Попробуйте еще раз.' %}",
+      request_error: "{% trans 'Произошла ошибка при обработке запроса' %}",
+      file_not_image: "{% trans 'Пожалуйста, выберите изображение' %}",
+      file_too_large: "{% trans 'Размер файла не должен превышать 5MB' %}",
+      avatar_ready: "{% trans 'Аватар готов к загрузке. Нажмите \"Сохранить изменения\" для применения.' %}"
+    };
+  </script>
+
+  {# Общие утилиты JavaScript #}
+  <script src="{% static 'js/utils.js' %}" defer></script>
+  <script src="{% static 'js/html-formatter.js' %}" defer></script>
+
   {# Дополнительные стили и скрипты из дочерних шаблонов #}
   {% block extra_head %}
   <script src="{% static 'js/search.js' %}" defer></script>

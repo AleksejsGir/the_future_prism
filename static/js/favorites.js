@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       console.log('Sending request for news ID:', newsId);
 
-      // Исправляем URL - удаляем префикс 'users/'
-      fetch(`/api/v1/users/favorites/toggle/${newsId}/`, {
+      // Исправлен URL - правильный путь к API новостей
+      fetch(`/api/v1/news/favorites/toggle/${newsId}/`, {
         method: 'POST',
         headers: {
           'X-Requested-With': 'XMLHttpRequest',
@@ -33,29 +33,44 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Response data:', data);
 
         if(data.success) {
-          // Обновляем внешний вид кнопки
+          // Обновляем внешний вид кнопки с использованием переводов
           if(data.is_favorite) {
             console.log('Adding to favorites');
             favoriteBtn.classList.add('favorite-active');
             favoriteBtn.querySelector('.favorite-icon').textContent = '★';
-            favoriteBtn.querySelector('.favorite-text').textContent = 'В избранном';
+            favoriteBtn.querySelector('.favorite-text').textContent = window.translations.in_favorites || 'В избранном';
           } else {
             console.log('Removing from favorites');
             favoriteBtn.classList.remove('favorite-active');
             favoriteBtn.querySelector('.favorite-icon').textContent = '☆';
-            favoriteBtn.querySelector('.favorite-text').textContent = 'В избранное';
+            favoriteBtn.querySelector('.favorite-text').textContent = window.translations.add_to_favorites || 'В избранное';
           }
 
-          // Показываем сообщение
-          showNotification(data.message);
+          // Используем общую функцию для уведомлений
+          if (typeof showNotification === 'function') {
+            showNotification(data.message);
+          } else {
+            // Запасной вариант, если общая функция недоступна
+            showLocalNotification(data.message);
+          }
         } else {
           console.error('Error in response:', data);
-          showNotification('Произошла ошибка. Попробуйте еще раз.', 'error');
+
+          if (typeof showNotification === 'function') {
+            showNotification(window.translations.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
+          } else {
+            showLocalNotification(window.translations.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
+          }
         }
       })
       .catch(error => {
         console.error('AJAX error:', error);
-        showNotification('Произошла ошибка при обработке запроса', 'error');
+
+        if (typeof showNotification === 'function') {
+            showNotification(window.translations.request_error || 'Произошла ошибка при обработке запроса', 'error');
+        } else {
+            showLocalNotification(window.translations.request_error || 'Произошла ошибка при обработке запроса', 'error');
+        }
       });
     });
   } else {
@@ -78,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
     return cookieValue;
   }
 
-  // Функция для показа уведомлений
-  function showNotification(message, type = 'success') {
+  // Локальная функция для показа уведомлений (запасной вариант)
+  function showLocalNotification(message, type = 'success') {
     console.log('Showing notification:', message, 'Type:', type);
     const notification = document.createElement('div');
     notification.className = `fixed top-5 right-5 p-3 rounded-lg ${type === 'success' ? 'bg-green-500/80' : 'bg-red-500/80'} text-white z-50`;

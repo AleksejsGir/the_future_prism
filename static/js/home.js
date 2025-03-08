@@ -1,18 +1,29 @@
+// static/js/home.js
 document.addEventListener("DOMContentLoaded", function() {
-    const searchBtn = document.getElementById("mobile-search-btn");
-    const searchBox = document.getElementById("mobile-search-box");
+    // Обновленные селекторы, соответствующие base.html
+    const mobileSearchForm = document.getElementById("mobileSearchForm");
+    const mobileSearchInput = document.getElementById("mobileSearchInput");
 
-    if (searchBtn && searchBox) {
-        searchBtn.addEventListener("click", function() {
-            if (searchBox.classList.contains("active")) {
-                searchBox.classList.add("hidden");
+    if (mobileSearchForm && mobileSearchInput) {
+        // Здесь логика для обработки мобильного поиска
+        // Например, можно добавить функционал открытия/закрытия поля поиска
+        const burgerBtn = document.getElementById('burger-btn');
+        
+        if (burgerBtn) {
+            burgerBtn.addEventListener("click", function() {
+                // Фокусировка на поле поиска после открытия мобильного меню
                 setTimeout(() => {
-                    searchBox.classList.remove("active", "hidden");
-                    searchBox.style.display = "none";
+                    if (document.getElementById('mobile-menu').classList.contains('open')) {
+                        mobileSearchInput.focus();
+                    }
                 }, 300);
-            } else {
-                searchBox.style.display = "block";
-                searchBox.classList.add("active");
+            });
+        }
+        
+        // Предотвращаем отправку пустой формы поиска
+        mobileSearchForm.addEventListener("submit", function(e) {
+            if (!mobileSearchInput.value.trim()) {
+                e.preventDefault();
             }
         });
     }
