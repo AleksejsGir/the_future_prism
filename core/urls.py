@@ -29,6 +29,9 @@ urlpatterns += i18n_patterns(
     # Маршруты пользователей
     path('', include('apps.users.urls')),
 
+    # Важно: добавляем веб-маршруты к новостям (включая избранное)
+    path('', include('apps.news.urls')),
+
     # TinyMCE
     path('tinymce/', include('tinymce.urls')),
 
@@ -51,6 +54,7 @@ if settings.DEBUG:
 
     try:
         import debug_toolbar
+
         urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
     except ImportError:
         pass
