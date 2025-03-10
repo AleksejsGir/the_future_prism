@@ -1,5 +1,4 @@
 # apps/users/views.py
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -9,35 +8,16 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods, require_POST
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.translation import gettext as _
-from rest_framework import generics, status
-from rest_framework.response import Response
+from django.core.exceptions import ValidationError
+
 from .models import CustomUser
 from .forms import CustomUserCreationForm, CustomUserChangeForm, LoginForm
-from .serializers import UserRegistrationSerializer
-from .utils import save_avatar
-
-class UserRegistrationView(generics.CreateAPIView):
-    """API для регистрации пользователей через REST."""
-    queryset = CustomUser.objects.all()
-    serializer_class = UserRegistrationSerializer
-
-    def create(self, request, *args, **kwargs):
-        """Создание нового пользователя через API."""
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+from .services import save_avatar
 
 
 def user_login(request):
     """
     Обработка входа пользователя через веб-форму.
-
-    Процесс:
-    1. Проверяем, не авторизован ли уже пользователь
-    2. Обрабатываем POST-запрос с данными формы
-    3. Аутентифицируем пользователя
-    4. Перенаправляем на нужную страницу
     """
     # Если пользователь уже авторизован, перенаправляем на профиль
     if request.user.is_authenticated:
@@ -88,12 +68,6 @@ def user_login(request):
 def register_view(request):
     """
     Обработка регистрации пользователя через веб-форму.
-
-    Процесс:
-    1. Проверяем, не авторизован ли уже пользователь
-    2. Обрабатываем POST-запрос с данными формы
-    3. Создаем нового пользователя
-    4. Автоматически логиним пользователя
     """
     if request.user.is_authenticated:
         return redirect('profile')
@@ -124,7 +98,6 @@ def register_view(request):
 def profile(request):
     """
     Отображение профиля пользователя.
-    Защищено декоратором login_required.
     """
     context = {
         'title': _('Профиль пользователя'),
@@ -138,40 +111,23 @@ def profile(request):
 def edit_profile(request):
     """
     Редактирование профиля пользователя.
-
-    Процесс:
-    1. Обработка формы с данными профиля
-    2. Обработка загрузки аватара
-    3. Сохранение изменений
     """
     if request.method == 'POST':
         # Создаем форму без файлов, чтобы избежать двойной обработки аватара
-        form = CustomUserChangeForm(
-            request.POST,
-            instance=request.user
-        )
+        form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             # Сначала сохраняем данные профиля без аватара
             user = form.save(commit=False)
 
-            # Обработка аватара
+            # Обработка аватара через сервисный слой
             avatar_file = request.FILES.get('avatar')
             if avatar_file:
                 try:
                     save_avatar(user, avatar_file)
                     messages.success(request, _('Профиль и аватар успешно обновлены!'))
-                except Exception as e:
-                    messages.error(
-                        request,
-                        _('Ошибка при загрузке аватара: {0}').format(str(e))
-                    )
-                    # Сохраняем остальные изменения, даже если аватар не загрузился
-                    user.save()
-                    return render(
-                        request,
-                        'registration/edit_profile.html',
-                        {'form': form}
-                    )
+                except ValidationError as e:
+                    messages.error(request, str(e))
+                    return render(request, 'registration/edit_profile.html', {'form': form})
             else:
                 # Если аватар не загружен, просто сохраняем профиль
                 user.save()
@@ -181,19 +137,14 @@ def edit_profile(request):
     else:
         form = CustomUserChangeForm(instance=request.user)
 
-    return render(
-        request,
-        'registration/edit_profile.html',
-        {'form': form}
-    )
+    return render(request, 'registration/edit_profile.html', {'form': form})
 
 
 @login_required
 @require_http_methods(["POST"])
 def delete_avatar(request):
     """
-    Удаление аватара пользователя.
-    Требует POST-запрос для безопасности.
+    Удаление аватара пользователя через веб-интерфейс.
     """
     user = request.user
     if user.avatar:
@@ -217,13 +168,7 @@ def delete_avatar(request):
 @login_required
 def change_password(request):
     """
-    Изменение пароля пользователя.
-
-    Процесс:
-    1. Проверка текущего пароля
-    2. Создание и проверка нового пароля
-    3. Сохранение нового пароля
-    4. Обновление сессии пользователя
+    Изменение пароля пользователя через веб-интерфейс.
     """
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -240,5 +185,3 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request, 'registration/password_change.html', {'form': form})
-
-

@@ -29,7 +29,7 @@ urlpatterns += i18n_patterns(
     # Маршруты пользователей
     path('', include('apps.users.urls')),
 
-    # Важно: добавляем веб-маршруты к новостям (включая избранное)
+    # Маршруты новостей
     path('', include('apps.news.urls')),
 
     # TinyMCE
@@ -43,7 +43,7 @@ urlpatterns += i18n_patterns(
         path('analytics/', include('apps.analytics.urls')),
     ])),
 
-    # Важно! Устанавливаем prefix_default_language в True
+    # Устанавливаем prefix_default_language в True
     prefix_default_language=True
 )
 
@@ -54,7 +54,6 @@ if settings.DEBUG:
 
     try:
         import debug_toolbar
-
         urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
     except ImportError:
         pass

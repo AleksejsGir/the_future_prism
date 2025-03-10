@@ -1,32 +1,24 @@
 # apps/users/urls.py
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import (
     LogoutView, PasswordResetView, PasswordResetDoneView,
     PasswordResetConfirmView, PasswordResetCompleteView
 )
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 from .views import (
-    UserRegistrationView,     # API регистрация
-    user_login,               # Вход через веб-форму
-    register_view,            # Веб-регистрация
-    profile,                  # Просмотр профиля
-    edit_profile,            # Редактирование профиля
-    delete_avatar,           # Удаление аватара
-    change_password,         # Изменение пароля
+    user_login, register_view, profile,
+    edit_profile, delete_avatar, change_password
 )
 
 # Разделяем URL-паттерны на группы для лучшей организации
 urlpatterns = [
-    # API endpoints
-    path('register/', UserRegistrationView.as_view(), name='api_register'),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('profile/password/', change_password, name='api_password_change'),
+    # API endpoints (через include)
+    path('api/', include('apps.users.api.urls')),
 
     # Веб-интерфейс аутентификации
     path('login/', user_login, name='login'),
-    path('register/web/', register_view, name='register'),
-    # Добавляем маршрут для выхода из системы
+    path('register/', register_view, name='register'),
+    # Маршрут для выхода из системы
     path('logout/', LogoutView.as_view(
         template_name='registration/logged_out.html',
         next_page='home',
