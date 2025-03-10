@@ -4,7 +4,7 @@ from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home, NewsListView, news_detail, about_view, contact_view
+from .views import home, about_view, contact_view  # Удаляем NewsListView, news_detail
 
 # Базовые маршруты без префикса языка
 urlpatterns = [
@@ -17,10 +17,8 @@ urlpatterns += i18n_patterns(
     # Административная панель Django
     path('admin/', admin.site.urls),
 
-    # Главная страница и новости
+    # Главная страница
     path('', home, name='home'),
-    path('news/', NewsListView.as_view(), name='news_list'),
-    path('news/<int:news_id>/', news_detail, name='news_detail'),
 
     # Страницы "О проекте" и "Контакты"
     path('about/', about_view, name='about'),
@@ -29,8 +27,8 @@ urlpatterns += i18n_patterns(
     # Маршруты пользователей
     path('', include('apps.users.urls')),
 
-    # Маршруты новостей
-    path('', include('apps.news.urls')),
+    # Маршруты новостей - теперь с правильным префиксом
+    path('news/', include('apps.news.urls')),
 
     # TinyMCE
     path('tinymce/', include('tinymce.urls')),
@@ -47,13 +45,5 @@ urlpatterns += i18n_patterns(
     prefix_default_language=True
 )
 
-# Настройка обработки медиафайлов в режиме разработки
 if settings.DEBUG:
-    # Добавляем обработку медиафайлов
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-    try:
-        import debug_toolbar
-        urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))
-    except ImportError:
-        pass
