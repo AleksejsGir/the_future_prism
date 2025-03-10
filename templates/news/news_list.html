@@ -1,4 +1,4 @@
-<!-- templates/news_list.html -->
+
 {% extends "base.html" %}
 {% load i18n %}
 
@@ -84,27 +84,58 @@
     {% endfor %}
   </div>
 
-  <!-- Пагинация  -->
-  {% if news_list.has_other_pages %}
-    <div class="mt-8 flex justify-center gap-2">
-      {% if news_list.has_previous %}
-        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.previous_page_number }}"
-           class="neon-button px-4 py-2">
-          {% trans "Предыдущая" %}
-        </a>
-      {% endif %}
+<!-- Пагинация (улучшенная) -->
+{% if is_paginated %}
+  <div class="pagination-container mt-8 flex justify-center gap-2">
+    {% if page_obj.has_previous %}
+      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.previous_page_number }}"
+         class="neon-button px-4 py-2">
+        {% trans "Предыдущая" %}
+      </a>
+    {% endif %}
 
-      {% if news_list.has_next %}
-        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.next_page_number }}"
-           class="neon-button px-4 py-2">
-          {% trans "Следующая" %}
-        </a>
-      {% endif %}
-    </div>
-  {% endif %}
-</div>
+    <!-- Добавляем отображение текущей страницы -->
+    <span class="current-page px-4 py-2">
+      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+    </span>
 
+    {% if page_obj.has_next %}
+      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}"
+         class="neon-button px-4 py-2">
+        {% trans "Следующая" %}
+      </a>
+    {% endif %}
+  </div>
+
+  <!-- Отладочная информация (временно) -->
+  <div class="text-center mt-4 text-gray-500" style="font-size: 0.8rem;">
+    <p>Всего записей: {{ page_obj.paginator.count }} | Страниц: {{ page_obj.paginator.num_pages }}</p>
+  </div>
+{% elif news_list.has_other_pages %}
+  <!-- Резервный вариант пагинации, если is_paginated не сработает -->
+  <div class="pagination-container mt-8 flex justify-center gap-2">
+    {% if news_list.has_previous %}
+      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.previous_page_number }}"
+         class="neon-button px-4 py-2">
+        {% trans "Предыдущая" %}
+      </a>
+    {% endif %}
+
+    <span class="current-page px-4 py-2">
+      Страница {{ news_list.number }} из {{ news_list.paginator.num_pages }}
+    </span>
+
+    {% if news_list.has_next %}
+      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.next_page_number }}"
+         class="neon-button px-4 py-2">
+        {% trans "Следующая" %}
+      </a>
+    {% endif %}
+  </div>
+{% endif %}
 <script>
+
+
   // Добавляем задержку для анимации категорий
   document.addEventListener('DOMContentLoaded', function() {
     const categoryFilter = document.querySelector('.category-filter');

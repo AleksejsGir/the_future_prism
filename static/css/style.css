@@ -5,11 +5,11 @@
 @import 'base/animations.css';
 
 /* Импорты компонентов */
+@import 'components/typography.css';
 @import 'components/buttons.css';
 @import 'components/avatar.css';
 @import 'components/forms.css';
 @import 'components/cards.css';
-@import 'components/typography.css';
 @import 'components/login.css';
 @import 'components/favorites.css';
 
@@ -17,6 +17,7 @@
 @import 'layout/header.css';
 @import 'layout/mobile-menu.css';
 @import 'layout/responsive.css';
+@import 'components/pagination.css';
 
 /* Стили для блока категории <ВЫБОР КАТЕГОРИИ> */
 .category-title {
@@ -68,41 +69,6 @@
 
   /* Анимация появления (если нужна) */
   animation: fadeInUp 1s ease-in-out;
-}
-
-/* Стиль для категорий-кнопок */
-.category-button {
-  background-color: rgba(79, 214, 255, 0.1); /* Полупрозрачный фон */
-  border: 1px solid rgba(79, 214, 255, 0.3); /* Тонкая неоновая рамка */
-  padding: 8px 16px;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  position: relative; /* Добавлено для позиционирования подчеркивания */
-  color: var(--text-color); /* Устанавливаем базовый цвет текста */
-}
-
-/* Hover-эффект для кнопок категорий */
-.category-button:hover {
-  background-color: rgba(255, 120, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 120, 255, 0.3);
-  border-color: rgba(255, 120, 255, 0.5);
-  animation: buttonGlow 1.5s infinite alternate;
-  color: var(--primary-color); /* Меняем цвет текста при наведении на синий */
-}
-
-/* Убираем подчеркивание под заголовком категорий */
-/* Оба блока удалены - и объявление псевдоэлемента, и правило для hover */
-
-/* Активная кнопка категории */
-.category-filter a.active-category {
-  background-color: rgba(255, 120, 255, 0.3);
-  border-color: rgba(255, 120, 255, 0.8);
-  box-shadow: 0 0 15px rgba(255, 120, 255, 0.4);
 }
 
 /* Анимация появления блока категорий */
@@ -159,13 +125,6 @@ a, button, input {
   filter: blur(1px);
   opacity: 0.7;
   mix-blend-mode: screen;
-}
-
-/* Safari iOS Fix */
-@supports (-webkit-touch-callout: none) {
-  .mobile-menu {
-    height: -webkit-fill-available;
-  }
 }
 
 /* Для доступности */

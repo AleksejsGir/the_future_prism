@@ -1,0 +1,58 @@
+/* static/css/components/pagination.css */
+
+/* Стили для контейнера пагинации */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 0.5rem;
+}
+
+/* Общие стили для кнопок и текущей страницы */
+.pagination-container .neon-button,
+.pagination-container .current-page {
+  min-width: 120px;
+  text-align: center;
+  display: block;
+  padding: 0.75rem 1.25rem;
+}
+
+/* Стили для кнопок пагинации */
+.pagination-container .neon-button {
+  background: linear-gradient(90deg,
+    rgba(79, 214, 255, 0.8) 0%,
+    rgba(255, 120, 255, 0.8) 100%
+  );
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(79, 214, 255, 0.3);
+}
+
+.pagination-container .neon-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.5);
+}
+
+/* Стили для текущей страницы */
+.pagination-container .current-page {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(79, 214, 255, 0.3);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+/* Обеспечиваем видимость на всех устройствах */
+@media (max-width: 768px) {
+  .pagination-container {
+    width: 100%;
+    margin: 1.5rem 0;
+  }
+
+  .pagination-container .neon-button,
+  .pagination-container .current-page {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    min-width: 110px;
+  }
+}

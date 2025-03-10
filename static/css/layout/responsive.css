@@ -54,6 +54,31 @@
   .share-buttons {
     justify-content: center;
   }
+
+  /* Добавлено из avatar.css */
+  .avatar-preview-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  /* Улучшенное отображение кнопок на мобильных устройствах */
+  .flex.gap-4.mt-6 {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem !important;
+  }
+
+  button.neon-button,
+  a.neon-button,
+  .neon-button.delete,
+  form.inline {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  form.inline button {
+    width: 100%;
+  }
 }
 
 /* Маленькие мобильные устройства */
@@ -79,6 +104,17 @@
   .avatar-preview-image {
     width: 100px;
     height: 100px;
+  }
+
+  /* Добавлено из login.css */
+  button.neon-button.flex span {
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  button.neon-button.flex svg {
+    flex-shrink: 0;
+    min-width: 20px;
   }
 }
 
@@ -113,6 +149,14 @@
 
   .article-content {
     font-size: 15px;
+  }
+
+  /* Добавлено из avatar.css */
+  button.neon-button,
+  a.neon-button,
+  .neon-button.delete {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 }
 

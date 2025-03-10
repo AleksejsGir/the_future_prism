@@ -138,42 +138,6 @@ a.neon-button:hover {
     box-shadow: 0 5px 15px rgba(255, 78, 78, 0.3);
 }
 
-/* Адаптивные стили для мобильных устройств */
-@media (max-width: 640px) {
-    .avatar-preview-image {
-        width: 120px;
-        height: 120px;
-    }
-
-    /* Улучшенное отображение кнопок на мобильных устройствах */
-    .flex.gap-4.mt-6 {
-        flex-direction: column;
-        width: 100%;
-        gap: 1rem !important;
-    }
-
-    button.neon-button,
-    a.neon-button,
-    .neon-button.delete,
-    form.inline {
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-
-    form.inline button {
-        width: 100%;
-    }
-}
-
-/* Дополнительные стили для очень маленьких экранов */
-@media (max-width: 360px) {
-    button.neon-button,
-    a.neon-button,
-    .neon-button.delete {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-    }
-}
 /* Стили для полей ввода пароля */
 input[type="password"] {
     width: 100%;

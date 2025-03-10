@@ -7,16 +7,3 @@ button.neon-button.flex {
     align-items: center;
     gap: 0.5rem;
 }
-
-/* Исправление для мобильной версии */
-@media (max-width: 640px) {
-    button.neon-button.flex span {
-        flex-grow: 1;
-        text-align: center;
-    }
-
-    button.neon-button.flex svg {
-        flex-shrink: 0;
-        min-width: 20px;
-    }
-}

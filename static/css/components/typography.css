@@ -1,57 +1,59 @@
+/* static/css/components/typography.css */
+
 /* Классы размеров текста для использования в редакторе и на сайте */
 
 /* Базовые размеры текста */
 .text-xs {
-    font-size: 0.75rem !important; /* 12px */
-    line-height: 1rem !important;  /* 16px */
+    font-size: 0.75rem; /* 12px */
+    line-height: 1rem;  /* 16px */
 }
 
 .text-sm {
-    font-size: 0.875rem !important; /* 14px */
-    line-height: 1.25rem !important; /* 20px */
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
 }
 
 .text-base {
-    font-size: 1rem !important; /* 16px */
-    line-height: 1.5rem !important; /* 24px */
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
 }
 
 .text-lg {
-    font-size: 1.125rem !important; /* 18px */
-    line-height: 1.75rem !important; /* 28px */
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
 }
 
 .text-xl {
-    font-size: 1.25rem !important; /* 20px */
-    line-height: 1.75rem !important; /* 28px */
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.75rem; /* 28px */
 }
 
 .text-2xl {
-    font-size: 1.5rem !important; /* 24px */
-    line-height: 2rem !important; /* 32px */
+    font-size: 1.5rem; /* 24px */
+    line-height: 2rem; /* 32px */
 }
 
 .text-3xl {
-    font-size: 1.875rem !important; /* 30px */
-    line-height: 2.25rem !important; /* 36px */
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
 }
 
 .text-4xl {
-    font-size: 2.25rem !important; /* 36px */
-    line-height: 2.5rem !important; /* 40px */
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem; /* 40px */
 }
 
 /* Цвета текста */
 .text-primary {
-    color: var(--primary-color) !important;
+    color: var(--primary-color);
 }
 
 .text-secondary {
-    color: var(--secondary-color) !important;
+    color: var(--secondary-color);
 }
 
 .text-accent {
-    color: var(--accent-color) !important;
+    color: var(--accent-color);
 }
 
 /* Дополнительные стили для заголовков */
@@ -61,19 +63,26 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0.5em;
 }
 
-h1 {
-    font-size: 2.25rem !important;
-    line-height: 2.5rem !important;
+/* Используем более специфичные селекторы вместо !important */
+.article-content h1,
+.editor-content h1,
+.content-wrapper h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
 }
 
-h2 {
-    font-size: 1.875rem !important;
-    line-height: 2.25rem !important;
+.article-content h2,
+.editor-content h2,
+.content-wrapper h2 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
 }
 
-h3 {
-    font-size: 1.5rem !important;
-    line-height: 2rem !important;
+.article-content h3,
+.editor-content h3,
+.content-wrapper h3 {
+    font-size: 1.5rem;
+    line-height: 2rem;
 }
 
 /* Стили для параграфов в статьях */
