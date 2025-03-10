@@ -1,78 +1,98 @@
 # apps/news/views.py
-from rest_framework import viewsets, filters
-from rest_framework.response import Response
-from django_filters.rest_framework import DjangoFilterBackend
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib import messages
 from django.utils.translation import gettext as _
-from django.shortcuts import render
-from .models import Category, News
-from .serializers import CategorySerializer, NewsSerializer
+from django.views.decorators.http import require_POST
+from django.core.exceptions import ValidationError
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    """
-    API для управления категориями новостей.
-    Поддерживает стандартные операции CRUD.
-    """
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['name', 'description']
+from .models import News, Category
+from .services import toggle_favorite, increment_view_count
 
-class NewsViewSet(viewsets.ModelViewSet):
-    """
-    API для управления новостями.
-    Поддерживает:
-    - Фильтрацию по категории и дате публикации
-    - Поиск по заголовку и содержимому
-    - Сортировку по различным полям
-    - Автоматическое увеличение счётчика просмотров при детальном просмотре
-    """
-    queryset = News.objects.all()
-    serializer_class = NewsSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['category', 'published_date']
-    search_fields = ['title', 'content']
-    ordering_fields = ['published_date', 'view_count', 'title']
-    ordering = ['-published_date']  # Сортировка по умолчанию - от новых к старым
 
-    def retrieve(self, request, *args, **kwargs):
-        """
-        Переопределяем метод retrieve для увеличения счетчика просмотров.
-        Используем update_fields для оптимизации запроса к БД.
-        """
-        instance = self.get_object() # Получаем объект новости
-        instance.view_count += 1 # Увеличиваем счетчик просмотров
-        instance.save(update_fields=['view_count']) # Сохраняем изменения
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+class NewsCategoryListView(ListView):
+    """
+    Отображает список новостей с возможностью фильтрации по категориям.
+    """
+    model = News
+    template_name = 'news/news_list.html'
+    context_object_name = 'news_list'
+    paginate_by = 9  # Количество новостей на странице
+
+    def get_queryset(self):
+        """Возвращает отфильтрованный список новостей."""
+        queryset = News.objects.all().order_by('-published_date')
+
+        # Фильтрация по категории
+        category_id = self.request.GET.get('category')
+        if category_id:
+            queryset = queryset.filter(category_id=category_id)
+
+        # Поиск по запросу
+        search_query = self.request.GET.get('search')
+        if search_query:
+            queryset = queryset.filter(title__icontains=search_query) | \
+                       queryset.filter(content__icontains=search_query)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        """Добавляет дополнительные данные в контекст."""
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['selected_category'] = self.request.GET.get('category')
+        context['search_query'] = self.request.GET.get('search', '')
+        return context
+
+
+class NewsDetailView(DetailView):
+    """
+    Отображает детальную информацию о новости.
+    """
+    model = News
+    template_name = 'news/news_detail.html'
+    context_object_name = 'news'
+    pk_url_kwarg = 'news_id'
+
+    def get_context_data(self, **kwargs):
+        """Добавляет дополнительные данные в контекст."""
+        context = super().get_context_data(**kwargs)
+
+        # Добавляем информацию о категориях
+        context['categories'] = Category.objects.all()
+
+        # Проверяем, находится ли новость в избранном
+        user = self.request.user
+        if user.is_authenticated:
+            context['is_favorite'] = self.object in user.favorites.all()
+        else:
+            context['is_favorite'] = False
+
+        # Добавляем похожие новости из той же категории
+        context['similar_news'] = News.objects.filter(
+            category=self.object.category
+        ).exclude(
+            id=self.object.id
+        ).order_by('-published_date')[:3]
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        """Увеличиваем счетчик просмотров и возвращаем страницу."""
+        response = super().get(request, *args, **kwargs)
+        increment_view_count(self.object.id)
+        return response
+
 
 @login_required
-def toggle_favorite(request, news_id):
+def toggle_favorite_view(request, news_id):
     """
     Добавляет или удаляет новость из избранного.
-
-    Если новость уже в избранном - удаляет её.
-    Если новости нет в избранном - добавляет её.
-    Работает как с GET, так и с POST запросами для совместимости.
     """
     try:
-        news = News.objects.get(pk=news_id)
-        user = request.user
-
-        # Проверяем, есть ли новость в избранном
-        if news in user.favorites.all():
-            # Если есть - удаляем
-            user.favorites.remove(news)
-            is_favorite = False
-            message = _('Новость удалена из избранного')
-        else:
-            # Если нет - добавляем
-            user.favorites.add(news)
-            is_favorite = True
-            message = _('Новость добавлена в избранное')
+        is_favorite, message = toggle_favorite(request.user, news_id)
 
         # Если это AJAX-запрос, возвращаем JSON-ответ
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -84,16 +104,17 @@ def toggle_favorite(request, news_id):
 
         # Иначе добавляем сообщение и делаем редирект
         messages.success(request, message)
-        return redirect('news_detail', news.id)
+        return redirect('news_detail', news_id)
 
-    except News.DoesNotExist:
+    except ValidationError as e:
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': False,
-                'message': _('Новость не найдена')
+                'message': str(e)
             }, status=404)
-        messages.error(request, _('Новость не найдена'))
+        messages.error(request, str(e))
         return redirect('news_list')
+
     except Exception as e:
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
@@ -108,17 +129,14 @@ def toggle_favorite(request, news_id):
 def favorite_news_list(request):
     """
     Отображает список избранных новостей пользователя.
-
-    Требует аутентификации. Возвращает страницу со списком
-    всех новостей, добавленных пользователем в избранное.
     """
     user = request.user
-    # Получаем избранные новости пользователя
     news_list = user.favorites.all().order_by('-published_date')
 
     context = {
         'news_list': news_list,
         'title': _('Избранные новости'),
+        'categories': Category.objects.all(),
     }
 
     return render(request, 'news/favorites_list.html', context)
