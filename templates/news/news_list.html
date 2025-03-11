@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% load i18n %}
 
@@ -17,6 +16,9 @@
       </p>
     </div>
   {% endif %}
+
+  <!-- Сообщения пользователю -->
+  {% include "includes/messages.html" %}
 
   <!-- Секция категорий -->
   <div class="category-section mb-8">
@@ -42,100 +44,13 @@
     </div>
   </div>
 
-  <!-- Основной контент (адаптивная сетка) -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-    {% for news in news_list %}
-      <!-- Вместо <div class="news-card ..."> использую <a> обёртку -->
-      <a href="{% url 'news_detail' news.id %}"
-         class="news-card transition-all duration-300 block"
-         style="--card-index: {{ forloop.counter0 }};">
-        {% if news.image %}
-          <img src="{{ news.image.url }}"
-               alt="{{ news.title }}"
-               class="w-full h-48 object-cover rounded-lg mb-3">
-        {% endif %}
+  <!-- Используем компонент списка новостей -->
+  {% include "includes/news_grid.html" with news_list=news_list %}
 
-        <h2 class="text-xl font-semibold">
-          {{ news.title }}
-        </h2>
+  <!-- Используем компонент пагинации -->
+  {% include "includes/pagination.html" with page_obj=page_obj %}
 
-        <div class="mt-2 text-gray-300 news-preview">
-          {{ news.content|striptags|truncatewords:20 }}
-        </div>
-
-        <!-- Если нужно отображать категорию внизу карточки, можно оставить: -->
-        {% if news.category %}
-          <span class="text-sm text-gray-400 block mt-4">
-            {{ news.category.icon|default:'🏷️' }} {{ news.category.name }}
-          </span>
-        {% endif %}
-      </a>
-    {% empty %}
-      <div class="col-span-full text-center">
-        {% if search_query %}
-          <p class="text-gray-400">{% trans "По вашему запросу ничего не найдено" %}</p>
-          <a href="{% url 'news_list' %}" class="mt-4 inline-block neon-button px-4 py-2">
-            {% trans "Сбросить поиск" %}
-          </a>
-        {% else %}
-          <p class="text-gray-400">{% trans "Новостей пока нет" %}</p>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
-
-<!-- Пагинация (улучшенная) -->
-{% if is_paginated %}
-  <div class="pagination-container mt-8 flex justify-center gap-2">
-    {% if page_obj.has_previous %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.previous_page_number }}"
-         class="neon-button px-4 py-2">
-        {% trans "Предыдущая" %}
-      </a>
-    {% endif %}
-
-    <!-- Добавляем отображение текущей страницы -->
-    <span class="current-page px-4 py-2">
-      Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-    </span>
-
-    {% if page_obj.has_next %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}"
-         class="neon-button px-4 py-2">
-        {% trans "Следующая" %}
-      </a>
-    {% endif %}
-  </div>
-
-  <!-- Отладочная информация (временно) -->
-  <div class="text-center mt-4 text-gray-500" style="font-size: 0.8rem;">
-    <p>Всего записей: {{ page_obj.paginator.count }} | Страниц: {{ page_obj.paginator.num_pages }}</p>
-  </div>
-{% elif news_list.has_other_pages %}
-  <!-- Резервный вариант пагинации, если is_paginated не сработает -->
-  <div class="pagination-container mt-8 flex justify-center gap-2">
-    {% if news_list.has_previous %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.previous_page_number }}"
-         class="neon-button px-4 py-2">
-        {% trans "Предыдущая" %}
-      </a>
-    {% endif %}
-
-    <span class="current-page px-4 py-2">
-      Страница {{ news_list.number }} из {{ news_list.paginator.num_pages }}
-    </span>
-
-    {% if news_list.has_next %}
-      <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ news_list.next_page_number }}"
-         class="neon-button px-4 py-2">
-        {% trans "Следующая" %}
-      </a>
-    {% endif %}
-  </div>
-{% endif %}
 <script>
-
-
   // Добавляем задержку для анимации категорий
   document.addEventListener('DOMContentLoaded', function() {
     const categoryFilter = document.querySelector('.category-filter');
@@ -145,18 +60,6 @@
         categoryFilter.style.transform = 'translateY(0)';
       }, 300);
     }
-
-    // Исправляем отображение HTML-символов
-    const previews = document.querySelectorAll('.news-preview');
-    previews.forEach(preview => {
-      preview.innerHTML = preview.innerHTML
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&')
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'")
-        .replace(/&nbsp;/g, ' ');
-    });
   });
 </script>
 {% endblock %}

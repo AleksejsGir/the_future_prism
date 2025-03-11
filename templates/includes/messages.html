@@ -1,0 +1,15 @@
+<!-- templates/includes/messages.html -->
+{% if messages %}
+<div class="messages-container py-2">
+    {% for message in messages %}
+        <div class="message mb-3 p-4 rounded-lg animate__animated animate__fadeIn
+                    {% if message.tags == 'success' %}bg-green-500/20 border-l-4 border-green-500
+                    {% elif message.tags == 'error' %}bg-red-500/20 border-l-4 border-red-500
+                    {% elif message.tags == 'warning' %}bg-yellow-500/20 border-l-4 border-yellow-500
+                    {% elif message.tags == 'info' %}bg-blue-500/20 border-l-4 border-blue-500
+                    {% else %}bg-gray-500/20 border-l-4 border-gray-500{% endif %}">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}

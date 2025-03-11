@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Редактирование профиля" %} | {% trans "The Future Prism" %}{% endblock %}
+
+{% block extra_head %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'users/css/avatar.css' %}">
+    <script src="{% static 'users/js/avatar-preview.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <div class="max-w-2xl mx-auto">
+        {# Заголовок страницы #}
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold neon-text">{% trans "Редактирование профиля" %}</h1>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="mt-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-500/20{% else %}bg-red-500/20{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        {# Форма редактирования #}
+        <form method="post" enctype="multipart/form-data" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6">
+            {% csrf_token %}
+
+            {# Специальная обработка поля аватара #}
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-400 mb-2">
+                    {% trans "Аватар профиля" %}
+                </label>
+                {# Текущий аватар #}
+                {% if user.avatar %}
+                    <div class="mb-4">
+                        <img src="{{ user.avatar.url }}" alt="{% trans 'Текущий аватар' %}"
+                             class="avatar-preview-image">
+                        <p class="text-sm text-gray-400 mt-2">{% trans "Текущий аватар" %}</p>
+                    </div>
+                {% endif %}
+                {# Поле загрузки нового аватара #}
+                {{ form.avatar }}
+                {% if form.avatar.help_text %}
+                    <p class="mt-1 text-sm text-gray-400">{{ form.avatar.help_text }}</p>
+                {% endif %}
+                {% if form.avatar.errors %}
+                    {% for error in form.avatar.errors %}
+                        <p class="mt-1 text-sm text-red-400">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Остальные поля формы #}
+            {% for field in form %}
+                {% if field.name != 'avatar' %}
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-400 mb-2">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="mt-1 text-sm text-gray-400">{{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p class="mt-1 text-sm text-red-400">{{ error }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {# Кнопка смены пароля #}
+            <div class="mt-6 mb-4">
+                <a href="{% url 'password_change' %}" class="neon-button bg-gray-700 inline-block">
+                    {% trans "Изменить пароль" %}
+                </a>
+            </div>
+
+            {# Кнопки действий #}
+            <div class="flex gap-4 mt-6">
+                <button type="submit" class="neon-button">{% trans "Сохранить изменения" %}</button>
+                <a href="{% url 'profile' %}" class="neon-button bg-gray-700">{% trans "Отмена" %}</a>
+                {% if user.avatar %}
+                    <form action="{% url 'delete_avatar' %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="neon-button delete">{% trans "Удалить аватар" %}</button>
+                    </form>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

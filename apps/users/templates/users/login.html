@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Вход" %} | {% trans "The Future Prism" %}{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md">
+        {# Заголовок страницы #}
+        <div class="text-center mb-8 px-2">
+            <h1 class="text-2xl md:text-3xl font-bold neon-text">{% trans "Вход в систему" %}</h1>
+            <p class="mt-2 text-sm md:text-base text-gray-400">
+                {% trans "Войдите в свой аккаунт для доступа к полному функционалу" %}
+            </p>
+        </div>
+
+        {# Системные сообщения #}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mb-6 p-4 rounded-lg border {% if message.tags == 'error' %}bg-red-500/20 border-red-500/50 text-red-300{% else %}bg-green-500/20 border-green-500/50 text-green-300{% endif %} text-center backdrop-blur-sm">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {# Форма входа #}
+        <form method="post" class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 space-y-4">
+            {% csrf_token %}
+
+            {# Поле имени пользователя #}
+            <div>
+                <label for="{{ form.username.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
+                    {% trans "Имя пользователя" %}
+                </label>
+                <div class="relative">
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <p class="mt-2 text-sm text-red-400">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Поле пароля #}
+            <div>
+                <label for="{{ form.password.id_for_label }}" class="block text-sm font-medium text-gray-300 mb-2">
+                    {% trans "Пароль" %}
+                </label>
+                <div class="relative">
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                            <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if form.password.errors %}
+                    {% for error in form.password.errors %}
+                        <p class="mt-2 text-sm text-red-400">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Дополнительные опции #}
+            <div class="flex items-center justify-between">
+                <label class="flex items-center">
+                    <input type="checkbox" name="remember_me" class="form-checkbox rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500">
+                    <span class="ml-2 text-sm text-gray-300">{% trans "Запомнить меня" %}</span>
+                </label>
+                <a href="{% url 'password_reset' %}" class="text-sm text-blue-400 hover:text-blue-300 transition-colors">
+                    {% trans "Забыли пароль?" %}
+                </a>
+            </div>
+
+            {# Кнопка входа #}
+            <button type="submit" class="w-full neon-button flex justify-center py-2 md:py-3 text-sm md:text-base">
+                <span class="mr-2">{% trans "Войти" %}</span>
+                <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </button>
+
+            {# Ссылка на регистрацию #}
+            <div class="text-center mt-6">
+                <p class="text-sm text-gray-400">
+                    {% trans "Нет аккаунта?" %}
+                    <a href="{% url 'register' %}" class="text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                        {% trans "Зарегистрироваться" %}
+                    </a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

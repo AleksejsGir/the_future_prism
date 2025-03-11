@@ -1,0 +1,26 @@
+<!-- templates/includes/pagination.html -->
+{% load i18n %}
+
+{% if page_obj.has_other_pages %}
+<div class="pagination-container mt-8 flex justify-center gap-2">
+    {% if page_obj.has_previous %}
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.previous_page_number }}"
+           class="neon-button px-4 py-2">
+            {% trans "Предыдущая" %}
+        </a>
+    {% endif %}
+
+    <span class="current-page px-4 py-2">
+        {% blocktrans with current=page_obj.number total=page_obj.paginator.num_pages %}
+            Страница {{ current }} из {{ total }}
+        {% endblocktrans %}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}"
+           class="neon-button px-4 py-2">
+            {% trans "Следующая" %}
+        </a>
+    {% endif %}
+</div>
+{% endif %}
