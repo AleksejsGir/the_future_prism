@@ -1,4 +1,3 @@
-<!-- apps/users/templates/users/edit_profile.html -->
 {% extends "base.html" %}
 {% load static %}
 {% load i18n %}
@@ -6,9 +5,9 @@
 {% block title %}{% trans "Редактирование профиля" %} | {% trans "The Future Prism" %}{% endblock %}
 
 {% block extra_head %}
-    {# Добавляем стили и скрипты для работы с аватаром #}
-    <link rel="stylesheet" href="{% static 'css/components/avatar.css' %}">
-    <script src="{% static 'js/avatar-preview.js' %}" defer></script>
+    {# Обновленные пути к файлам #}
+    <link rel="stylesheet" href="{% static 'users/css/avatar.css' %}">
+    <script src="{% static 'users/js/avatar-preview.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}

@@ -4,20 +4,20 @@
 @import 'base/variables.css';
 @import 'base/animations.css';
 
-/* Импорты компонентов */
+/* Импорты компонентов (без перемещенных файлов) */
 @import 'components/typography.css';
 @import 'components/buttons.css';
-@import 'components/avatar.css';
+/* @import 'components/avatar.css'; - перенесен в приложение users */
 @import 'components/forms.css';
 @import 'components/cards.css';
 @import 'components/login.css';
-@import 'components/favorites.css';
+/* @import 'components/favorites.css'; - перенесен в приложение news */
+@import 'components/pagination.css';
 
 /* Импорты макетов */
 @import 'layout/header.css';
 @import 'layout/mobile-menu.css';
 @import 'layout/responsive.css';
-@import 'components/pagination.css';
 
 /* Стили для блока категории <ВЫБОР КАТЕГОРИИ> */
 .category-title {

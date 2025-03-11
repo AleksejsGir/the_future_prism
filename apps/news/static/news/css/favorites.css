@@ -1,0 +1,41 @@
+/* apps/news/static/news/css/favorites.css */
+
+/* Улучшенные стили для кнопки избранного */
+.favorite-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favorite-toggle:hover {
+  background: rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(79, 214, 255, 0.3);
+}
+
+.favorite-icon {
+  font-size: 1.25rem;
+  color: #aaa;
+  transition: all 0.3s ease;
+}
+
+.favorite-active .favorite-icon {
+  color: #ffd700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+.favorite-active {
+  background: rgba(255, 215, 0, 0.1);
+  border-color: rgba(255, 215, 0, 0.2);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
