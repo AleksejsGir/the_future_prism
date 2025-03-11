@@ -1,0 +1,14 @@
+<!-- templates/includes/profile_menu.html -->
+{% load i18n %}
+
+<div class="profile-menu mb-6 flex flex-wrap justify-center gap-3">
+    <a href="{% url 'edit_profile' %}" class="category-button {% if active_tab == 'edit' %}active-category{% endif %}">
+        {% trans "Редактировать" %}
+    </a>
+    <a href="{% url 'favorite_news_list' %}" class="category-button {% if active_tab == 'favorites' %}active-category{% endif %}">
+        {% trans "Избранное" %}
+    </a>
+    <a href="{% url 'password_change' %}" class="category-button {% if active_tab == 'password' %}active-category{% endif %}">
+        {% trans "Безопасность" %}
+    </a>
+</div>
