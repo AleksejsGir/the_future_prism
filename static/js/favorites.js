@@ -1,117 +1,140 @@
 // static/js/favorites.js
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Favorites script loaded');
 
+/**
+ * Скрипт для управления функциональностью избранных новостей
+ * Версия: 1.0.0
+ * Автор: The Future Prism Team
+ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Журналирование загрузки скрипта
+  console.log('Favorites script loaded successfully');
+
+  // Получаем кнопку избранного
   const favoriteBtn = document.getElementById('favorite-btn');
 
-  if (favoriteBtn) {
-    console.log('Found favorite button with ID:', favoriteBtn.dataset.newsId);
-    console.log('Button initial state:', favoriteBtn.classList.contains('favorite-active') ? 'Active (in favorites)' : 'Inactive (not in favorites)');
-
-    favoriteBtn.addEventListener('click', function(e) {
-      e.preventDefault(); // Предотвращаем переход по ссылке, если кнопка внутри <a>
-      console.log('Favorite button clicked!');
-
-      const newsId = this.dataset.newsId;
-      const csrfToken = getCookie('csrftoken');
-
-      console.log('Sending request for news ID:', newsId);
-      console.log('CSRF Token:', csrfToken ? 'Found' : 'Not found');
-
-      // Используем обычный URL маршрут вместо API (исправление)
-      fetch(`/favorites/toggle/${newsId}/`, {
-        method: 'POST',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRFToken': csrfToken,
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(response => {
-        console.log('Response status:', response.status);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Response data:', data);
-
-        if(data.success) {
-          // Обновляем внешний вид кнопки с использованием переводов
-          if(data.is_favorite) {
-            console.log('Adding to favorites');
-            favoriteBtn.classList.add('favorite-active');
-            favoriteBtn.querySelector('.favorite-icon').textContent = '★';
-            favoriteBtn.querySelector('.favorite-text').textContent = window.translations?.in_favorites || 'В избранном';
-          } else {
-            console.log('Removing from favorites');
-            favoriteBtn.classList.remove('favorite-active');
-            favoriteBtn.querySelector('.favorite-icon').textContent = '☆';
-            favoriteBtn.querySelector('.favorite-text').textContent = window.translations?.add_to_favorites || 'В избранное';
-          }
-
-          // Используем общую функцию для уведомлений
-          if (typeof showNotification === 'function') {
-            showNotification(data.message);
-          } else {
-            // Запасной вариант, если общая функция недоступна
-            showLocalNotification(data.message);
-          }
-        } else {
-          console.error('Error in response:', data);
-
-          if (typeof showNotification === 'function') {
-            showNotification(window.translations?.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
-          } else {
-            showLocalNotification(window.translations?.error_occurred || 'Произошла ошибка. Попробуйте еще раз.', 'error');
-          }
-        }
-      })
-      .catch(error => {
-        console.error('AJAX error:', error);
-
-        if (typeof showNotification === 'function') {
-            showNotification(window.translations?.request_error || 'Произошла ошибка при обработке запроса', 'error');
-        } else {
-            showLocalNotification(window.translations?.request_error || 'Произошла ошибка при обработке запроса', 'error');
-        }
-      });
-    });
-  } else {
-    console.warn('Favorite button not found on page!');
+  // Проверяем наличие кнопки на странице
+  if (!favoriteBtn) {
+    console.warn('Favorite button not found. Skipping initialization.');
+    return;
   }
 
-  // Функция для получения CSRF-токена из куки
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
+  // Журналирование начального состояния кнопки
+  const newsId = favoriteBtn.dataset.newsId;
+  console.log('Initial favorite button state:', {
+    newsId: newsId,
+    isFavorite: favoriteBtn.classList.contains('favorite-active')
+  });
+
+  // Обработчик клика по кнопке избранного
+  favoriteBtn.addEventListener('click', function(event) {
+    // Предотвращаем стандартное поведение ссылки
+    event.preventDefault();
+
+    // Отключаем кнопку во время запроса для предотвращения множественных кликов
+    this.disabled = true;
+
+    // Получаем идентификатор новости и CSRF-токен
+    const newsId = this.dataset.newsId;
+    const csrfToken = getCookie('csrftoken');
+
+    // Журналирование отправляемого запроса
+    console.log('Sending favorite toggle request', { newsId, csrfTokenPresent: !!csrfToken });
+
+    // Выполняем запрос на сервер
+    fetch(`/news/favorites/toggle/${newsId}/`, {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrfToken,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      // Расширенная обработка ответа
+      if (!response.ok) {
+        switch(response.status) {
+          case 404: throw new Error('Новость не найдена');
+          case 403: throw new Error('Требуется авторизация');
+          case 500: throw new Error('Внутренняя ошибка сервера');
+          default: throw new Error('Неизвестная ошибка при обработке запроса');
         }
       }
+      return response.json();
+    })
+    .then(data => {
+      // Проверяем успешность операции
+      if (!data.success) {
+        throw new Error(data.message || 'Не удалось обновить избранное');
+      }
+
+      // Обновляем внешний вид кнопки
+      updateFavoriteButtonState(favoriteBtn, data.is_favorite);
+
+      // Показываем уведомление
+      showNotification(data.message, 'success');
+    })
+    .catch(error => {
+      // Обработка ошибок
+      console.error('Favorite toggle error:', error);
+      showNotification(error.message, 'error');
+    })
+    .finally(() => {
+      // Возвращаем кнопку в активное состояние
+      this.disabled = false;
+    });
+  });
+
+  /**
+   * Обновляет визуальное состояние кнопки избранного
+   * @param {HTMLElement} button - Кнопка избранного
+   * @param {boolean} isFavorite - Состояние избранного
+   */
+  function updateFavoriteButtonState(button, isFavorite) {
+    const iconElement = button.querySelector('.favorite-icon');
+    const textElement = button.querySelector('.favorite-text');
+
+    if (isFavorite) {
+      button.classList.add('favorite-active');
+      iconElement.textContent = '★';
+      textElement.textContent = window.translations?.in_favorites || 'В избранном';
+    } else {
+      button.classList.remove('favorite-active');
+      iconElement.textContent = '☆';
+      textElement.textContent = window.translations?.add_to_favorites || 'В избранное';
     }
-    return cookieValue;
   }
 
-  // Локальная функция для показа уведомлений (запасной вариант)
-  function showLocalNotification(message, type = 'success') {
-    console.log('Showing notification:', message, 'Type:', type);
-    const notification = document.createElement('div');
-    notification.className = `fixed top-5 right-5 p-3 rounded-lg ${type === 'success' ? 'bg-green-500/80' : 'bg-red-500/80'} text-white z-50`;
-    notification.textContent = message;
-    document.body.appendChild(notification);
+  /**
+   * Получает значение cookie
+   * @param {string} name - Имя cookie
+   * @returns {string|null} Значение cookie
+   */
+  function getCookie(name) {
+    const cookieMatch = document.cookie.match(`(^|;)\\s*${name}\\s*=\\s*([^;]+)`);
+    return cookieMatch ? decodeURIComponent(cookieMatch[2]) : null;
+  }
 
-    // Удаляем уведомление через 3 секунды
-    setTimeout(() => {
-      notification.classList.add('fade-out');
+  /**
+   * Показывает уведомление с использованием глобальной функции или fallback
+   * @param {string} message - Текст сообщения
+   * @param {string} type - Тип сообщения (success/error)
+   */
+  function showNotification(message, type = 'success') {
+    if (typeof window.showNotification === 'function') {
+      window.showNotification(message, type);
+    } else {
+      // Fallback - локальное уведомление
+      const notification = document.createElement('div');
+      notification.className = `fixed top-5 right-5 p-3 rounded-lg ${
+        type === 'success' ? 'bg-green-500/80' : 'bg-red-500/80'
+      } text-white z-50`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
       setTimeout(() => {
-        notification.remove();
-      }, 500);
-    }, 3000);
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 500);
+      }, 3000);
+    }
   }
 });
