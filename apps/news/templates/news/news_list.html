@@ -46,7 +46,7 @@
   </div>
 
   <!-- Используем компонент списка новостей -->
-  {% include "includes/news_grid.html" with news_list=news_list %}
+  {% include "news/includes/news_grid.html" with news_list=news_list %}
 
   <!-- Используем компонент пагинации -->
   {% include "includes/pagination.html" with page_obj=page_obj %}

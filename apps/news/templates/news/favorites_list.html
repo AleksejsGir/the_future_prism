@@ -14,7 +14,7 @@
   {% include "includes/messages.html" %}
 
   <!-- Используем компонент сетки новостей и передаем доп. параметр -->
-  {% include "includes/news_grid.html" with news_list=news_list is_favorites=True %}
+  {% include "news/includes/news_grid.html" with news_list=news_list is_favorites=True %}
 
   <!-- Используем компонент пагинации если есть пагинация -->
   {% if page_obj %}
