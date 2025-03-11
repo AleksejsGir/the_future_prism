@@ -10,8 +10,8 @@
   animation: fadeInUp 1s ease-in-out;
 }
 .news-card:hover {
-  /* Можно усилить тень */
-  box-shadow: 0 0 20px rgba(79, 214, 255, 0.5)!important;
+  /* Усиливаем тень при наведении */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.5);
   transition: box-shadow 0.3s ease;
 }
 

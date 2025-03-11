@@ -30,4 +30,25 @@
   --breakpoint-mobile: 640px;
   --breakpoint-tablet: 768px;
   --breakpoint-small-mobile: 480px;
+
+    /* Размеры кнопок */
+  --button-large-padding-y: 0.875rem; /* 14px */
+  --button-large-padding-x: 1.5rem;   /* 24px */
+  --button-large-font: 1rem;          /* 16px */
+
+  --button-medium-padding-y: 0.625rem; /* 10px */
+  --button-medium-padding-x: 1rem;     /* 16px */
+  --button-medium-font: 0.875rem;      /* 14px */
+
+  --button-small-padding-y: 0.4375rem; /* 7px */
+  --button-small-padding-x: 0.75rem;   /* 12px */
+  --button-small-font: 0.75rem;        /* 12px */
+
+  /* Размеры кнопок в мобильной версии */
+  --button-mobile-large-padding-y: 0.75rem;  /* 12px */
+  --button-mobile-large-padding-x: 1.25rem;  /* 20px */
+  --button-mobile-medium-padding-y: 0.5rem;  /* 8px */
+  --button-mobile-medium-padding-x: 0.875rem; /* 14px */
+  --button-mobile-small-padding-y: 0.375rem;  /* 6px */
+  --button-mobile-small-padding-x: 0.625rem;  /* 10px */
 }

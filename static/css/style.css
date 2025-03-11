@@ -1,23 +1,21 @@
 /* static/css/style.css */
 
-/* Импорты базовых стилей */
-@import 'base/variables.css';
-@import 'base/animations.css';
+/* ====== Базовые стили ====== */
+@import 'base/variables.css';  /* Переменные всегда первыми */
+@import 'base/animations.css';  /* Анимации используются в других компонентах */
 
-/* Импорты компонентов (без перемещенных файлов) */
-@import 'components/typography.css';
-@import 'components/buttons.css';
-/* @import 'components/avatar.css'; - перенесен в приложение users */
-@import 'components/forms.css';
-@import 'components/cards.css';
-@import 'components/login.css';
-/* @import 'components/favorites.css'; - перенесен в приложение news */
-@import 'components/pagination.css';
+/* ====== Компоненты ====== */
+@import 'components/typography.css';  /* Типографика должна загружаться перед компонентами */
+@import 'components/buttons.css';  /* Базовые компоненты интерфейса */
+@import 'components/forms.css';  /* Формы и поля ввода */
+@import 'components/cards.css';  /* Карточки для контента */
+@import 'components/pagination.css';  /* Компоненты пагинации */
+@import 'components/login.css';  /* Специфичные компоненты для авторизации */
 
-/* Импорты макетов */
-@import 'layout/header.css';
-@import 'layout/mobile-menu.css';
-@import 'layout/responsive.css';
+/* ====== Макеты ====== */
+@import 'layout/header.css';  /* Верхняя часть страницы */
+@import 'layout/mobile-menu.css';  /* Мобильное меню */
+@import 'layout/responsive.css';  /* Адаптивность всегда последней */
 
 /* Стили для блока категории <ВЫБОР КАТЕГОРИИ> */
 .category-title {

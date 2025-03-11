@@ -36,7 +36,7 @@
 .avatar-remove-button {
     background: rgba(255, 78, 78, 0.8);
     color: white;
-    padding: 0.5rem 1rem;
+    padding: var(--button-small-padding-y) var(--button-small-padding-x);
     border-radius: 0.5rem;
     border: none;
     cursor: pointer;
@@ -94,49 +94,6 @@ input[type="file"] {
     align-items: center;
 }
 
-button.neon-button,
-a.neon-button,
-.neon-button.delete {
-    background: linear-gradient(135deg,
-        rgba(79, 214, 255, 0.7),
-        rgba(255, 120, 255, 0.7)
-    );
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-    font-size: 1rem;
-}
-
-.neon-button.delete {
-    background: linear-gradient(135deg,
-        rgba(255, 78, 78, 0.7),
-        rgba(255, 59, 59, 0.7)
-    );
-}
-
-button.neon-button:hover,
-a.neon-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(79, 214, 255, 0.3);
-    background: linear-gradient(135deg,
-        rgba(79, 214, 255, 0.9),
-        rgba(255, 120, 255, 0.9)
-    );
-}
-
-.neon-button.delete:hover {
-    background: linear-gradient(135deg,
-        rgba(255, 78, 78, 0.9),
-        rgba(255, 59, 59, 0.9)
-    );
-    box-shadow: 0 5px 15px rgba(255, 78, 78, 0.3);
-}
 
 /* Стили для полей ввода пароля */
 input[type="password"] {

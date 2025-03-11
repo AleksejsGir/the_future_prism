@@ -11,10 +11,10 @@
 /* Общие стили для кнопок и текущей страницы */
 .pagination-container .neon-button,
 .pagination-container .current-page {
-  min-width: 120px;
+  min-width: 110px;
   text-align: center;
   display: block;
-  padding: 0.75rem 1.25rem;
+  padding: var(--button-medium-padding-y) var(--button-medium-padding-x);
 }
 
 /* Стили для кнопок пагинации */
@@ -40,19 +40,4 @@
   border-radius: 8px;
   color: var(--text-color);
   font-weight: 500;
-}
-
-/* Обеспечиваем видимость на всех устройствах */
-@media (max-width: 768px) {
-  .pagination-container {
-    width: 100%;
-    margin: 1.5rem 0;
-  }
-
-  .pagination-container .neon-button,
-  .pagination-container .current-page {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    min-width: 110px;
-  }
 }

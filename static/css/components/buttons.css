@@ -1,53 +1,184 @@
-/* Неоновая кнопка */
+/* static/css/components/buttons.css */
+
+/* Базовые стили для всех кнопок */
+.btn-base {
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-align: center;
+  line-height: 1.5;
+  border-radius: 0.5rem;
+}
+
+/* Неоновая кнопка - основная кнопка действий (большая) */
 .neon-button {
   background: var(--primary-gradient-transparent);
   color: var(--text-color);
-  padding: 12px 24px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 0.75rem 1.5rem; /* 12px 24px - стандартный размер */
+  border-radius: 0.5rem;
+  font-size: 1rem; /* 16px */
+  box-shadow: 0 0 5px rgba(79, 214, 255, 0.3);
 }
 
 .neon-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(79,214,255,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.5);
   opacity: 0.9;
 }
 
-/* Кнопка категории */
+/* Кнопка категории - средний размер */
 .category-button {
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
   background: var(--primary-gradient-transparent);
   color: var(--text-color);
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 0.5rem 1rem; /* 8px 16px - стандартный средний размер */
+  border-radius: 0.5rem;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.25rem;
 }
 
 /* Ховер-эффект для категории */
 .category-button:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 15px rgba(79, 214, 255, 0.7);
-  opacity: 0.9; /* немного затемняем или делаем прозрачнее, как вам нужно */
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(79, 214, 255, 0.5);
+  opacity: 0.9;
 }
+
+/* Активная категория */
+.active-category {
+  background: rgba(79, 214, 255, 0.5);
+  box-shadow: 0 0 10px rgba(79, 214, 255, 0.5);
+}
+
 /* Кнопка выхода */
 .logout-btn {
   background: linear-gradient(135deg, rgba(255, 78, 78, 0.9), rgba(255, 0, 0, 0.9));
   color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-size: 14px;
-  text-transform: uppercase;
+  padding: 0.625rem 1.25rem; /* 10px 20px - средний размер для этого типа */
+  border-radius: 0.5rem;
+  font-size: 0.875rem; /* 14px */
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 78, 78, 1), rgba(255, 0, 0, 1));
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(255, 78, 78, 0.5);
+}
+
+/* Модификаторы размеров */
+.btn-lg {
+  padding: 0.875rem 1.75rem; /* 14px 28px - большой размер */
+  font-size: 1.125rem; /* 18px */
+}
+
+.btn-md {
+  padding: 0.625rem 1.25rem; /* 10px 20px - средний размер */
+  font-size: 1rem; /* 16px */
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem; /* 6px 12px - малый размер */
+  font-size: 0.875rem; /* 14px */
+}
+
+/* Кнопка с альтернативным фоном (серая) */
+.neon-button.bg-gray-700 {
+  background: rgba(55, 65, 81, 0.8);
+  color: white;
+}
+
+.neon-button.bg-gray-700:hover {
+  background: rgba(55, 65, 81, 0.9);
+  box-shadow: 0 0 10px rgba(55, 65, 81, 0.5);
+}
+
+/* Кнопка удаления (красная) */
+.neon-button.delete {
+  background: linear-gradient(135deg,
+      rgba(255, 78, 78, 0.7),
+      rgba(255, 59, 59, 0.7)
+  );
+  color: white;
+}
+
+.neon-button.delete:hover {
+  background: linear-gradient(135deg,
+      rgba(255, 78, 78, 0.9),
+      rgba(255, 59, 59, 0.9)
+  );
+  box-shadow: 0 0 10px rgba(255, 78, 78, 0.5);
+}
+
+/* Кнопка с иконкой и текстом */
+.neon-button.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Кнопка поделиться */
+.share-buttons .category-button {
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Меню-ссылки в мобильном меню */
+.menu-link {
+  font-size: 1.125rem; /* 18px - стандартизируем */
+  padding: 0.75rem 1.5rem; /* 12px 24px */
+  width: 100%;
+  text-align: center;
+  border-radius: 0.5rem;
   transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+  background: rgba(79, 214, 255, 0.1);
+}
+
+/* Кнопки категорий на мобильной странице */
+.category-section .category-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  height: 42px; /* Фиксированная высота для единообразия */
+}
+
+/* Стили для категорий на странице выбора категорий */
+.category-filter .category-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+/* Элементы пагинации */
+.page-navigation {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.page-navigation .neon-button,
+.page-navigation .current-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px; /* Минимальная высота для тач-интерфейса */
+  text-align: center;
+}
+
+.page-navigation .current-page {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(79, 214, 255, 0.3);
+  border-radius: 0.5rem;
+  color: var(--text-color);
 }
