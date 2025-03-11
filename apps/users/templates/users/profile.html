@@ -1,13 +1,8 @@
+<!-- templates/registration/profile.html -->
 {% extends "base.html" %}
 {% load i18n %}
-{% load static %}
 
 {% block title %}{% trans "Профиль" %} | {% trans "The Future Prism" %}{% endblock %}
-
-{% block extra_head %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
-{% endblock %}
 
 {% block content %}
 <div class="container mx-auto p-4">
@@ -18,7 +13,7 @@
             <h1 class="text-3xl font-bold neon-text">{% trans "Личный кабинет" %}</h1>
             {% if messages %}
                 {% for message in messages %}
-                    <div class="mt-4 p-4 rounded-lg {% if message.tags == 'success' %}bg-green-500/20{% else %}bg-red-500/20{% endif %}">
+                    <div class="mt-4 p-4 rounded-xl {% if message.tags == 'success' %}bg-green-500/20{% else %}bg-red-500/20{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
@@ -26,7 +21,7 @@
         </div>
 
         {# Карточка с информацией о пользователе #}
-        <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 mb-6">
+        <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6 mb-6">
             <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
                 {# Аватар пользователя #}
                 <div class="w-32 h-32 rounded-full bg-gray-700 flex items-center justify-center overflow-hidden">
@@ -74,25 +69,25 @@
 
         {# Статистика пользователя #}
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
                 <h3 class="text-lg font-semibold mb-2">{% trans "Комментарии" %}</h3>
                 <p class="text-2xl neon-text">{{ user.comments.count }}</p>
             </div>
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
                 <h3 class="text-lg font-semibold mb-2">{% trans "Избранные статьи" %}</h3>
                 <p class="text-2xl neon-text">{{ user.favorites.count }}</p>
                 <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300 text-sm">
                     {% trans "Показать все" %}
                 </a>
             </div>
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-4 text-center">
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
                 <h3 class="text-lg font-semibold mb-2">{% trans "Последнее посещение" %}</h3>
                 <p class="text-2xl neon-text">{{ user.last_login|date:"d.m.Y" }}</p>
             </div>
         </div>
 
         {# Последняя активность #}
-        <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6">
+        <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6">
             <h2 class="text-xl font-semibold mb-4">{% trans "Последняя активность" %}</h2>
             <div class="space-y-4">
                 {% for comment in user.comments.all|slice:":5" %}
@@ -110,7 +105,7 @@
         </div>
 
         {% if user.favorites.exists %}
-        <div class="bg-gray-800/80 backdrop-blur-md rounded-lg p-6 mt-6">
+        <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6 mt-6">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold">{% trans "Избранные новости" %}</h2>
                 <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300">

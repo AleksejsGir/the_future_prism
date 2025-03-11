@@ -30,9 +30,14 @@ class NewsSerializer(serializers.ModelSerializer):
     def get_is_favorite(self, obj):
         """Проверяет, находится ли новость в избранном у пользователя."""
         request = self.context.get('request')
-        if request and request.user.is_authenticated:
+        if not request or not request.user.is_authenticated:
+            return False
+            
+        try:
             return obj in request.user.favorites.all()
-        return False
+        except Exception:
+            # В случае ошибки возвращаем False вместо поломки API
+            return False
 
 
 class NewsDetailSerializer(serializers.ModelSerializer):
@@ -51,6 +56,11 @@ class NewsDetailSerializer(serializers.ModelSerializer):
     def get_is_favorite(self, obj):
         """Проверяет, находится ли новость в избранном у пользователя."""
         request = self.context.get('request')
-        if request and request.user.is_authenticated:
+        if not request or not request.user.is_authenticated:
+            return False
+            
+        try:
             return obj in request.user.favorites.all()
-        return False
+        except Exception:
+            # В случае ошибки возвращаем False вместо поломки API
+            return False

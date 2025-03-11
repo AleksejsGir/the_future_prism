@@ -4,6 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
+from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from ..models import Category, News
 from ..services import increment_view_count, toggle_favorite
@@ -64,6 +66,12 @@ class NewsViewSet(viewsets.ModelViewSet):
         """
         Добавляет или удаляет новость из избранного пользователя.
         """
+        if not request.user.is_authenticated:
+            return Response({
+                'success': False,
+                'message': _('Необходимо войти в систему для работы с избранным')
+            }, status=status.HTTP_401_UNAUTHORIZED)
+            
         try:
             is_favorite, message = toggle_favorite(request.user, pk)
             return Response({
@@ -71,24 +79,51 @@ class NewsViewSet(viewsets.ModelViewSet):
                 'is_favorite': is_favorite,
                 'message': message
             })
-        except Exception as e:
+        except ValidationError as e:
             return Response({
                 'success': False,
                 'message': str(e)
             }, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            # Логируем необработанные исключения
+            import logging
+            logger = logging.getLogger('django')
+            logger.error(f'API ошибка в toggle_favorite: {str(e)}')
+            
+            return Response({
+                'success': False,
+                'message': _('Произошла ошибка при обработке запроса')
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def favorites(self, request):
         """
         Возвращает список избранных новостей пользователя.
         """
-        user = request.user
-        favorites = user.favorites.all().order_by('-published_date')
+        if not request.user.is_authenticated:
+            return Response({
+                'success': False,
+                'message': _('Необходимо войти в систему для просмотра избранного')
+            }, status=status.HTTP_401_UNAUTHORIZED)
+            
+        try:
+            user = request.user
+            favorites = user.favorites.all().order_by('-published_date')
 
-        page = self.paginate_queryset(favorites)
-        if page is not None:
-            serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+            page = self.paginate_queryset(favorites)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
 
-        serializer = self.get_serializer(favorites, many=True)
-        return Response(serializer.data)
+            serializer = self.get_serializer(favorites, many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            # Логируем необработанные исключения
+            import logging
+            logger = logging.getLogger('django')
+            logger.error(f'API ошибка в favorites: {str(e)}')
+            
+            return Response({
+                'success': False,
+                'message': _('Произошла ошибка при получении избранных новостей')
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

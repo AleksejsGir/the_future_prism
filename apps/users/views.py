@@ -62,7 +62,7 @@ def user_login(request):
         'title': _('Вход в систему'),
         'next': request.GET.get('next', ''),
     }
-    return render(request, 'registration/login.html', context)
+    return render(request, 'users/login.html', context)
 
 
 def register_view(request):
@@ -91,7 +91,7 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
 
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
 
 
 @login_required
@@ -104,7 +104,7 @@ def profile(request):
         'user_since': request.user.date_joined,
         'avatar_url': request.user.get_avatar_url(),
     }
-    return render(request, 'registration/profile.html', context)
+    return render(request, 'users/profile.html', context)
 
 
 @login_required
@@ -127,7 +127,7 @@ def edit_profile(request):
                     messages.success(request, _('Профиль и аватар успешно обновлены!'))
                 except ValidationError as e:
                     messages.error(request, str(e))
-                    return render(request, 'registration/edit_profile.html', {'form': form})
+                    return render(request, 'users/edit_profile.html', {'form': form})
             else:
                 # Если аватар не загружен, просто сохраняем профиль
                 user.save()
@@ -137,7 +137,7 @@ def edit_profile(request):
     else:
         form = CustomUserChangeForm(instance=request.user)
 
-    return render(request, 'registration/edit_profile.html', {'form': form})
+    return render(request, 'users/edit_profile.html', {'form': form})
 
 
 @login_required
@@ -184,4 +184,4 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
 
-    return render(request, 'registration/password_change.html', {'form': form})
+    return render(request, 'users/password_change.html', {'form': form})

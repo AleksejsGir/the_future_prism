@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.core.exceptions import ValidationError
+import logging
 
 from .models import News, Category
 from .services import toggle_favorite, increment_view_count
@@ -91,6 +92,10 @@ def toggle_favorite_view(request, news_id):
     """
     Добавляет или удаляет новость из избранного.
     """
+    if not request.user.is_authenticated:
+        messages.error(request, _('Необходимо войти в систему для работы с избранным'))
+        return redirect('login')
+        
     try:
         is_favorite, message = toggle_favorite(request.user, news_id)
 
@@ -104,24 +109,42 @@ def toggle_favorite_view(request, news_id):
 
         # Иначе добавляем сообщение и делаем редирект
         messages.success(request, message)
+        # Редирект на предыдущую страницу, если возможно
+        referer = request.META.get('HTTP_REFERER')
+        if referer:
+            return redirect(referer)
         return redirect('news_detail', news_id)
 
     except ValidationError as e:
+        # Более детальная обработка ошибок валидации
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': False,
                 'message': str(e)
-            }, status=404)
+            }, status=400)  # Используем 400 Bad Request вместо 404
         messages.error(request, str(e))
+        referer = request.META.get('HTTP_REFERER')
+        if referer:
+            return redirect(referer)
         return redirect('news_list')
 
     except Exception as e:
+        # Логируем необработанные исключения
+        logger = logging.getLogger('django')
+        logger.error(f'Необработанная ошибка в toggle_favorite_view: {str(e)}')
+        
+        # Возвращаем понятное пользователю сообщение
+        error_message = _('Произошла ошибка при обработке запроса')
+        
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return JsonResponse({
                 'success': False,
-                'message': str(e)
+                'message': error_message
             }, status=500)
-        messages.error(request, str(e))
+        messages.error(request, error_message)
+        referer = request.META.get('HTTP_REFERER')
+        if referer:
+            return redirect(referer)
         return redirect('news_list')
 
 

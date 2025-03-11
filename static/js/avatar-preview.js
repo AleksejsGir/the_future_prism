@@ -60,18 +60,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Общая функция для создания элементов предпросмотра
 function createPreviewElements() {
-    const previewContainer = document.createElement('div');
-    previewContainer.className = 'avatar-preview-container hidden';
+    const previewContainer = document.querySelector('.avatar-preview-container');
+    if (previewContainer) {
+        return {
+            previewContainer,
+            previewImage: previewContainer.querySelector('img'),
+            removeButton: previewContainer.querySelector('button')
+        };
+    } else {
+        const previewContainer = document.createElement('div');
+        previewContainer.className = 'avatar-preview-container hidden';
 
-    const previewImage = document.createElement('img');
-    previewImage.className = 'avatar-preview-image';
+        const previewImage = document.createElement('img');
+        previewImage.className = 'avatar-preview-image';
 
-    const removeButton = document.createElement('button');
-    removeButton.className = 'avatar-remove-button';
-    removeButton.textContent = window.translations.delete || 'Удалить'; // Используем перевод
+        const removeButton = document.createElement('button');
+        removeButton.className = 'avatar-remove-button';
+        removeButton.textContent = window.translations.delete || 'Удалить'; // Используем перевод
 
-    previewContainer.append(previewImage, removeButton);
-    return {previewContainer, previewImage, removeButton};
+        previewContainer.append(previewImage, removeButton);
+        return {previewContainer, previewImage, removeButton};
+    }
 }
 
 // Валидация файла с использованием переводов
@@ -96,6 +105,5 @@ function validateFile(file) {
         }
         return false;
     }
-
     return true;
 }

@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext as _
+import logging
 
 from .models import News, Category
 
@@ -194,10 +195,16 @@ def toggle_favorite(user, news_id):
 
     Returns:
         tuple: (bool, str) - (добавлено/удалено, сообщение)
+        
+    Raises:
+        ValidationError: Если новость не найдена или возникла другая ошибка
     """
+    if not user.is_authenticated:
+        raise ValidationError(_('Необходимо войти в систему для работы с избранным'))
+        
     try:
         news = News.objects.get(pk=news_id)
-
+        
         # Проверяем, есть ли новость в избранном
         if news in user.favorites.all():
             # Если есть - удаляем
@@ -210,3 +217,8 @@ def toggle_favorite(user, news_id):
 
     except News.DoesNotExist:
         raise ValidationError(_('Новость не найдена'))
+    except Exception as e:
+        # Логируем необработанные исключения для дальнейшего анализа
+        logger = logging.getLogger('django')
+        logger.error(f'Ошибка при работе с избранным: {str(e)}')
+        raise ValidationError(_('Произошла ошибка при обработке запроса'))
