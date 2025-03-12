@@ -1,16 +1,21 @@
 /* static/css/style.css */
 
-/* Импорты всех компонентов */
-@import 'variables.css';
-/* ВАЖНО добавить animations.css до cards.css */
-@import 'components/animations.css';
-@import 'components/buttons.css';
-@import 'components/avatar.css';
-@import 'components/forms.css';
-@import 'components/cards.css';
-@import 'layout/header.css';
-@import 'layout/mobile-menu.css';
-@import 'layout/responsive.css';
+/* ====== Базовые стили ====== */
+@import 'base/variables.css';  /* Переменные всегда первыми */
+@import 'base/animations.css';  /* Анимации используются в других компонентах */
+
+/* ====== Компоненты ====== */
+@import 'components/typography.css';  /* Типографика должна загружаться перед компонентами */
+@import 'components/buttons.css';  /* Базовые компоненты интерфейса */
+@import 'components/forms.css';  /* Формы и поля ввода */
+@import 'components/cards.css';  /* Карточки для контента */
+@import 'components/pagination.css';  /* Компоненты пагинации */
+@import 'components/login.css';  /* Специфичные компоненты для авторизации */
+
+/* ====== Макеты ====== */
+@import 'layout/header.css';  /* Верхняя часть страницы */
+@import 'layout/mobile-menu.css';  /* Мобильное меню */
+@import 'layout/responsive.css';  /* Адаптивность всегда последней */
 
 /* Стили для блока категории <ВЫБОР КАТЕГОРИИ> */
 .category-title {
@@ -28,6 +33,17 @@
   animation: neonPulse 2s ease-in-out infinite alternate;
 }
 
+/* Декоративная линия под заголовком категорий */
+.category-title:after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 80%;
+  margin: 0.7rem auto 1.5rem;
+  background: var(--primary-gradient);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 120, 255, 0.5);
+}
 
 /* Стили для блока категории с фоновым изображением */
 .category-section {
@@ -36,20 +52,32 @@
   background: url("../images/category-bg8.jpg") no-repeat center center;
   background-size: cover;
 
-  /* Чтобы текст был читаем, возможно стоит добавить полупрозрачную подложку */
-  /* Пример (если нужно затемнение):*/
-  background-color: rgba(0, 0, 0, 0.5);
+  /* Затемнение фона для лучшего контраста */
+  background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: darken;
 
-
-  /* Скругление углов, отступы, тени  */
+  /* Скругление углов, отступы, тени */
   border-radius: 12px; /* Скругление углов */
   padding: 40px 20px; /* Внутренние отступы */
-  margin-bottom: 2rem; /* Отступ снизу */
-  box-shadow: 0 0 20px rgba(79, 214, 255, 0.2); /* Тень */
+  margin: 2rem 0 3rem 0; /* Увеличиваем отступы сверху и снизу */
+  box-shadow: 0 0 20px rgba(79, 214, 255, 0.3); /* Тень */
+
+  /* Неоновая рамка */
+  border: 1px solid rgba(255, 120, 255, 0.3);
 
   /* Анимация появления (если нужна) */
   animation: fadeInUp 1s ease-in-out;
+}
+
+/* Анимация появления блока категорий */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px; /* Увеличиваем с 10px */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 /* Базовые стили, которые не относятся к компонентам */
@@ -95,13 +123,6 @@ a, button, input {
   filter: blur(1px);
   opacity: 0.7;
   mix-blend-mode: screen;
-}
-
-/* Safari iOS Fix */
-@supports (-webkit-touch-callout: none) {
-  .mobile-menu {
-    height: -webkit-fill-available;
-  }
 }
 
 /* Для доступности */

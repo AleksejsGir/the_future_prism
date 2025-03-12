@@ -1,0 +1,111 @@
+/* apps/comments/static/comments/css/comments.css */
+.comments-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comment {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.comment:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.comment-author {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comment-author img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.comment-content {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.comment-actions a {
+    color: var(--primary-color, #4FD6FF);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.comment-actions a:hover {
+    color: var(--secondary-color, #FF78FF);
+}
+
+.reply-form {
+    margin-top: 1rem;
+    margin-left: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.reply-form.hidden {
+    display: none;
+}
+
+.comment-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color, #4FD6FF);
+    box-shadow: 0 0 0 2px rgba(79, 214, 255, 0.3);
+}
+
+.comment-form button {
+    margin-top: 0.5rem;
+}
+
+.comment-replies {
+    margin-left: 2rem;
+    margin-top: 1rem;
+}
+
+.comment-awaiting-moderation {
+    font-style: italic;
+    color: var(--warning-color, #FFC107);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}

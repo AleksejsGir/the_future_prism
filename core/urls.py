@@ -30,6 +30,9 @@ urlpatterns += i18n_patterns(
     # Маршруты новостей - теперь с правильным префиксом
     path('news/', include('apps.news.urls')),
 
+    # Добавляем маршруты для комментариев в веб-интерфейс (вне API)
+    path('', include('apps.comments.urls')),
+
     # TinyMCE
     path('tinymce/', include('tinymce.urls')),
 
@@ -37,7 +40,7 @@ urlpatterns += i18n_patterns(
     path('api/v1/', include([
         path('users/', include('apps.users.api.urls')),
         path('news/', include('apps.news.api.urls')),
-        path('comments/', include('apps.comments.urls')),
+        path('comments/', include('apps.comments.api.urls')),
         path('analytics/', include('apps.analytics.urls')),
     ])),
 
