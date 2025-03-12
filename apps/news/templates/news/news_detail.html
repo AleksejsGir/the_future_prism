@@ -7,6 +7,8 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'news/css/favorites.css' %}">
     <script src="{% static 'news/js/favorites.js' %}" defer></script>
+    <!-- Добавляем CSS для комментариев -->
+    <link rel="stylesheet" href="{% static 'comments/css/comments.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -33,7 +35,8 @@
   <!-- Статистика -->
   <div class="article-stats flex justify-center gap-4 mb-6">
     <span>👁 {{ news.view_count }}</span>
-    <span>💬 {{ news.comments.count }}</span>
+    <!-- Ссылка к комментариям -->
+    <a href="#comments" class="hover:text-blue-400 transition-colors">💬 {{ news.comments.count }}</a>
 
     {% if user.is_authenticated %}
       <div class="favorite-toggle{% if news in user.favorites.all %} favorite-active{% endif %}" id="favorite-btn" data-news-id="{{ news.id }}">
@@ -83,6 +86,12 @@
     </div>
   </div>
   {% endif %}
+
+  <!-- Секция комментариев -->
+  <div id="comments" class="comments-container mt-8 mb-6">
+    <h2 class="text-2xl font-semibold mb-4 text-center">{% trans "Комментарии" %}</h2>
+    {% include "comments/comment_list.html" with comments=news.comments.all news=news %}
+  </div>
 
   <!-- Навигация -->
   <div class="article-nav text-center mt-6">

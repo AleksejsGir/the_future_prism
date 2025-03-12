@@ -71,6 +71,10 @@ class NewsDetailView(DetailView):
         else:
             context['is_favorite'] = False
 
+        # Добавляем комментарии к новости
+        # Получаем только корневые комментарии (без родителя)
+        context['comments'] = self.object.comments.filter(parent=None).order_by('-created_at')
+
         # Добавляем похожие новости из той же категории
         context['similar_news'] = News.objects.filter(
             category=self.object.category
