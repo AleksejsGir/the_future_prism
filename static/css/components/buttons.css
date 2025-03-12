@@ -156,7 +156,27 @@
   justify-content: center;
   text-align: center;
   border-radius: 0.5rem;
-  font-weight: 500;
+  /* Увеличиваем размер и улучшаем читаемость */
+  font-weight: 600;
+  font-size: 1rem; /* Увеличиваем с 0.875rem до 1rem */
+  padding: 0.75rem 1.25rem; /* Увеличиваем с 0.5rem 1rem */
+  min-height: 48px; /* Минимальная высота для удобства нажатия */
+  min-width: 120px; /* Минимальная ширина для лучшего отображения */
+  box-shadow: 0 0 8px rgba(79, 214, 255, 0.3); /* Добавляем свечение для выделения */
+  transition: all 0.3s ease;
+}
+
+/* Улучшаем эффект при наведении */
+.category-filter .category-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.6);
+}
+
+/* Активная категория - делаем более заметной */
+.category-filter .active-category {
+  background: rgba(79, 214, 255, 0.7);
+  box-shadow: 0 0 15px rgba(79, 214, 255, 0.7);
+  font-weight: 700;
 }
 
 /* Элементы пагинации */
