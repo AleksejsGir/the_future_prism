@@ -5,6 +5,40 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Стили для сортировки */
+.comments-sorting {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.comment-sort-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.comment-sort-btn {
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.comment-sort-btn:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.comment-sort-btn.active {
+    background: var(--primary-color, #4FD6FF);
+    color: #000;
+}
+
+/* Стили для комментариев */
 .comment {
     margin-bottom: 1.5rem;
     padding: 1rem;
@@ -48,10 +82,69 @@
     line-height: 1.5;
 }
 
+/* Стили для реакций (лайков/дизлайков) */
+.comment-reactions {
+    display: flex;
+    margin: 0.5rem 0;
+}
+
+.reaction-buttons, .reaction-counters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.reaction-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reaction-btn:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.reaction-btn.active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.like-btn.active {
+    background: rgba(0, 128, 0, 0.3);
+}
+
+.dislike-btn.active {
+    background: rgba(255, 0, 0, 0.3);
+}
+
+.reaction-icon {
+    font-size: 1rem;
+}
+
+.reaction-count {
+    font-size: 0.9rem;
+    min-width: 1.2rem;
+    text-align: center;
+}
+
+.reaction-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.5rem;
+    background: rgba(0, 0, 0, 0.15);
+}
+
 .comment-actions {
     display: flex;
     gap: 1rem;
     font-size: 0.9rem;
+    margin-top: 0.5rem;
 }
 
 .comment-actions a {

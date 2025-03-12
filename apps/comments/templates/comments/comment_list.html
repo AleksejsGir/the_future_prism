@@ -4,6 +4,22 @@
 <div class="comments-section">
     <h2 class="text-2xl font-bold mb-4">{% trans "Комментарии" %} ({{ comments|length }})</h2>
 
+    <!-- Добавляем сортировку -->
+    <div class="comments-sorting mb-4">
+        <span class="text-sm text-gray-400">{% trans "Сортировать по:" %}</span>
+        <div class="comment-sort-buttons">
+            <a href="?sort_by=newest" class="comment-sort-btn {% if sort_by == 'newest' %}active{% endif %}" data-sort="newest">
+                {% trans "Сначала новые" %}
+            </a>
+            <a href="?sort_by=oldest" class="comment-sort-btn {% if sort_by == 'oldest' %}active{% endif %}" data-sort="oldest">
+                {% trans "Сначала старые" %}
+            </a>
+            <a href="?sort_by=popular" class="comment-sort-btn {% if sort_by == 'popular' %}active{% endif %}" data-sort="popular">
+                {% trans "По популярности" %}
+            </a>
+        </div>
+    </div>
+
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'add_comment' news.id %}" class="comment-form mb-6">
             {% csrf_token %}
@@ -43,6 +59,39 @@
                             {% trans "Комментарий ожидает модерации" %}
                         </div>
                     {% endif %}
+
+                    <!-- Добавляем кнопки лайк/дизлайк -->
+                    <div class="comment-reactions">
+                        {% if user.is_authenticated %}
+                            <div class="reaction-buttons">
+                                <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: заменено user_reaction на current_user_reaction -->
+                                <button class="reaction-btn like-btn {% if comment.current_user_reaction == 'like' %}active{% endif %}"
+                                        data-comment-id="{{ comment.id }}"
+                                        data-reaction-type="like">
+                                    <span class="reaction-icon">👍</span>
+                                    <span class="reaction-count like-count">{{ comment.like_count }}</span>
+                                </button>
+                                <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: заменено user_reaction на current_user_reaction -->
+                                <button class="reaction-btn dislike-btn {% if comment.current_user_reaction == 'dislike' %}active{% endif %}"
+                                        data-comment-id="{{ comment.id }}"
+                                        data-reaction-type="dislike">
+                                    <span class="reaction-icon">👎</span>
+                                    <span class="reaction-count dislike-count">{{ comment.dislike_count }}</span>
+                                </button>
+                            </div>
+                        {% else %}
+                            <div class="reaction-counters">
+                                <span class="reaction-counter">
+                                    <span class="reaction-icon">👍</span>
+                                    <span class="reaction-count">{{ comment.like_count }}</span>
+                                </span>
+                                <span class="reaction-counter">
+                                    <span class="reaction-icon">👎</span>
+                                    <span class="reaction-count">{{ comment.dislike_count }}</span>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
 
                     <div class="comment-actions">
                         {% if user.is_authenticated %}
@@ -92,6 +141,39 @@
                                             {% trans "Комментарий ожидает модерации" %}
                                         </div>
                                     {% endif %}
+
+                                    <!-- Реакции для ответов -->
+                                    <div class="comment-reactions">
+                                        {% if user.is_authenticated %}
+                                            <div class="reaction-buttons">
+                                                <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: заменено user_reaction на current_user_reaction -->
+                                                <button class="reaction-btn like-btn {% if reply.current_user_reaction == 'like' %}active{% endif %}"
+                                                        data-comment-id="{{ reply.id }}"
+                                                        data-reaction-type="like">
+                                                    <span class="reaction-icon">👍</span>
+                                                    <span class="reaction-count like-count">{{ reply.like_count }}</span>
+                                                </button>
+                                                <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: заменено user_reaction на current_user_reaction -->
+                                                <button class="reaction-btn dislike-btn {% if reply.current_user_reaction == 'dislike' %}active{% endif %}"
+                                                        data-comment-id="{{ reply.id }}"
+                                                        data-reaction-type="dislike">
+                                                    <span class="reaction-icon">👎</span>
+                                                    <span class="reaction-count dislike-count">{{ reply.dislike_count }}</span>
+                                                </button>
+                                            </div>
+                                        {% else %}
+                                            <div class="reaction-counters">
+                                                <span class="reaction-counter">
+                                                    <span class="reaction-icon">👍</span>
+                                                    <span class="reaction-count">{{ reply.like_count }}</span>
+                                                </span>
+                                                <span class="reaction-counter">
+                                                    <span class="reaction-icon">👎</span>
+                                                    <span class="reaction-count">{{ reply.dislike_count }}</span>
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
 
                                     <div class="comment-actions">
                                         {% if user == reply.author or user.is_staff %}

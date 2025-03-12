@@ -71,7 +71,8 @@
   <!-- Секция комментариев - переместили вверх перед похожими новостями -->
   <div id="comments" class="comments-container mt-8 mb-6">
     <h2 class="text-2xl font-semibold mb-4 text-center">{% trans "Комментарии" %}</h2>
-    {% include "comments/comment_list.html" with comments=news.comments.all news=news %}
+    <!-- ИЗМЕНЕНИЕ ЗДЕСЬ: добавлен параметр sort_by="newest" -->
+    {% include "comments/comment_list.html" with comments=comments news=news sort_by="newest" %}
   </div>
 
   <!-- Похожие новости - переместили вниз после комментариев -->
