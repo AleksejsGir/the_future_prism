@@ -67,42 +67,44 @@
             </div>
         </div>
 
-        {# Статистика пользователя #}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">{% trans "Комментарии" %}</h3>
-                <p class="text-2xl neon-text">{{ user.comments.count }}</p>
+            {# Статистика пользователя #}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+                    <h3 class="text-lg font-semibold mb-2">{% trans "Комментарии" %}</h3>
+                    <p class="text-2xl neon-text">{{ user.comments.count }}</p>
+                    <a href="{% url 'user_comments' %}" class="text-blue-400 hover:text-blue-300 text-sm">
+                        {% trans "Показать все" %}
+                    </a>
+                </div>
+                <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+                    <h3 class="text-lg font-semibold mb-2">{% trans "Избранные статьи" %}</h3>
+                    <p class="text-2xl neon-text">{{ user.favorites.count }}</p>
+                    <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300 text-sm">
+                        {% trans "Показать все" %}
+                    </a>
+                </div>
+                <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+                    <h3 class="text-lg font-semibold mb-2">{% trans "Последнее посещение" %}</h3>
+                    <p class="text-2xl neon-text">{{ user.last_login|date:"d.m.Y" }}</p>
+                </div>
             </div>
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">{% trans "Избранные статьи" %}</h3>
-                <p class="text-2xl neon-text">{{ user.favorites.count }}</p>
-                <a href="{% url 'favorite_news_list' %}" class="text-blue-400 hover:text-blue-300 text-sm">
-                    {% trans "Показать все" %}
-                </a>
+            {# Последняя активность #}
+            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6">
+                <h2 class="text-xl font-semibold mb-4">{% trans "Последняя активность" %}</h2>
+                <div class="space-y-4">
+                    {% for comment in user.comments.all|slice:":5" %}
+                        <div class="border-l-4 border-primary-500 pl-4">
+                            <p class="text-sm text-gray-400">{{ comment.created_at|date:"d.m.Y H:i" }}</p>
+                            <p class="mt-1">{{ comment.content|truncatechars:100 }}</p>
+                            <a href="{% url 'news_detail' comment.news.id %}" class="text-blue-400 hover:text-blue-300 text-sm">
+                                {% trans "Перейти к новости" %}
+                            </a>
+                        </div>
+                    {% empty %}
+                        <p class="text-gray-400">{% trans "Пока нет активности" %}</p>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
-                <h3 class="text-lg font-semibold mb-2">{% trans "Последнее посещение" %}</h3>
-                <p class="text-2xl neon-text">{{ user.last_login|date:"d.m.Y" }}</p>
-            </div>
-        </div>
-
-        {# Последняя активность #}
-        <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6">
-            <h2 class="text-xl font-semibold mb-4">{% trans "Последняя активность" %}</h2>
-            <div class="space-y-4">
-                {% for comment in user.comments.all|slice:":5" %}
-                    <div class="border-l-4 border-primary-500 pl-4">
-                        <p class="text-sm text-gray-400">{{ comment.created_at|date:"d.m.Y H:i" }}</p>
-                        <p class="mt-1">{{ comment.text|truncatechars:100 }}</p>
-                        <a href="{% url 'news_detail' comment.news.id %}" class="text-blue-400 hover:text-blue-300 text-sm">
-                            {% trans "Перейти к новости" %}
-                        </a>
-                    </div>
-                {% empty %}
-                    <p class="text-gray-400">{% trans "Пока нет активности" %}</p>
-                {% endfor %}
-            </div>
-        </div>
 
         {% if user.favorites.exists %}
         <div class="bg-gray-800/80 backdrop-blur-md rounded-xl p-6 mt-6">

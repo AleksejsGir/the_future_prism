@@ -185,3 +185,19 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
 
     return render(request, 'users/password_change.html', {'form': form})
+
+
+@login_required
+def user_comments(request):
+    """
+    Отображение всех комментариев пользователя.
+    """
+    # Получаем все комментарии пользователя, отсортированные по дате (сначала новые)
+    comments = request.user.comments.all().order_by('-created_at')
+
+    context = {
+        'comments': comments,
+        'active_tab': 'comments',  # Для подсветки активного пункта меню
+        'title': _('Мои комментарии'),
+    }
+    return render(request, 'users/user_comments.html', context)

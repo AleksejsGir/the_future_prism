@@ -8,6 +8,9 @@
     <a href="{% url 'favorite_news_list' %}" class="category-button {% if active_tab == 'favorites' %}active-category{% endif %}">
         {% trans "Избранное" %}
     </a>
+    <a href="{% url 'user_comments' %}" class="category-button {% if active_tab == 'comments' %}active-category{% endif %}">
+        {% trans "Комментарии" %}
+    </a>
     <a href="{% url 'password_change' %}" class="category-button {% if active_tab == 'password' %}active-category{% endif %}">
         {% trans "Безопасность" %}
     </a>

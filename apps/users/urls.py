@@ -7,7 +7,7 @@ from django.contrib.auth.views import (
 
 from .views import (
     user_login, register_view, profile,
-    edit_profile, delete_avatar, change_password
+    edit_profile, delete_avatar, change_password, user_comments
 )
 
 # Разделяем URL-паттерны на группы для лучшей организации
@@ -53,6 +53,7 @@ urlpatterns = [
     path('profile/edit/', edit_profile, name='edit_profile'),
     path('profile/avatar/delete/', delete_avatar, name='delete_avatar'),
     path('profile/password/', change_password, name='password_change'),
+    path('profile/comments/', user_comments, name='user_comments'),
 ]
 
 # Примечания по URL-паттернам:
