@@ -28,23 +28,23 @@ urlpatterns = [
 
     # Маршруты для сброса пароля
     path('password-reset/', PasswordResetView.as_view(
-        template_name='registration/templates/users/password_reset.html',
+        template_name='users/password_reset.html',  # Исправлено
         success_url='/password-reset/done/',
         email_template_name='registration/password_reset_email.html',
         subject_template_name='registration/password_reset_subject.txt',
         extra_context={'title': 'Сброс пароля'}
     ), name='password_reset'),
     path('password-reset/done/', PasswordResetDoneView.as_view(
-        template_name='registration/templates/users/password_reset_done.html',
+        template_name='users/password_reset_done.html',  # Исправлено
         extra_context={'title': 'Письмо отправлено'}
     ), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
-        template_name='registration/templates/users/password_reset_confirm.html',
+        template_name='users/password_reset_confirm.html',  # Исправлено
         success_url='/password-reset-complete/',
         extra_context={'title': 'Установка нового пароля'}
     ), name='password_reset_confirm'),
     path('password-reset-complete/', PasswordResetCompleteView.as_view(
-        template_name='registration/templates/users/password_reset_complete.html',
+        template_name='users/password_reset_complete.html',  # Исправлено
         extra_context={'title': 'Пароль изменен'}
     ), name='password_reset_complete'),
 
