@@ -26,7 +26,19 @@ def comment_list(request, news_id):
 
     # Получаем тип сортировки из GET-параметров
     sort_by = request.GET.get('sort_by', 'newest')
-    comments = get_comments_for_news(news_id, sort_by)
+
+    # Определяем, нужно ли показывать все комментарии
+    show_all = request.GET.get('show_all') == 'true'
+
+    # Получаем все комментарии для подсчета
+    all_comments = Comment.objects.filter(news_id=news_id, parent=None)
+    total_comments = all_comments.count()
+
+    # По умолчанию показываем только первые 5 комментариев
+    if not show_all and total_comments > 5:
+        comments = get_comments_for_news(news_id, sort_by)[:5]
+    else:
+        comments = get_comments_for_news(news_id, sort_by)
 
     # Для каждого комментария устанавливаем user_reaction
     if request.user.is_authenticated:
@@ -39,7 +51,9 @@ def comment_list(request, news_id):
     context = {
         'news': news,
         'comments': comments,
-        'sort_by': sort_by
+        'total_comments': total_comments,
+        'sort_by': sort_by,
+        'show_all': show_all
     }
 
     # Если это AJAX-запрос, возвращаем только часть HTML
@@ -47,7 +61,6 @@ def comment_list(request, news_id):
         return render(request, 'comments/comment_list.html', context)
 
     return render(request, 'comments/comment_list.html', context)
-
 
 @login_required
 @require_POST

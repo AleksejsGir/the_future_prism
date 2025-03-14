@@ -29,7 +29,70 @@ function initializeEventHandlers() {
             }
         });
     });
+// Обработка кнопки "Показать все комментарии"
+const showAllCommentsButton = document.getElementById('show-all-comments');
+if (showAllCommentsButton) {
+    showAllCommentsButton.addEventListener('click', function() {
+        const newsId = this.dataset.newsId;
 
+        // Показываем загрузку и блокируем кнопку
+        this.textContent = window.translations?.loading || 'Загрузка...';
+        this.disabled = true;
+
+        // Получаем языковой префикс из текущего URL
+        const langPrefix = getCurrentLanguagePrefix();
+
+        // Формируем URL с учетом сортировки
+        const sortBy = document.querySelector('.comment-sort-btn.active')?.dataset.sort || 'newest';
+
+        // Загружаем все комментарии
+        fetch(`${langPrefix}/news/${newsId}/comments/?show_all=true&sort_by=${sortBy}`, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Ошибка сети: ' + response.status);
+            }
+            return response.text();
+        })
+        .then(html => {
+            console.log('Получены все комментарии');
+
+            // Создаем временный элемент для парсинга HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Находим элементы для обновления
+            const newCommentsSection = doc.querySelector('.comments-section');
+            const currentCommentsSection = document.querySelector('.comments-section');
+
+            if (currentCommentsSection && newCommentsSection) {
+                currentCommentsSection.innerHTML = newCommentsSection.innerHTML;
+
+                // Повторно инициализируем обработчики событий для новых элементов
+                initializeEventHandlers();
+            } else {
+                console.error('Не удалось найти секцию комментариев для обновления');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке комментариев:', error);
+
+            // Восстанавливаем кнопку
+            this.textContent = window.translations?.show_all_comments || 'Показать все комментарии';
+            this.disabled = false;
+
+            // Показываем уведомление об ошибке
+            if (typeof showNotification === 'function') {
+                showNotification('Произошла ошибка при загрузке комментариев', 'error');
+            } else {
+                alert('Произошла ошибка при загрузке комментариев: ' + error.message);
+            }
+        });
+    });
+}
     // Валидация формы комментария
     const commentForms = document.querySelectorAll('.comment-form');
 

@@ -2,7 +2,7 @@
 {% load i18n %}
 
 <div class="comments-section">
-    <h2 class="text-2xl font-bold mb-4">{% trans "Комментарии" %} ({{ comments|length }})</h2>
+    <h2 class="text-2xl font-bold mb-4">{% trans "Комментарии" %} ({{ total_comments }})</h2>
 
     <!-- Добавляем сортировку -->
     <div class="comments-sorting mb-4">
@@ -19,6 +19,15 @@
             </a>
         </div>
     </div>
+
+    <!-- Кнопка показать все комментарии -->
+    {% if not show_all and comments|length < total_comments %}
+    <div class="text-center mb-6">
+        <button id="show-all-comments" class="neon-button" data-news-id="{{ news.id }}">
+            {% trans "Показать все комментарии" %} ({{ total_comments }})
+        </button>
+    </div>
+    {% endif %}
 
     {% if user.is_authenticated %}
         <form method="post" action="{% url 'add_comment' news.id %}" class="comment-form mb-6">
