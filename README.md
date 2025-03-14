@@ -1,120 +1,120 @@
-# 🌟 The Future Prism - Новостной портал о технологиях и будущем 🚀
+# 🌟 The Future Prism - Technology & Future News Portal 🚀
 
-**"The Future Prism"** — это современный новостной портал, посвящённый технологиям, обществу и будущему. Платформа предоставляет удобный интерфейс для чтения, публикации и обсуждения новостей.
-
----
-
-## 📌 Основные особенности проекта
-
-✅ Интуитивно понятный интерфейс  
-✅ Разделение по категориям новостей  
-✅ Расширенные профили пользователей с аватарами  
-✅ Система комментариев и лайков  
-✅ Избранные статьи с персональным списком  
-✅ Адаптивный современный дизайн  
-✅ Оптимизированная API-интеграция  
-✅ Многоязычный интерфейс  
+**"The Future Prism"** is a modern news portal dedicated to technology, society, and the future. The platform provides a user-friendly interface for reading, publishing, and discussing news.
 
 ---
 
-## 🏗️ Технологический стек
+## 📌 Key Project Features
+
+✅ Intuitive user interface  
+✅ News categorization system  
+✅ Enhanced user profiles with avatars  
+✅ Comments and likes system  
+✅ Favorites article list for personalized reading  
+✅ Responsive modern design  
+✅ Optimized API integration  
+✅ Multilingual interface  
+
+---
+
+## 🏗️ Technology Stack
 
 ### 🔹 **Backend**
-- **Язык программирования:** Python 3.11  
-- **Фреймворк:** Django 5.1  
-- **СУБД:** PostgreSQL 13  
-- **Кэширование:** Redis 6  
-- **Асинхронные задачи:** Celery  
-- **Аутентификация:** JWT (DRF SimpleJWT)  
+- **Programming Language:** Python 3.11  
+- **Framework:** Django 5.1  
+- **Database:** PostgreSQL 13  
+- **Caching:** Redis 6  
+- **Asynchronous Tasks:** Celery  
+- **Authentication:** JWT (DRF SimpleJWT)  
 - **REST API:** Django REST Framework  
-- **Документация API:** Swagger/OpenAPI (drf-yasg)  
+- **API Documentation:** Swagger/OpenAPI (drf-yasg)  
 
 ### 🎨 **Frontend**
-- **Языки:** HTML5, CSS3, JavaScript  
-- **Стилизация:** Tailwind CSS  
-- **Редактор контента:** TinyMCE  
-- **Интерактивные компоненты:** HTMX  
+- **Languages:** HTML5, CSS3, JavaScript  
+- **Styling:** Tailwind CSS  
+- **Content Editor:** TinyMCE  
+- **Interactive Components:** HTMX  
 
-### ⚙️ **Инфраструктура**
-- **Контейнеризация:** Docker + Docker Compose  
+### ⚙️ **Infrastructure**
+- **Containerization:** Docker + Docker Compose  
 - **CI/CD:** GitHub Actions  
-- **Веб-сервер:** Gunicorn + Nginx  
-- **Логирование и мониторинг**  
+- **Web Server:** Gunicorn + Nginx  
+- **Logging and Monitoring**  
 
 ---
 
-## 📂 Структура проекта
+## 📂 Project Structure
 
-Проект следует модульной архитектуре с разделением на ядро и независимые приложения:
+The project follows a modular architecture separating core functionality from independent applications:
 
 ```
 the_future_prism/
-├── core/                 # Ядро проекта
-│   ├── settings/         # Настройки для разных сред (dev, prod)
-│   ├── urls.py           # Основные URL-маршруты
-│   └── views.py          # Общие представления
-├── apps/                 # Приложения проекта
-│   ├── users/            # Пользовательская система
-│   │   ├── api/          # API компоненты
-│   │   └── services.py   # Бизнес-логика
-│   ├── news/             # Модуль публикации новостей
-│   │   ├── api/          # API компоненты
-│   │   └── services.py   # Бизнес-логика
-│   ├── comments/         # Управление комментариями
-│   └── analytics/        # Анализ данных и статистика
-├── templates/            # Общие шаблоны
+├── core/                 # Core project files
+│   ├── settings/         # Settings for different environments (dev, prod)
+│   ├── urls.py           # Main URL routes
+│   └── views.py          # Common views
+├── apps/                 # Project applications
+│   ├── users/            # User management system
+│   │   ├── api/          # API components
+│   │   └── services.py   # Business logic
+│   ├── news/             # News publication module
+│   │   ├── api/          # API components
+│   │   └── services.py   # Business logic
+│   ├── comments/         # Comments management
+│   └── analytics/        # Data analysis and statistics
+├── templates/            # Common templates
 │   ├── base.html
-│   └── includes/         # Повторно используемые компоненты
-├── static/               # Общие статические файлы
-└── media/                # Загружаемые пользователем файлы
+│   └── includes/         # Reusable components
+├── static/               # Common static files
+└── media/                # User-uploaded files
 ```
 
-Каждое приложение содержит:
-- Свои модели, представления, формы
-- Сервисный слой для бизнес-логики
-- Отдельные API-компоненты
-- Специфические статические файлы
-- Тесты для всех компонентов
+Each application contains:
+- Models, views, and forms
+- Service layer for business logic
+- Separate API components
+- App-specific static files
+- Tests for all components
 
 ---
 
-## 🛠️ Установка и запуск
+## 🛠️ Installation and Setup
 
-### 🔹 **Предварительные требования**
+### 🔹 **Prerequisites**
 - Python 3.11+
 - PostgreSQL 13+
 - Redis 6+
-- Docker (по желанию)
-- Виртуальное окружение Python (рекомендуется)
+- Docker (optional)
+- Python virtual environment (recommended)
 
-### 🔹 **Шаги по установке**
-1. Клонировать репозиторий:
+### 🔹 **Installation Steps**
+1. Clone the repository:
 ```bash
 git clone https://github.com/AleksejsGir/the_future_prism.git
 cd the_future_prism
 ```
 
-2. Создать виртуальное окружение и установить зависимости:
+2. Create a virtual environment and install dependencies:
 ```bash
 python -m venv venv
-source venv/bin/activate  # (Linux/macOS) или venv\Scripts\activate  # (Windows)
+source venv/bin/activate  # (Linux/macOS) or venv\Scripts\activate  # (Windows)
 pip install -r requirements.txt
 ```
 
-3. Настроить `.env` файл (пример `.env.example`)
+3. Configure the `.env` file (see `.env.example` for reference)
 
-4. Применить миграции и запустить сервер:
+4. Apply migrations and start the server:
 ```bash
 python manage.py migrate
 python manage.py runserver
 ```
 
-5. Создать суперпользователя для доступа к админ-панели:
+5. Create a superuser for admin panel access:
 ```bash
 python manage.py createsuperuser
 ```
 
-### 🔹 **Запуск через Docker**
+### 🔹 **Docker Setup**
 ```bash
 docker-compose up -d
 docker-compose exec web python manage.py migrate
@@ -123,51 +123,51 @@ docker-compose exec web python manage.py createsuperuser
 
 ---
 
-## 🔥 API и интеграции
+## 🔥 API and Integrations
 
-- **REST API** с полным доступом к функциональности  
-- **Swagger/OpenAPI** документация  
-- **JWT аутентификация** для безопасного доступа  
-- **Фильтрация и поиск** для всех ресурсов  
-- **Пагинация и кэширование**  
+- **REST API** with full functionality access  
+- **Swagger/OpenAPI** documentation  
+- **JWT authentication** for secure access  
+- **Filtering and search** for all resources  
+- **Pagination and caching**  
 
-📌 **API-документация доступна по адресу:**  
+📌 **API documentation is available at:**  
 `/api/docs/` (Swagger UI)
 
-Подробная документация API находится в файле [API_DOCUMENTATION.md](API_DOCUMENTATION.md)
+Detailed API documentation can be found in the [API_DOCUMENTATION.en.md](API_DOCUMENTATION.en.md) file.
 
 ---
 
-## 🔒 Безопасность и оптимизация
+## 🔒 Security and Optimization
 
-🔹 Защита от XSS, CSRF и SQL-инъекций  
-🔹 Ограничение частоты запросов (Rate Limiting)  
-🔹 Оптимизация запросов с использованием select_related и prefetch_related  
-🔹 Кэширование запросов через Redis  
-🔹 Отложенная загрузка изображений  
-🔹 Минимизация CSS и JavaScript  
+🔹 Protection against XSS, CSRF, and SQL injections  
+🔹 Request rate limiting  
+🔹 Query optimization using select_related and prefetch_related  
+🔹 Request caching through Redis  
+🔹 Lazy loading for images  
+🔹 CSS and JavaScript minification  
 
 ---
 
-## 📊 Тестирование
+## 📊 Testing
 
-Проект содержит обширный набор тестов для всех компонентов:
+The project includes a comprehensive test suite for all components:
 
 ```bash
-# Запуск всех тестов
+# Run all tests
 python manage.py test
 
-# Запуск тестов для конкретного приложения
+# Run tests for a specific application
 python manage.py test apps.news
 
-# Запуск тестов с отчетом о покрытии
+# Run tests with coverage report
 coverage run --source='.' manage.py test
 coverage report
 ```
 
 ---
 
-## 🌍 Развертывание
+## 🌍 Deployment
 
 📦 **Docker**  
 ```bash
@@ -180,61 +180,61 @@ docker-compose -f docker-compose.prod.yml up -d
 ```
 
 ⏳ **CI/CD (GitHub Actions)**  
-- Автоматические тесты при каждом push и pull request  
-- Безопасное хранение секретов  
-- Автоматическое развертывание при merge в main  
+- Automatic testing for each push and pull request  
+- Secure storage of secrets  
+- Automatic deployment when merging to main  
 
-Пример CI/CD конфигурации можно найти в файле [.github/workflows/ci.yml](.github/workflows/ci.yml)
-
----
-
-## 📅 Текущая стадия разработки
-
-### ✅ **Завершено**
-✔️ Базовая архитектура и модульная структура  
-✔️ Авторизация, профили пользователей с аватарами  
-✔️ Основной функционал новостей и категорий  
-✔️ Система избранных статей  
-✔️ Настроено безопасное развертывание  
-✔️ Оптимизация статических файлов  
-✔️ Документация API  
-
-### 🔄 **В процессе**
-🔸 Улучшение комментариев  
-🔸 Добавление аналитики  
-🔸 Оптимизация производительности  
-
-### 🚀 **Планируется**
-🔹 Интеграция с социальными сетями  
-🔹 Расширенный поиск с релевантностью  
-🔹 Рекомендательная система на основе предпочтений  
-🔹 Разработка мобильного приложения  
+An example CI/CD configuration can be found in the [.github/workflows/ci.yml](.github/workflows/ci.yml) file.
 
 ---
 
-## 🤝 Вклад в проект
+## 📅 Current Development Stage
 
-Мы приветствуем вклад в развитие проекта The Future Prism:
+### ✅ **Completed**
+✔️ Basic architecture and modular structure  
+✔️ Authentication, user profiles with avatars  
+✔️ Core news functionality and categories  
+✔️ Favorites system  
+✔️ Secure deployment configuration  
+✔️ Static file optimization  
+✔️ API documentation  
 
-1. Сделайте форк репозитория
-2. Создайте свою ветку (`git checkout -b feature/amazing-feature`)
-3. Зафиксируйте изменения (`git commit -m 'Add amazing feature'`)
-4. Отправьте изменения в свой форк (`git push origin feature/amazing-feature`)
-5. Создайте Pull Request
+### 🔄 **In Progress**
+🔸 Comments system enhancement  
+🔸 Analytics implementation  
+🔸 Performance optimization  
+
+### 🚀 **Planned**
+🔹 Social media integration  
+🔹 Advanced search with relevance  
+🔹 Recommendation system based on preferences  
+🔹 Mobile application development  
 
 ---
 
-## 📜 Лицензия
+## 🤝 Contributing
 
-Этот проект распространяется под лицензией MIT. См. файл [LICENSE](LICENSE) для получения дополнительной информации.
+We welcome contributions to The Future Prism project:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Create a Pull Request
 
 ---
 
-## 🎉 Благодарности
+## 📜 License
 
-Проект разрабатывается с использованием лучших практик Django и современных технологий.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
-💡 **The Future Prism** — это ваш портал в мир будущего!  
-📧 **Контакты:** [aleksej.it.gir@gmail.com](mailto:aleksej.it.gir@gmail.com)
+---
+
+## 🎉 Acknowledgements
+
+This project is developed using Django best practices and modern technologies.
+
+💡 **The Future Prism** — your portal to the world of the future!  
+📧 **Contact:** [aleksej.it.gir@gmail.com](mailto:aleksej.it.gir@gmail.com)
 
 ---
