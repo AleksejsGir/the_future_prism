@@ -4,6 +4,25 @@
 
 ---
 
+
+## 📸 Screenshots
+
+### Home Page with News Categories
+![Home Page](docs/screenshots/homepage.png)
+
+### Article Detail View
+![Article Detail](docs/screenshots/article_detail.png)
+
+### User Profile with Activity History
+![User Profile](docs/screenshots/profile.png)
+
+### Favorites Collection Page
+![Favorites](docs/screenshots/favorites.png)
+
+### Mobile Responsive Design
+![Mobile View](docs/screenshots/mobile_view.png)
+
+---
 ## 📌 Key Project Features
 
 ✅ Intuitive user interface  

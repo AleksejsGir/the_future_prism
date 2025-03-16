@@ -1,33 +1,35 @@
 """
-Настройки Jazzmin для админ-панели проекта The Future Prism.
+Settings for Jazzmin admin panel of The Future Prism project.
 """
+# Добавляем импорт для gettext_lazy
+from django.utils.translation import gettext_lazy as _
 
-# Основные настройки Jazzmin
+# Jazzmin main settings
 JAZZMIN_SETTINGS = {
-    # Заголовок на панели навигации
-    "site_title": "The Future Prism",
-    # Название, отображаемое на вкладке браузера
-    "site_header": "The Future Prism Admin",
-    # Название в панели приложений
-    "site_brand": "The Future Prism",
-    # Ссылка на логотип
+    # Title on navigation bar
+    "site_title": _("The Future Prism"),
+    # Title displayed in browser tab
+    "site_header": _("The Future Prism Admin"),
+    # Title in apps panel
+    "site_brand": _("The Future Prism"),
+    # Logo link
     "site_logo": "images/logo.PNG",
-    # CSS-класс логотипа
+    # CSS class for logo
     "site_logo_classes": "img-circle",
-    # Приветственное сообщение на странице входа
-    "welcome_sign": "Добро пожаловать в админ-панель The Future Prism",
-    # Авторские права
-    "copyright": "The Future Prism © 2025",
-    # Пользовательские ссылки для отображения вверху справа
+    # Welcome message on login page
+    "welcome_sign": _("Welcome to The Future Prism Admin Panel"),
+    # Copyright
+    "copyright": _("The Future Prism © 2025"),
+    # Custom links displayed on top right
     "topmenu_links": [
-        # URL, который будет указан как кнопка "Домой"
-        {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
-        # Внешние URL, которые будут открываться в новой вкладке
-        {"name": "Перейти на сайт", "url": "/", "new_window": True},
-        # Модель пользовательских разрешений
+        # URL for Home button
+        {"name": _("Home"), "url": "admin:index", "permissions": ["auth.view_user"]},
+        # External URLs that will open in a new tab
+        {"name": _("Go to website"), "url": "/", "new_window": True},
+        # User permissions model
         {"model": "auth.User"},
     ],
-    # Пользовательские иконки для приложений/моделей
+    # Custom icons for apps/models
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
@@ -38,32 +40,33 @@ JAZZMIN_SETTINGS = {
         "comments.comment": "fas fa-comments",
         "analytics.pageview": "fas fa-chart-line",
     },
-    # Иконки, используемые когда не определены пользовательские иконки
+    # Icons used when custom icons are not defined
     "default_icon_parents": "fas fa-folder",
     "default_icon_children": "fas fa-file",
-    # Тема интерфейса
+    # Interface theme
     "theme": "darkly",
-    # Пользовательские CSS
+    # Custom CSS
     "custom_css": "css/themes/admin/admin.css",
-    # Пользовательский JS
+    # Custom JS
     "custom_js": None,
-    # Скрыть модели пользователей
+    # Hide user models
     "hide_models": [],
-    # Настройки боковой панели
+    # Sidebar settings
     "order_with_respect_to": ["auth", "users", "news", "comments", "analytics"],
-    # Показывать или скрывать приложения
+    # Show or hide apps
     "show_ui_builder": True,
-    # Делать поля форм более компактными
+    # Make form fields more compact
     "changeform_format": "horizontal",
-    # Делать поля форм более компактными
+    # Make form fields more compact
     "changeform_format_overrides": {
         "auth.user": "collapsible",
         "auth.group": "collapsible",
     },
 }
 
-# Пользовательские настройки UI для админ-панели
+# Custom UI settings for admin panel
 JAZZMIN_UI_TWEAKS = {
+    # Оставляем существующие настройки без изменений
     "navbar_small_text": False,
     "footer_small_text": False,
     "body_small_text": False,
