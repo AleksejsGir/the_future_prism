@@ -36,7 +36,7 @@ if (showAllCommentsButton) {
         const newsId = this.dataset.newsId;
 
         // Показываем загрузку и блокируем кнопку
-        this.textContent = window.translations?.loading || 'Загрузка...';
+        this.textContent = window.translations?.loading || 'Loading...';
         this.disabled = true;
 
         // Получаем языковой префикс из текущего URL
@@ -53,12 +53,12 @@ if (showAllCommentsButton) {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Ошибка сети: ' + response.status);
+                throw new Error(window.translations?.request_error || 'Network error: ' + response.status);
             }
             return response.text();
         })
         .then(html => {
-            console.log('Получены все комментарии');
+            console.log('Comments loaded successfully');
 
             // Создаем временный элемент для парсинга HTML
             const parser = new DOMParser();
@@ -74,21 +74,21 @@ if (showAllCommentsButton) {
                 // Повторно инициализируем обработчики событий для новых элементов
                 initializeEventHandlers();
             } else {
-                console.error('Не удалось найти секцию комментариев для обновления');
+                console.error('Could not find comments section to update');
             }
         })
         .catch(error => {
-            console.error('Ошибка при загрузке комментариев:', error);
+            console.error('Error loading comments:', error);
 
             // Восстанавливаем кнопку
-            this.textContent = window.translations?.show_all_comments || 'Показать все комментарии';
+            this.textContent = window.translations?.show_all_comments || 'Show all comments';
             this.disabled = false;
 
             // Показываем уведомление об ошибке
             if (typeof showNotification === 'function') {
-                showNotification('Произошла ошибка при загрузке комментариев', 'error');
+                showNotification(window.translations?.error_loading_comments || 'Error loading comments', 'error');
             } else {
-                alert('Произошла ошибка при загрузке комментариев: ' + error.message);
+                alert(window.translations?.error_loading_comments || 'Error loading comments: ' + error.message);
             }
         });
     });
@@ -104,9 +104,9 @@ if (showAllCommentsButton) {
                 event.preventDefault();
                 // Используем общую функцию уведомлений, если она доступна
                 if (typeof showNotification === 'function') {
-                    showNotification('Текст комментария не может быть пустым', 'error');
+                    showNotification(window.translations?.empty_comment || 'Comment text cannot be empty', 'error');
                 } else {
-                    alert('Текст комментария не может быть пустым');
+                    alert(window.translations?.empty_comment || 'Comment text cannot be empty');
                 }
                 contentField.focus();
             }
@@ -122,7 +122,7 @@ reactionButtons.forEach(button => {
         const commentId = this.dataset.commentId;
         const reactionType = this.dataset.reactionType;
 
-        console.log('Нажата кнопка реакции:', commentId, reactionType);
+        console.log('Reaction button clicked:', commentId, reactionType);
 
         // Получаем CSRF-токен
         const csrftoken = getCookie('csrftoken');
@@ -132,7 +132,7 @@ reactionButtons.forEach(button => {
 
         // Формируем полный URL с учетом языкового префикса
         const url = `${langPrefix}/comments/${commentId}/reaction/`;
-        console.log('Отправка запроса на URL:', url);
+        console.log('Sending request to URL:', url);
 
         // Отправляем стандартный POST-запрос вместо AJAX для отладки
         const form = document.createElement('form');
@@ -189,7 +189,7 @@ function getCurrentLanguagePrefix() {
             const url = new URL(window.location.href);
             url.searchParams.set('sort_by', sortBy);
 
-            console.log('Сортировка по:', sortBy, 'URL:', url.toString());
+            console.log('Sorting by:', sortBy, 'URL:', url.toString());
 
             // Визуально активируем кнопку сортировки
             sortButtons.forEach(btn => btn.classList.remove('active'));
@@ -206,12 +206,12 @@ function getCurrentLanguagePrefix() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Ошибка сети: ' + response.status);
+                    throw new Error(window.translations?.request_error || 'Network error: ' + response.status);
                 }
                 return response.text();
             })
             .then(html => {
-                console.log('Получен HTML для сортировки');
+                console.log('Received HTML for sorting');
 
                 // Создаем временный элемент для парсинга HTML
                 const parser = new DOMParser();
@@ -228,15 +228,15 @@ function getCurrentLanguagePrefix() {
                     // Повторно инициализируем обработчики событий
                     initializeEventHandlers();
                 } else {
-                    console.error('Не удалось найти список комментариев для обновления');
+                    console.error('Could not find comments list to update');
                 }
             })
             .catch(error => {
-                console.error('Ошибка при сортировке:', error);
+                console.error('Error during sorting:', error);
                 if (typeof showNotification === 'function') {
-                    showNotification('Произошла ошибка при загрузке комментариев', 'error');
+                    showNotification(window.translations?.error_loading_comments || 'Error loading comments', 'error');
                 } else {
-                    alert('Произошла ошибка при загрузке комментариев: ' + error.message);
+                    alert(window.translations?.error_loading_comments || 'Error loading comments: ' + error.message);
                 }
             });
         });

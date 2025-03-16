@@ -1,11 +1,11 @@
 # English translation for The Future Prism.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-05 23:30+0000\n"
-"PO-Revision-Date: 2025-03-05 15:30+0000\n"
-"Last-Translator: ADMIN <admin@thefutureprism.com>\n"
+"POT-Creation-Date: 2025-03-16 12:00+0000\n"
+"PO-Revision-Date: 2025-03-16 12:00+0000\n"
+"Last-Translator: Developer <dev@thefutureprism.com>\n"
 "Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -17,15 +17,15 @@ msgstr ""
 msgid "The Future Prism Admin"
 msgstr "The Future Prism Admin"
 
-#: .\apps\news\admin.py:52
+#: .\apps\news\admin.py:30
 msgid "Количество новостей"
 msgstr "Number of news"
 
-#: .\apps\news\admin.py:74 .\apps\news\admin.py:283
+#: .\apps\news\admin.py:52 .\apps\news\admin.py:283
 msgid "Статус переводов"
 msgstr "Translation status"
 
-#: .\apps\news\admin.py:96 .\apps\news\admin.py:316
+#: .\apps\news\admin.py:74 .\apps\news\admin.py:316
 msgid "Копировать основной язык во все переводы"
 msgstr "Copy main language to all translations"
 
@@ -130,33 +130,46 @@ msgid "Сбросить счетчик просмотров"
 msgstr "Reset view counter"
 
 #: .\apps\users\forms.py:20
-
-msgid "Уведомления на email"
-msgstr "Email notifications"
+msgid "Введите email"
+msgstr "Enter email"
 
 #: .\apps\users\forms.py:23
 msgid "Введите действующий email адрес"
-msgstr ""
+msgstr "Enter a valid email address"
 
 #: .\apps\users\forms.py:38
 msgid "Пользователь с таким email уже существует."
-msgstr ""
+msgstr "A user with this email already exists."
 
 #: .\apps\users\forms.py:50
 msgid "Расскажите о себе"
-msgstr ""
+msgstr "Tell us about yourself"
 
 #: .\apps\users\forms.py:53
 msgid "Кратко расскажите о себе (необязательно)"
-msgstr ""
+msgstr "Tell briefly about yourself (optional)"
 
 #: .\apps\users\forms.py:63
 msgid "Максимальный размер: 5MB"
-msgstr ""
+msgstr "Maximum size: 5MB"
 
-#: .\apps\users\forms.py:85
+#: .\apps\users\forms.py:67 .\apps\users\models.py:37
+#: .\templates\registration\profile.html:45
+msgid "Русский"
+msgstr "Russian"
+
+#: .\apps\users\forms.py:67 .\apps\users\models.py:37
+#: .\templates\registration\profile.html:47
+msgid "Английский"
+msgstr "English"
+
+#: .\apps\users\forms.py:71
+msgid "Выберите предпочитаемый язык интерфейса"
+msgstr "Choose your preferred interface language"
+
+#: .\apps\users\forms.py:85 .\apps\users\forms.py:93
 msgid "Размер файла не должен превышать 5MB"
-msgstr ""
+msgstr "File size should not exceed 5MB"
 
 #: .\apps\users\forms.py:96 .\apps\users\forms.py:100
 #: .\templates\registration\login.html:33
@@ -171,14 +184,24 @@ msgid "Пароль"
 msgstr "Password"
 
 #: .\apps\users\forms.py:118 .\templates\registration\login.html:78
+msgid "Запомнить меня"
+msgstr "Remember me"
 
+#: .\apps\users\forms.py:120
 msgid "Изменить пароль"
 msgstr "Change password"
 
 #: .\apps\users\forms.py:133
-
 msgid "Повторите пароль"
 msgstr "Confirm password"
+
+#: .\apps\users\forms.py:138
+msgid "Введите имя пользователя"
+msgstr "Enter username"
+
+#: .\apps\users\forms.py:141
+msgid "Введите пароль"
+msgstr "Enter password"
 
 #: .\apps\users\models.py:13
 msgid "О себе"
@@ -188,8 +211,8 @@ msgstr "About me"
 msgid "Краткая информация о пользователе"
 msgstr "Brief information about the user"
 
-#: .\apps\users\models.py:20 .\templates\base.html:101
-#: .\templates\base.html:127 .\templates\registration\profile.html:28
+#: .\apps\users\models.py:20 .\templates\base.html:84 .\templates\base.html:127
+#: .\templates\registration\profile.html:28
 msgid "Аватар"
 msgstr "Avatar"
 
@@ -197,73 +220,93 @@ msgstr "Avatar"
 msgid "Изображение профиля пользователя"
 msgstr "User profile image"
 
+#: .\apps\users\models.py:28
+msgid "Уведомления на email"
+msgstr "Email notifications"
 
 #: .\apps\users\models.py:30
 msgid "Получать уведомления на email"
 msgstr "Receive email notifications"
 
-#: .\apps\users\models.py:34
+#: .\apps\users\models.py:35
+msgid "Предпочитаемый язык"
+msgstr "Preferred language"
+
+#: .\apps\users\models.py:39
+msgid "Выберите язык интерфейса"
+msgstr "Choose interface language"
+
+#: .\apps\users\models.py:43
 msgid "Пользователь"
 msgstr "User"
 
-#: .\apps\users\models.py:35
+#: .\apps\users\models.py:44
 msgid "Пользователи"
 msgstr "Users"
 
-#: .\apps\users\views.py:60
+#: .\apps\users\views.py:60 .\apps\users\views.py:62
 #, python-brace-format
 msgid "Добро пожаловать, {0}!"
 msgstr "Welcome, {0}!"
 
-#: .\apps\users\views.py:70
+#: .\apps\users\views.py:70 .\apps\users\views.py:72
 msgid "Ваш аккаунт деактивирован"
 msgstr "Your account is deactivated"
 
-#: .\apps\users\views.py:83 .\templates\registration\login.html:11
+#: .\apps\users\views.py:77 .\apps\users\views.py:83
+msgid "Неверное имя пользователя или пароль"
+msgstr "Invalid username or password"
+
+#: .\apps\users\views.py:83 .\apps\users\views.py:85
+#: .\templates\registration\login.html:11
 msgid "Вход в систему"
 msgstr "Log in"
 
-#: .\apps\users\views.py:110
+#: .\apps\users\views.py:110 .\apps\users\views.py:112
 msgid "Регистрация успешна! Добро пожаловать!"
 msgstr "Registration successful! Welcome!"
 
-#: .\apps\users\views.py:116
-msgid "Дата регистрации:"
-msgstr "Registration date:"
+#: .\apps\users\views.py:116 .\apps\users\views.py:118
+#, python-brace-format
+msgid "Ошибка при регистрации: {0}"
+msgstr "Registration error: {0}"
 
+#: .\apps\users\views.py:133
+msgid "Профиль пользователя"
+msgstr "User profile"
 
-#: .\apps\users\views.py:163
+#: .\apps\users\views.py:163 .\apps\users\views.py:166
 msgid "Профиль и аватар успешно обновлены!"
 msgstr "Profile and avatar successfully updated!"
 
-#: .\apps\users\views.py:167
+#: .\apps\users\views.py:167 .\apps\users\views.py:170
 #, python-brace-format
 msgid "Ошибка при загрузке аватара: {0}"
 msgstr "Error uploading avatar: {0}"
 
-#: .\apps\users\views.py:179
+#: .\apps\users\views.py:179 .\apps\users\views.py:182
 msgid "Профиль успешно обновлен!"
 msgstr "Profile successfully updated!"
 
-#: .\apps\users\views.py:206
+#: .\apps\users\views.py:206 .\apps\users\views.py:216
 msgid "Аватар успешно удален"
 msgstr "Avatar successfully deleted"
 
-#: .\apps\users\views.py:210
+#: .\apps\users\views.py:210 .\apps\users\views.py:220
 #, python-brace-format
 msgid "Ошибка при удалении аватара: {0}"
 msgstr "Error deleting avatar: {0}"
 
-#: .\apps\users\views.py:213
+#: .\apps\users\views.py:213 .\apps\users\views.py:223
 msgid "У вас нет загруженного аватара"
 msgstr "You don't have an uploaded avatar"
 
-#: .\apps\users\views.py:235
+#: .\apps\users\views.py:235 .\apps\users\views.py:245
 msgid "Ваш пароль успешно изменен!"
 msgstr "Your password has been changed successfully!"
 
-#: .\templates\about.html:4 .\templates\about.html:9 .\templates\base.html:51
-#: .\templates\base.html:175
+#: .\templates\about.html:4 .\templates\about.html:9 .\templates\base.html:50
+#: .\templates\base.html:174
 msgid "О проекте"
 msgstr "About"
 
@@ -276,10 +319,16 @@ msgid ""
 "информацию в удобном формате.\n"
 "        "
 msgstr ""
+"\n"
+"        \"The Future Prism\" is a news portal that covers topics of the future, "
+"technology, and society.\n"
+"        The goal of the project is to provide users with up-to-date and quality "
+"information in a convenient format.\n"
+"        "
 
 #: .\templates\about.html:19
 msgid "Наша миссия"
-msgstr ""
+msgstr "Our mission"
 
 #: .\templates\about.html:21
 msgid ""
@@ -290,10 +339,15 @@ msgid ""
 "технологий.\n"
 "        "
 msgstr ""
+"\n"
+"        We strive to make complex topics accessible and understandable, "
+"provide objective information\n"
+"        and help our readers navigate the rapidly changing world of technology.\n"
+"        "
 
 #: .\templates\about.html:27
 msgid "Команда"
-msgstr ""
+msgstr "Team"
 
 #: .\templates\about.html:29
 msgid ""
@@ -304,10 +358,15 @@ msgid ""
 "инноваций.\n"
 "        "
 msgstr ""
+"\n"
+"        Our team consists of experienced journalists, technical experts, and "
+"researchers,\n"
+"        who specialize in various fields of technology and innovation.\n"
+"        "
 
 #: .\templates\about.html:35
 msgid "Присоединяйтесь к нам"
-msgstr ""
+msgstr "Join us"
 
 #: .\templates\about.html:37
 msgid ""
@@ -319,39 +378,57 @@ msgid ""
 "        или предложения, не стесняйтесь связаться с нами.\n"
 "        "
 msgstr ""
+"\n"
+"        We are always open to collaboration with authors, experts, and "
+"companies\n"
+"        that share our passion for innovation and the future. If you have "
+"ideas\n"
+"        or suggestions, feel free to contact us.\n"
+"        "
 
 #: .\templates\about.html:47
 msgid "Связаться с нами"
-msgstr ""
+msgstr "Contact us"
 
+#: .\templates\base.html:7 .\templates\base.html:35
+#: .\templates\registration\edit_profile.html:5
+#: .\templates\registration\login.html:4
+#: .\templates\registration\profile.html:4
+msgid "The Future Prism"
+msgstr "The Future Prism"
 
-#: .\templates\base.html:37
+#: .\templates\base.html:36 .\templates\base.html:37
 msgid "THE FUTURE PRISM"
-msgstr ""
+msgstr "THE FUTURE PRISM"
 
-#: .\templates\base.html:43 .\templates\base.html:173
+#: .\templates\base.html:42 .\templates\base.html:43 .\templates\base.html:172
+#: .\templates\base.html:173
 msgid "Главная"
 msgstr "Home"
 
-#: .\templates\base.html:47 .\templates\base.html:174
+#: .\templates\base.html:46 .\templates\base.html:47 .\templates\base.html:173
+#: .\templates\base.html:174
 msgid "Новости"
 msgstr "News"
 
-#: .\templates\base.html:55 .\templates\base.html:176
-#: .\templates\contact.html:4 .\templates\contact.html:9
+#: .\templates\base.html:54 .\templates\base.html:55 .\templates\base.html:175
+#: .\templates\base.html:176 .\templates\contact.html:4 .\templates\contact.html:9
 msgid "Контакты"
 msgstr "Contacts"
 
-#: .\templates\base.html:67 .\templates\base.html:161
+#: .\templates\base.html:66 .\templates\base.html:67 .\templates\base.html:143
+#: .\templates\base.html:161
 msgid "Поиск..."
 msgstr "Search..."
 
-#: .\templates\base.html:107 .\templates\base.html:183
+#: .\templates\base.html:90 .\templates\base.html:107 .\templates\base.html:182
+#: .\templates\base.html:183
 #: .\templates\registration\logged_out.html:4
 msgid "Выход"
 msgstr "Logout"
 
-#: .\templates\base.html:110 .\templates\base.html:186
+#: .\templates\base.html:93 .\templates\base.html:110 .\templates\base.html:185
+#: .\templates\base.html:186
 #: .\templates\registration\login.html:4
 msgid "Вход"
 msgstr "Login"
@@ -360,11 +437,11 @@ msgstr "Login"
 msgid "Перейти в профиль"
 msgstr "Go to profile"
 
-#: .\templates\base.html:191
+#: .\templates\base.html:190 .\templates\base.html:191
 msgid "Закрыть"
 msgstr "Close"
 
-#: .\templates\base.html:200
+#: .\templates\base.html:199 .\templates\base.html:200
 msgid "Все права защищены."
 msgstr "All rights reserved."
 
@@ -376,31 +453,35 @@ msgid ""
 "        пожалуйста, используйте контактную информацию ниже.\n"
 "        "
 msgstr ""
+"\n"
+"        If you have questions, suggestions, or you want to collaborate with "
+"us,\n"
+"        please use the contact information below.\n"
+"        "
 
 #: .\templates\contact.html:21
 msgid "Электронная почта"
-msgstr ""
+msgstr "Email"
 
 #: .\templates\contact.html:24
 msgid "Адрес"
-msgstr ""
+msgstr "Address"
 
 #: .\templates\contact.html:25
 msgid "Street 8"
-msgstr ""
+msgstr "Street 8"
 
 #: .\templates\contact.html:25
 msgid "London, United Kingdom"
-msgstr ""
+msgstr "London, United Kingdom"
 
 #: .\templates\contact.html:29
-
-msgid "Избранные статьи"
-msgstr "Favorite articles"
+msgid "Социальные сети"
+msgstr "Social Media"
 
 #: .\templates\contact.html:40
 msgid "Обратная связь"
-msgstr ""
+msgstr "Feedback"
 
 #: .\templates\contact.html:42
 msgid ""
@@ -410,6 +491,11 @@ msgid ""
 "          на электронную почту.\n"
 "          "
 msgstr ""
+"\n"
+"          A feedback form will appear here soon. In the meantime, you can "
+"write to us\n"
+"          by email.\n"
+"          "
 
 #: .\templates\news_detail.html:10
 msgid "Опубликовано"
@@ -419,17 +505,25 @@ msgstr "Published"
 msgid "Категория"
 msgstr "Category"
 
+#: .\templates\news_detail.html:17
+msgid "В избранном"
+msgstr "In Favorites"
+
+#: .\templates\news_detail.html:19
+msgid "В избранное"
+msgstr "Add to Favorites"
+
 #: .\templates\news_detail.html:31
 msgid "Поделиться"
 msgstr "Share"
 
 #: .\templates\news_detail.html:45
 msgid "Похожие новости"
-msgstr "Related news"
+msgstr "Related News"
 
 #: .\templates\news_detail.html:66
 msgid "← Назад к новостям"
-msgstr "← Back to news"
+msgstr "← Back to News"
 
 #: .\templates\news_list.html:13
 #, python-format
@@ -443,7 +537,7 @@ msgstr "No results found for \"%(query)s\""
 
 #: .\templates\news_list.html:25
 msgid "Выбор категории"
-msgstr "Category Selection"
+msgstr "Select Category"
 
 #: .\templates\news_list.html:32
 msgid "Все категории"
@@ -462,6 +556,14 @@ msgid "Сбросить поиск"
 msgstr "Reset search"
 
 #: .\templates\news_list.html:81
+msgid "У вас пока нет избранных новостей"
+msgstr "You don't have any favorite news yet"
+
+#: .\templates\news_list.html:83
+msgid "Перейти к новостям"
+msgstr "Go to news"
+
+#: .\templates\news_list.html:87
 msgid "Новостей пока нет"
 msgstr "No news yet"
 
@@ -469,21 +571,42 @@ msgstr "No news yet"
 msgid "Предыдущая"
 msgstr "Previous"
 
+#: .\templates\news_list.html:97
+#, python-format
+msgid ""
+"\n"
+"            Страница %(current)s из %(total)s\n"
+"        "
+msgstr ""
+"\n"
+"            Page %(current)s of %(total)s\n"
+"        "
+
 #: .\templates\news_list.html:100
 msgid "Следующая"
 msgstr "Next"
 
 #: .\templates\registration\edit_profile.html:5
 #: .\templates\registration\edit_profile.html:18
+msgid "Редактирование профиля"
+msgstr "Edit Profile"
 
-msgid "Редактировать профиль"
-msgstr "Edit profile"
+#: .\templates\registration\edit_profile.html:35
+msgid "Аватар профиля"
+msgstr "Profile Avatar"
 
 #: .\templates\registration\edit_profile.html:40
 #: .\templates\registration\edit_profile.html:42
 msgid "Текущий аватар"
-msgstr "Current avatar"
+msgstr "Current Avatar"
 
+#: .\templates\registration\edit_profile.html:80
+#: .\templates\registration\profile.html:69
+
+
+#: .\templates\registration\edit_profile.html:86
+msgid "Сохранить изменения"
+msgstr "Save Changes"
 
 #: .\templates\registration\edit_profile.html:87
 #: .\templates\registration\password_change.html:81
@@ -491,86 +614,121 @@ msgid "Отмена"
 msgstr "Cancel"
 
 #: .\templates\registration\edit_profile.html:91
-
-msgid "Уже есть аккаунт?"
-msgstr "Already have an account?"
+msgid "Удалить аватар"
+msgstr "Delete Avatar"
 
 #: .\templates\registration\logged_out.html:9
 msgid "Выход из системы"
-msgstr "Logged out"
+msgstr "Logged Out"
 
 #: .\templates\registration\logged_out.html:10
 msgid "Вы успешно вышли из своей учетной записи"
-msgstr "You have successfully logged out"
+msgstr "You have successfully logged out of your account"
 
 #: .\templates\registration\logged_out.html:14
 msgid "Войти снова"
-msgstr "Log in again"
+msgstr "Log In Again"
 
 #: .\templates\registration\logged_out.html:17
 msgid "Вернуться на главную"
-msgstr "Return to home page"
+msgstr "Return to Home Page"
 
 #: .\templates\registration\login.html:13
 msgid "Войдите в свой аккаунт для доступа к полному функционалу"
 msgstr "Log in to your account to access full functionality"
 
+#: .\templates\registration\login.html:81
+msgid "Забыли пароль?"
+msgstr "Forgot Password?"
 
 #: .\templates\registration\login.html:87
-#: .\templates\registration\register.html:62
+#: .\templates\registration\register.html:58
 msgid "Войти"
-msgstr "Log in"
+msgstr "Log In"
 
 #: .\templates\registration\login.html:96
 msgid "Нет аккаунта?"
 msgstr "Don't have an account?"
 
 #: .\templates\registration\login.html:98
-#: .\templates\registration\register.html:51
 msgid "Зарегистрироваться"
 msgstr "Register"
 
+#: .\templates\registration\password_change.html:5
+#: .\templates\registration\password_change.html:18
+msgid "Изменение пароля"
+msgstr "Change Password"
+
+#: .\templates\registration\password_change.html:39
+msgid "Текущий пароль"
+msgstr "Current Password"
+
+#: .\templates\registration\password_change.html:49
+msgid "Новый пароль"
+msgstr "New Password"
 
 #: .\templates\registration\password_change.html:60
 msgid "Пароль должен содержать минимум 8 символов и не быть слишком простым"
 msgstr "Password must contain at least 8 characters and not be too simple"
 
+#: .\templates\registration\password_change.html:66
+msgid "Подтверждение нового пароля"
+msgstr "Confirm New Password"
 
+#: .\templates\registration\password_change.html:80
+
+
+#: .\templates\registration\password_reset.html:4
 #: .\templates\registration\password_reset.html:9
+msgid "Сброс пароля"
+msgstr "Password Reset"
+
+#: .\templates\registration\password_reset.html:10
 msgid "Введите ваш email, и мы отправим вам инструкцию по сбросу пароля."
 msgstr "Enter your email and we will send you password reset instructions."
 
-#: .\templates\registration\password_reset.html:13
-#: .\templates\registration\profile.html:38
+#: .\templates\registration\password_reset.html:14
 msgid "Email:"
 msgstr "Email:"
 
-#: .\templates\registration\password_reset.html:16
+#: .\templates\registration\password_reset.html:17
 msgid "Отправить"
 msgstr "Send"
 
 #: .\templates\registration\password_reset_complete.html:4
-
-
 #: .\templates\registration\password_reset_complete.html:9
-
+msgid "Пароль изменен"
+msgstr "Password Changed"
 
 #: .\templates\registration\password_reset_complete.html:10
 msgid "Теперь вы можете войти в свой аккаунт с новым паролем."
 msgstr "Now you can log in to your account with your new password."
 
 #: .\templates\registration\password_reset_complete.html:11
+msgid "Перейти ко входу"
+msgstr "Go to Login"
 
-msgid "Перейти к новости"
-msgstr "Go to news"
+#: .\templates\registration\password_reset_confirm.html:4
+#: .\templates\registration\password_reset_confirm.html:9
+msgid "Создание нового пароля"
+msgstr "Create New Password"
 
+#: .\templates\registration\password_reset_confirm.html:14
+msgid "Новый пароль:"
+msgstr "New Password:"
 
+#: .\templates\registration\password_reset_confirm.html:18
+msgid "Подтвердите пароль:"
+msgstr "Confirm Password:"
+
+#: .\templates\registration\password_reset_confirm.html:22
+msgid "Сохранить пароль"
+msgstr "Save Password"
 
 #: .\templates\registration\password_reset_done.html:4
 #: .\templates\registration\password_reset_done.html:9
-
-msgid "Установлен"
-msgstr "Set"
+msgid "Письмо отправлено"
+msgstr "Email Sent"
 
 #: .\templates\registration\password_reset_done.html:10
 msgid ""
@@ -578,51 +736,84 @@ msgid ""
 "сбросу пароля."
 msgstr "If your email is found in our system, you will receive password reset instructions."
 
+#: .\templates\registration\profile.html:4
+msgid "Профиль"
+msgstr "Profile"
 
 #: .\templates\registration\profile.html:12
 msgid "Личный кабинет"
-msgstr "Personal account"
+msgstr "Personal Account"
 
+#: .\templates\registration\profile.html:38
+
+
+#: .\templates\registration\profile.html:39
+msgid "Дата регистрации:"
+msgstr "Registration Date:"
 
 #: .\templates\registration\profile.html:41
 msgid "О себе:"
 msgstr "About me:"
 
+#: .\templates\registration\profile.html:43
+msgid "Предпочитаемый язык:"
+msgstr "Preferred Language:"
 
-#: .\templates\registration\profile.html:51
+#: .\templates\registration\profile.html:53
+msgid "Редактировать профиль"
+msgstr "Edit Profile"
+
+#: .\templates\registration\profile.html:58
 msgid "Управление безопасностью"
-msgstr "Security management"
+msgstr "Security Management"
 
-#: .\templates\registration\profile.html:54
+#: .\templates\registration\profile.html:61
 msgid "Пароль:"
 msgstr "Password:"
 
+#: .\templates\registration\profile.html:63
+msgid "Установлен"
+msgstr "Set"
 
-#: .\templates\registration\profile.html:58
+#: .\templates\registration\profile.html:65
 msgid "Не установлен"
-msgstr "Not set"
+msgstr "Not Set"
 
-#: .\templates\registration\profile.html:60
+#: .\templates\registration\profile.html:67
 msgid "Для безопасности аккаунта регулярно меняйте пароль"
 msgstr "Change your password regularly for account security"
 
-#: .\templates\registration\profile.html:72
+#: .\templates\registration\profile.html:79
 msgid "Комментарии"
 msgstr "Comments"
 
-
-#: .\templates\registration\profile.html:80
-msgid "Последнее посещение"
-msgstr "Last visit"
+#: .\templates\registration\profile.html:83
+msgid "Избранные статьи"
+msgstr "Favorite Articles"
 
 #: .\templates\registration\profile.html:87
+msgid "Последнее посещение"
+msgstr "Last Visit"
+
+#: .\templates\registration\profile.html:94
 msgid "Последняя активность"
-msgstr "Recent activity"
+msgstr "Recent Activity"
 
+#: .\templates\registration\profile.html:101
+msgid "Перейти к новости"
+msgstr "Go to News"
 
-#: .\templates\registration\profile.html:98
+#: .\templates\registration\profile.html:105
 msgid "Пока нет активности"
-msgstr "No activity yet"
+msgstr "No Activity Yet"
+
+#: .\templates\registration\profile.html:113
+msgid "Избранные новости"
+msgstr "Favorite News"
+
+#: .\templates\registration\profile.html:115
+msgid "Показать все"
+msgstr "Show All"
 
 #: .\templates\registration\register.html:4
 #: .\templates\registration\register.html:10
@@ -637,10 +828,29 @@ msgstr "Create an account to access all features"
 msgid "Email"
 msgstr "Email"
 
+#: .\templates\registration\register.html:45
 
 
+#: .\templates\registration\register.html:51
 
 
+#: .\templates\registration\register.html:56
+msgid "Уже есть аккаунт?"
+msgstr "Already have an account?"
 
-#~ msgid "Предпочитаемый язык:"
-#~ msgstr "Preferred language:"
+#: .\templates\registration\user_comments.html:4
+#: .\templates\registration\user_comments.html:10
+msgid "Мои комментарии"
+msgstr "My Comments"
+
+#: .\templates\registration\user_comments.html:28
+msgid "Все мои комментарии"
+msgstr "All My Comments"
+
+#: .\templates\registration\user_comments.html:29
+msgid "Всего:"
+msgstr "Total:"
+
+#: .\templates\registration\user_comments.html:62
+msgid "У вас пока нет комментариев"
+msgstr "You don't have any comments yet"

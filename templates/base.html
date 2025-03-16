@@ -17,34 +17,63 @@
   {# Фавиконка #}
   <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 
-  {# Глобальный объект с переводами для JavaScript #}
-  <script>
-    window.translations = {
-      // Общие переводы
-      select_photo: "{% trans 'Выбрать фото' %}",
-      delete: "{% trans 'Удалить' %}",
-      save: "{% trans 'Сохранить' %}",
-      cancel: "{% trans 'Отмена' %}",
 
-      // Переводы для избранного
-      added_to_favorites: "{% trans 'Новость добавлена в избранное' %}",
-      removed_from_favorites: "{% trans 'Новость удалена из избранного' %}",
-      in_favorites: "{% trans 'В избранном' %}",
-      add_to_favorites: "{% trans 'В избранное' %}",
+<script>
+  window.translations = {
+    // Существующие переводы
+    select_photo: "{% trans 'Select photo' %}",
+    delete: "{% trans 'Delete' %}",
+    save: "{% trans 'Save' %}",
+    cancel: "{% trans 'Cancel' %}",
 
-      // Сообщения об ошибках
-      error_occurred: "{% trans 'Произошла ошибка. Попробуйте еще раз.' %}",
-      request_error: "{% trans 'Произошла ошибка при обработке запроса' %}",
-      file_not_image: "{% trans 'Пожалуйста, выберите изображение' %}",
-      file_too_large: "{% trans 'Размер файла не должен превышать 5MB' %}",
-      avatar_ready: "{% trans 'Аватар готов к загрузке. Нажмите \"Сохранить изменения\" для применения.' %}",
+    // Переводы для избранного
+    added_to_favorites: "{% trans 'Article added to favorites' %}",
+    removed_from_favorites: "{% trans 'Article removed from favorites' %}",
+    in_favorites: "{% trans 'In favorites' %}",
+    add_to_favorites: "{% trans 'Add to favorites' %}",
 
-        show_all_comments: "{% trans 'Показать все комментарии' %}",
-        loading: "{% trans 'Загрузка...' %}",
-        error_loading_comments: "{% trans 'Ошибка при загрузке комментариев' %}"
+    // Сообщения об ошибках
+    error_occurred: "{% trans 'An error occurred. Please try again.' %}",
+    request_error: "{% trans 'An error occurred while processing the request' %}",
+    file_not_image: "{% trans 'Please select an image' %}",
+    file_too_large: "{% trans 'File size should not exceed 5MB' %}",
+    avatar_ready: "{% trans 'Avatar is ready to upload. Click \"Save Changes\" to apply.' %}",
 
-    };
-  </script>
+    // Существующие переводы для комментариев
+    show_all_comments: "{% trans 'Show all comments' %}",
+    loading: "{% trans 'Loading...' %}",
+    error_loading_comments: "{% trans 'Error loading comments' %}",
+
+    // Новые переводы для компонентов комментариев
+    comments: "{% trans 'Comments' %}",
+    sort_by: "{% trans 'Sort by:' %}",
+    newest_first: "{% trans 'Newest first' %}",
+    oldest_first: "{% trans 'Oldest first' %}",
+    by_popularity: "{% trans 'By popularity' %}",
+    write_comment: "{% trans 'Write your comment...' %}",
+    submit_comment: "{% trans 'Submit comment' %}",
+    login_to_comment: "{% trans 'To leave a comment, please' %}",
+    login: "{% trans 'log in' %}",
+    or: "{% trans 'or' %}",
+    register: "{% trans 'register' %}",
+    reply: "{% trans 'Reply' %}",
+    delete_comment: "{% trans 'Delete' %}",
+    delete_confirm: "{% trans 'Are you sure you want to delete this comment?' %}",
+    write_reply: "{% trans 'Write your reply...' %}",
+    submit_reply: "{% trans 'Submit reply' %}",
+    awaiting_moderation: "{% trans 'Comment awaiting moderation' %}",
+    no_comments: "{% trans 'No comments yet. Be the first to leave a comment!' %}",
+    empty_comment: "{% trans 'Comment text cannot be empty' %}",
+
+      // Добавляем переводы для уведомлений о комментариях
+    comment_added: "{% trans 'Comment added and awaiting moderation' %}",
+    comment_published: "{% trans 'Comment has been published' %}",
+    comment_deleted: "{% trans 'Comment has been deleted' %}",
+    comment_updated: "{% trans 'Comment has been updated' %}",
+    comment_error: "{% trans 'Error processing comment' %}",
+    comment_empty: "{% trans 'Comment text cannot be empty' %}"
+  };
+</script>
 
   {# Общие утилиты JavaScript #}
   <script src="{% static 'js/utils.js' %}" defer></script>
