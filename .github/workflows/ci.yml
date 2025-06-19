@@ -1,3 +1,7 @@
+# Файл: .github/workflows/ci.yml.disabled
+# Временно отключили CI/CD для срочного обновления main ветки
+# После решения проблем с PostgreSQL переименуем обратно в ci.yml
+
 name: Django CI/CD
 
 on:
