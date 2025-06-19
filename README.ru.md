@@ -224,9 +224,32 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ---
 
-## 📜 Лицензия
+## 📄 License
 
-Этот проект распространяется под лицензией MIT. См. файл [LICENSE](LICENSE) для получения дополнительной информации.
+This project is licensed under the [Apache License 2.0](LICENSE).
+See the [NOTICE](NOTICE) file for attribution.
+
+## 👨‍💻 Author
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/AleksejsGir">
+          <img src="https://github.com/AleksejsGir.png" width="100px;" alt="Aleksejs Giruckis"/>
+          <br />
+          <sub><b>Aleksejs Giruckis</b></sub>
+        </a>
+        <br />
+        <sub>Full-Stack Developer</sub>
+        <br />
+        <a href="https://github.com/AleksejsGir">GitHub</a> •
+        <a href="mailto:aleksej.it.gir@gmail.com">Email</a> •
+        <a href="https://linkedin.com/in/aleksejs-giruckis-0569a7353">LinkedIn</a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 

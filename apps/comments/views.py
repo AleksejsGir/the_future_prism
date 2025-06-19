@@ -1,3 +1,18 @@
+# Copyright 2024-2025 Aleksejs Giruckis
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 # apps/comments/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
@@ -15,7 +30,7 @@ from .services import (
     approve_comment,
     delete_comment,
     toggle_comment_reaction
-)  # Здесь не хватало закрывающей скобки
+)
 
 
 def comment_list(request, news_id):
